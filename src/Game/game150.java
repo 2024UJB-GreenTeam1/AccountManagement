@@ -24,7 +24,7 @@ public class game150 {
 
 }
 
-class MainFrame extends JFrame implements MouseListener, Runnable {
+class MainFrame extends JFrame implements MouseListener, Runnable { 
 
 //메인프레임클래스
 
