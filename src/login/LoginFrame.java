@@ -83,8 +83,8 @@ public class LoginFrame extends JFrame {
 		btnL.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(tfId.getText() + " : " + tfPwd.getText());
-				String id = tfId.getText();
+				System.out.println(tfId.getText() + " : " + tfPwd.getText());//이거왜있지?
+				String id = tfId.getText();							
 
 				list = dao.list(id);
 
@@ -99,12 +99,12 @@ public class LoginFrame extends JFrame {
 						if (tfId.getText().equals(gid) && tfPwd.getText().equals(gpwd)) {
 							tfMsg.setText("로그인이 성공했습니다.");
 						} else {
-							new ResisterForm();
+							new FailMessage();
 //							tfMsg.setText("로그인이 실패했습니다.");
 						}
 					}
 				} else {
-					new ResisterForm();
+					new FailMessage();
 //					tfMsg.setText("로그인이 실패했습니다.");
 				}
 
@@ -117,6 +117,28 @@ public class LoginFrame extends JFrame {
 				}
 			}
 		});
+		
+		btnI.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				
+			}
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		f.getContentPane().add(tab1Panel);
 
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -135,8 +157,12 @@ public class LoginFrame extends JFrame {
 		f.setVisible(true);
 	}
 
-	public class ResisterForm extends JFrame {
-		public ResisterForm() {
+	
+	
+	
+	
+	public class FailMessage extends JFrame {
+		public FailMessage() {
 			setSize(300, 200);
 			setVisible(true);
 			getContentPane().setLayout(null);
