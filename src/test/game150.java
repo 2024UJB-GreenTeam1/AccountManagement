@@ -1,5 +1,6 @@
 package test;
 
+
 import java.awt.*;
 
 import javax.swing.*;
@@ -14,23 +15,16 @@ import java.util.Timer;
 
 
 public class game150 {
- 
+
 public static void main(String[] ar) {
 
 MainFrame mf = new MainFrame();
 
 //메인클래스, 메인프레임을불러와실행
-//실행해보기 
 
 }
 
 }
-
-
-
-
-
-
 
 
 
@@ -95,7 +89,7 @@ start();
 
 setTitle("1 to 50 Game");
 
-setSize(600, 600);
+setSize(800, 800);
 
 Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -123,13 +117,13 @@ Container con = this.getContentPane();
 con.setLayout(null);
 
 
-lb_title.setBounds(250, 10, 300, 30);
+lb_title.setBounds(350, 10, 300, 30);
 
 lb_title.setFont(new Font("Default", Font.BOLD, 20));
 
 con.add(lb_title);
 
-lb_time.setBounds(400, 50, 150, 30);
+lb_time.setBounds(600, 50, 150, 30);
 
 lb_time.setFont(new Font("Default", Font.BOLD, 20));
 
@@ -138,13 +132,13 @@ con.add(lb_time);
 //프레임에표시할텍스트라벨
 
 
-bt_start.setBounds(100, 520, 100, 30);
+bt_start.setBounds(130, 680, 150, 30);
 
 bt_start.setFont(new Font("Default", Font.BOLD, 20));
 
 con.add(bt_start);
 
-bt_reset.setBounds(400, 520, 100, 30);
+bt_reset.setBounds(550, 680, 150, 30);
 
 bt_reset.setFont(new Font("Default", Font.BOLD, 20));
 
@@ -155,7 +149,7 @@ con.add(bt_reset);
 
 sc = new ImagePanel();
 
-sc.setBounds(100, 100, 410, 410);
+sc.setBounds(150, 150, 620, 620);
 
 con.add(sc);
 
@@ -357,7 +351,7 @@ public void mouseEntered(MouseEvent e) {}
 
 public void mouseExited(MouseEvent e) {}
 
-
+   
 }
 
 
@@ -473,9 +467,9 @@ for (int j = 0; j < 5; ++j) {
 int num = 0;
 
 
-int xx = 5 + i * 80;
+int xx = 5 + i * 100;
 
-int yy = 5 + j * 80;
+int yy = 5 + j * 100;
 
 //25개사각형좌표값들
 
@@ -518,7 +512,7 @@ rect_select.add(sr);
 public void paint(Graphics g) {
 
 
-g.drawRect(0, 0, 400, 400);
+g.drawRect(0, 0, 500, 500);
 
 //게임화면사각테두리
 
@@ -530,11 +524,11 @@ if (game_start) {
 
 g.setFont(new Font("Default", Font.BOLD, 50));
 
-g.drawString("CountDown", 70, 150);
+g.drawString("CountDown", 120, 200);
 
 g.setFont(new Font("Default", Font.BOLD, 100));
 
-g.drawString("" + count, 170, 250);
+g.drawString("" + count, 220, 300);
 
 
 }else if ( !game_start && count == 0 ){
@@ -545,11 +539,11 @@ for (int i = 0; i < rect_select.size(); ++i) {
 
 sr = (SelectRect) rect_select.get(i);
 
-g.drawRect(sr.x, sr.y, 70, 70);
+g.drawRect(sr.x, sr.y, 90, 90);
 
 g.setFont(new Font("Default", Font.BOLD, 30));
 
-g.drawString("" + sr.number, sr.x + 22, sr.y + 45);
+g.drawString("" + sr.number, sr.x + 30, sr.y + 50);
 
 //벡터에저장된각각의숫자값을받아사각형과숫자그리기
 
@@ -558,7 +552,7 @@ g.drawString("" + sr.number, sr.x + 22, sr.y + 45);
 
 g.setColor(Color.red);
 
-g.drawRect(x * 80 + 5, y * 80 + 5, 70, 70);
+g.drawRect(x * 100+ 5, y * 100 + 5, 90, 90);
 
 //마우스로선택된사각박스를붉게표시
 
@@ -572,13 +566,13 @@ g.setColor(Color.blue);
 
 g.setFont(new Font("Default", Font.BOLD, 50));
 
-g.drawString("GAME CLEAR!", 40, 150);
+g.drawString("GAME CLEAR!", 90, 200);
 
 g.setColor(Color.red);
 
 g.setFont(new Font("Default", Font.BOLD, 40));
 
-g.drawString("" + time, 90, 250);
+g.drawString("" + time, 150, 300);
 
 //게임이클리어되면클리어화면표시
 
@@ -601,9 +595,9 @@ public void mouseClicked(MouseEvent e) {}
 public void mousePressed(MouseEvent e) {
 
 
-x = e.getX() / 80;
+x = e.getX() / 100;
 
-y = e.getY() / 80;
+y = e.getY() / 100;
 
 
 if ( count == 0 ){
@@ -612,7 +606,7 @@ for (int i = 0; i < rect_select.size(); ++i) {
 
 sr = (SelectRect) rect_select.get(i);
 
-if (x == sr.x / 80 && y == sr.y / 80) {
+if (x == sr.x / 100 && y == sr.y / 100) {
 
 int xx = sr.x;
 
