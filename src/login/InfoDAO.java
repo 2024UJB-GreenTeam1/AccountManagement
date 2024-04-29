@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class InfoDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	String user = "C##GREEN";
+	String user = "C##GREEN";						
 	String password = "GREEN1234";
 
 	private Connection con;
@@ -22,9 +22,9 @@ public class InfoDAO {
 		try {
 			connDB();
 
-			String query = "SELECT * FROM login";
+			String query = "SELECT * FROM login";			//login테이블에서 id, pwd 필드 조회
 			if (pid != null) {
-				query += " where id='" + pid + "'";
+				query += " where id='" + pid + "'";			
 			}
 			System.out.println("SQL : " + query);
 
