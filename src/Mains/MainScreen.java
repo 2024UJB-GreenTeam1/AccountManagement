@@ -11,9 +11,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class MainScreen {
-			
+//	public void excute() {				
+//		new MainScreen();
+//	}
+	
+	
 		//프레임 생성
-	public static void main(String[] args) {
+	/*public static void main(String[] args)*/public void excute() {
 		Frame f = new Frame("메인");
 		f.setSize(800, 800);
 		f.setLayout(null);
@@ -145,7 +149,7 @@ public class MainScreen {
 		f.add(logo);
 		
 		f.setVisible(true);
-
+	
 	}
-
+	
 }

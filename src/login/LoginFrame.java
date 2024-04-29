@@ -2,6 +2,8 @@ package login;
 
 import javax.swing.*;
 
+import Mains.MainScreen;
+
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
@@ -101,6 +103,10 @@ public class LoginFrame extends JFrame {
 
 						if (tfId.getText().equals(gid) && pwd.equals(gpwd)) {
 							tfMsg.setText("로그인이 성공했습니다.");
+							MainScreen mainscreen = new MainScreen();//
+							
+							mainscreen.excute();
+			                f.setVisible(false); 		//
 						} else {
 							new FailMessage();  		//로그인 실패
 						}
