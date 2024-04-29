@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import Mains.MainScreen;
 
-import java.awt.BorderLayout;//TestTestTestTestTestTestTest
+import java.awt.BorderLayout;//whatwhatwhatwhatwhatwhat
 import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
