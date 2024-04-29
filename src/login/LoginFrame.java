@@ -112,7 +112,7 @@ public class LoginFrame extends JFrame {
 						}
 					}
 				} else {
-					new FailMessage();					////로그인 실패
+					new FailMessage();					////로그인 실패  
 				}
 
 				for (int i = 0; i < list.size(); i++) {
