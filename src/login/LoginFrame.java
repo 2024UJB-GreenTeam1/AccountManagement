@@ -56,7 +56,7 @@ public class LoginFrame extends JFrame {
 		tfId.setSize(200, 30);
 
 		tfPwd = new JPasswordField(10);
-		tfPwd.setEchoChar('*');
+//		tfPwd.setEchoChar('*');
 		tfPwd.setLocation(220, 490);
 		tfPwd.setSize(200, 30);
 
@@ -83,7 +83,10 @@ public class LoginFrame extends JFrame {
 		btnL.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(tfId.getText() + " : " + tfPwd.getText());//이거왜있지?
+				
+				String pwd = new String(tfPwd.getPassword());//SWING에서 .getPassword()는 char[]이기때문에 String변환
+				
+				System.out.println(tfId.getText() + " : " + pwd);
 				String id = tfId.getText();							
 
 				list = dao.list(id);
@@ -96,16 +99,14 @@ public class LoginFrame extends JFrame {
 
 						System.out.println(gid + " :: " + gpwd);
 
-						if (tfId.getText().equals(gid) && tfPwd.getText().equals(gpwd)) {
+						if (tfId.getText().equals(gid) && pwd.equals(gpwd)) {
 							tfMsg.setText("로그인이 성공했습니다.");
 						} else {
-							new FailMessage();
-//							tfMsg.setText("로그인이 실패했습니다.");
+							new FailMessage();  		//로그인 실패
 						}
 					}
 				} else {
-					new FailMessage();
-//					tfMsg.setText("로그인이 실패했습니다.");
+					new FailMessage();					////로그인 실패
 				}
 
 				for (int i = 0; i < list.size(); i++) {
@@ -200,17 +201,6 @@ public class LoginFrame extends JFrame {
 
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	public static void main(String[] args) {
 		new LoginFrame();
