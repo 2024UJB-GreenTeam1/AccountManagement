@@ -571,7 +571,7 @@ class ImagePanel extends JPanel implements MouseListener {
 	}
 
 	public void mouseEntered(MouseEvent e) {
-	}
+	}00
 
 	public void mouseExited(MouseEvent e) {
 	}
