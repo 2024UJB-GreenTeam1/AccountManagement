@@ -19,14 +19,11 @@ public class MemberDAO {
 	public MemberDAO() {
 		connDB();
 	}
-	
-	// 회원가입 메서드
-	
 
-	// 아이디 중복 확인 메서드
+	// 아이디 중복 확인
 	public boolean isIdDuplicate(String userId) {
 		try {
-			String sql = "SELECT COUNT(*) AS count FROM MEMBERS WHERE ID = ?";
+			String sql = "SELECT COUNT(*) AS count FROM USERS WHERE USER_ID = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userId);
 			rs = pstmt.executeQuery();
@@ -40,10 +37,10 @@ public class MemberDAO {
 		return false;
 	}
 
-	// 닉네임 중복 확인 메서드
+	// 닉네임 중복 확인
 	public boolean isNickname(String Name) {
 		try {
-			String sql = "SELECT COUNT(*) AS count FROM MEMBERS WHERE NAME = ?";
+			String sql = "SELECT COUNT(*) AS count FROM USERS WHERE USER_NAME = ?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, Name);
 			rs = pstmt.executeQuery();
@@ -57,13 +54,18 @@ public class MemberDAO {
 		return false;
 	}
 
-	public int insert(String id, String name) {
+	public int insert(String name, String id, String pwd, String phone, String email, String height) {
 		int i = 0;
 		try {
-			String sql = "" + "INSERT INTO MEMBERS(ID,NAME) " + "VALUES(?,?)";
+			String sql = "" + "INSERT INTO USERS(USER_NAME,USER_ID,PWD,PHONE,EMAIL,HEIGHT) " + "VALUES(?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, id);
-			pstmt.setString(2, name);
+			pstmt.setString(1, name);
+			pstmt.setString(2, id);
+			pstmt.setString(3, pwd);
+			pstmt.setString(4, phone);
+			pstmt.setString(5, email);
+			pstmt.setString(6, height);
+
 			i = pstmt.executeUpdate();
 			pstmt.close();
 

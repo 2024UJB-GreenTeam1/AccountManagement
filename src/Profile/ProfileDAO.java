@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class ProfileDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
@@ -19,9 +20,26 @@ public class ProfileDAO {
 		connDB();
 	}
 
+	public void Tabinsert(char height, char weight) {
+
+		try {
+			String sql = "" + "UPDATE USERS ?" + "SET HEIGHT=?" + "WHERE";
+			PreparedStatement pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, String.valueOf(height));
+			pstmt.setString(2, String.valueOf(weight));
+
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return;
+	}
+
 	public void delete(String id) {
 		try {
-			String sql = "" + "DELETE FROM profile Where bweriter=?";
+			String sql = "" + "DELETE FROM USERS Where bweriter=?";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
 			int rows = pstmt.executeUpdate();
@@ -31,9 +49,7 @@ public class ProfileDAO {
 		}
 		return;
 	}
-	
-	
-	
+
 	private void connDB() {
 		try {
 			Class.forName(driver);
