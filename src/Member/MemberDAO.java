@@ -19,6 +19,9 @@ public class MemberDAO {
 	public MemberDAO() {
 		connDB();
 	}
+	
+	// 회원가입 메서드
+	
 
 	// 아이디 중복 확인 메서드
 	public boolean isIdDuplicate(String userId) {
