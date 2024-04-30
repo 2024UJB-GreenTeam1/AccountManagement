@@ -1,3 +1,5 @@
+package Mains;
+
 import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -11,9 +13,9 @@ import java.awt.event.WindowEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-public class Mainscreen {
+public class MainScreen {
 	// 프레임 생성
-	public static void main(String[] args) {
+	public void excute() {
 		Frame f = new Frame("메인페이지");
 		f.setSize(800, 800);
 		f.setLayout(null);
