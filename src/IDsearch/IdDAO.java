@@ -1,4 +1,4 @@
-package login;
+package IDsearch;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class InfoDAO {
+public class IdDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	String user = "C##GREEN";						
@@ -16,8 +16,8 @@ public class InfoDAO {
 	private Statement stmt;
 	private ResultSet rs;
 
-	public ArrayList<InfoVo> list(String pid) {
-		ArrayList<InfoVo> list = new ArrayList<InfoVo>();
+	public ArrayList<IdVo> list(String pid) {
+		ArrayList<IdVo> list = new ArrayList<IdVo>();
 
 		try {
 			connDB();
@@ -41,7 +41,7 @@ public class InfoDAO {
 					String id = rs.getString("USER_ID");	//USERS테이블에서 USER_id, pwd 필드 조회
 					String pwd = rs.getString("pwd");
 
-					InfoVo data = new InfoVo(id, pwd);
+					IdVo data = new IdVo(id, pwd);
 					list.add(data);
 				}
 			}

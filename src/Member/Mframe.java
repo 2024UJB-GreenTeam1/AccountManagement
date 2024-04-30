@@ -171,7 +171,7 @@ class EventHandler extends WindowAdapter {
 	@Override
 	public void windowClosing(WindowEvent we) {
 		we.getWindow().setVisible(false);
-		we.getWindow().dispose();
-		System.exit(0);
+		we.getWindow().dispose();				//현재창만닫기
+//		System.exit(0);
 	}
 }
