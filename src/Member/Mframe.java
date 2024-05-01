@@ -10,13 +10,16 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class Mframe {
 	private JFrame f;
-	private JTextField tfheight, tfName, tfId, tfPwd, tfPwda, tfPhoneN, tfEmail;
+	private JTextField tfheight, tfName, tfId, tfPhoneN, tfEmail;
+	private JPasswordField tfPwd, tfPwda;
 	private JButton btIdCheck, btn, btlogo;
 	private MemberDAO dao;
+
 	private JLabel lheight, lName, lId, lPwd, lPwda, lPhone, lEmail;
 	Font font = new Font("SansSerif", Font.PLAIN, 15);
 	ImageIcon img = new ImageIcon("./image/logo.jpg");
@@ -66,23 +69,22 @@ public class Mframe {
 				String name = tfName.getText();
 				String id = tfId.getText();
 				String password = tfPwd.getText();
-				String height = tfheight.getText(); // 문자열로 입력 받음
+				String confirmPassword = tfPwda.getText();
+				String height = tfheight.getText();
 				String phone = tfPhoneN.getText();
 				String email = tfEmail.getText();
 
-				// 입력 필드가 비어 있는지 확인
-				if (name.isEmpty() || id.isEmpty() || password.isEmpty() || height.isEmpty() || phone.isEmpty()
-						|| email.isEmpty()) {
-					// 하나 이상의 필드가 비어 있으면 회원 가입 차단 및 메시지 표시
+				if (name.isEmpty() || id.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()
+						|| height.isEmpty() || phone.isEmpty() || email.isEmpty()) {
 					new MessageDialog(f, "알림", "빈칸 없이 채워주세요.");
+				} else if (!password.equals(confirmPassword)) {
+					new MessageDialog(f, "알림", "비밀번호가 일치하지 않습니다.");
 				} else {
 					int result = dao.insert(name, id, password, phone, email, height);
-
 					if (result > 0) {
 						new MessageDialog(f, "알림", "회원 가입 성공");
-						// 성공시 로그인화면으로
-						// new LoginFrame();
-//                      f.dispose();
+						// 로그인 화면으로 이동 넣어야함
+						f.dispose();
 					} else {
 						new MessageDialog(f, "알림", "회원 가입 실패!");
 					}
@@ -94,10 +96,12 @@ public class Mframe {
 		tfName.setBounds(310, 150, 180, 30);
 		tfId = new JTextField(30);
 		tfId.setBounds(310, 200, 180, 30);
-		tfPwd = new JTextField(30);
+		tfPwd = new JPasswordField(30);
 		tfPwd.setBounds(310, 250, 180, 30);
-		tfPwda = new JTextField(30);
+		tfPwd.setEchoChar('*');
+		tfPwda = new JPasswordField(30);
 		tfPwda.setBounds(310, 300, 180, 30);
+		tfPwda.setEchoChar('*');
 		tfPhoneN = new JTextField(30);
 		tfPhoneN.setBounds(310, 350, 180, 30);
 		tfEmail = new JTextField(30);

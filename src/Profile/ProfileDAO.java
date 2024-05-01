@@ -50,6 +50,48 @@ public class ProfileDAO {
 		return;
 	}
 
+	// 몸무게 키 수정
+	public void updateHW(String userId, char height, char weight) {
+		try {
+			String sql = "UPDATE USERS SET HEIGHT=?, WEIGHT=? WHERE USER_ID=?";
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, String.valueOf(height));
+			pstmt.setString(2, String.valueOf(weight));
+			pstmt.setString(3, userId);
+			pstmt.executeUpdate();
+			pstmt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void updatepwd(String pwd, String userId) {
+		try {
+			String sql = "" + "UPDATE ISERS SET PWD =? " + " WHERE USER_ID=?";
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, pwd);
+			pstmt.setString(2, userId);
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void updatemail(String email, String userId) {
+		try {
+			String sql = "" + "UPDATE ISERS SET EMAIL =? " + " WHERE USER_ID=?";
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, email);
+			pstmt.setString(2, userId);
+			pstmt.executeUpdate();
+			pstmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 	private void connDB() {
 		try {
 			Class.forName(driver);
