@@ -1,85 +1,68 @@
 package Post;
 
-
-
 public class ComDto {
-	
-	private int num;
+	private String user_id;
 	private String pwd;
-	private String title;
-	private String content;
-	private String hits;
-	private String time_posted;
-	private String id;
-	
+	private String bctitle;
+	private String bcontent;
+	private int bcviews;
+	private int bcno;
 	public ComDto() {
 		super();
 	}
 	
-	public ComDto (int num, String pwd, String title, String content,String hits,String time_posted,String id) {
-		super();
-		this.num = num;
-		this.pwd = pwd;
-		this.title = title;
-		this.content = content;
-		this.hits = hits;
-		this.time_posted = time_posted;
-		this.id = id;
-		
+	public ComDto (String user_id,String pwd,String bctitle, String bcontent,int bcviews,int bcno) {
+	this.user_id = user_id;
+	this.pwd = pwd;
+	this.bctitle = bctitle;
+	this.bcontent = bcontent;
+	this.bcviews = bcviews;
+	this.bcno = bcno;
 	}
-	
-	public void setNum(int num) {
-		this.num = num;
+	public  int getBcno() {
+		return bcno;
+	}
+
+	public void setBno(int bcno) {
+		this.bcno = bcno;
+	}
+	public String getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+
+	public String getPwd() {
+		return pwd;
 	}
 
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public String getBctitle() {
+		return bctitle;
 	}
 
-	public void setContent(String content) {
-		this.content = content;
+	public void setBctitle(String bctitle) {
+		this.bctitle = bctitle;
 	}
 
-	public void setHits(String hits) {
-		this.hits = hits;
+	public String getBcontent() {
+		return bcontent;
 	}
 
-	public void setTime_posted(String time_posted) {
-		this.time_posted = time_posted;
+	public void setBcontent(String bcontent) {
+		this.bcontent = bcontent;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public int getBcviews() {
+		return bcviews;
 	}
 
-	public int getNum() {
-		return num;
+	public void setBcviews(int bcviews) {
+		this.bcviews = bcviews;
 	}
-
-	public String getPwd() {
-		return pwd;
-	}
-	public String getTitle() {
-		return title;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public String getHits() {
-		return hits;
-	}
-	public String getTime_posted() {
-		return time_posted;
-	}
-
-	public String getId() {
-		return id;
-	}
-
 }
