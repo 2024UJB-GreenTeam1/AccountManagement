@@ -1,4 +1,6 @@
+
 package Board;  //자료 가져오는 클래스 (안씀)
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 
 import test.BoardDTO;
 
@@ -26,7 +29,9 @@ public class BoardList {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
+
 			BoardDTO board = new BoardDTO();
+
 			board.setW_num(rs.getInt("w_num"));
 			board.setUser_id(rs.getString("User_id"));
 			board.setContent(rs.getString("Content"));		
@@ -58,9 +63,11 @@ public class BoardList {
 			}
 		}
 	}
+
 	public List<BoardDTO> select() {  //테이블 데이터 가져오기
 		
 		List<BoardDTO> list = new ArrayList<BoardDTO>();
+
 		
 		try {
 			conn = DriverManager.getConnection(URL,USERID,USERPWD);
@@ -71,7 +78,9 @@ public class BoardList {
 			
 			while(rs.next()) {
 				/*
+
 				 * BoardDTO board = new BoardDTO(); 
+
 				 * board.setUser_id(rs.getString("User_id"));
 				 * board.setContent(rs.getString("Content"));
 				 * board.setDate(rs.getDate("dates"));

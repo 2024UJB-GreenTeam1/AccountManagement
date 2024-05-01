@@ -9,8 +9,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Member.MessageDialog;
+
 public class PTab extends JPanel {
+	private DTO user;
 	public PTab(String tabName) {
+		this.user = user;
 		setLayout(new BorderLayout());
 
 		if (tabName.equals("내 프로필")) {
@@ -20,9 +24,13 @@ public class PTab extends JPanel {
 		} else if (tabName.equals("비밀번호 변경")) {
 			add(createPasswordChangePanel(), BorderLayout.CENTER);
 		}
+
 	}
 
+	ProfileDAO dao = new ProfileDAO();
+
 	private JPanel createProfilePanel() {
+
 		JPanel profilePanel = new JPanel();
 		profilePanel.setLayout(new BorderLayout());
 		// 프로필 정보 패널 구성
@@ -120,7 +128,6 @@ public class PTab extends JPanel {
 				// TODO Auto-generated method stub
 
 			}
-
 		});
 
 		return idChangePanel;
@@ -148,13 +155,21 @@ public class PTab extends JPanel {
 		pwd.setBounds(400, 100, 70, 30);
 		passwordChangePanel.add(pwd);
 		pwd.addActionListener(new ActionListener() {
-			// 새로운 비밀번호 저장
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-
+				String password = newPasswordField.getText();
+				String confirmPassword = tfnewPwd.getText();
+				if (password.isEmpty() || confirmPassword.isEmpty()) {
+					new MessageDialog(null, "알림", "빈칸 없이 채워주세요.");
+				} else if (!password.equals(confirmPassword)) {
+					new MessageDialog(null, "알림", "비밀번호가 일치하지 않습니다.");
+				} else {
+					// 비밀번호 업데이트
+//					int res = dao.updatepwd(password, confirmPassword);
+					new MessageDialog(null, "알림", "비밀번호 변경 완료");
+				}
 			}
-
 		});
 
 		return passwordChangePanel;

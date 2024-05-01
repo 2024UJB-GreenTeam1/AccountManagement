@@ -21,11 +21,12 @@ public class ConnectionB {
 			Class.forName(DRIVER_NAME);
 			
 			conn = DriverManager.getConnection(URL,USERID,USERPWD);
-			
+
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 
 
 	public ResultSet getRs() {
@@ -56,4 +57,5 @@ public class ConnectionB {
 	public void setRs(ResultSet rs) {
 		this.rs = rs;
 	}
+
 }
