@@ -58,11 +58,11 @@ public class Pdel extends JFrame {
 		btnNewButton.setBounds(109, 134, 97, 23);
 		contentPane.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
-			// db 자료 삭제 및 팝업 띄우기
+			// db 자료 삭제 및 로그인 화면 띄우기
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				dispose();
 			}
 			
 		});
@@ -75,7 +75,7 @@ public class Pdel extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				dispose();
 			}
 			
 		});

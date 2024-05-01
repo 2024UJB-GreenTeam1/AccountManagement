@@ -65,7 +65,7 @@ public class MemberDAO {
 			pstmt.setString(4, phone);
 			pstmt.setString(5, email);
 			pstmt.setString(6, height);
-
+			
 			i = pstmt.executeUpdate();
 			pstmt.close();
 
