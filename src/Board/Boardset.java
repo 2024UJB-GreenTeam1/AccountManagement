@@ -7,10 +7,11 @@ import java.awt.List;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.sql.Connection;
-import java.sql.ResultSet;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
@@ -21,7 +22,8 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-public class Boardset  extends WindowAdapter implements ActionListener {
+
+public class Boardset  extends ConnectionB implements ActionListener, WindowListener {
 	private JFrame f;
 	private JButton np,search2,before,after,logo,click;
 	private JLabel board,writer,writing,date,recommend,check,page,writer2,writing2,date2,recommend2,check2;
@@ -31,6 +33,7 @@ public class Boardset  extends WindowAdapter implements ActionListener {
 	
 	public Boardset(){
 		f = new JFrame("1o0");
+		f.addWindowListener(this);
 		logo = new JButton(new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/1o0.jpg"));
 		logo.setBorderPainted(false);
 		logo.setFocusPainted(false);
@@ -40,6 +43,7 @@ public class Boardset  extends WindowAdapter implements ActionListener {
 		Font font2 = new Font("맑은 고딕",Font.BOLD,20); //작성자 내용 날짜 추천수 조회수 카테고리
 		
 		np = new JButton("새글작성");
+		np.addActionListener(this);
 	
 		search2 = new JButton("검색");//검색 버튼
 		search2 = new JButton(new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/search2.jpg"));
@@ -110,16 +114,13 @@ public class Boardset  extends WindowAdapter implements ActionListener {
 		search = new TextField();
 		search.setFont(font2);
 		
-		f.setLayout(null);
-}
-	
-	
-	public void startFrame() {
-		List userlist = new List();
-		f.addWindowListener(this);
+		f.setLayout(null);	
 		f.setSize(800,800);
 		f.addWindowListener(this);   // 이거 없으면 창닫기도 안된다.
 		f.setLocationRelativeTo(null);
+		np.addActionListener(this);
+
+		
 		
 		board.setSize(200,100);     //x 클수록 오른쪽 y 클수록 아래로 
 		board.setLocation(320,10);   //게시판 라벨
@@ -186,19 +187,17 @@ public class Boardset  extends WindowAdapter implements ActionListener {
 			
 				
 				try {
-					Connection conn = null;
-					
+					String sql = "" + "select bno,btitle,bdate,busy " + "from BOARDS";
 					ConnectionB cb = new ConnectionB();  //연결
-			
-					java.sql.Statement st = null;
-					ResultSet rs = null;
-					List userList = new List();
-					st = conn.createStatement();
-					st.execute("use xe;");
-					rs = st.executeQuery("select user_id,content,dates,recommend,checks " + "from USERS");
-				while(rs.next()) {
-					String str = rs.getString(1);
+					Connection conn = DriverManager.getConnection(URL,USERID,USERPWD);
+				 	List userList = new List();
+				 	
+				    PreparedStatement  pstmt = conn.prepareStatement(sql);
+					setRs(pstmt.executeQuery());
+				while(getRs().next()) {
+					String str = getRs().getString(1);
 					userList.add(str);
+					System.out.print(userList);
 				}			
 				}catch(SQLException sqle) {
 					sqle.printStackTrace();
@@ -239,16 +238,60 @@ public class Boardset  extends WindowAdapter implements ActionListener {
 		System.exit(0);  //닫기 눌러서 창닫기
 	}
 
+
 	@Override
-	public void actionPerformed(ActionEvent e) {    
+	public void windowOpened(WindowEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
-	public static void main(String[ ]args ) {
+
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getActionCommand().equals("새글작성")) {
+			BoardWrite bw = new BoardWrite();
+			bw.BoardWrite();
+		}
+		
+	}
+
+	public static void main(String[] args) {
 		Boardset bs = new Boardset();
-		bs.startFrame();
 		
 	}
 }
