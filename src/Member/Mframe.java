@@ -14,10 +14,10 @@ import javax.swing.JTextField;
 
 public class Mframe {
 	private JFrame f;
-	private JTextField tfName, tfId, tfPwd, tfPwda, tfNickname, tfPhoneN, tfEmail;
-	private JButton btIdCheck, btNickCheck, btn, btlogo;
+	private JTextField tfheight, tfName, tfId, tfPwd, tfPwda, tfPhoneN, tfEmail;
+	private JButton btIdCheck, btn, btlogo;
 	private MemberDAO dao;
-	private JLabel lName, lId, lPwd, lPwda, lNickn, lPhone, lEmail;
+	private JLabel lheight, lName, lId, lPwd, lPwda, lPhone, lEmail;
 	Font font = new Font("SansSerif", Font.PLAIN, 15);
 	ImageIcon img = new ImageIcon("./image/logo.jpg");
 
@@ -37,7 +37,8 @@ public class Mframe {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-
+//              new LoginFrame();
+//              f.dispose();
 			}
 
 		});
@@ -57,53 +58,36 @@ public class Mframe {
 			}
 		});
 
-		btNickCheck = new JButton("중복 확인");
-		btNickCheck.setBounds(500, 350, 100, 30);
-		btNickCheck.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				String userNickCheck = tfNickname.getText();
-				boolean isDuplicate = dao.isNickname(userNickCheck);
-				if (isDuplicate) {
-					new MessageDialog(f, "알림", "닉네임이 이미 존재합니다.");
-				} else {
-					new MessageDialog(f, "알림", "사용 가능한 닉네임입니다.");
-				}
-			}
-		});
-
 		btn = new JButton("회원 가입");
-		btn.setBounds(400, 580, 100, 30);
+		btn.setBounds(380, 550, 100, 30);
 		btn.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String name = tfName.getText();
 				String id = tfId.getText();
 				String password = tfPwd.getText();
-				String passwordConfirm = tfPwda.getText();
-				String nickname = tfNickname.getText();
+				String height = tfheight.getText(); // 문자열로 입력 받음
 				String phone = tfPhoneN.getText();
 				String email = tfEmail.getText();
 
 				// 입력 필드가 비어 있는지 확인
-				if (name.isEmpty() || id.isEmpty() || password.isEmpty() || passwordConfirm.isEmpty()
-						|| nickname.isEmpty() || phone.isEmpty() || email.isEmpty()) {
+				if (name.isEmpty() || id.isEmpty() || password.isEmpty() || height.isEmpty() || phone.isEmpty()
+						|| email.isEmpty()) {
 					// 하나 이상의 필드가 비어 있으면 회원 가입 차단 및 메시지 표시
 					new MessageDialog(f, "알림", "빈칸 없이 채워주세요.");
 				} else {
-					int result = dao.insert(id, nickname);
+					int result = dao.insert(name, id, password, phone, email, height);
 
 					if (result > 0) {
-						// 회원 가입 성공
 						new MessageDialog(f, "알림", "회원 가입 성공");
+						// 성공시 로그인화면으로
+						// new LoginFrame();
+//                      f.dispose();
 					} else {
-						// 회원 가입 실패
 						new MessageDialog(f, "알림", "회원 가입 실패!");
 					}
 				}
 			}
-
 		});
 
 		tfName = new JTextField(30);
@@ -114,12 +98,12 @@ public class Mframe {
 		tfPwd.setBounds(310, 250, 180, 30);
 		tfPwda = new JTextField(30);
 		tfPwda.setBounds(310, 300, 180, 30);
-		tfNickname = new JTextField(30);
-		tfNickname.setBounds(310, 350, 180, 30);
 		tfPhoneN = new JTextField(30);
-		tfPhoneN.setBounds(310, 400, 180, 30);
+		tfPhoneN.setBounds(310, 350, 180, 30);
 		tfEmail = new JTextField(30);
-		tfEmail.setBounds(310, 450, 180, 30);
+		tfEmail.setBounds(310, 400, 180, 30);
+		tfheight = new JTextField(30);
+		tfheight.setBounds(310, 450, 180, 30);
 
 		lName = new JLabel("이름");
 		lName.setBounds(180, 150, 30, 30);
@@ -129,30 +113,31 @@ public class Mframe {
 		lPwd.setBounds(180, 250, 100, 30);
 		lPwda = new JLabel("비밀번호 확인");
 		lPwda.setBounds(180, 300, 100, 30);
-		lNickn = new JLabel("닉네임");
-		lNickn.setBounds(180, 350, 100, 30);
 		lPhone = new JLabel("핸드폰 번호");
-		lPhone.setBounds(180, 400, 100, 30);
+		lPhone.setBounds(180, 350, 100, 30);
 		lEmail = new JLabel("Email");
-		lEmail.setBounds(180, 450, 100, 30);
+		lEmail.setBounds(180, 400, 100, 30);
+		lheight = new JLabel("키");
+		lheight.setBounds(180, 450, 100, 30);
 
 		f.add(lName);
 		f.add(lId);
 		f.add(lPwd);
 		f.add(lPwda);
-		f.add(lNickn);
 		f.add(lPhone);
 		f.add(lEmail);
+		f.add(lheight);
+
 		f.add(tfName);
 		f.add(tfId);
-		f.add(tfNickname);
 		f.add(tfPwd);
 		f.add(tfPwda);
 		f.add(tfPhoneN);
 		f.add(tfEmail);
+		f.add(tfheight);
 
 		f.add(btIdCheck);
-		f.add(btNickCheck);
+
 		f.add(btn);
 		f.add(btlogo);
 

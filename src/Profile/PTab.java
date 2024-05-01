@@ -1,9 +1,13 @@
 package Profile;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class PTab extends JPanel {
 	public PTab(String tabName) {
@@ -11,7 +15,7 @@ public class PTab extends JPanel {
 
 		if (tabName.equals("내 프로필")) {
 			add(createProfilePanel(), BorderLayout.CENTER);
-		} else if (tabName.equals("아이디 변경")) {
+		} else if (tabName.equals("E-MAIL 변경")) {
 			add(createIdChangePanel(), BorderLayout.CENTER);
 		} else if (tabName.equals("비밀번호 변경")) {
 			add(createPasswordChangePanel(), BorderLayout.CENTER);
@@ -25,7 +29,7 @@ public class PTab extends JPanel {
 		JLabel name = new JLabel("이름");
 		name.setBounds(100, 10, 100, 30);
 		profilePanel.add(name);
-		JLabel dname = new JLabel("이민욱");
+		JLabel dname = new JLabel("");
 		dname.setBounds(200, 10, 100, 30);
 		profilePanel.add(dname);
 		// 정보 가져오기
@@ -80,7 +84,8 @@ public class PTab extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-
+				Ptab1hw frame = new Ptab1hw();
+				frame.setVisible(true);
 			}
 		});
 
@@ -105,6 +110,19 @@ public class PTab extends JPanel {
 		JTextField newIdField = new JTextField();
 		newIdField.setBounds(160, 50, 200, 30);
 		idChangePanel.add(newIdField);
+		JButton ICP = new JButton("확인");
+		ICP.setBounds(400, 50, 70, 30);
+		idChangePanel.add(ICP);
+		ICP.addActionListener(new ActionListener() {
+			// 새로운 이메일 저장
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+		});
+
 		return idChangePanel;
 	}
 
@@ -112,12 +130,33 @@ public class PTab extends JPanel {
 		JPanel passwordChangePanel = new JPanel();
 		passwordChangePanel.setLayout(null);
 		// 비밀번호 변경 패널 구성
-		JLabel newPasswordLabel = new JLabel("New Password:");
+		JLabel newPasswordLabel = new JLabel("새 비밀번호:");
 		newPasswordLabel.setBounds(50, 50, 120, 30);
 		passwordChangePanel.add(newPasswordLabel);
 		JTextField newPasswordField = new JTextField();
 		newPasswordField.setBounds(180, 50, 200, 30);
 		passwordChangePanel.add(newPasswordField);
+
+		JLabel newPwd2 = new JLabel("비밀번호 확인:");
+		newPwd2.setBounds(50, 100, 120, 30);
+		passwordChangePanel.add(newPwd2);
+		JTextField tfnewPwd = new JTextField();
+		tfnewPwd.setBounds(180, 100, 200, 30);
+		passwordChangePanel.add(tfnewPwd);
+
+		JButton pwd = new JButton("확인");
+		pwd.setBounds(400, 100, 70, 30);
+		passwordChangePanel.add(pwd);
+		pwd.addActionListener(new ActionListener() {
+			// 새로운 비밀번호 저장
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+		});
+
 		return passwordChangePanel;
 	}
 }
