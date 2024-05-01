@@ -15,4 +15,5 @@ public class IdVo {
 	public String getPwd() {
 		return pwd;
 	}
+	
 }

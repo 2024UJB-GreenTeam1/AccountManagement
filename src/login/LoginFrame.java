@@ -140,7 +140,7 @@ public class LoginFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				IDsearch ID = new IDsearch();					//
-				ID.IDFrame();							//ID찾기열기
+				ID.excuteID();							//ID찾기열기
 			}
 		});
 		
