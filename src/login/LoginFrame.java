@@ -1,19 +1,22 @@
 package login;
 
-import javax.swing.*;
-
-import Mains.MainScreen;
-
-import java.awt.BorderLayout;//TestTestTestTestTestTest
-import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
-import java.awt.Image;
-import java.awt.Panel;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import IDsearch.IDsearch;
+import Mains.MainScreen;
+import Member.Mframe;
 
 //extends WindowAdapter 
 public class LoginFrame extends JFrame {
@@ -82,6 +85,14 @@ public class LoginFrame extends JFrame {
 		btnS.setLocation(400, 570);
 		btnS.setSize(100, 40);
 
+		
+		btnS.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new Mframe();								//회원가입열기
+			}
+		});
+		
 		btnL.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -128,8 +139,8 @@ public class LoginFrame extends JFrame {
 		btnI.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
+				IDsearch ID = new IDsearch();					//
+				ID.IDFrame();							//ID찾기열기
 			}
 		});
 		

@@ -35,6 +35,8 @@ public class Pframe {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
+//				new MainScreen();
+				f.dispose();
 			}
 		});
 
@@ -57,13 +59,15 @@ public class Pframe {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+//				new MainScreen();
+				f.dispose();
 			}
 		});
 
 		pane = new JTabbedPane();
 		PTab profileTab = new PTab("내 프로필");
 		pane.addTab("내 프로필", profileTab);
-		PTab idChangeTab = new PTab("E_MAIL 변경");
+		PTab idChangeTab = new PTab("E-MAIL 변경");
 		pane.addTab("E-MAIL 변경", idChangeTab);
 		PTab passwordChangeTab = new PTab("비밀번호 변경");
 		pane.addTab("비밀번호 변경", passwordChangeTab);
