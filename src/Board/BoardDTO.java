@@ -3,19 +3,36 @@ package Board; //DTO 클래스
 import java.util.Date;
 
 public class BoardDTO {
-	int num;
+
+	int bno;
 	String title;
 	String content;
 	String name;
-	Date regDate;
+	String busy;
+	Date bDate;
 	
 	
-	public int getNum() {
-		return num;
+	
+	public int getbno() {
+		return bno;
 	}
-	public void setNum(int num) {
-		this.num = num;
+	public void setbno(int bno) {
+		this.bno = bno;
 	}
+	public int getBno() {
+		return bno;
+	}
+	public void setBno(int bno) {
+		this.bno = bno;
+	}
+	public String getBusy() {
+		return busy;
+	}
+	public void setBusy(String busy) {
+		this.busy = busy;
+	}
+	
+
 	public String getTitle() {
 		return title;
 	}
@@ -34,11 +51,13 @@ public class BoardDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Date getRegDate() {
-		return regDate;
+
+	public Date getBDate() {
+		return bDate;
 	}
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
+	public void setbDate(Date bDate) {
+		this.bDate = bDate;
+
 	}
 
 	

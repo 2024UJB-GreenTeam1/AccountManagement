@@ -21,8 +21,41 @@ public class ConnectionB {
 			Class.forName(DRIVER_NAME);
 			
 			conn = DriverManager.getConnection(URL,USERID,USERPWD);
+
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
+
+
+
+	public ResultSet getRs() {
+		return rs;
+	}
+
+
+	public Connection getConn() {
+		return conn;
+	}
+
+
+	public void setConn(Connection conn) {
+		this.conn = conn;
+	}
+
+
+	public PreparedStatement getPstmt() {
+		return pstmt;
+	}
+
+
+	public void setPstmt(PreparedStatement pstmt) {
+		this.pstmt = pstmt;
+	}
+
+
+	public void setRs(ResultSet rs) {
+		this.rs = rs;
+	}
+
 }

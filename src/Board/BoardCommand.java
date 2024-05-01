@@ -1,5 +1,4 @@
-
-package Board;  //자료 가져오는 클래스 (안씀)
+package Board;  //자료 가져오는 클래스
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,11 +10,9 @@ import java.util.Date;
 import java.util.List;
 
 
-import test.BoardDTO;
-
-public class BoardList {
+public class BoardCommand {
 	private Connection conn;
-	private PreparedStatement pstmt;
+	protected PreparedStatement pstmt; // 원래 private
 	private ResultSet rs;
 	
 	public static final String DRIVER_NAME = "oracle.jdbc.OracleDriver";
@@ -29,19 +26,7 @@ public class BoardList {
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-
-			BoardDTO board = new BoardDTO();
-
-			board.setW_num(rs.getInt("w_num"));
-			board.setUser_id(rs.getString("User_id"));
-			board.setContent(rs.getString("Content"));		
-			board.setDate(rs.getDate("dates"));
-			board.setRecommend(rs.getInt("recommend"));
-			board.setChecks(rs.getInt("checks"));
-			System.out.printf("%-5s%-5s%-5s%-5s%-5s%-5s" ,
-			board.getW_num(),board.getUser_id(),board.getContent(),
-			board.getDate(),board.getRecommend(),board.getChecks()
-					);
+		
 			}
 			rs.close();
 			pstmt.close();
@@ -63,24 +48,41 @@ public class BoardList {
 			}
 		}
 	}
+	
+	public void insert(BoardDTO dto) {  //삽입
+		try {
+			conn = DriverManager.getConnection(URL,USERID,USERPWD);
+			String sql = "insert into Boards(bno, btitle, bdate, busy) valuses (SEQ_BOARD_NUM,?,?,SYSDATE )";
+			setPstmt(conn.prepareStatement(sql));
+			getPstmt().setString(1, dto.getTitle());
+			getPstmt().setString(2, dto.getBusy());
+			
+			getPstmt().executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {			
+		}try {
+			conn.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public List<BoardDTO> select() {  //테이블 데이터 가져오기
 		
 		List<BoardDTO> list = new ArrayList<BoardDTO>();
-
 		
 		try {
 			conn = DriverManager.getConnection(URL,USERID,USERPWD);
 			String sql = "select user_id,content,dates,recommend,checks " + "from USERS "+
 			"order by user_id";
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
+			setPstmt(conn.prepareStatement(sql));
+			rs = getPstmt().executeQuery();
 			
 			while(rs.next()) {
 				/*
-
 				 * BoardDTO board = new BoardDTO(); 
-
 				 * board.setUser_id(rs.getString("User_id"));
 				 * board.setContent(rs.getString("Content"));
 				 * board.setDate(rs.getDate("dates"));
@@ -118,7 +120,13 @@ public class BoardList {
 
 
 	public static void main(String[] args) {
-		BoardList bl = new BoardList();
+		BoardCommand bl = new BoardCommand();  //접속
 		bl.select();
+	}
+	public PreparedStatement getPstmt() {
+		return pstmt;
+	}
+	public void setPstmt(PreparedStatement pstmt) {
+		this.pstmt = pstmt;
 	}
 }
