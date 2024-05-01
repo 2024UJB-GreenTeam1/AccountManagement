@@ -30,7 +30,7 @@ public class BoardWrite extends BoardCommand implements WindowListener,ActionLis
 	
 	public void BoardWrite() { 
 	f = new JFrame("새글작성");
-	f.setSize(500,600);
+	f.setSize(800,800);
 	f.setLocationRelativeTo(null);
 	f.getContentPane().setLayout(null);
 	f.addWindowListener(this);
