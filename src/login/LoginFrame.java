@@ -218,7 +218,7 @@ public class LoginFrame extends JFrame {
 			this.add(lFail);
 			this.add(lFail2);
 			this.add(btnE);
-
+			
 		}
 
 	}
