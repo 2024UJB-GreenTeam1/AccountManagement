@@ -1,30 +1,31 @@
 package IDsearch;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class IdDAO {
+public class PwdDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	String user = "c##green";
+	String user = "c##green";						
 	String password = "green1234";
 
 	private Connection con;
 	private Statement stmt;
 	private ResultSet rs;
 
-	public ArrayList<IdVo> list(String pname) { // IdSearch 89line// list = dao.list(name);
+	public ArrayList<IdVo> list(String pid) {		//	IdSearch 89line// list = dao.list(name);	
 		ArrayList<IdVo> list = new ArrayList<IdVo>();
 
 		try {
 			connDB();
 
-			String query = "SELECT * FROM USERS"; // USERS테이블에서 USER_id, pwd 필드 조회
-			if (pname != null) {
-				query += " where NAME='" + pname + "'";
+			String query = "SELECT * FROM USERS";			//USERS테이블에서 USER_id, pwd 필드 조회
+			if (pid != null) {
+				query += " where user_id='" + pid + "'";			
 			}
 			System.out.println("SQL : " + query);
 
@@ -38,10 +39,10 @@ public class IdDAO {
 				System.out.println(rs.getRow() + " rows selected...");
 				rs.previous();
 				while (rs.next()) {
-					String id = rs.getString("USER_ID"); // USERS테이블에서 USER_id, pwd, name 필드 조회
+					String id = rs.getString("USER_ID");	//USERS테이블에서 USER_id, pwd, name 필드 조회
 					String pwd = rs.getString("pwd");
-					String name = rs.getString("name");
-					String email = rs.getString("email"); // 여기에 추가해줘야함
+					String name  = rs.getString("name");
+					String email  = rs.getString("email");		//추가해줘야함
 					IdVo data = new IdVo(id, pwd, name, email);
 					list.add(data);
 				}
@@ -53,6 +54,10 @@ public class IdDAO {
 		return list;
 	}
 
+	
+	
+	
+	
 	private void connDB() {
 		try {
 			Class.forName(driver);
