@@ -18,8 +18,8 @@ public class FileInsert {
 			//연결하기
 			conn=DriverManager.getConnection( 
 					"jdbc:oracle:thin:@localhost:1521/XE",
-					"C##GREEN",
-					"GREEN1234"
+					"c##green",
+					"green1234"
 					);
 			
 			//매개변수화된 SQL 문 작성

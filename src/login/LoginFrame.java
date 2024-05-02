@@ -14,7 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import IDsearch.IDsearch;
+import IDsearch.IdSearch;
+import IDsearch.PwdSearch;
 import Mains.MainScreen;
 import Member.Mframe;
 
@@ -93,7 +94,7 @@ public class LoginFrame extends JFrame {
 			}
 		});
 		
-		btnL.addActionListener(new ActionListener() {
+		btnL.addActionListener(new ActionListener() {		//로그인
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
@@ -112,7 +113,7 @@ public class LoginFrame extends JFrame {
 
 						System.out.println(gid + " :: " + gpwd);
 
-						if (tfId.getText().equals(gid) && pwd.equals(gpwd)) {
+						if (tfId.getText().equals(gid) && pwd.equals(gpwd)) {	//성공 메인페이지열기
 							tfMsg.setText("로그인이 성공했습니다.");
 							MainScreen mainscreen = new MainScreen();//
 							
@@ -123,10 +124,10 @@ public class LoginFrame extends JFrame {
 						}
 					}
 				} else {
-					new FailMessage();					////로그인 실패  
+					new FailMessage();				
 				}
 
-				for (int i = 0; i < list.size(); i++) {
+				for (int i = 0; i < list.size(); i++) {			//이거 왜 중복이냐
 					InfoVo data = (InfoVo) list.get(i);
 					String gid = data.getId();
 					String gpwd = data.getPwd();
@@ -139,14 +140,18 @@ public class LoginFrame extends JFrame {
 		btnI.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				IDsearch ID = new IDsearch();					//
-				ID.IDFrame();							//ID찾기열기
+				 new IdSearch();					//
+										//ID찾기열기
 			}
 		});
 		
-		
-		
-		
+		btnP.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 new PwdSearch();		//PWD찾기열기
+				
+			}
+		});
 		
 		
 		
