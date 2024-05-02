@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import IDsearch.IDsearch;
+import IDsearch.IdSearch;
 import Mains.MainScreen;
 import Member.Mframe;
 
@@ -126,7 +126,7 @@ public class LoginFrame extends JFrame {
 					new FailMessage();					////로그인 실패  
 				}
 
-				for (int i = 0; i < list.size(); i++) {
+				for (int i = 0; i < list.size(); i++) {			//이거 왜 중복이냐
 					InfoVo data = (InfoVo) list.get(i);
 					String gid = data.getId();
 					String gpwd = data.getPwd();
@@ -139,7 +139,7 @@ public class LoginFrame extends JFrame {
 		btnI.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				IDsearch ID = new IDsearch();					//
+				IdSearch ID = new IdSearch();					//
 				ID.excuteID();							//ID찾기열기
 			}
 		});

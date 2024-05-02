@@ -1,5 +1,6 @@
 package IDsearch;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -9,55 +10,22 @@ import java.util.ArrayList;
 public class IdDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	String user = "C##GREEN";						
-	String password = "GREEN1234";
+	String user = "c##green";						
+	String password = "green1234";
 
 	private Connection con;
 	private Statement stmt;
 	private ResultSet rs;
 
-	public ArrayList<IdVo> list(String pid) {
+	public ArrayList<IdVo> list(String pname) {		//
 		ArrayList<IdVo> list = new ArrayList<IdVo>();
-
-//		try {
-//			connDB();
-//
-//			String query = "SELECT * FROM USERS";			//USERS테이블에서 USER_id, pwd 필드 조회
-//			if (pid != null) {
-//				query += " where USER_ID='" + pid + "'";			
-//			}
-//			System.out.println("SQL : " + query);
-//
-//			rs = stmt.executeQuery(query);
-//			rs.last();
-//			System.out.println("rs.getRow() : " + rs.getRow());
-//
-//			if (rs.getRow() == 0) {
-//				System.out.println("0 row selected...");
-//			} else {
-//				System.out.println(rs.getRow() + " rows selected...");
-//				rs.previous();
-//				while (rs.next()) {
-//					String id = rs.getString("USER_ID");	//USERS테이블에서 USER_id, pwd 필드 조회
-//					String pwd = rs.getString("pwd");
-//
-//					IdVo data = new IdVo(id, pwd);
-//					list.add(data);
-//				}
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//
-//		return list;
-//	}
 
 		try {
 			connDB();
 
 			String query = "SELECT * FROM USERS";			//USERS테이블에서 USER_id, pwd 필드 조회
-			if (pid != null) {
-				query += " where USER_ID='" + pid + "'";			
+			if (pname != null) {
+				query += " where NAME='" + pname + "'";			
 			}
 			System.out.println("SQL : " + query);
 
@@ -71,10 +39,11 @@ public class IdDAO {
 				System.out.println(rs.getRow() + " rows selected...");
 				rs.previous();
 				while (rs.next()) {
-					String id = rs.getString("USER_ID");	//USERS테이블에서 USER_id, pwd 필드 조회
+					String id = rs.getString("USER_ID");	//USERS테이블에서 USER_id, pwd, name 필드 조회
 					String pwd = rs.getString("pwd");
-
-					IdVo data = new IdVo(id, pwd);
+					String name  = rs.getString("name");
+					String email  = rs.getString("email");		//여기에 추가해줘야함
+					IdVo data = new IdVo(id, pwd, name, email);
 					list.add(data);
 				}
 			}
@@ -84,31 +53,7 @@ public class IdDAO {
 
 		return list;
 	}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 	private void connDB() {
 		try {
 			Class.forName(driver);
