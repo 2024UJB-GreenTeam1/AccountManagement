@@ -9,8 +9,8 @@ import java.sql.SQLException;
 public class ProfileDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	String user = "C##GREEN";
-	String password = "GREEN1234";
+	String user = "c##green";
+	String password = "green1234";
 
 	private Connection con;
 	private PreparedStatement pstmt;
