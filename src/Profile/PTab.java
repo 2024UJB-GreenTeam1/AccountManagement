@@ -13,14 +13,14 @@ import Member.MessageDialog;
 
 public class PTab extends JPanel {
 	private DTO user;
-	public PTab(String tabName) {
+	public PTab(String tabName, DTO user) {
 		this.user = user;
 		setLayout(new BorderLayout());
 
 		if (tabName.equals("내 프로필")) {
 			add(createProfilePanel(), BorderLayout.CENTER);
 		} else if (tabName.equals("E-MAIL 변경")) {
-			add(createIdChangePanel(), BorderLayout.CENTER);
+			add(emailChangePanel(), BorderLayout.CENTER);
 		} else if (tabName.equals("비밀번호 변경")) {
 			add(createPasswordChangePanel(), BorderLayout.CENTER);
 		}
@@ -37,7 +37,7 @@ public class PTab extends JPanel {
 		JLabel name = new JLabel("이름");
 		name.setBounds(100, 10, 100, 30);
 		profilePanel.add(name);
-		JLabel dname = new JLabel("");
+		JLabel dname = new JLabel("user.getName()");
 		dname.setBounds(200, 10, 100, 30);
 		profilePanel.add(dname);
 		// 정보 가져오기
@@ -45,42 +45,42 @@ public class PTab extends JPanel {
 		JLabel id = new JLabel("ID");
 		id.setBounds(100, 60, 100, 30);
 		profilePanel.add(id);
-		JLabel did = new JLabel("green");
+		JLabel did = new JLabel("user.getID()");
 		did.setBounds(200, 60, 100, 30);
 		profilePanel.add(did);
 
 		JLabel mail = new JLabel("E-mail");
 		mail.setBounds(100, 110, 100, 30);
 		profilePanel.add(mail);
-		JLabel dmail = new JLabel("green@naver.com");
+		JLabel dmail = new JLabel("user.getEmail()");
 		dmail.setBounds(200, 110, 130, 30);
 		profilePanel.add(dmail);
 
 		JLabel phone = new JLabel("핸드폰번호");
 		phone.setBounds(100, 160, 100, 30);
 		profilePanel.add(phone);
-		JLabel dphone = new JLabel("010-0000-0000");
+		JLabel dphone = new JLabel("user.getPhone()");
 		dphone.setBounds(200, 160, 100, 30);
 		profilePanel.add(dphone);
 
 		JLabel year = new JLabel("생년월일");
 		year.setBounds(100, 210, 100, 30);
 		profilePanel.add(year);
-		JLabel dyear = new JLabel("199.04.24");
+		JLabel dyear = new JLabel("user.getYear()");
 		dyear.setBounds(200, 210, 100, 30);
 		profilePanel.add(dyear);
 
 		JLabel height = new JLabel("키");
 		height.setBounds(100, 260, 100, 30);
 		profilePanel.add(height);
-		JLabel dheight = new JLabel("200");
+		JLabel dheight = new JLabel("String.valueOf(user.getHeight())");
 		dheight.setBounds(200, 260, 100, 30);
 		profilePanel.add(dheight);
 
 		JLabel weight = new JLabel("몸무게");
 		weight.setBounds(100, 310, 100, 30);
 		profilePanel.add(weight);
-		JLabel dweight = new JLabel("80");
+		JLabel dweight = new JLabel("String.valueOf(user.getWeight())");
 		dweight.setBounds(200, 310, 100, 30);
 		profilePanel.add(dweight);
 
@@ -108,31 +108,38 @@ public class PTab extends JPanel {
 		return profilePanel;
 	}
 
-	private JPanel createIdChangePanel() {
-		JPanel idChangePanel = new JPanel();
-		idChangePanel.setLayout(null);
+	private JPanel emailChangePanel() {
+		JPanel emailChangePanel = new JPanel();
+		emailChangePanel.setLayout(null);
 		// 아이디 변경 패널 구성
 		JLabel newIdLabel = new JLabel("NEW E-MAIL:");
 		newIdLabel.setBounds(50, 50, 100, 30);
-		idChangePanel.add(newIdLabel);
+		emailChangePanel.add(newIdLabel);
 		JTextField newIdField = new JTextField();
 		newIdField.setBounds(160, 50, 200, 30);
-		idChangePanel.add(newIdField);
+		emailChangePanel.add(newIdField);
 		JButton ICP = new JButton("확인");
 		ICP.setBounds(400, 50, 70, 30);
-		idChangePanel.add(ICP);
+		emailChangePanel.add(ICP);
 		ICP.addActionListener(new ActionListener() {
 			// 새로운 이메일 저장
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-
+				String userId = user.getID();
+				String email = newIdField.getText();
+				dao.updatemail(email, userId);
 			}
 		});
 
-		return idChangePanel;
+		return emailChangePanel;
 	}
 
+	
+	
+	
+	
+	
 	private JPanel createPasswordChangePanel() {
 		JPanel passwordChangePanel = new JPanel();
 		passwordChangePanel.setLayout(null);

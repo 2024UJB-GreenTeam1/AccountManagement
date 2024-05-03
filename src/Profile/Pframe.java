@@ -21,7 +21,7 @@ public class Pframe {
 	private ProfileDAO dao;
 	private PTab tab;
 	Font font = new Font("SansSerif", Font.PLAIN, 15);
-	ImageIcon img = new ImageIcon("./image/logo.jpg");
+	ImageIcon img = new ImageIcon("../img/logo.jpg"); // 왜 안뜨는지 이해가 안되네;;
 
 	public Pframe() {
 		dao = new ProfileDAO();
@@ -50,14 +50,17 @@ public class Pframe {
 			// 탈퇴 확인 취소 팝업 띄우기
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+
 				// TODO Auto-generated method stub
+				Pdel delf = new Pdel();
+				delf.setVisible(true);
 			}
 		});
 
-		logo = new JButton(img);
-		// 로고 이미지 크기 및 위치
-		logo.setSize(213, 114);
-		logo.setLocation(10, 10);
+		logo = new JButton();
+		logo.setIcon(img);
+		logo.setLayout(null);
+		logo.setBounds(0, 0, 100, 100);
 		logo.addActionListener(new ActionListener() {
 			// 메인페이지로 이동
 			@Override
@@ -67,13 +70,15 @@ public class Pframe {
 				f.dispose();
 			}
 		});
-
+		String userrId = // 현재 사용자 아이디 가져오는 방법 구현 예정
+		DTO user = dao.getUserProfile(userId);
+		
 		pane = new JTabbedPane();
-		PTab profileTab = new PTab("내 프로필");
+		PTab profileTab = new PTab("내 프로필", user);
 		pane.addTab("내 프로필", profileTab);
-		PTab idChangeTab = new PTab("E-MAIL 변경");
+		PTab idChangeTab = new PTab("E-MAIL 변경", user);
 		pane.addTab("E-MAIL 변경", idChangeTab);
-		PTab passwordChangeTab = new PTab("비밀번호 변경");
+		PTab passwordChangeTab = new PTab("비밀번호 변경", user);
 		pane.addTab("비밀번호 변경", passwordChangeTab);
 		pane.setBounds(100, 130, 600, 550);
 

@@ -12,7 +12,7 @@ public class MessageDialog extends Dialog {
         setSize(300, 150);
         setLayout(null);
         Label lblMessage = new Label(message);
-        lblMessage.setBounds(50, 50, 200, 30);
+        lblMessage.setBounds(30, 50, 400, 30);
         add(lblMessage);
         setLocationRelativeTo(parent);
         addWindowListener(new WindowAdapter() {
