@@ -18,6 +18,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 public class BoardWrite extends BoardCommand implements WindowListener, ActionListener {
+
    private JTextArea maincontent2;
    private JFrame f;
    private JLabel title;

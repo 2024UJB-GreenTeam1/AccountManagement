@@ -17,8 +17,8 @@ public class BoardCommand {
 	
 	public static final String DRIVER_NAME = "oracle.jdbc.OracleDriver";
 	public static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	public static final String USERID = "c##green";
-	public static final String USERPWD = "green1234";
+	public static final String USERID = "C##GREEN";
+	public static final String USERPWD = "GREEN1234";
 	
 	public void list() {  //데이터 가져오기
 		try {
