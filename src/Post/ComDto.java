@@ -1,5 +1,10 @@
 package Post;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class ComDto {
 	private String user_id;
 	private String pwd;
@@ -7,18 +12,21 @@ public class ComDto {
 	private String bcontent;
 	private int bcviews;
 	private int bcno;
-	public ComDto() {
-		super();
-	}
+	public static final String driver = "ora"+ "cle.jdbc.driver.OracleDriver";
+	public static final String url = "jdbc:oracle:thin:@localhost:1521:xe";
+	public static final String user = "c##green";
+	public static final String password = "green1234";
 	
-	public ComDto (String user_id,String pwd,String bctitle, String bcontent,int bcviews,int bcno) {
-	this.user_id = user_id;
-	this.pwd = pwd;
-	this.bctitle = bctitle;
-	this.bcontent = bcontent;
-	this.bcviews = bcviews;
-	this.bcno = bcno;
-	}
+	public ComDto () {
+				try {
+					Class.forName(driver);
+					Connection conn = DriverManager.getConnection(url,user,password);
+				}catch (Exception e) {
+					System.out.println(e);
+				}
+				
+			}
+	
 	public  int getBcno() {
 		return bcno;
 	}
