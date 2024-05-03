@@ -140,10 +140,9 @@ public class Boardset  extends ConnectionB implements ActionListener, WindowList
 	
 	category = new Choice();
 	category.add("카테고리");
-	category.add("B");
-	category.add("C");
-	category.add("D");
-	category.add("E");
+	category.add("운동");
+	category.add("음식");
+	category.add("수면시간");
 	category.setFont(font2);
 	
 	
