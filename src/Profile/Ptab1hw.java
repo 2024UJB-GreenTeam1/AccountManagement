@@ -9,10 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 public class Ptab1hw extends JFrame {
 

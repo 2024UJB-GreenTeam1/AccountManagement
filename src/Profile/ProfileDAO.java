@@ -20,23 +20,7 @@ public class ProfileDAO {
 		connDB();
 	}
 
-	public void Tabinsert(char height, char weight) {
-
-		try {
-			String sql = "" + "UPDATE USERS ?" + "SET HEIGHT=?" + "WHERE";
-			PreparedStatement pstmt = con.prepareStatement(sql);
-
-			pstmt.setString(1, String.valueOf(height));
-			pstmt.setString(2, String.valueOf(weight));
-
-			pstmt.executeUpdate();
-			pstmt.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return;
-	}
-
+	// 회원 탈퇴
 	public void delete(String id) {
 		try {
 			String sql = "" + "DELETE FROM USERS Where bweriter=?";
@@ -50,7 +34,7 @@ public class ProfileDAO {
 		return;
 	}
 
-	// 몸무게 키 수정
+	// 몸무게 키 수정 몸무게는 데일리에서 가져와야 해서 쿼리문 수정 해야됨
 	public void updateHW(String userId, char height, char weight) {
 		try {
 			String sql = "UPDATE USERS SET HEIGHT=?, WEIGHT=? WHERE USER_ID=?";
@@ -66,6 +50,7 @@ public class ProfileDAO {
 		}
 	}
 
+	// 비밀번호 업데이트
 	public void updatepwd(String pwd, String userId) {
 		try {
 			String sql = "" + "UPDATE ISERS SET PWD =? " + " WHERE USER_ID=?";
@@ -78,7 +63,8 @@ public class ProfileDAO {
 			e.printStackTrace();
 		}
 	}
-	
+
+	// 이메일 업데이트
 	public void updatemail(String email, String userId) {
 		try {
 			String sql = "" + "UPDATE ISERS SET EMAIL =? " + " WHERE USER_ID=?";
@@ -91,6 +77,38 @@ public class ProfileDAO {
 			e.printStackTrace();
 		}
 	}
+
+	// 회원정보 표시
+	public DTO getUserProfile(String userId) {
+        DTO userProfile = null;
+
+        try {
+            String sql = "SELECT * FROM USERS WHERE USER_ID = ?";
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, userId);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                // 사용자 정보를 ProfileDTO 객체에 담기
+            	String name = rs.getString("name");
+				String id = rs.getString("USER_ID");
+				String phone = rs.getString("phone");
+				String email = rs.getString("email");
+				String year = rs.getString("year");
+				int height = rs.getInt("height");
+				userProfile = new DTO(name, id, email, phone, year, height);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // 리소스 해제 코드??
+        }
+
+        return userProfile;
+    }
+
+
+	
 
 	private void connDB() {
 		try {
