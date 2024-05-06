@@ -83,7 +83,8 @@ public class IdSearch extends JFrame {
 				String name = tfName.getText(); // TextField에서 getText
 				String email = tfEmail.getText();
 
-				list = dao.list(name); // DAO list에 name이 는지 확인?있
+				list = dao.list(name); //  DAO list에 NAME넣어주기? ->NAME이 겹치는 유저가 있다면??
+
 
 				if (list.size() != 0) {
 					for (int i = 0; i < list.size(); i++) {

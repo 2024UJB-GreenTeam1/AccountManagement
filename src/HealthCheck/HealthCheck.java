@@ -1,6 +1,7 @@
 package HealthCheck;
 
 
+import java.awt.Choice;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
@@ -17,6 +18,10 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import Mains.MainScreen;
+import Member.Mframe;
+import login.InfoVo;
+import login.LoginFrame.FailMessage;
 
 //extends WindowAdapter 
 public class HealthCheck extends JFrame {
@@ -24,11 +29,11 @@ public class HealthCheck extends JFrame {
 //	private JTextField tfAt, tfMsg;
 	private JPasswordField tfPwd;
 	private JButton btnL, btnI, btnP, btnS;
-	private InfoDAO dao;
-	ArrayList<InfoVo> list;
+	private HealthDAO dao;
+	ArrayList<InfoVo> list;							//<InfoVo>list
 	private JPanel tab1Panel;
 	
-						//이미지크기조정
+						//이미지크기조절기능
 	ImageIcon imageSetSize(ImageIcon icon, int i, int j) { // image Size Setting
 		Image ximg = icon.getImage();  //ImageIcon을 Image로 변환.
 		Image yimg = ximg.getScaledInstance(i, j, java.awt.Image.SCALE_SMOOTH);
@@ -40,8 +45,15 @@ public class HealthCheck extends JFrame {
 	
 	
 	public HealthCheck() {
+		
+		dao = new HealthDAO();
 
-		dao = new InfoDAO();
+		
+		
+
+		
+		
+		
 		Font fontT = new Font("SansSerif", Font.PLAIN, 35);
 		Font font = new Font("SansSerif", Font.PLAIN, 25);
 		f = new JFrame("Login");
@@ -50,11 +62,12 @@ public class HealthCheck extends JFrame {
 		
 		tab1Panel = new JPanel();
 		JLabel jLabel = new JLabel();
-		
+		//이미지크기조절&삽입
 		ImageIcon imgTest = new ImageIcon(getClass().getResource("../img/logo.jpg"));
 		imgTest = imageSetSize(imgTest, 145, 145);
 		jLabel.setIcon(imgTest);
 //		jLabel.setIcon(new ImageIcon(getClass().getResource("../img/logo.jpg")));// bin폴더 넘어가면 안되는듯?
+		
 		tab1Panel.add(jLabel);
 		tab1Panel.setLocation(10, 20);
 		tab1Panel.setSize(150, 150);
@@ -65,10 +78,14 @@ public class HealthCheck extends JFrame {
 		int leftTopY = centerPoint.y - f.getHeight() / 2;
 		f.setLocation(leftTopX, leftTopY);
 		
-		JLabel lTitle = new JLabel("<주간분석>");
-		lTitle.setLocation(250, 120);
-		lTitle.setSize(200, 50);
-		lTitle.setText("<월간분석>");
+		
+		Choice ctl20 = new Choice();
+		ctl20.setFont(new Font("Serif",Font.BOLD,30));
+		ctl20.add("<주간분석>");
+		ctl20.add("<월간분석>");
+		ctl20.setLocation(250, 120);
+		ctl20.setSize(200, 50);
+
 
 		JLabel lAt = new JLabel("운동시간 : ");
 		lAt.setLocation(180, 180);
@@ -95,6 +112,29 @@ public class HealthCheck extends JFrame {
 		lS.setSize(200, 50);
 		
 		//------------------------------
+		
+//		if (list.size() != 0) {
+			for (int i = 0; i < list.size(); i++) {
+				InfoVo data = (InfoVo) list.get(i);
+				String gid = data.getId();
+				list = dao.list(gid);  //DAO list에 gid넣어주기?
+				
+				if (tfId.getText().equals(gid) && pwd.equals(gpwd)) {	//case1 주간 평균
+					tfMsg.setText("로그인이 성공했습니다.");
+					MainScreen mainscreen = new MainScreen();//
+					
+					mainscreen.excute();
+	                f.setVisible(false); 		//
+				} else {
+					new FailMessage();  		//case2 월간평균
+				}
+				
+			}
+//		}
+		
+		
+		
+		
 		JLabel lAtT = new JLabel("운동시간");
 		lAtT.setLocation(340, 180);
 		lAtT.setSize(150, 50);
@@ -131,7 +171,7 @@ public class HealthCheck extends JFrame {
 		lIwT.setFont(font);
 		lBmiT.setFont(font);
 		lST.setFont(font);
-		lTitle.setFont(fontT);
+//		lTitle.setFont(fontT);
 		
 		
 		
@@ -206,12 +246,12 @@ public class HealthCheck extends JFrame {
 //				}
 //			}
 //		});
-		
+			
 		btnI.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				 new IdSearch();					//
-										//ID찾기열기
+										//메인페이지열기
 			}
 		});
 		
@@ -236,7 +276,8 @@ public class HealthCheck extends JFrame {
 
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		f.addWindowListener(this);
-		f.add(lTitle);
+//		f.add(lTitle);
+		f.add(ctl20);
 		f.add(lAt);
 		f.add(lUc);
 		f.add(lIc);
