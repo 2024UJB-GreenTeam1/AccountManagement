@@ -114,22 +114,22 @@ public class HealthCheck extends JFrame {
 		//------------------------------
 		
 //		if (list.size() != 0) {
-			for (int i = 0; i < list.size(); i++) {
-				InfoVo data = (InfoVo) list.get(i);
-				String gid = data.getId();
-				list = dao.list(gid);  //DAO list에 gid넣어주기?
+//			for (int i = 0; i < list.size(); i++) {
+//				InfoVo data = (InfoVo) list.get(i);
+//				String gid = data.getId();
+//				list = dao.list(gid);  //DAO list에 gid넣어주기?
+//				
+//				if (tfId.getText().equals(gid) && pwd.equals(gpwd)) {	//case1 주간 평균
+//					tfMsg.setText("로그인이 성공했습니다.");
+//					MainScreen mainscreen = new MainScreen();//
+//					
+//					mainscreen.excute();
+//	                f.setVisible(false); 		//
+//				} else {
+//					new FailMessage();  		//case2 월간평균
+//				}
 				
-				if (tfId.getText().equals(gid) && pwd.equals(gpwd)) {	//case1 주간 평균
-					tfMsg.setText("로그인이 성공했습니다.");
-					MainScreen mainscreen = new MainScreen();//
-					
-					mainscreen.excute();
-	                f.setVisible(false); 		//
-				} else {
-					new FailMessage();  		//case2 월간평균
-				}
-				
-			}
+//			}
 //		}
 		
 		

@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 
 import IDsearch.IdSearch;
 import IDsearch.PwdSearch;
-import Mains.MainScreen;
+import Mains1.Mainscreen;
 import Member.Mframe;
 
 //extends WindowAdapter 
@@ -119,7 +119,7 @@ public class LoginFrame extends JFrame {
 
 						if (tfId.getText().equals(gid) && pwd.equals(gpwd)) {	//성공 메인페이지열기
 							tfMsg.setText("로그인이 성공했습니다.");
-							MainScreen mainscreen = new MainScreen();//
+							Mainscreen mainscreen = new Mainscreen();//
 							
 							mainscreen.excute();
 			                f.setVisible(false); 		//
