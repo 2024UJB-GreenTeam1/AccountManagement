@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 
-import Mains1.Mainscreen;
+import Mains.MainScreen;
 
 public class Pframe {
 	private JFrame f;
@@ -21,7 +21,7 @@ public class Pframe {
 	private ProfileDAO dao;
 	private PTab tab;
 	Font font = new Font("SansSerif", Font.PLAIN, 15);
-	ImageIcon img = new ImageIcon("../img/logo.jpg"); // 왜 안뜨는지 이해가 안되네;;
+
 
 	public Pframe() {
 		dao = new ProfileDAO();
@@ -38,7 +38,7 @@ public class Pframe {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 //				new MainScreen();
-				Mainscreen Main = new Mainscreen();
+				MainScreen Main = new MainScreen();
 				Main.excute();
 				f.dispose();
 			}
@@ -58,20 +58,22 @@ public class Pframe {
 		});
 
 		logo = new JButton();
-		logo.setIcon(img);
+		logo.setIcon(new ImageIcon(getClass().getResource("../img/logo3.jpg")));
 		logo.setLayout(null);
-		logo.setBounds(0, 0, 100, 100);
+		logo.setSize(127, 115);
+		logo.setLocation(10, 10);
 		logo.addActionListener(new ActionListener() {
 			// 메인페이지로 이동
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-//				new MainScreen();
+				new MainScreen();
 				f.dispose();
 			}
 		});
-		String userrId = // 현재 사용자 아이디 가져오는 방법 구현 예정
+		String userId = getCurrentUserId();// 현재 사용자 아이디 가져오는 방법 구현 예정
 		DTO user = dao.getUserProfile(userId);
+		// login 페이지에서 로그인을 하면 로그인 한 사람의 데이터를 가져와야 하는데 후후후후후 이해가 안되고
 		
 		pane = new JTabbedPane();
 		PTab profileTab = new PTab("내 프로필", user);
@@ -89,11 +91,16 @@ public class Pframe {
 		f.setVisible(true);
 	}
 
+	private String getCurrentUserId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new Pframe();
 	}
-
+	
 }
 
 class EventHandler extends WindowAdapter {
