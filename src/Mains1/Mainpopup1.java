@@ -1,4 +1,4 @@
-package Mains;
+package Mains1;
 
 import java.awt.Button;
 import java.awt.Choice;
@@ -14,7 +14,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
-public class Mainpopup {
+public class Mainpopup1 {
 
  // 이미지크기조정
 	ImageIcon imageSetSize(ImageIcon icon, int i, int j) { // image Size Setting
@@ -26,7 +26,7 @@ public class Mainpopup {
 
 	// 프레임 생성
 //	public static void main(String[] args) {
-	public Mainpopup() {
+	public Mainpopup1() {
 		Frame f = new Frame("메인페이지 팝업");
 		f.setSize(800, 800);
 		f.setLayout(null);
@@ -231,7 +231,7 @@ public class Mainpopup {
 	}
 
 	public static void main(String[] args) {
-		new Mainpopup();
+		new Mainpopup1();
 	}
 
 }

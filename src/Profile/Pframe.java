@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
 
-import Mains.MainScreen;
+import Mains1.Mainscreen;
 
 public class Pframe {
 	private JFrame f;
@@ -38,7 +38,7 @@ public class Pframe {
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 //				new MainScreen();
-				MainScreen Main = new MainScreen();
+				Mainscreen Main = new Mainscreen();
 				Main.excute();
 				f.dispose();
 			}
