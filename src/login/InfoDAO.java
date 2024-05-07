@@ -2,6 +2,7 @@ package login;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class InfoDAO {
 
 	private Connection con;
 	private Statement stmt;
-	private ResultSet rs;
+	private ResultSet rs, rsL;
 
 	public ArrayList<InfoVo> list(String pid) {
 		ArrayList<InfoVo> list = new ArrayList<InfoVo>();
@@ -43,6 +44,16 @@ public class InfoDAO {
 
 					InfoVo data = new InfoVo(id, pwd);
 					list.add(data);
+					
+					
+					//실시간로그인 테이블??? 저장
+					String query1 = "INSERT INTO LOGIN(USER_ID,LNO,LDATE) VALUES('"
+					+pid+"',1,DEFAULT)";
+					rsL = stmt.executeQuery(query1);
+					rsL.last();
+					System.out.println("rsL.getRow() : " + rsL.getRow());
+
+					
 				}
 			}
 		} catch (Exception e) {

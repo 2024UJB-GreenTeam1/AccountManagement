@@ -6,15 +6,35 @@ import java.awt.Frame;
 import java.awt.Label;
 import java.awt.TextField;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import HealthCheck.HealthCheck;
+import login.InfoVo;
+import login.LoginFrame;
+
 public class Mainscreen {
+	
+	private String id;
+	ArrayList<InfoVo> list;
+//	private LoginFrame login; 
+		
+	
 	// 프레임 생성
 	public void excute() {
+//		new LoginFrame();
+//		InfoVo data = new InfoVo();
+//		id = list.getTfId();
+//		System.out.println(id);
+		
+		
+		
 		Frame f = new Frame("메인페이지");
 		f.setSize(800, 800);
 		f.setLayout(null);
@@ -54,6 +74,16 @@ public class Mainscreen {
 		mpg.setFont(font1);
 		healthbutton.setFont(font1);
 		boardbutton.setFont(font1);
+		healthbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 new HealthCheck();		//PWD찾기열기
+				
+			}
+		});
+		
+		
+		
 
 		mpg.setSize(130, 40);
 		mpg.setLocation(610, 60);

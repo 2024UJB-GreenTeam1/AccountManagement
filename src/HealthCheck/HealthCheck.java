@@ -1,7 +1,6 @@
 package HealthCheck;
 
 
-import java.awt.Choice;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
@@ -12,25 +11,23 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 
-import Mains.MainScreen;
+import IDsearch.IdSearch;
 import Member.Mframe;
-import login.InfoVo;
-import login.LoginFrame.FailMessage;
 
 //extends WindowAdapter 
-public class HealthCheck extends JFrame {
+public class HealthCheck extends JFrame {	//Label->textField로 바꿔야함
 	private JFrame f;
 //	private JTextField tfAt, tfMsg;
 	private JPasswordField tfPwd;
 	private JButton btnL, btnI, btnP, btnS;
-	private HealthDAO dao;
-	ArrayList<InfoVo> list;							//<InfoVo>list
+	private HealthDAO dao;					
+	ArrayList<HealthVo> list;						//<HealthVo>list2
 	private JPanel tab1Panel;
 	
 						//이미지크기조절기능
@@ -56,7 +53,7 @@ public class HealthCheck extends JFrame {
 		
 		Font fontT = new Font("SansSerif", Font.PLAIN, 35);
 		Font font = new Font("SansSerif", Font.PLAIN, 25);
-		f = new JFrame("Login");
+		f = new JFrame("HealthCheck");
 		f.setSize(700, 700);
 		f.getContentPane().setLayout(null);
 		
@@ -79,10 +76,10 @@ public class HealthCheck extends JFrame {
 		f.setLocation(leftTopX, leftTopY);
 		
 		
-		Choice ctl20 = new Choice();
+		JComboBox<String> ctl20 = new JComboBox<String>();
 		ctl20.setFont(new Font("Serif",Font.BOLD,30));
-		ctl20.add("<주간분석>");
-		ctl20.add("<월간분석>");
+		ctl20.addItem("<주간분석>");
+		ctl20.addItem("<월간분석>");
 		ctl20.setLocation(250, 120);
 		ctl20.setSize(200, 50);
 
@@ -113,64 +110,167 @@ public class HealthCheck extends JFrame {
 		
 		//------------------------------
 		
-//		if (list.size() != 0) {
-//			for (int i = 0; i < list.size(); i++) {
-//				InfoVo data = (InfoVo) list.get(i);
-//				String gid = data.getId();
-//				list = dao.list(gid);  //DAO list에 gid넣어주기?
-//				
-//				if (tfId.getText().equals(gid) && pwd.equals(gpwd)) {	//case1 주간 평균
-//					tfMsg.setText("로그인이 성공했습니다.");
-//					MainScreen mainscreen = new MainScreen();//
-//					
-//					mainscreen.excute();
-//	                f.setVisible(false); 		//
+		
+//		LoginFrame login = new LoginFrame();
+//		HealthVo data = new HealthVo();
+		
+//		String id = list.getId();
+//		System.out.println(id);
+		
+		
+//		public void actionPerformed(ActionEvent e) {
+//		    JComboBox comboBox=(JComboBox) e.getSource();
+//		    String s1=(String) comboBox.getSelectedItem();
+//		    String s2=(String) comboBox.getActionCommand();
+//
+//		   System.out.println(s1);
+//		   System.out.println(s2);
+//		 }
+		list = dao.list();
+		if (list.size() != 0) {
+			for (int i = 0; i < list.size(); i++) {
+				HealthVo data = (HealthVo) list.get(i);
+				String gid = data.getId();
+				 String DIDATE = data.getDIDATE();
+				 String INTAKEC = Integer.toString(data.getINTAKEC());
+				 String USEUPC = Integer.toString(data.getUSEUPC());
+				 String SLEEP = Integer.toString(data.getSLEEP());
+				 String WEIGHT = Integer.toString(data.getWEIGHT());
+				 String WATER = Integer.toString(data.getWATER());
+				  //HealthDAO list에 InfoDAO gid넣어주기?
+				
+				//프린트테스트OK
+				System.out.println(gid);
+				
+//				if (name.equals(gname) && pwd.equals(gpwd) && email.equals(gemail)) {
+//					tfNotice.setText(" 당신의 ID는  :  " + gid + "  입니다."); // 아이디 텍스트필드에 표시
+//
 //				} else {
-//					new FailMessage();  		//case2 월간평균
+//
+//					tfNotice.setText("이름, 이메일, 비밀번호를 다시확인하여 주세요.");
 //				}
 				
-//			}
-//		}
-		
-		
-		
-		
-		JLabel lAtT = new JLabel("운동시간");
-		lAtT.setLocation(340, 180);
-		lAtT.setSize(150, 50);
-		
-		JLabel lUcT = new JLabel("소모cal");
-		lUcT.setLocation(340, 230);
-		lUcT.setSize(150, 50);
+				ctl20.addActionListener (new ActionListener () {
+				    public void actionPerformed(ActionEvent e) {
+				    	//case1 주간 평균
+						if (ctl20.getSelectedItem().toString()=="<주간분석>") {	
+							dispose();
+//							JLabel lAtT = new JLabel("운동시간");
+							JLabel lAtT = new JLabel(USEUPC);
+							lAtT.setLocation(340, 180);
+							lAtT.setSize(150, 50);
+							
+//							JLabel lUcT = new JLabel("소모cal");
+							JLabel lUcT = new JLabel(USEUPC);
+							lUcT.setLocation(340, 230);
+							lUcT.setSize(150, 50);
 
-		JLabel lIcT = new JLabel("섭취cal");
-		lIcT.setLocation(340, 280);
-		lIcT.setSize(150, 50);
+//							JLabel lIcT = new JLabel("섭취cal");
+							JLabel lIcT = new JLabel(INTAKEC);
+							lIcT.setLocation(340, 280);
+							lIcT.setSize(150, 50);
 
-		JLabel lIwT = new JLabel("섭취수분");
-		lIwT.setLocation(340, 330);
-		lIwT.setSize(150, 50);
-		
-		JLabel lBmiT = new JLabel("BMI");
-		lBmiT.setLocation(340, 380);
-		lBmiT.setSize(150, 50);
-		
-		JLabel lST = new JLabel("평균수면시간");
-		lST.setLocation(340, 430);
-		lST.setSize(200, 50);
+//							JLabel lIwT = new JLabel("섭취수분");
+							JLabel lIwT = new JLabel(WATER);
+							lIwT.setLocation(340, 330);
+							lIwT.setSize(150, 50);
+							
+//							JLabel lBmiT = new JLabel("BMI");
+							JLabel lBmiT = new JLabel(WEIGHT);
+							lBmiT.setLocation(340, 380);
+							lBmiT.setSize(150, 50);
+							
+//							JLabel lST = new JLabel("평균수면시간");
+							JLabel lST = new JLabel(SLEEP);
+							lST.setLocation(340, 430);
+							lST.setSize(200, 50);
 
-		lAt.setFont(font);
-		lUc.setFont(font);
-		lIc.setFont(font);
-		lIw.setFont(font);
-		lBmi.setFont(font);
-		lS.setFont(font);
-		lAtT.setFont(font);
-		lUcT.setFont(font);
-		lIcT.setFont(font);
-		lIwT.setFont(font);
-		lBmiT.setFont(font);
-		lST.setFont(font);
+							lAtT.setFont(font);
+							lUcT.setFont(font);
+							lIcT.setFont(font);
+							lIwT.setFont(font);
+							lBmiT.setFont(font);
+							lST.setFont(font);
+							
+							
+							f.add(lAtT);
+							f.add(lUcT);
+							f.add(lIcT);
+							f.add(lIwT);
+							f.add(lBmiT);
+							f.add(lST);
+							
+							
+							f.setVisible(true);
+
+						} else {
+//							dispose();
+							//case2 월간평균
+							
+//							new HealthCheck();
+							
+//							JLabel lAtT = new JLabel("운동시간");
+							JLabel lAtT = new JLabel("1");
+							lAtT.setLocation(340, 180);
+							lAtT.setSize(150, 50);
+//							lAtT.setText("2");
+							
+//							JLabel lUcT = new JLabel("소모cal");
+							JLabel lUcT = new JLabel("2");
+							lUcT.setLocation(340, 230);
+							lUcT.setSize(150, 50);
+
+//							JLabel lIcT = new JLabel("섭취cal");
+							JLabel lIcT = new JLabel("3");
+							lIcT.setLocation(340, 280);
+							lIcT.setSize(150, 50);
+
+//							JLabel lIwT = new JLabel("섭취수분");
+							JLabel lIwT = new JLabel("4");
+							lIwT.setLocation(340, 330);
+							lIwT.setSize(150, 50);
+							
+//							JLabel lBmiT = new JLabel("BMI");
+							JLabel lBmiT = new JLabel("5");
+							lBmiT.setLocation(340, 380);
+							lBmiT.setSize(150, 50);
+							
+//							JLabel lST = new JLabel("평균수면시간");
+							JLabel lST = new JLabel("6");
+							lST.setLocation(340, 430);
+							lST.setSize(200, 50);
+
+							lAtT.setFont(font);
+							lUcT.setFont(font);
+							lIcT.setFont(font);
+							lIwT.setFont(font);
+							lBmiT.setFont(font);
+							lST.setFont(font);
+							
+							
+							f.add(lAtT);
+							f.add(lUcT);
+							f.add(lIcT);
+							f.add(lIwT);
+							f.add(lBmiT);
+							f.add(lST);
+							
+							
+							f.setVisible(true);
+						}
+				    }
+				});
+				
+				
+			
+				
+			}
+		}
+		
+		
+		
+		
+		
 //		lTitle.setFont(fontT);
 		
 		
@@ -204,48 +304,6 @@ public class HealthCheck extends JFrame {
 			}
 		});
 		
-//		btnL.addActionListener(new ActionListener() {		//로그인
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				
-//				String pwd = new String(tfPwd.getPassword());//SWING에서 .getPassword()는 char[]이기때문에 String변환
-//				
-//				System.out.println(tfId.getText() + " : " + pwd);
-//				String id = tfId.getText();							
-//
-//				list = dao.list(id);
-//
-//				if (list.size() != 0) {
-//					for (int i = 0; i < list.size(); i++) {
-//						InfoVo data = (InfoVo) list.get(i);
-//						String gid = data.getId();
-//						String gpwd = data.getPwd();
-//
-//						System.out.println(gid + " :: " + gpwd);
-//
-//						if (tfId.getText().equals(gid) && pwd.equals(gpwd)) {	//성공 메인페이지열기
-//							tfMsg.setText("로그인이 성공했습니다.");
-//							MainScreen mainscreen = new MainScreen();//
-//							
-//							mainscreen.excute();
-//			                f.setVisible(false); 		//
-//						} else {
-//							new FailMessage();  		//로그인 실패
-//						}
-//					}
-//				} else {
-//					new FailMessage();				
-//				}
-//
-//				for (int i = 0; i < list.size(); i++) {			//이거 왜 중복이냐
-//					InfoVo data = (InfoVo) list.get(i);
-//					String gid = data.getId();
-//					String gpwd = data.getPwd();
-//
-//					System.out.println(gid + " :: " + gpwd);
-//				}
-//			}
-//		});
 			
 		btnI.addActionListener(new ActionListener() {
 			@Override
@@ -255,18 +313,17 @@ public class HealthCheck extends JFrame {
 			}
 		});
 		
-//		btnP.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				 new PwdSearch();		//PWD찾기열기
-//				
-//			}
-//		});
+
 		
 		
 		
-		
-		
+		lAt.setFont(font);
+		lUc.setFont(font);
+		lIc.setFont(font);
+		lIw.setFont(font);
+		lBmi.setFont(font);
+		lS.setFont(font);
+
 		
 		
 		
@@ -284,12 +341,7 @@ public class HealthCheck extends JFrame {
 		f.add(lIw);
 		f.add(lBmi);
 		f.add(lS);
-		f.add(lAtT);
-		f.add(lUcT);
-		f.add(lIcT);
-		f.add(lIwT);
-		f.add(lBmiT);
-		f.add(lST);
+		
 		
 		
 		f.add(btnI);
@@ -301,48 +353,6 @@ public class HealthCheck extends JFrame {
 	}
 
 	
-	
-	
-	
-	public class FailMessage extends JFrame {
-		public FailMessage() {
-			setSize(300, 200);
-			setVisible(true);
-			getContentPane().setLayout(null);
-
-			JLabel lFail = new JLabel("로그인이 실패했습니다.");
-			lFail.setLocation(40, 10);
-			lFail.setSize(200, 50);
-
-			JLabel lFail2 = new JLabel("ID혹은 PWD를 다시 확인하여 주십시오.");
-			lFail2.setLocation(40, 30);
-			lFail2.setSize(290, 50);
-
-			JButton btnE = new JButton("확인");
-			btnE.setLocation(95, 80);
-			btnE.setSize(100, 40);
-
-			btnE.addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					dispose();
-				}
-			});
-
-			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			Point centerPoint = ge.getCenterPoint();
-			int leftTopX = centerPoint.x - getWidth() / 2;
-			int leftTopY = centerPoint.y - getHeight() / 2;
-			setLocation(leftTopX, leftTopY);
-
-			this.add(lFail);
-			this.add(lFail2);
-			this.add(btnE);
-			
-		}
-
-	}
-
 	
 	public static void main(String[] args) {
 		new HealthCheck();

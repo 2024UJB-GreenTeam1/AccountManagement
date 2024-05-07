@@ -63,7 +63,7 @@ public class LoginFrame extends JFrame {
 		tfId = new JTextField(10);
 		tfId.setLocation(220, 450);
 		tfId.setSize(200, 30);
-		String id = tfId.getText();							//
+//		String id = getTfId().getText();							//
 		
 		tfPwd = new JPasswordField(10);
 //		tfPwd.setEchoChar('*');
@@ -104,7 +104,7 @@ public class LoginFrame extends JFrame {
 				
 				String pwd = new String(tfPwd.getPassword());//SWING에서 .getPassword()는 char[]이기때문에 String변환
 				
-				System.out.println(tfId.getText() + " : " + pwd);
+				System.out.println(getTfId().getText() + " : " + pwd);
 				String id = tfId.getText();							
 
 				list = dao.list(id);
@@ -117,7 +117,7 @@ public class LoginFrame extends JFrame {
 
 						System.out.println(gid + " :: " + gpwd);
 
-						if (tfId.getText().equals(gid) && pwd.equals(gpwd)) {	//성공 메인페이지열기
+						if (getTfId().getText().equals(gid) && pwd.equals(gpwd)) {	//성공 메인페이지열기
 							tfMsg.setText("로그인이 성공했습니다.");
 							Mainscreen mainscreen = new Mainscreen();//
 							
@@ -171,7 +171,7 @@ public class LoginFrame extends JFrame {
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		f.addWindowListener(this);
 		f.add(lId);
-		f.add(tfId);
+		f.add(getTfId());
 		f.add(lPwd);
 		f.add(tfPwd);
 		f.add(tfMsg);
@@ -231,5 +231,10 @@ public class LoginFrame extends JFrame {
 	public static void main(String[] args) {
 		new LoginFrame();
 
+	}
+
+
+	public JTextField getTfId() {
+		return tfId;
 	}
 }
