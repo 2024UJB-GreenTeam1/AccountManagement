@@ -43,7 +43,8 @@ public class LoginFrame extends JFrame {
 		tab1Panel.add(jLabel);
 		tab1Panel.setLocation(140, 10);
 		tab1Panel.setSize(400, 400);
-
+		
+		//화면중앙배치
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		Point centerPoint = ge.getCenterPoint();
 		int leftTopX = centerPoint.x - f.getWidth() / 2;
@@ -53,6 +54,8 @@ public class LoginFrame extends JFrame {
 		JLabel lId = new JLabel("ID");
 		lId.setLocation(170, 440);
 		lId.setSize(50, 50);
+		
+		
 		JLabel lPwd = new JLabel("PWD");
 		lPwd.setLocation(170, 480);
 		lPwd.setSize(50, 50);
@@ -60,7 +63,8 @@ public class LoginFrame extends JFrame {
 		tfId = new JTextField(10);
 		tfId.setLocation(220, 450);
 		tfId.setSize(200, 30);
-
+		String id = tfId.getText();							//
+		
 		tfPwd = new JPasswordField(10);
 //		tfPwd.setEchoChar('*');
 		tfPwd.setLocation(220, 490);

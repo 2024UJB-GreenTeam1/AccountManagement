@@ -6,23 +6,25 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class InfoDAO {
+import login.InfoVo;
+
+public class HealthDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	String user = "c##green";						
 	String password = "green1234";
 
-	private Connection con;
+	private Connection con;						//안돼네////
 	private Statement stmt;
 	private ResultSet rs;
 
-	public ArrayList<InfoVo> list(String pid) {
-		ArrayList<InfoVo> list = new ArrayList<InfoVo>();
+	public ArrayList<InfoVo> list(String pid) {				//InfoVo
+		ArrayList<HealthVo> list = new ArrayList<HealthVo>();		//HealthVo
 
 		try {
 			connDB();
 
-			String query = "SELECT * FROM USERS";			//USERS테이블에서 USER_id, pwd 필드 조회
+			String query = "SELECT * FROM DAILYINPUT";			//DAILYINPUT테이블에서 필드 조회
 			if (pid != null) {
 				query += " where USER_ID='" + pid + "'";			
 			}
@@ -38,10 +40,15 @@ public class InfoDAO {
 				System.out.println(rs.getRow() + " rows selected...");
 				rs.previous();
 				while (rs.next()) {
-					String id = rs.getString("USER_ID");	//USERS테이블에서 USER_id, pwd 필드 조회
-					String pwd = rs.getString("pwd");
+					String id = rs.getString("USER_ID");	//DAILYINPUT테이블에서 USER_id, pwd 필드 조회
+					String DIDATE = rs.getString("DIDATE");
+					int INTAKEC = rs.getInt("INTAKEC");
+					int USEUPC = rs.getInt("USEUPC");
+					int SLEEP = rs.getInt("SLEEP");
+					int WEIGHT = rs.getInt("WEIGHT");
+					int WATER = rs.getInt("WATER");
 
-					InfoVo data = new InfoVo(id, pwd);
+					HealthVo data = new HealthVo(id, DIDATE, INTAKEC, USEUPC,SLEEP, WEIGHT, WATER);
 					list.add(data);
 				}
 			}

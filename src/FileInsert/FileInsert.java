@@ -37,8 +37,8 @@ public class FileInsert {
 			pstmt.setInt(1,2);
 			pstmt.setString(2,"GREEN");
 			pstmt.setString(3,"감자중독자");
-			pstmt.setString(4,"감자가 좋아요");
-			pstmt.setString(5,"감자는 다이어트에 효능을 보인다.");
+			pstmt.setString(4,"누가 내 감자를 옮겼을까?");
+			pstmt.setString(5,"감자튀김, 감자볶음, 감자떡, 감자칩, 감자밥, 감자탕, 감자가 너무좋아. 감자는 다이어트에 효능을 보인다.");
 			pstmt.setInt(6,0);
 			pstmt.setString(7,"potato.jpg");
 			pstmt.setBlob(8,new FileInputStream("src/FileInsert/potato.jpg"));
