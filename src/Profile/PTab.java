@@ -35,57 +35,57 @@ public class PTab extends JPanel {
 		profilePanel.setLayout(new BorderLayout());
 		// 프로필 정보 패널 구성
 		JLabel name = new JLabel("이름");
-		name.setBounds(100, 10, 100, 30);
+		name.setBounds(100, 80, 100, 30);
 		profilePanel.add(name);
 		JLabel dname = new JLabel("user.getName()");
-		dname.setBounds(200, 10, 100, 30);
+		dname.setBounds(200, 80, 100, 30);
 		profilePanel.add(dname);
 		// 정보 가져오기
 
 		JLabel id = new JLabel("ID");
-		id.setBounds(100, 60, 100, 30);
+		id.setBounds(100, 130, 100, 30);
 		profilePanel.add(id);
-		JLabel did = new JLabel("user.getID()");
-		did.setBounds(200, 60, 100, 30);
+		JLabel did = new JLabel(user.getID());
+		did.setBounds(200, 130, 100, 30);
 		profilePanel.add(did);
 
 		JLabel mail = new JLabel("E-mail");
-		mail.setBounds(100, 110, 100, 30);
+		mail.setBounds(100, 180, 100, 30);
 		profilePanel.add(mail);
-		JLabel dmail = new JLabel("user.getEmail()");
-		dmail.setBounds(200, 110, 130, 30);
+		JLabel dmail = new JLabel(user.getEmail());
+		dmail.setBounds(200, 180, 130, 30);
 		profilePanel.add(dmail);
 
 		JLabel phone = new JLabel("핸드폰번호");
-		phone.setBounds(100, 160, 100, 30);
+		phone.setBounds(100, 230, 100, 30);
 		profilePanel.add(phone);
-		JLabel dphone = new JLabel("user.getPhone()");
-		dphone.setBounds(200, 160, 100, 30);
+		JLabel dphone = new JLabel(user.getPhone());
+		dphone.setBounds(200, 230, 100, 30);
 		profilePanel.add(dphone);
 
 		JLabel year = new JLabel("생년월일");
-		year.setBounds(100, 210, 100, 30);
+		year.setBounds(100, 280, 100, 30);
 		profilePanel.add(year);
-		JLabel dyear = new JLabel("user.getYear()");
-		dyear.setBounds(200, 210, 100, 30);
+		JLabel dyear = new JLabel(user.getYear());
+		dyear.setBounds(200, 280, 100, 30);
 		profilePanel.add(dyear);
 
 		JLabel height = new JLabel("키");
-		height.setBounds(100, 260, 100, 30);
+		height.setBounds(100, 330, 100, 30);
 		profilePanel.add(height);
-		JLabel dheight = new JLabel("String.valueOf(user.getHeight())");
-		dheight.setBounds(200, 260, 100, 30);
+		JLabel dheight = new JLabel(String.valueOf(user.getHeight()));
+		dheight.setBounds(200, 330, 100, 30);
 		profilePanel.add(dheight);
 
 		JLabel weight = new JLabel("몸무게");
-		weight.setBounds(100, 310, 100, 30);
+		weight.setBounds(100, 380, 100, 30);
 		profilePanel.add(weight);
 		JLabel dweight = new JLabel("String.valueOf(user.getWeight())");
-		dweight.setBounds(200, 310, 100, 30);
+		dweight.setBounds(200, 380, 100, 30);
 		profilePanel.add(dweight);
 
 		JButton wh = new JButton("키 몸무게 수정");
-		wh.setBounds(400, 300, 120, 30);
+		wh.setBounds(400, 380, 120, 30);
 		profilePanel.add(wh);
 		wh.addActionListener(new ActionListener() {
 			// 키 몸무게 수정창 띄우기
