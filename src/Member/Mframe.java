@@ -12,7 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import login.LoginFrame;
+
+import login2.LoginFrame;
 
 public class Mframe {
 	private JFrame f;

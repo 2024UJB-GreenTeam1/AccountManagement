@@ -1,15 +1,17 @@
 package Profile;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import login2.InfoVo;
+import login2.LoginFrame;
 
 public class Pdel extends JFrame {
 
@@ -18,8 +20,10 @@ public class Pdel extends JFrame {
 	private String userId;
 	
 	public Pdel(String userId) {
+		
 		this.userId = userId;
 		this.dao = new ProfileDAO();
+		this.dao.connDB();
 		
 	}
 
@@ -61,12 +65,11 @@ public class Pdel extends JFrame {
 		btnNewButton.setBounds(109, 134, 97, 23);
 		contentPane.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
-			// db 자료 삭제 및 로그인 화면 띄우기
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				dao.delete(userId);
-				dispose();
+				dao.delete();
+				new LoginFrame();
 			}
 
 		});

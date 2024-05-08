@@ -7,6 +7,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import login2.InfoVo;
+
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -17,7 +20,7 @@ public class Ptab1hw extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
-
+	ProfileDAO dao = new ProfileDAO();
 	/**
 	 * Launch the application.
 	 */
@@ -68,13 +71,23 @@ public class Ptab1hw extends JFrame {
 		btnNewButton.setBounds(283, 79, 69, 57);
 		contentPane.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
-			// 키 몸무게값 디비로 수정 저장
+			// 키 몸무게 수정
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				dispose();
-			}
-			
+				String heightStr = textField.getText();
+		        String weightStr = textField_1.getText();
+
+		        if (heightStr.isEmpty() || weightStr.isEmpty()) {
+		            new MessageDialog(null, "알림","키와 몸무게를 모두 입력하세요.");
+		        } else {
+		        	 new MessageDialog(null, "알림","저장되었습니다");
+		            int height = Integer.parseInt(heightStr);
+		            int weight = Integer.parseInt(weightStr);
+		            dao.updateHW(height, weight);
+		            dispose();
+		        }
+		    }
 		});
 	}
 }
