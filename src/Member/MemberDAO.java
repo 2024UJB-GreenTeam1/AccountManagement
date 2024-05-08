@@ -54,10 +54,10 @@ public class MemberDAO {
 		return false;
 	}
 
-	public int insert(String name, String id, String pwd, String phone, String email, int height) {
+	public int insert(String name, String id, String pwd, String phone, String email, int height, String year) {
 		int i = 0;
 		try {
-			String sql = "" + "INSERT INTO USERS(NAME,USER_ID,PWD,PHONE,EMAIL,HEIGHT) " + "VALUES(?,?,?,?,?,?)";
+			String sql = "" + "INSERT INTO USERS(NAME,USER_ID,PWD,PHONE,EMAIL,HEIGHT,YEAR) " + "VALUES(?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, name);
 			pstmt.setString(2, id);
@@ -65,6 +65,7 @@ public class MemberDAO {
 			pstmt.setString(4, phone);
 			pstmt.setString(5, email);
 			pstmt.setInt(6, height);
+			pstmt.setString(7, year);
 			
 			i = pstmt.executeUpdate();
 //			pstmt.close();

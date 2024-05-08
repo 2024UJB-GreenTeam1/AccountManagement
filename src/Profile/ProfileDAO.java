@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import login2.InfoVo;
+
 public class ProfileDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -15,7 +17,8 @@ public class ProfileDAO {
 	private Connection con;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
-
+	private InfoVo info;
+		
 	public ProfileDAO() {
 		connDB();
 	}
@@ -81,11 +84,12 @@ public class ProfileDAO {
 	// 회원정보 표시
 	public DTO getUserProfile(String userId) {
         DTO userProfile = null;
+        String userId1 = InfoVo.getInstance().getId();
 
         try {
             String sql = "SELECT * FROM USERS WHERE USER_ID = ?";
             pstmt = con.prepareStatement(sql);
-            pstmt.setString(1, userId);
+            pstmt.setString(1, userId1);
             rs = pstmt.executeQuery();
 
             if (rs.next()) {

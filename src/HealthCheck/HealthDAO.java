@@ -18,16 +18,20 @@ public class HealthDAO {
 	private Statement stmt;
 	private ResultSet rs;
 
-	public ArrayList<InfoVo> list(String pid) {				//InfoVo
+	public ArrayList<HealthVo> list(/*String pid*/) {			
 		ArrayList<HealthVo> list = new ArrayList<HealthVo>();		//HealthVo
 
 		try {
 			connDB();
 
-			String query = "SELECT * FROM DAILYINPUT";			//DAILYINPUT테이블에서 필드 조회
-			if (pid != null) {
-				query += " where USER_ID='" + pid + "'";			
-			}
+			//DAILYINPUT테이블에서 필드 조회쿼리(로그인테이블과 조인)
+			String query = "select 	D.USER_ID, D.DIDATE ,D.INTAKEC,D.USEUPC ,D.SLEEP ,D.WEIGHT ,D.WATER \r\n"
+					+ "	from 	LOGIN L, DAILYINPUT D \r\n"
+					+ "	where 	L.USER_id = d.USER_id and  \r\n"
+					+ "		LNO=1";			
+//			if (pid != null) {
+//				query += " where USER_ID='" + pid + "'";			
+//			}
 			System.out.println("SQL : " + query);
 
 			rs = stmt.executeQuery(query);
@@ -40,7 +44,7 @@ public class HealthDAO {
 				System.out.println(rs.getRow() + " rows selected...");
 				rs.previous();
 				while (rs.next()) {
-					String id = rs.getString("USER_ID");	//DAILYINPUT테이블에서 USER_id, pwd 필드 조회
+					String id = rs.getString("USER_ID");	//DAILYINPUT테이블에서 USER_id,  필드 조회
 					String DIDATE = rs.getString("DIDATE");
 					int INTAKEC = rs.getInt("INTAKEC");
 					int USEUPC = rs.getInt("USEUPC");
@@ -48,6 +52,7 @@ public class HealthDAO {
 					int WEIGHT = rs.getInt("WEIGHT");
 					int WATER = rs.getInt("WATER");
 
+					//HealthVo에 데이터 넣어주기
 					HealthVo data = new HealthVo(id, DIDATE, INTAKEC, USEUPC,SLEEP, WEIGHT, WATER);
 					list.add(data);
 				}

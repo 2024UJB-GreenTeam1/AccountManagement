@@ -16,14 +16,14 @@ import login.LoginFrame;
 
 public class Mframe {
 	private JFrame f;
-	private JTextField tfheight, tfName, tfId, tfPhoneN, tfEmail;
+	private JTextField tfheight, tfName, tfId, tfPhoneN, tfEmail,tfYear;
 	private JPasswordField tfPwd, tfPwda;
 	private JButton btIdCheck, btn, btlogo;
 	private MemberDAO dao;
 
-	private JLabel lheight, lName, lId, lPwd, lPwda, lPhone, lEmail;
+	private JLabel lheight, lYear, lName, lId, lPwd, lPwda, lPhone, lEmail;
 	Font font = new Font("SansSerif", Font.PLAIN, 15);
-	ImageIcon img = new ImageIcon("./img/logo.jpg");
+	
 
 	public Mframe() {
 		dao = new MemberDAO();
@@ -32,9 +32,10 @@ public class Mframe {
 		f.setSize(800, 800);
 		f.setLayout(null);
 
-		btlogo = new JButton(img);
+		btlogo = new JButton();
+		btlogo.setIcon(new ImageIcon(getClass().getResource("../img/logo2.jpg")));
 		// 로고 이미지 크기 및 위치
-		btlogo.setSize(213, 114);
+		btlogo.setSize(181, 163);
 		btlogo.setLocation(10, 10);
 		btlogo.addActionListener(new ActionListener() {
 			// 로그인 창으로 이동하게 해야함
@@ -48,7 +49,7 @@ public class Mframe {
 		});
 
 		btIdCheck = new JButton("중복 확인");
-		btIdCheck.setBounds(500, 200, 100, 30);
+		btIdCheck.setBounds(500, 250, 100, 30);
 		btIdCheck.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -67,7 +68,7 @@ public class Mframe {
 		});
 
 		btn = new JButton("회원 가입");
-		btn.setBounds(380, 550, 100, 30);
+		btn.setBounds(380, 620, 100, 30);
 		btn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -78,9 +79,10 @@ public class Mframe {
 				String heightStr = tfheight.getText();
 				String phone = tfPhoneN.getText();
 				String email = tfEmail.getText();
+				String year = tfYear.getText();
 
 				if (name.isEmpty() || id.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()
-						|| heightStr.isEmpty() || phone.isEmpty() || email.isEmpty()) {
+						|| heightStr.isEmpty() || phone.isEmpty() || email.isEmpty() || year.isEmpty()) {
 					new MessageDialog(f, "알림", "빈칸 없이 채워주세요.");
 				} else if (!password.equals(confirmPassword)) {
 					new MessageDialog(f, "알림", "비밀번호가 일치하지 않습니다.");
@@ -91,7 +93,7 @@ public class Mframe {
 				} else {
 					try {
 						int height = Integer.parseInt(heightStr); // height 문자열을 정수로 변환
-						int result = dao.insert(name, id, password, phone, email, height);
+						int result = dao.insert(name, id, password, phone, email, height, year);
 						if (result > 0) {
 							new MessageDialog(f, "알림", "회원 가입 성공");
 							new LoginFrame();
@@ -107,36 +109,40 @@ public class Mframe {
 		});
 
 		tfName = new JTextField(30);
-		tfName.setBounds(310, 150, 180, 30);
+		tfName.setBounds(310, 200, 180, 30);
 		tfId = new JTextField(30);
-		tfId.setBounds(310, 200, 180, 30);
+		tfId.setBounds(310, 250, 180, 30);
 		tfPwd = new JPasswordField(30);
-		tfPwd.setBounds(310, 250, 180, 30);
+		tfPwd.setBounds(310, 300, 180, 30);
 		tfPwd.setEchoChar('*');
 		tfPwda = new JPasswordField(30);
-		tfPwda.setBounds(310, 300, 180, 30);
+		tfPwda.setBounds(310, 350, 180, 30);
 		tfPwda.setEchoChar('*');
+		tfYear = new JTextField(30);
+		tfYear.setBounds(310, 400, 180, 30);
 		tfPhoneN = new JTextField(30);
-		tfPhoneN.setBounds(310, 350, 180, 30);
+		tfPhoneN.setBounds(310, 450, 180, 30);
 		tfEmail = new JTextField(30);
-		tfEmail.setBounds(310, 400, 180, 30);
+		tfEmail.setBounds(310, 500, 180, 30);
 		tfheight = new JTextField(30);
-		tfheight.setBounds(310, 450, 180, 30);
+		tfheight.setBounds(310, 550, 180, 30);
 
 		lName = new JLabel("이름");
-		lName.setBounds(180, 150, 30, 30);
+		lName.setBounds(180, 200, 30, 30);
 		lId = new JLabel("아이디");
-		lId.setBounds(180, 200, 100, 30);
+		lId.setBounds(180, 250, 100, 30);
 		lPwd = new JLabel("비밀번호");
-		lPwd.setBounds(180, 250, 100, 30);
+		lPwd.setBounds(180, 300, 100, 30);
 		lPwda = new JLabel("비밀번호 확인");
-		lPwda.setBounds(180, 300, 100, 30);
+		lPwda.setBounds(180, 350, 100, 30);
+		lYear = new JLabel("생년월일");
+		lYear.setBounds(180, 400, 100, 30);
 		lPhone = new JLabel("핸드폰 번호");
-		lPhone.setBounds(180, 350, 100, 30);
+		lPhone.setBounds(180, 450, 100, 30);
 		lEmail = new JLabel("Email");
-		lEmail.setBounds(180, 400, 100, 30);
+		lEmail.setBounds(180, 500, 100, 30);
 		lheight = new JLabel("키");
-		lheight.setBounds(180, 450, 100, 30);
+		lheight.setBounds(180, 550, 100, 30);
 
 		f.add(lName);
 		f.add(lId);
@@ -145,6 +151,7 @@ public class Mframe {
 		f.add(lPhone);
 		f.add(lEmail);
 		f.add(lheight);
+		f.add(lYear);
 
 		f.add(tfName);
 		f.add(tfId);
@@ -153,6 +160,7 @@ public class Mframe {
 		f.add(tfPhoneN);
 		f.add(tfEmail);
 		f.add(tfheight);
+		f.add(tfYear);
 
 		f.add(btIdCheck);
 

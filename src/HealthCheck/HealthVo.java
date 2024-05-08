@@ -24,6 +24,10 @@ public class HealthVo {
 		return id;
 	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 	public String getDIDATE() {
 		return DIDATE;
 	}
