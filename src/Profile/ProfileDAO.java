@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import login.InfoVo;
+import login2.InfoVo;
 
 public class ProfileDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
