@@ -38,18 +38,127 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 	private JButton contentno_1,contentno_2, contentno_3,contentno_4,contentno_5,contentno_6,contentno_7,contentno_8,contentno_9,contentno_10;
 
 	public Boardset() {
-		f = new JFrame("1o0");
-		f.addWindowListener(this);
-		logo = new JButton(new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/1o0.jpg"));
-		logo.setBorderPainted(false);
-		logo.setFocusPainted(false);
-		logo.setContentAreaFilled(false);
 
-		Font font = new Font("맑은 고딕", Font.BOLD, 50); // 게시판
-		Font font2 = new Font("맑은 고딕", Font.BOLD, 20); // 작성자 내용 날짜 추천수 조회수 카테고리
+	f = new JFrame("1o0");
+	f.addWindowListener(this);
+	logo = new JButton(new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/1o0.jpg"));
+	logo.setBorderPainted(false);
+	logo.setFocusPainted(false);
+	logo.setContentAreaFilled(false);
+	
+	Font font = new Font("맑은 고딕",Font.BOLD,50);  //게시판 
+	Font font2 = new Font("맑은 고딕",Font.BOLD,20); //작성자 내용 날짜 추천수 조회수 카테고리
+	
+	np = new JButton("새글작성");
+	np.addActionListener(this);
 
-		np = new JButton("새글작성");
-		np.addActionListener(this);
+	search2 = new JButton("검색");//검색 버튼
+	search2 = new JButton(new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/search2.jpg"));
+	search2.setBorderPainted(false);
+	search2.setFocusPainted(false);
+	search2.setContentAreaFilled(false);
+	
+	before = new JButton("이전");
+	before = new JButton(new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/before.jpg"));
+	before.setBorderPainted(false);
+	before.setFocusPainted(false);
+	before.setContentAreaFilled(false);
+	
+	after = new JButton("다음");
+	after = new JButton(new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/after.jpg"));
+	after.setBorderPainted(false);
+	after.setFocusPainted(false);
+	after.setContentAreaFilled(false);
+	
+	click = new JButton("조회");
+	
+	
+	board = new JLabel("게시판");
+	board.setFont(font);
+	page = new JLabel("페이지");
+	page.setFont(font2);
+	page.setBorder(new TitledBorder(new LineBorder(Color.black,2)));
+	page.setHorizontalAlignment(JLabel.CENTER); // 가운데 정렬
+	
+	writing = new JLabel("내용");
+	writing.setFont(font2);
+	writing2 = new JLabel();
+	writing2.setBorder(new TitledBorder(new LineBorder(Color.black,2)));
+	
+	date = new JLabel("날짜");
+	date.setFont(font2);
+	date2 = new JLabel();
+	date2.setBorder(new TitledBorder(new LineBorder(Color.black,2)));
+	
+	recommend = new JLabel("추천수");
+	recommend.setFont(font2);
+	recommend2 = new JLabel();
+	recommend2.setBorder(new TitledBorder(new LineBorder(Color.black,2)));
+	
+	check = new JLabel("조회수");
+	check.setFont(font2);
+	check2 = new JLabel();
+	check2.setBorder(new TitledBorder(new LineBorder(Color.black,2)));
+	
+	
+	category = new Choice();
+	category.add("카테고리");
+	category.add("운동");
+	category.add("음식");
+	category.add("수면시간");
+	category.setFont(font2);
+	
+	
+	main = new JPanel(); 
+	main.setBorder(new TitledBorder(new LineBorder(Color.black,2)));
+	
+	search = new TextField();
+	search.setFont(font2);
+	
+	f.getContentPane().setLayout(null);	
+	f.setSize(800,800);
+	f.addWindowListener(this);   // 이거 없으면 창닫기도 안된다.
+	f.setLocationRelativeTo(null);
+	np.addActionListener(this);
+
+	
+	
+	board.setSize(200,100);     //x 클수록 오른쪽 y 클수록 아래로 
+	board.setLocation(320,10);   //게시판 라벨
+	
+	logo.setSize(100,100);   //로고
+	logo.setLocation(10,10);
+	
+	np.setSize(85,30);     //새글작성
+	np.setLocation(7,700);
+	
+	
+	writing.setSize(100,100); 	//내용   
+	writing.setLocation(300,115);
+	writing2.setSize(450,30);
+	writing2.setLocation(98,150);
+	
+	date.setSize(100,100);  	//날짜
+	date.setLocation(564,115);
+	date2.setSize(80,30);
+	date2.setLocation(546,150);
+	
+	recommend.setSize(100,100);   //추천수
+	recommend.setLocation(634,115);
+	recommend2.setSize(85,30);
+	recommend2.setLocation(624,150);
+	
+	check.setSize(100,100);   //조회수
+	check.setLocation(717,115);
+	check2.setSize(76,30);
+	check2.setLocation(707,150);
+	
+	main.setSize(784,530);       //내용들어갈 예정
+	main.setLocation(0,150);
+	
+	search.setSize(200,30);   //검색창
+	search.setLocation(285,730);
+
 		
 		ImageIcon search3 = new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/test/search2.jpg");
 		search2 = new JButton(search3);// 검색 버튼
