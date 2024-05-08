@@ -24,10 +24,11 @@ public class HealthDAO {
 		try {
 			connDB();
 
+			//DAILYINPUT테이블에서 필드 조회쿼리(로그인테이블과 조인)
 			String query = "select 	D.USER_ID, D.DIDATE ,D.INTAKEC,D.USEUPC ,D.SLEEP ,D.WEIGHT ,D.WATER \r\n"
 					+ "	from 	LOGIN L, DAILYINPUT D \r\n"
 					+ "	where 	L.USER_id = d.USER_id and  \r\n"
-					+ "		LNO=1";			//DAILYINPUT테이블에서 필드 조회
+					+ "		LNO=1";			
 //			if (pid != null) {
 //				query += " where USER_ID='" + pid + "'";			
 //			}
@@ -51,6 +52,7 @@ public class HealthDAO {
 					int WEIGHT = rs.getInt("WEIGHT");
 					int WATER = rs.getInt("WATER");
 
+					//HealthVo에 데이터 넣어주기
 					HealthVo data = new HealthVo(id, DIDATE, INTAKEC, USEUPC,SLEEP, WEIGHT, WATER);
 					list.add(data);
 				}
