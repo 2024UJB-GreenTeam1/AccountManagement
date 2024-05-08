@@ -20,81 +20,21 @@ public class HealthDAO {
 	private Connection con; // 안돼네////
 	private Statement stmt;
 	private ResultSet rs;
-	private PreparedStatement pstmt; // ★☆★☆★☆★☆★☆★☆
-	private InfoVo info; // ★☆★☆★☆★☆★☆★☆
+//	private PreparedStatement pstmt; //
+//	private InfoVo info; // 
 
 	public HealthDAO() {
 		connDB();
 	}
 
-//	public ArrayList<HealthVo> list(String pid) {			
-//		ArrayList<HealthVo> list = new ArrayList<HealthVo>();		//HealthVo
-//
-//		try {
-//			connDB();
-//
-//			//DAILYINPUT테이블에서 필드 조회쿼리(로그인테이블과 조인)
-//			String query = "select 	D.USER_ID, D.DIDATE ,D.INTAKEC,D.USEUPC ,D.SLEEP ,D.WEIGHT ,D.WATER \r\n"
-//					+ "	from 	DAILYINPUT D \r\n";
-//	            if (pid != null) {
-//	                query += " WHERE USER_ID=?";
-//	            }
-//
-//	            PreparedStatement pstmt = con.prepareStatement(query);
-//	            if (pid != null) {
-//	                pstmt.setString(1, pid);
-//	            }
-//			
-//			System.out.println("SQL : " + query);
-//
-//			
-//			
-//			rs = stmt.executeQuery(query);
-//			rs.last();
-//			System.out.println("rs.getRow() : " + rs.getRow());
-//
-//			if (rs.getRow() == 0) {
-//				System.out.println("0 row selected...");
-//			} else {
-//				System.out.println(rs.getRow() + " rows selected...");
-//				rs.previous();
-//				while (rs.next()) {
-//					String id = rs.getString("USER_ID");	//DAILYINPUT테이블에서 USER_id,  필드 조회
-//					String DIDATE = rs.getString("DIDATE");
-//					int INTAKEC = rs.getInt("INTAKEC");
-//					int USEUPC = rs.getInt("USEUPC");
-//					int SLEEP = rs.getInt("SLEEP");
-//					int WEIGHT = rs.getInt("WEIGHT");
-//					int WATER = rs.getInt("WATER");
-//					
-//					 HealthVo data = HealthVo.getInstance();//★☆★☆★☆★☆
-//
-//					//HealthVo에 데이터 넣어주기
-//					data.setDataHealth(id, DIDATE, INTAKEC, USEUPC, SLEEP, WEIGHT, WATER);
-////					HealthVo data = new HealthVo(id, DIDATE, INTAKEC, USEUPC,SLEEP, WEIGHT, WATER);
-//					list.add(data);
-//				}
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}finally {
-//            closeResources();
-//        }
-//
-//		return list;
-//	}
-
-	///////////////////////////////////////////////
-//	public DTO getUserProfile(String userId) {		//★☆★☆★☆★☆★☆
-//        DTO userProfile = null;
-//        String userId1 = InfoVo.getInstance().getId();
-
+	
+	//<주간평균>
 	public ArrayList<HealthVo> list() {
 		ArrayList<HealthVo> list = new ArrayList<HealthVo>();
 
 		try {
 			connDB();
-			String userId1 = InfoVo.getInstance().getId();
+			String userId1 = InfoVo.getInstance().getId();// ★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆
 			// 프린트
 			System.out.println(userId1);
 			String query = "select 	D.USER_ID, D.DIDATE ,D.INTAKEC,D.USEUPC ,D.SLEEP ,D.WEIGHT ,D.WATER \r\n"
@@ -129,16 +69,65 @@ public class HealthDAO {
 			e.printStackTrace();
 		} finally {
 			// 리소스 해제 코드??
-			 closeResources();
+			closeResources();
 		}
-
 		return list;
 	}
 
-	private String getCurrentUserId() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	//<월간평균>
+	public ArrayList<HealthVo> list2() {
+		ArrayList<HealthVo> list2 = new ArrayList<HealthVo>();
+
+		try {
+			connDB();
+			String userId1 = InfoVo.getInstance().getId();// ★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆
+			// 프린트
+			System.out.println(userId1);
+			String query = "select 	D.USER_ID, D.DIDATE ,D.INTAKEC,D.USEUPC ,D.SLEEP ,D.WEIGHT ,D.WATER \r\n"
+					+ "	from 	DAILYINPUT D \r\n";
+			if (userId1 != null) {
+				query += " WHERE USER_ID=?";
+			}
+
+			PreparedStatement pstmt = con.prepareStatement(query);
+			if (userId1 != null) {
+				pstmt.setString(1, userId1);
+			}
+
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				String id = rs.getString("USER_ID"); // DAILYINPUT테이블에서 USER_id, 필드 조회
+				String DIDATE = rs.getString("DIDATE");
+				int INTAKEC = rs.getInt("INTAKEC");
+				int USEUPC = rs.getInt("USEUPC");
+				int SLEEP = rs.getInt("SLEEP");
+				int WEIGHT = rs.getInt("WEIGHT");
+				int WATER = rs.getInt("WATER");
+
+				HealthVo data = HealthVo.getInstance();// ★☆★☆★☆★☆
+				// HealthVo에 데이터 넣어주기
+				data.setDataHealth(id, DIDATE, INTAKEC, USEUPC, SLEEP, WEIGHT, WATER);
+				list2.add(data);
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			// 리소스 해제 코드??
+			closeResources();
+		}
+		return list2;
 	}
+	
+	
+	
+	
+//	private String getCurrentUserId() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	private void connDB() {
 		try {
@@ -153,14 +142,17 @@ public class HealthDAO {
 		}
 	}
 
-    private void closeResources() {
-        try {
-            if (rs != null) rs.close();
+	private void closeResources() {
+		try {
+			if (rs != null)
+				rs.close();
 //            if (rsL != null) rsL.close(); //??뭐지
-            if (stmt != null) stmt.close();
-            if (con != null) con.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+			if (stmt != null)
+				stmt.close();
+			if (con != null)
+				con.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
