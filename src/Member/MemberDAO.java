@@ -54,20 +54,21 @@ public class MemberDAO {
 		return false;
 	}
 
-	public int insert(String name, String id, String pwd, String phone, String email, String height) {
+	public int insert(String name, String id, String pwd, String phone, String email, int height, String year) {
 		int i = 0;
 		try {
-			String sql = "" + "INSERT INTO USERS(USER_NAME,USER_ID,PWD,PHONE,EMAIL,HEIGHT) " + "VALUES(?,?,?,?,?,?)";
+			String sql = "" + "INSERT INTO USERS(NAME,USER_ID,PWD,PHONE,EMAIL,HEIGHT,YEAR) " + "VALUES(?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, name);
 			pstmt.setString(2, id);
 			pstmt.setString(3, pwd);
 			pstmt.setString(4, phone);
 			pstmt.setString(5, email);
-			pstmt.setString(6, height);
+			pstmt.setInt(6, height);
+			pstmt.setString(7, year);
 			
 			i = pstmt.executeUpdate();
-			pstmt.close();
+//			pstmt.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();

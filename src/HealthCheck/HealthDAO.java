@@ -1,32 +1,37 @@
-package login;
+package HealthCheck;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class InfoDAO {
+import login.InfoVo;
+
+public class HealthDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	String user = "c##green";						
 	String password = "green1234";
 
-	private Connection con;
+	private Connection con;						//안돼네////
 	private Statement stmt;
-	private ResultSet rs, rsL;
+	private ResultSet rs;
 
-	public ArrayList<InfoVo> list(String pid) {
-		ArrayList<InfoVo> list = new ArrayList<InfoVo>();
+	public ArrayList<HealthVo> list(/*String pid*/) {			
+		ArrayList<HealthVo> list = new ArrayList<HealthVo>();		//HealthVo
 
 		try {
 			connDB();
 
-			String query = "SELECT * FROM USERS";			//USERS테이블에서 USER_id, pwd 필드 조회
-			if (pid != null) {
-				query += " where USER_ID='" + pid + "'";			
-			}
+			//DAILYINPUT테이블에서 필드 조회쿼리(로그인테이블과 조인)
+			String query = "select 	D.USER_ID, D.DIDATE ,D.INTAKEC,D.USEUPC ,D.SLEEP ,D.WEIGHT ,D.WATER \r\n"
+					+ "	from 	LOGIN L, DAILYINPUT D \r\n"
+					+ "	where 	L.USER_id = d.USER_id and  \r\n"
+					+ "		LNO=1";			
+//			if (pid != null) {
+//				query += " where USER_ID='" + pid + "'";			
+//			}
 			System.out.println("SQL : " + query);
 
 			rs = stmt.executeQuery(query);
@@ -39,21 +44,17 @@ public class InfoDAO {
 				System.out.println(rs.getRow() + " rows selected...");
 				rs.previous();
 				while (rs.next()) {
-					String id = rs.getString("USER_ID");	//USERS테이블에서 USER_id, pwd 필드 조회
-					String pwd = rs.getString("pwd");
+					String id = rs.getString("USER_ID");	//DAILYINPUT테이블에서 USER_id,  필드 조회
+					String DIDATE = rs.getString("DIDATE");
+					int INTAKEC = rs.getInt("INTAKEC");
+					int USEUPC = rs.getInt("USEUPC");
+					int SLEEP = rs.getInt("SLEEP");
+					int WEIGHT = rs.getInt("WEIGHT");
+					int WATER = rs.getInt("WATER");
 
-					InfoVo data = new InfoVo(id, pwd);
+					//HealthVo에 데이터 넣어주기
+					HealthVo data = new HealthVo(id, DIDATE, INTAKEC, USEUPC,SLEEP, WEIGHT, WATER);
 					list.add(data);
-					
-					
-					//실시간로그인 테이블??? 저장
-					String query1 = "INSERT INTO LOGIN(USER_ID,LNO,LDATE) VALUES('"
-					+pid+"',1,DEFAULT)";
-					rsL = stmt.executeQuery(query1);
-					rsL.last();
-					System.out.println("rsL.getRow() : " + rsL.getRow());
-
-					
 				}
 			}
 		} catch (Exception e) {

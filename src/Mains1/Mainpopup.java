@@ -1,4 +1,4 @@
-package Mains;
+package Mains1;
 import java.awt.Button;
 import java.awt.Choice;
 import java.awt.Dimension;
@@ -11,6 +11,10 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.Icon;
 
 public class Mainpopup {
 
@@ -26,36 +30,44 @@ public class Mainpopup {
 		// 로고 객체 생성
 		JButton logo;
 		// 로고 이미지 생성
-		logo = new JButton(new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/1o0.jpg"));
+		logo = new JButton(new ImageIcon("C:\\Users\\Manic-063\\git\\AccountManagement\\bin\\img\\logo_Mains.jpg"));
 		// 로고 이미지 크기 및 위치
-		logo.setSize(100, 90);
+		logo.setSize(100, 100);
 		logo.setLocation(60, 60);
 		// + 객체 생성
 		JButton plus1;
 		JButton plus2;
 		JButton plus3;
-		JButton plus4; 
+		JButton plus4;
 		JButton plus5;
 		// + 이미지 생성
-		plus1 = new JButton(new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/plus.jpg"));
-		plus2 = new JButton(new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/plus.jpg"));
-		plus3 = new JButton(new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/plus.jpg"));
-		plus4 = new JButton(new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/plus.jpg"));
-		plus5 = new JButton(new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/plus.jpg"));
-		
+		plus1 = new JButton(new ImageIcon("C:\\Users\\Manic-063\\git\\AccountManagement\\bin\\img\\plus.jpg.jpg"));
+		plus1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		plus2 = new JButton(new ImageIcon("C:\\Users\\Manic-063\\git\\AccountManagement\\bin\\img\\plus.jpg.jpg"));
+		plus2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		plus3 = new JButton(new ImageIcon("C:\\Users\\Manic-063\\git\\AccountManagement\\bin\\img\\plus.jpg.jpg"));
+		plus4 = new JButton(new ImageIcon("C:\\Users\\Manic-063\\git\\AccountManagement\\bin\\img\\plus.jpg.jpg"));
+		plus5 = new JButton(new ImageIcon("C:\\Users\\Manic-063\\git\\AccountManagement\\bin\\img\\plus.jpg.jpg"));
+
 		// + 이미지 크기 및 위치
 		plus1.setSize(30, 30);
 		plus1.setLocation(490, 260);
-		
+
 		plus2.setSize(30, 30);
 		plus2.setLocation(490, 300);
-		
+
 		plus3.setSize(30, 30);
 		plus3.setLocation(490, 340);
-		
+
 		plus4.setSize(30, 30);
 		plus4.setLocation(490, 380);
-		
+
 		plus5.setSize(30, 30);
 		plus5.setLocation(530, 420);
 		// 중앙배치
@@ -113,14 +125,14 @@ public class Mainpopup {
 		Choice ctl19 = new Choice();
 		Choice ctl20 = new Choice();
 		// Choice 내용 생성
-		ctl1.add("catalog");
-		ctl2.add("catalog");
+		ctl1.add("종류");
+		ctl2.add("시간");
 
-		ctl3.add("catalog");
+		ctl3.add("종류");
 		ctl4.add("catalog");
 
-		ctl5.add("catalog");
-		ctl6.add("catalog");
+		ctl5.add("일어난 시간");
+		ctl6.add("잠든 시간");
 
 		ctl17.add("catalog");
 		ctl18.add("catalog");
