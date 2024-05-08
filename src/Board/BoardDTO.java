@@ -5,7 +5,7 @@ import java.util.Date;
 public class BoardDTO {
 	int bno;
 	String title;
-	String content;
+	String bmain;
 	String name;
 	String busy;
 	Date bDate;
@@ -37,11 +37,11 @@ public class BoardDTO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getContent() {
-		return content;
+	public String getbmain() {
+		return bmain;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setbmain(String bmain) {
+		this.bmain = bmain;
 	}
 	public String getName() {
 		return name;

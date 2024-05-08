@@ -10,19 +10,20 @@ import java.util.Date;
 import java.util.List;
 
 
-public class BoardCommand {
+public class BoardCommand extends ConnectionB {
 	private Connection conn;
 	protected PreparedStatement pstmt; // 원래 private
 	private ResultSet rs;
 	
 	public static final String DRIVER_NAME = "oracle.jdbc.OracleDriver";
 	public static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	public static final String USERID = "C##GREEN";
-	public static final String USERPWD = "GREEN1234";
+	public static final String USERID = "c##green";
+	public static final String USERPWD = "green1234";
 	
 	public void list() {  //데이터 가져오기
 		try {
-			String sql = "" + "Select w_num,user_id,content,dates,recommend,checks " + "FROM WRITINGPULL ";
+			String sql = "" + "Select * " + "FROM  post";
+		    conn = DriverManager.getConnection(URL, USERID, USERPWD);
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
@@ -34,7 +35,6 @@ public class BoardCommand {
 			e.printStackTrace();
 			exit();
 		}
-		
 					
 		
 		
@@ -52,7 +52,7 @@ public class BoardCommand {
 	public void insert(BoardDTO dto) {  //삽입
 		try {
 			conn = DriverManager.getConnection(URL,USERID,USERPWD);
-			String sql = "insert into Boards(bno, btitle, bdate, busy) valuses (SEQ_BOARD_NUM,?,?,SYSDATE )";
+			String sql = "insert into post(bno, btitle, bdate, busy) valuses (SEQ_BOARD_NUM,?,SYSDATE,? )";
 			setPstmt(conn.prepareStatement(sql));
 			getPstmt().setString(1, dto.getTitle());
 			getPstmt().setString(2, dto.getBusy());
@@ -75,29 +75,21 @@ public class BoardCommand {
 		
 		try {
 			conn = DriverManager.getConnection(URL,USERID,USERPWD);
-			String sql = "select user_id,content,dates,recommend,checks " + "from USERS "+
-			"order by user_id";
+			String sql = "select bno,btitle,bmain,bdate,busy " + "from post "+
+			"order by bno DESC";
 			setPstmt(conn.prepareStatement(sql));
 			rs = getPstmt().executeQuery();
 			
 			while(rs.next()) {
-				/*
-				 * BoardDTO board = new BoardDTO(); 
-				 * board.setUser_id(rs.getString("User_id"));
-				 * board.setContent(rs.getString("Content"));
-				 * board.setDate(rs.getDate("dates"));
-				 * board.setRecommend(rs.getInt("recommend"));
-				 * board.setChecks(rs.getInt("checks"));
-				 */
-				String user_id =rs.getString("User_id"); 
-				String content =rs.getString("Content");
-				Date dates =rs.getDate("dates");
-				int recommend = rs.getInt("recommend");
-				int checks = rs.getInt("checks");
+				int bno  =rs.getInt("bno"); 
+				String btitle =rs.getString("btitle");
+				String bmain = rs.getString("bmain");
+				Date bDate =rs.getDate("bDate");
+				int busy = rs.getInt("busy");
 				
-				Object data[] = {user_id,content,dates,recommend,checks};
+				Object data[] = {bno,btitle,bmain,bDate,busy};
 				//list.add(board);
-				System.out.println(user_id+","+content+","+dates+","+recommend+","+checks);
+				System.out.println(bno+","+btitle+","+bmain+","+bDate+","+busy);
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -117,15 +109,32 @@ public class BoardCommand {
 		// TODO Auto-generated method stub
 		return list;
 	}
-
+	
+	public void count() {
+		try {
+			String sql = "" + "select count(*) " + "from post ";
+			ConnectionB cb = new ConnectionB(); // 연결
+			Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			setRs(pstmt.executeQuery());
+			while (getRs().next()) {
+				int count= getRs().getInt("count(*)");				
+			}
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+		}
+		
+	}
 
 	public static void main(String[] args) {
 		BoardCommand bl = new BoardCommand();  //접속
 		bl.select();
 	}
+	
 	public PreparedStatement getPstmt() {
 		return pstmt;
 	}
+	
 	public void setPstmt(PreparedStatement pstmt) {
 		this.pstmt = pstmt;
 	}
