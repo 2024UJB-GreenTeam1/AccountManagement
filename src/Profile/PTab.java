@@ -37,7 +37,7 @@ public class PTab extends JPanel {
 		JLabel name = new JLabel("이름");
 		name.setBounds(100, 80, 100, 30);
 		profilePanel.add(name);
-		JLabel dname = new JLabel("user.getName()");
+		JLabel dname = new JLabel(user.getName());
 		dname.setBounds(200, 80, 100, 30);
 		profilePanel.add(dname);
 		// 정보 가져오기
