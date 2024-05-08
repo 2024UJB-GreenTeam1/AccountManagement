@@ -35,7 +35,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 	blikes_3, blikes_4, blikes_5, blikes_6, blikes_7, blikes_8,
 	blikes_9, blikes_10, clickno_1, clickno_2, clickno_3, clickno_4,
 	clickno_5, clickno_6, clickno_7, clickno_8, clickno_9, clickno_10;
-	private JButton contentno_1,contentno_2, contentno_3,contentno_4,contentno_5,contentno_6,contentno_7,contentno_8,contentno_9,contentno_10;
+	private JButton titleno_1,titleno_2, titleno_3,titleno_4,titleno_5,titleno_6,titleno_7,titleno_8,titleno_9,titleno_10;
 
 	public Boardset() {
 
@@ -170,6 +170,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		before = new JButton(before1);
 		before.addActionListener(this);
 		before.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
+		before.setVisible(false);
 	//	before.setBorderPainted(false);		//내부
 	//	before.setFocusPainted(false);      //초점 잡히냐
 	//	before.setContentAreaFilled(false); //테두리
@@ -180,7 +181,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		after.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
 	//	after.setBorderPainted(false);
 	//	after.setFocusPainted(false);
-	//	after.setContentAreaFilled(false);
+	//  after.setContentAreaFilled(false);
 
 		click = new JButton("조회");
 
@@ -191,7 +192,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		page.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
 		page.setHorizontalAlignment(JLabel.CENTER); // 가운데 정렬
 
-		writing = new JLabel("내용");
+		writing = new JLabel("제목");
 		writing.setFont(font2);
 		writing2 = new JLabel();
 		writing2.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
@@ -289,7 +290,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 			public void actionPerformed(ActionEvent e) {
 
 				try {
-					String sql = "" + "select btitle,bcontent,bdate,blikes,bviews " + "from post " + "order by bdate DESC" ;
+					String sql = "" + "select user_id,btitle,bdate,blikes,bviews " + "from post " + "order by bdate DESC" ;
 					ConnectionB cb = new ConnectionB(); // 연결
 					Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
 					PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -301,20 +302,23 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					String[] show2 = new String[10]; //내용
 					int i=0;
 					while (getRs().next()) {
+						String user_id = getRs().getString("user_id");
 						String btitle = getRs().getString("btitle");
-						String bcontent = getRs().getString("bcontent");
 						String bdate = getRs().getString("bdate");
 						int blikes = getRs().getInt("blikes");
 						int bviews = getRs().getInt("bviews");
-						show[i] =(btitle+" "+" "+bdate+" "+blikes+" "+bviews);
-						show2[i]=(bcontent);
+						show[i] =(user_id+" "+" "+bdate+" "+blikes+" "+bviews);
+						show2[i]= (btitle);
 						//System.out.print(btitle+" "+bmain+" "+bdate+" "+busy+ "\n");					
 					i++;
 						
 					}
+					if(i+1>10) {
+						before.setVisible(false);
+					}
 					if(show[0] != null) {
 						writingno_1.setText(show[0].split(" ")[0]);
-						contentno_1.setText(show2[0]);
+						titleno_1.setText(show2[0]);
 						dateno_1.setText(show[0].split(" ")[2]);  //데이트가 2,3번을 먹음
 						blikes_1.setText(show[0].split(" ")[4]);
 						clickno_1.setText(show[0].split(" ")[5]);
@@ -322,7 +326,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					}
 					if(show[1] != null) {
 						writingno_2.setText(show[1].split(" ")[0]);
-						contentno_2.setText(show2[1]);
+						titleno_2.setText(show2[1]);
 						dateno_2.setText(show[1].split(" ")[2]); 
 						blikes_2.setText(show[1].split(" ")[4]);
 						clickno_2.setText(show[1].split(" ")[5]);
@@ -330,7 +334,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 
 					if(show[2] != null) {
 						writingno_3.setText(show[2].split(" ")[0]);
-						contentno_3.setText(show2[2]);
+						titleno_3.setText(show2[2]);
 						dateno_3.setText(show[2].split(" ")[2]);
 						blikes_3.setText(show[2].split(" ")[4]);
 						clickno_3.setText(show[2].split(" ")[5]);
@@ -338,7 +342,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 
 					if(show[3] != null) {
 						writingno_4.setText(show[3].split(" ")[0]);
-						contentno_4.setText(show2[3]);
+						titleno_4.setText(show2[3]);
 						dateno_4.setText(show[3].split(" ")[2]);
 						blikes_4.setText(show[3].split(" ")[4]);
 						clickno_4.setText(show[3].split(" ")[5]);
@@ -346,7 +350,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 
 					if(show[4] != null) {
 						writingno_5.setText(show[4].split(" ")[0]);
-						contentno_5.setText(show2[4]);
+						titleno_5.setText(show2[4]);
 						dateno_5.setText(show[4].split(" ")[2]);
 						blikes_5.setText(show[4].split(" ")[4]);
 						clickno_5.setText(show[4].split(" ")[5]);
@@ -354,7 +358,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 
 					if(show[5] != null) {
 						writingno_6.setText(show[5].split(" ")[0]);
-						contentno_6.setText(show2[5]);
+						titleno_6.setText(show2[5]);
 						dateno_6.setText(show[5].split(" ")[2]);
 						blikes_6.setText(show[5].split(" ")[4]);
 						clickno_6.setText(show[5].split(" ")[5]);
@@ -362,7 +366,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 
 					if(show[6] != null) {
 						writingno_7.setText(show[6].split(" ")[0]);
-						contentno_7.setText(show2[6]);
+						titleno_7.setText(show2[6]);
 						dateno_7.setText(show[6].split(" ")[2]);
 						blikes_7.setText(show[6].split(" ")[4]);
 						clickno_7.setText(show[6].split(" ")[5]);
@@ -370,7 +374,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 
 					if(show[7] != null) {
 						writingno_8.setText(show[7].split(" ")[0]);
-						contentno_8.setText(show2[7]);
+						titleno_8.setText(show2[7]);
 						dateno_8.setText(show[7].split(" ")[2]);
 						blikes_8.setText(show[7].split(" ")[4]);
 						clickno_8.setText(show[7].split(" ")[5]);
@@ -378,7 +382,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 
 					if(show[8] != null) {
 						writingno_9.setText(show[8].split(" ")[0]);
-						contentno_9.setText(show2[8]);
+						titleno_9.setText(show2[8]);
 						dateno_9.setText(show[8].split(" ")[2]);
 						blikes_9.setText(show[8].split(" ")[4]);
 						clickno_9.setText(show[8].split(" ")[5]);
@@ -386,7 +390,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 
 					if(show[9] != null) {
 						writingno_10.setText(show[9].split(" ")[0]);
-						contentno_10.setText(show2[9]);
+						titleno_10.setText(show2[9]);
 						dateno_10.setText(show[9].split(" ")[2]);
 						blikes_10.setText(show[9].split(" ")[4]);
 						clickno_10.setText(show[9].split(" ")[5]);
@@ -427,7 +431,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		writingno_1.setHorizontalAlignment(JLabel.CENTER);
 		main.add(writingno_1);
 
-		writer = new JLabel("제목"); // 보여지는거
+		writer = new JLabel("작성자"); // 보여지는거
 		writer.setBounds(12, -38, 100, 100);
 		main.add(writer);
 		writer.setFont(font2);
@@ -660,55 +664,55 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		clickno_10.setHorizontalAlignment(JLabel.CENTER);
 		main.add(clickno_10);
 
-		contentno_1 = new JButton(""); //1번글 내용
-		contentno_1.setBounds(98, 28, 450, 52);
-		contentno_1.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
-		main.add(contentno_1);
+		titleno_1 = new JButton(""); //1번글 내용
+		titleno_1.setBounds(98, 28, 450, 52);
+		titleno_1.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
+		main.add(titleno_1);
 
-		contentno_2 = new JButton("");
-		contentno_2.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
-		contentno_2.setBounds(98, 78, 450, 52);
-		main.add(contentno_2);
+		titleno_2 = new JButton("");
+		titleno_2.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
+		titleno_2.setBounds(98, 78, 450, 52);
+		main.add(titleno_2);
 
-		contentno_3 = new JButton("");
-		contentno_3.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
-		contentno_3.setBounds(98, 128, 450, 52);
-		main.add(contentno_3);
+		titleno_3 = new JButton("");
+		titleno_3.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
+		titleno_3.setBounds(98, 128, 450, 52);
+		main.add(titleno_3);
 
-		contentno_4 = new JButton("");
-		contentno_4.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
-		contentno_4.setBounds(98, 178, 450, 52);
-		main.add(contentno_4);
+		titleno_4 = new JButton("");
+		titleno_4.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
+		titleno_4.setBounds(98, 178, 450, 52);
+		main.add(titleno_4);
 
-		contentno_5 = new JButton("");
-		contentno_5.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
-		contentno_5.setBounds(98, 228, 450, 52);
-		main.add(contentno_5);
+		titleno_5 = new JButton("");
+		titleno_5.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
+		titleno_5.setBounds(98, 228, 450, 52);
+		main.add(titleno_5);
 
-		contentno_6 = new JButton("");
-		contentno_6.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
-		contentno_6.setBounds(98, 278, 450, 52);
-		main.add(contentno_6);
+		titleno_6 = new JButton("");
+		titleno_6.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
+		titleno_6.setBounds(98, 278, 450, 52);
+		main.add(titleno_6);
 
-		contentno_7 = new JButton("");
-		contentno_7.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
-		contentno_7.setBounds(98, 328, 450, 52);
-		main.add(contentno_7);
+		titleno_7 = new JButton("");
+		titleno_7.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
+		titleno_7.setBounds(98, 328, 450, 52);
+		main.add(titleno_7);
 
-		contentno_8 = new JButton("");
-		contentno_8.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
-		contentno_8.setBounds(98, 378, 450, 52);
-		main.add(contentno_8);
+		titleno_8 = new JButton("");
+		titleno_8.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
+		titleno_8.setBounds(98, 378, 450, 52);
+		main.add(titleno_8);
 
-		contentno_9 = new JButton("");
-		contentno_9.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
-		contentno_9.setBounds(98, 428, 450, 52);
-		main.add(contentno_9);
+		titleno_9 = new JButton("");
+		titleno_9.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
+		titleno_9.setBounds(98, 428, 450, 52);
+		main.add(titleno_9);
 
-		contentno_10 = new JButton("");
-		contentno_10.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
-		contentno_10.setBounds(98, 478, 450, 52);
-		main.add(contentno_10);
+		titleno_10 = new JButton("");
+		titleno_10.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
+		titleno_10.setBounds(98, 478, 450, 52);
+		main.add(titleno_10);
 		f.getContentPane().add(logo);
 		f.getContentPane().add(board);
 		f.setVisible(true);
@@ -761,7 +765,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		}else if(e.getSource()==before) {
 			System.out.print("이전");
 		}else if(e.getSource()==after) {
-			System.out.print("이후");
+			before.setVisible(true);
 		}
 	}
 

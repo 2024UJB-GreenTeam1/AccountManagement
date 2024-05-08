@@ -6,31 +6,23 @@ public class BoardDTO {
 	int bno;
 	String title;
 	String bmain;
-	String name;
-	String busy;
+	String user_id;
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
 	Date bDate;
 	
 	
-	
-	public int getbno() {
-		return bno;
-	}
-	public void setbno(int bno) {
-		this.bno = bno;
-	}
 	public int getBno() {
 		return bno;
 	}
 	public void setBno(int bno) {
 		this.bno = bno;
 	}
-	public String getBusy() {
-		return busy;
-	}
-	public void setBusy(String busy) {
-		this.busy = busy;
-	}
-	
+
 	public String getTitle() {
 		return title;
 	}
@@ -42,12 +34,6 @@ public class BoardDTO {
 	}
 	public void setbmain(String bmain) {
 		this.bmain = bmain;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
 	}
 	public Date getBDate() {
 		return bDate;
