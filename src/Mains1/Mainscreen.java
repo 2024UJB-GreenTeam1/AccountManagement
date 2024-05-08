@@ -15,9 +15,10 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+import Board.Boardset;
 import HealthCheck.HealthCheck;
+import Profile.Pframe;
 import login.InfoVo;
-import login.LoginFrame;
 
 public class Mainscreen {
 	
@@ -74,11 +75,25 @@ public class Mainscreen {
 		mpg.setFont(font1);
 		healthbutton.setFont(font1);
 		boardbutton.setFont(font1);
+		
+		boardbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new Boardset();	//게시판열기
+			}
+		});
+		
+		mpg.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 new Pframe();		//마이페이지열기
+			}
+		});
+		
 		healthbutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 new HealthCheck();		//PWD찾기열기
-				
+				 new HealthCheck();		//건강페이지열기
 			}
 		});
 		
@@ -123,7 +138,7 @@ public class Mainscreen {
 		f.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent we) {
-				System.exit(0);
+				System.exit(0);					//왜 dispose(); 안돼지?
 			}
 		});
 
@@ -139,7 +154,7 @@ public class Mainscreen {
 		f.add(popboard);
 		f.add(maplink);
 		f.add(calendarlink);
-
+		
 		f.setVisible(true);
 
 	}

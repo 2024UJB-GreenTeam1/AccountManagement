@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import login2.InfoVo;
+import login.InfoVo;
 
 public class ProfileDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
@@ -17,7 +17,7 @@ public class ProfileDAO {
 	private Connection con;
 	private PreparedStatement pstmt;
 	private ResultSet rs;
-	private InfoVo info;
+	private InfoVo info;			//★☆★☆★☆★☆★☆★☆
 		
 	public ProfileDAO() {
 		connDB();
@@ -82,7 +82,7 @@ public class ProfileDAO {
 	}
 
 	// 회원정보 표시
-	public DTO getUserProfile(String userId) {
+	public DTO getUserProfile(String userId) {		//★☆★☆★☆★☆★☆
         DTO userProfile = null;
         String userId1 = InfoVo.getInstance().getId();
 

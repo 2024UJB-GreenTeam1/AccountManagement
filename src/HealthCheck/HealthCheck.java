@@ -1,3 +1,4 @@
+
 package HealthCheck;
 
 import java.awt.Font;
@@ -14,11 +15,11 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import IDsearch.IdSearch;
 import Member.Mframe;
+import login.InfoVo;
 
 //extends WindowAdapter 
 public class HealthCheck extends JFrame { 
@@ -97,11 +98,16 @@ public class HealthCheck extends JFrame {
 		lS.setSize(200, 50);
 
 		// ------------------------------
-
-		list = dao.list();
+//		 String userId = InfoVo.getInstance().getId();
+		 
+		list = dao.list(/*----------*/);
 		if (list.size() != 0) {
 			for (int i = 0; i < list.size(); i++) {
 				HealthVo data = (HealthVo) list.get(i);
+//		getUserProfile data = new getUserProfile();
+		
+		
+//				HealthVo data = HealthVo.getInstance();
 				String gid = data.getId();
 				String DIDATE = data.getDIDATE();
 				String INTAKEC = Integer.toString(data.getINTAKEC());

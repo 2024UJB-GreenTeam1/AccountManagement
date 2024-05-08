@@ -1,6 +1,9 @@
 package HealthCheck;
 
+import login.InfoVo;
+
 public class HealthVo {
+	private static HealthVo instance;
 	private String id;
 	private String DIDATE;
 	private int INTAKEC;
@@ -9,8 +12,11 @@ public class HealthVo {
 	private int WEIGHT;
 	private int WATER;
 	
+	public HealthVo() {
+		
+	}
 
-	public HealthVo(String id, String DIDATE, int intakec, int useupc,int sleep, int weight, int water) {
+	public void setDataHealth(String id, String DIDATE, int intakec, int useupc,int sleep, int weight, int water) {
 		this.id = id;
 		this.DIDATE = DIDATE;
 		this.INTAKEC=intakec;
@@ -18,6 +24,15 @@ public class HealthVo {
 		this.SLEEP=sleep;
 		this.WEIGHT=weight;
 		this.WATER=water;
+	}
+	
+	public static HealthVo getInstance() {
+		if(instance == null) {
+			synchronized(HealthVo.class) {
+				instance = new HealthVo();
+			}
+		}
+		return instance;
 	}
 
 	public String getId() {
