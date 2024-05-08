@@ -27,16 +27,23 @@ public class FileInsert {
 //			"INSERT INTO board(bno, btitle, bcontent, bwriter, bdate, bfilename, bfiledata)"+
 //					"VALUES(SEQ_BNO.NEXTVAL,? ,?,?,SYSDATE,?,?)";
 			
-			"INSERT INTO board(bcno,bno,user_id, bcnickname,bctitle,bcontent,bcdate,bcdelete,bcfilename,bfiledata,bcviews,bclikes)"+
-			"VALUES(SEQ_BNO.NEXTVAL,? ,?,?,SYSDATE,?,?)";
+			"INSERT INTO BCONTENTS(bcno,bno,user_id, bcnickname,bctitle,bcontent,bcdate,"
+			+ "bcdelete,bcfilename,bfiledata,bcviews,bclikes)"+
+			"VALUES(SEQ_BNO.NEXTVAL,?,? ,?,?,?,SYSDATE,?,?,?,?,?)";	/*SEQ_BNO.NEXTVAL*/
 			
 			//PreparedStatement 얻기 및 값 지정
 			PreparedStatement pstmt = conn.prepareStatement(sql, new String[]{"bno"});
-			pstmt.setString(1,"눈 오는 날");
-			pstmt.setString(2,"함박눈이 내려요.");
-			pstmt.setString(3,"winter");
-			pstmt.setString(4,"snow.jpg");
-			pstmt.setBlob(5,new FileInputStream("src/FileInsert/potato.jpg"));
+//			pstmt.setInt(1,1);
+			pstmt.setInt(1,2);
+			pstmt.setString(2,"GREEN");
+			pstmt.setString(3,"감자중독자");
+			pstmt.setString(4,"누가 내 감자를 옮겼을까?");
+			pstmt.setString(5,"감자튀김, 감자볶음, 감자떡, 감자칩, 감자밥, 감자탕, 감자가 너무좋아. 감자는 다이어트에 효능을 보인다.");
+			pstmt.setInt(6,0);
+			pstmt.setString(7,"potato.jpg");
+			pstmt.setBlob(8,new FileInputStream("src/FileInsert/potato.jpg"));
+			pstmt.setInt(9,0);
+			pstmt.setInt(10,0);
 			
 			//SQL 문 실행
 			int rows = pstmt.executeUpdate();
