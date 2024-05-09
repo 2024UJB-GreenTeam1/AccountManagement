@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Member.MessageDialog;
-import login2.InfoVo;
+import login.InfoVo;
 
 public class PTab extends JPanel {
 	private DTO user;

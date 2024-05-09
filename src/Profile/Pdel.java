@@ -10,8 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import login2.InfoVo;
-import login2.LoginFrame;
+import login.InfoVo;
+import login.LoginFrame;
 
 public class Pdel extends JFrame {
 

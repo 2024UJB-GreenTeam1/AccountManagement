@@ -21,7 +21,7 @@ import IDsearch.IdSearch;
 import IDsearch.PwdSearch;
 import Mains1.Mainscreen;
 import Member.Mframe;
-import Profile.Pframe;
+//import Profile.Pframe;
 
 //extends WindowAdapter 
 public class LoginFrame extends JFrame {

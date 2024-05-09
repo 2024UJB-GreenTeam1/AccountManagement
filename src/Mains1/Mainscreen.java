@@ -16,7 +16,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import Board.Boardset;
-import HealthCheck.HealthCheck;
+import HealthCheck2.HealthCheck;
 import Profile.Pframe;
 import login.InfoVo;
 
