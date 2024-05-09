@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 public class CalendarMemo {
 
 	public static void main(String[] args) {
+		
 		JFrame f = new JFrame("일정관리 입력");
 		f.setSize(400, 250);
 		f.setLayout(new FlowLayout());
