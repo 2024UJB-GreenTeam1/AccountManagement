@@ -1,89 +1,74 @@
 package Profile;
 
-import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
+//<<<<<<< HEAD
 import login.InfoVo;
+//=======
+//import Member.Mframe;
+//>>>>>>> branch 'master' of https://github.com/2024UJB-GreenTeam1/AccountManagement.git
 import login.LoginFrame;
 
-public class Pdel extends JFrame {
-
-	private JPanel contentPane;
+public class Pdel {
+	private JFrame f;
+	private JLabel ldelete;
+	private JButton Btok, Btno;
 	private ProfileDAO dao;
-	private String userId;
+	private DTO user;
 	
-	public Pdel(String userId) {
-		
-		this.userId = userId;
-		this.dao = new ProfileDAO();
-		this.dao.connDB();
-		
-	}
+	Font font = new Font("SansSerif", Font.PLAIN, 15);
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Pdel frame = new Pdel();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public Pdel() {
-		
+		dao = new ProfileDAO();
+				
+		f = new JFrame("회원탈퇴");
+		f.setBounds(100, 100, 450, 300);
+		f.setLayout(null);
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		ldelete = new JLabel("탈퇴 하겠습니까?");
+		ldelete.setBounds(169, 85, 102, 23);
 
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		Btok = new JButton("확인");
+		Btok.setBounds(109, 134, 97, 23);
+		Btok.addActionListener(new ActionListener() {
 
-		JLabel lblNewLabel = new JLabel("탈퇴 하겠습니까?");
-		lblNewLabel.setBounds(169, 85, 102, 23);
-		contentPane.add(lblNewLabel);
-
-		JButton btnNewButton = new JButton("확인");
-		btnNewButton.setBounds(109, 134, 97, 23);
-		contentPane.add(btnNewButton);
-		btnNewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				dao.delete();
+				dao.delete(user);
 				new LoginFrame();
+				f.dispose();
 			}
-
 		});
-
-		JButton btnNewButton_1 = new JButton("취소");
-		btnNewButton_1.setBounds(229, 134, 97, 23);
-		contentPane.add(btnNewButton_1);
-		btnNewButton_1.addActionListener(new ActionListener() {
+		
+		
+		Btno = new JButton("취소");
+		Btno.setBounds(229, 134, 97, 23);
+		Btno.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				dispose();
+				f.dispose();
 			}
-
 		});
+		
+		f.add(ldelete);
+		f.add(Btno);
+		f.add(Btok);
+		
+		f.setFont(font);
+		f.setVisible(true);	
+		
 	}
+	public static void main(String[] args) {
+		new Pdel();
+	}
+
 }
