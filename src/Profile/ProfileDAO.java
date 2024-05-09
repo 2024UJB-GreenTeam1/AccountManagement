@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import login2.InfoVo;
+import login.InfoVo;
 
 public class ProfileDAO {
 	String driver = "oracle.jdbc.driver.OracleDriver";
@@ -23,8 +23,8 @@ public class ProfileDAO {
 		connDB();
 	}
 
-	// 회원 탈퇴
-	public void delete() {
+	// 회원 탈퇴 아직 해결하지 못함
+	public void delete(DTO user) {
 		String userId1 = InfoVo.getInstance().getId();
 		try {
 			String deletesql = "" + "DELETE FROM DAILYINPUT WHERE USER_ID = ?";
@@ -33,11 +33,11 @@ public class ProfileDAO {
 			pstmt1.executeUpdate();
 			pstmt1.close();
 			
-			String deletesql2 = "" + "DELETE FROM LOGIN WHERE USER_ID = ?";
-			PreparedStatement pstmt2 = con.prepareStatement(deletesql2);
-			pstmt2.setString(1, userId1);
-			pstmt2.executeUpdate();
-			pstmt2.close();
+//			String deletesql2 = "" + "DELETE FROM LOGIN WHERE USER_ID = ?";
+//			PreparedStatement pstmt2 = con.prepareStatement(deletesql2);
+//			pstmt2.setString(1, userId1);
+//			pstmt2.executeUpdate();
+//			pstmt2.close();
 						
 			String sql = "" + "DELETE FROM USERS WHERE USER_ID = ?";
 			pstmt = con.prepareStatement(sql);
