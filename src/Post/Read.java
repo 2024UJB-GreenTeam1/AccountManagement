@@ -24,7 +24,7 @@ import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
-import kakaomap.Correct;
+//import kakaomap.Correct;
 
 public class Read extends Connection2 implements ActionListener, WindowListener{
 

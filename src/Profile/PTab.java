@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Member.MessageDialog;
-import login2.InfoVo;
+import login.InfoVo;
 
 public class PTab extends JPanel {
 	private DTO user;
@@ -173,7 +173,9 @@ public class PTab extends JPanel {
 					new MessageDialog(null, "알림", "빈칸 없이 채워주세요.");
 				} else if (!password.equals(confirmPassword)) {
 					new MessageDialog(null, "알림", "비밀번호가 일치하지 않습니다.");
-				} else {
+				} else if (!isValidPassword(password)) {
+					new MessageDialog(null, "알림", "특수문자를 포함하지 않습니다.");
+				}else {
 					// 비밀번호 업데이트
 					String userId = InfoVo.getInstance().getId();
 					dao.updatepwd(password, userId);
@@ -184,4 +186,9 @@ public class PTab extends JPanel {
 
 		return passwordChangePanel;
 	}
+	
+	// 비밀번호에 특수문자가 포함되어 있는지 검증
+		public boolean isValidPassword(String password) {
+		    return password.matches("[a-zA-Z0-9]+");
+		}
 }
