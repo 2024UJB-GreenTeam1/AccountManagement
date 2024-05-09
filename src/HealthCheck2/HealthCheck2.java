@@ -1,4 +1,5 @@
-package HealthCheck;
+
+package HealthCheck2;
 
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
@@ -16,19 +17,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import HealthCheck2.HealthCheck;
+import HealthCheck.HealthDAO;
+import HealthCheck.HealthVo;
 import IDsearch.IdSearch;
 import Member.Mframe;
 import login.InfoVo;
 
 //extends WindowAdapter 
-public class HealthCheck extends JFrame {
+public class HealthCheck2 extends JFrame { 
 	private JFrame f;
 //	private JPasswordField tfPwd;
 	private JButton btnI, btnS;
 	private HealthDAO dao;
 	ArrayList<HealthVo> list; // <HealthVo>list2
-	ArrayList<HealthVo> list2;
 	private JPanel tab1Panel;
 
 	// 이미지크기조절기능
@@ -39,7 +40,7 @@ public class HealthCheck extends JFrame {
 		return xyimg;
 	}
 
-	public HealthCheck() {
+	public HealthCheck2() {
 
 		dao = new HealthDAO();
 
@@ -56,6 +57,7 @@ public class HealthCheck extends JFrame {
 		imgTest = imageSetSize(imgTest, 145, 145);
 		jLabel.setIcon(imgTest);
 
+		
 		tab1Panel.add(jLabel);
 		tab1Panel.setLocation(10, 20);
 		tab1Panel.setSize(150, 150);
@@ -68,7 +70,6 @@ public class HealthCheck extends JFrame {
 
 		JComboBox<String> ctl20 = new JComboBox<String>();
 		ctl20.setFont(new Font("Serif", Font.BOLD, 30));
-		ctl20.addItem("<기간선택>");
 		ctl20.addItem("<주간분석>");
 		ctl20.addItem("<월간분석>");
 		ctl20.setLocation(250, 120);
@@ -100,79 +101,80 @@ public class HealthCheck extends JFrame {
 
 		// ------------------------------
 //		 String userId = InfoVo.getInstance().getId();
-
-//		("운동시간");
-		JTextField lAtT = new JTextField();
-		lAtT.setLocation(340, 180);
-		lAtT.setSize(150, 50);
-
-//		("소모cal");
-		JTextField lUcT = new JTextField();
-		lUcT.setLocation(340, 230);
-		lUcT.setSize(150, 50);
-
-//		("섭취cal");
-		JTextField lIcT = new JTextField();
-		lIcT.setLocation(340, 280);
-		lIcT.setSize(150, 50);
-
-//		("섭취수분");
-		JTextField lIwT = new JTextField();
-		lIwT.setLocation(340, 330);
-		lIwT.setSize(150, 50);
-
-//		("BMI");
-		JTextField lBmiT = new JTextField();
-		lBmiT.setLocation(340, 380);
-		lBmiT.setSize(150, 50);
-
-//		("평균수면시간");
-		JTextField lST = new JTextField();
-		lST.setLocation(340, 430);
-		lST.setSize(200, 50);
-
-		lAtT.setFont(font);
-		lUcT.setFont(font);
-		lIcT.setFont(font);
-		lIwT.setFont(font);
-		lBmiT.setFont(font);
-		lST.setFont(font);
-
-		f.add(lAtT);
-		f.add(lUcT);
-		f.add(lIcT);
-		f.add(lIwT);
-		f.add(lBmiT);
-		f.add(lST);
-
-//		f.setVisible(true);
-
+		 
 		list = dao.list(/*----------*/);
 		if (list.size() != 0) {
 			for (int i = 0; i < list.size(); i++) {
 				HealthVo data = (HealthVo) list.get(i);
 //		getUserProfile data = new getUserProfile();
+		
+		
+//				HealthVo data = HealthVo.getInstance();
+				String gid = data.getId();
+//				String DIDATE = data.getDIDATE();
+				String AVG_EXERCISE_HOURS = Integer.toString(data.getAVG_EXERCISE_HOURS());
+				String AVG_CALORIES_INTAKE = Integer.toString(data.getAVG_CALORIES_INTAKE());
+				String AVG_CALORIES_BURNED = Integer.toString(data.getAVG_CALORIES_BURNED());
+				String AVG_SLEEP_HOURS = Integer.toString(data.getAVG_SLEEP_HOURS());
+				String AVG_BMI = Integer.toString(data.getAVG_BMI());
+				String AVG_WATER_INTAKE = Integer.toString(data.getAVG_WATER_INTAKE());
+				// HealthDAO list에 InfoDAO gid넣어주기?
+
+				// 프린트테스트OK
+				System.out.println(gid);
+
+//				("운동시간");
+				JTextField lAtT = new JTextField(AVG_EXERCISE_HOURS);
+				lAtT.setLocation(340, 180);
+				lAtT.setSize(150, 50);
+
+//				("소모cal");
+				JTextField lUcT = new JTextField(AVG_CALORIES_BURNED);
+				lUcT.setLocation(340, 230);
+				lUcT.setSize(150, 50);
+
+//				("섭취cal");
+				JTextField lIcT = new JTextField(AVG_CALORIES_INTAKE);
+				lIcT.setLocation(340, 280);
+				lIcT.setSize(150, 50);
+
+//				("섭취수분");
+				JTextField lIwT = new JTextField(AVG_WATER_INTAKE);
+				lIwT.setLocation(340, 330);
+				lIwT.setSize(150, 50);
+
+//				("BMI");
+				JTextField lBmiT = new JTextField(AVG_BMI);
+				lBmiT.setLocation(340, 380);
+				lBmiT.setSize(150, 50);
+
+//				("평균수면시간");
+				JTextField lST = new JTextField(AVG_SLEEP_HOURS);
+				lST.setLocation(340, 430);
+				lST.setSize(200, 50);
+
+				lAtT.setFont(font);
+				lUcT.setFont(font);
+				lIcT.setFont(font);
+				lIwT.setFont(font);
+				lBmiT.setFont(font);
+				lST.setFont(font);
+
+				f.add(lAtT);
+				f.add(lUcT);
+				f.add(lIcT);
+				f.add(lIwT);
+				f.add(lBmiT);
+				f.add(lST);
+
+				f.setVisible(true);
 
 				ctl20.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 
 						// case1 주간 평균
 						if (ctl20.getSelectedItem().toString() == "<주간분석>") {
-//							dispose();
-
-//							HealthVo data = HealthVo.getInstance();
-							String gid = data.getId();
-//							String DIDATE = data.getDIDATE();
-							String AVG_EXERCISE_HOURS = Integer.toString(data.getAVG_EXERCISE_HOURS());
-							String AVG_CALORIES_INTAKE = Integer.toString(data.getAVG_CALORIES_INTAKE());
-							String AVG_CALORIES_BURNED = Integer.toString(data.getAVG_CALORIES_BURNED());
-							String AVG_SLEEP_HOURS = Integer.toString(data.getAVG_SLEEP_HOURS());
-							String AVG_BMI = Integer.toString(data.getAVG_BMI());
-							String AVG_WATER_INTAKE = Integer.toString(data.getAVG_WATER_INTAKE());
-							// HealthDAO list에 InfoDAO gid넣어주기?
-
-							// 프린트테스트
-							System.out.println(gid);
+							dispose();
 
 							lAtT.setText(AVG_EXERCISE_HOURS);
 							lUcT.setText(AVG_CALORIES_BURNED);
@@ -180,43 +182,24 @@ public class HealthCheck extends JFrame {
 							lIwT.setText(AVG_WATER_INTAKE);
 							lBmiT.setText(AVG_BMI);
 							lST.setText(AVG_SLEEP_HOURS);
-							
-							System.out.println(AVG_EXERCISE_HOURS); ///////////////////////////
 
-							 // case2 월간평균
-						}
-						else {
-//							/////////////
-							list2 = dao.list2(/*----------*/);
-							if (list2.size() != 0) {
-								for (int i = 0; i < list2.size(); i++) {
-									HealthVo data = (HealthVo) list2.get(i);
+						} else {
 
-									String gid = data.getId();
-//									String DIDATE = data.getDIDATE();
-									String AVG_EXERCISE_HOURS = Integer.toString(data.getAVG_EXERCISE_HOURS());
-									String AVG_CALORIES_INTAKE = Integer.toString(data.getAVG_CALORIES_INTAKE());
-									String AVG_CALORIES_BURNED = Integer.toString(data.getAVG_CALORIES_BURNED());
-									String AVG_SLEEP_HOURS = Integer.toString(data.getAVG_SLEEP_HOURS());
-									String AVG_BMI = Integer.toString(data.getAVG_BMI());
-									String AVG_WATER_INTAKE = Integer.toString(data.getAVG_WATER_INTAKE());
-									// HealthDAO list에 InfoDAO gid넣어주기?
+							// case2 월간평균
+							lAtT.setText("1");
+							lUcT.setText("2");
+							lIcT.setText("3");
+							lIwT.setText("4");
+							lBmiT.setText("5");
+							lST.setText("6");
 
-									lAtT.setText(AVG_EXERCISE_HOURS);
-									lUcT.setText(AVG_CALORIES_BURNED);
-									lIcT.setText(AVG_CALORIES_INTAKE);
-									lIwT.setText(AVG_WATER_INTAKE);
-									lBmiT.setText(AVG_BMI);
-									lST.setText(AVG_SLEEP_HOURS);
-
-								}
-							}
 						}
 					}
 				});
 
 			}
 		}
+
 
 		btnI = new JButton("메인페이지이동");
 		btnI.setLocation(170, 570);
@@ -269,7 +252,7 @@ public class HealthCheck extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new HealthCheck();
+		new HealthCheck2();
 
 	}
 }
