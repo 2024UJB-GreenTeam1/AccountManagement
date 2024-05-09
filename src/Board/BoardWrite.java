@@ -1,5 +1,6 @@
 package Board;
 
+import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -19,14 +20,14 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-public class BoardWrite extends BoardCommand implements WindowListener, ActionListener {
+public class BoardWrite extends BoardDTO implements WindowListener, ActionListener {
 	private JTextArea maincontent2;
 	private JFrame f;
 	private JLabel title;
 	private JPanel maindp, maindptitle2, content2;
 	private JButton write, cancle, maincontent;
 	private JTextField maindptitlecontent;
-
+	private Choice category;
 	public BoardWrite() {
 		Font font = new Font("맑은 고딕", Font.BOLD, 50);
 		Font font2 = new Font("맑은 고딕", Font.BOLD, 20);
@@ -40,6 +41,16 @@ public class BoardWrite extends BoardCommand implements WindowListener, ActionLi
 		JButton write = new JButton("작성");
 		write.setBounds(12, 584, 102, 40);
 		write.addActionListener(this);
+		
+		category = new Choice();
+		category.add("");
+		category.add("exercise");  //1
+		category.add("food");  //2
+		category.add("sleep"); //3
+		category.setFont(font2);
+		category.setSize(200, 100); // 카테고리
+		category.setLocation(50, 10);
+		f.add(category);
 
 		JButton cancle = new JButton("취소");
 		cancle.setBounds(670, 584, 102, 40);
@@ -147,11 +158,28 @@ public class BoardWrite extends BoardCommand implements WindowListener, ActionLi
 		if (e.getActionCommand().equals("취소")) {
 			f.setVisible(false);
 		} else if (e.getActionCommand().equals("작성")) {
+			String num =category.getSelectedItem();
+			int a = 0;
+			String b = "";
+			if(num.equals("")) {
+				a=0;
+				b=Integer.toString(a);	
+			}else if(num.equals("exercise")){
+				a=1;
+				b=Integer.toString(a);	
+			}else if(num.equals("food")) {
+				a=2;
+				b=Integer.toString(a);	
+			}else if(num.equals("sleep")) {
+				a=3;
+				b=Integer.toString(a);	
+			}
+			
 			try {
 				ConnectionB cb = new ConnectionB(); // 연결
 				Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
-				String sql = "" + "insert into post(User_id,bno, btitle,bcontent, bdate,blikes,bviews) "
-						+ "values(default,SEQ_BNO.NEXTVAL,?,?,to_char(Sysdate,'YYYY-MM-DD'),?,?) ";
+				String sql = "" + "insert into post(bno,User_id,bcno, btitle,bcontent, bdate,blikes,bviews) "
+						+ "values(+"+b+",default,BCNO.NEXTVAL,?,?,to_char(Sysdate,'YYYY-MM-DD'),?,?) ";
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, maindptitlecontent.getText());
 				// System.out.println(maindptitlecontent.getText());
