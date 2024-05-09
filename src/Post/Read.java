@@ -4,27 +4,36 @@ import java.awt.Choice;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Scanner;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-
-//import kakaomap.Correct;
+import read.Tab;
+import kakaomap.Correct;
 
 public class Read extends Connection2 implements ActionListener, WindowListener{
 
@@ -35,7 +44,11 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 	private JPanel main;
 	private Choice category;
 	private LineBorder bb = new LineBorder(Color.black, 1, true); 
-
+	private ReadDao readDao;
+	
+	Scanner sc = new Scanner (System.in);
+	int i = sc.nextInt();
+	
 	String driver = "ora"+ "cle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	String user = "c##green";
@@ -49,13 +62,30 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 	PreparedStatement pstmt= null;
 	ResultSet rs = null;	
 	
+	String bcno;	
+	String bno;
+	String bctitle;
+	String user_id;
+	String bcontent ;
+	String bcdate ;
+	int bcviews;
+	int bclikes;
+	String bcnickname;
+	String bcdelete ;
+	String bcfilename;
+	Blob bfiledata;
+	ImageIcon icon;
+	Image image;
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					
-					Read window = new Read();
-					window.frame.setVisible(true);
+				
+					Read read = new Read();
+					read.frame.setVisible(true);
+//					ReadDao readdao = new ReadDao();
+				//	readdao.iselect();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -68,6 +98,8 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 	 */
 	public Read() {
 		initialize();
+	readDao = new ReadDao();
+		
 	}
 
 	public void conDB() {
@@ -82,72 +114,100 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 		}
 		
 	}
-	
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-//		logo = new JButton(new ImageIcon("C:/Users/Manic-063/Desktop/t/project/logo.jpg"));
-//		logo.setBorderPainted(false);
-//		logo.setFocusPainted(false);
-//		logo.setContentAreaFilled(false);
+	public int getBclikes() {
 		
-		Connection2 con2 = new Connection2();
-//		ImageIcon img = new ImageIcon("button_image/logo.jpg");
+		return bclikes;
+	}
+
+	public void updatebclikes(int newBclikes) {
+	this.bclikes = newBclikes;
+
+	try {
+	String driver = "ora"+ "cle.jdbc.driver.OracleDriver";
+	con=DriverManager.getConnection(url,user,password);
+	String sql = "update bcontents set bclikes = bclikes + 1 where bcno = ?"; 
+	try (PreparedStatement pstmt = con.prepareStatement(sql)){
+		pstmt.setInt(1,i);
+		pstmt.executeUpdate();
+	}
+	}catch(SQLException e) {
+		e.printStackTrace();
+	} finally {
+		if (con !=null) {
+			try {
+				con.close();
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+}
+
+
+	private void initialize() {
+		
+		
 		Font font = new Font("맑은 고딕",Font.BOLD,40);  //게시판 
 		Font font2 = new Font("맑은 고딕",Font.BOLD,13); //작성자 내용 날짜 추천수 조회수 카테고리
-		ReadDao readDao = new ReadDao();
-		ResultSet result = readDao.select();
 		
-//		JButton btnNewButton_3 = new JButton((new ImageIcon("C:/Users/Manic-063/Desktop/t/project/logo.jpg")));
-		
-//		btnNewButton_3.setBounds(42, 25, 157, 70);
-//		frame.getContentPane().add(btnNewButton_3);
-//		
-		
-		
-		frame = new JFrame();
+		frame = new JFrame("게시글");
 		frame.setBounds(100, 100, 800, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
+		JLabel imageLabel = new JLabel();
 		JLabel lblNewLabel = new JLabel("게시글");
 		lblNewLabel.setBounds(316, 17, 206, 78);
 		frame.getContentPane().add(lblNewLabel);
 		lblNewLabel.setFont(font);
 		
-		String bcno = null;
-		String bno = null;
-		String bctitle = null;
-		String user_id = null;
-		String bcontent = null;
-		String bcdate = null;
-		String bcviews = null;
-		String bclikes=null;
-		try {
-			while (result.next()) {
-				bctitle =  result.getString("bctitle");
-				user_id = result.getString("user_id");
-				bcontent = result.getString("bcontent");
-				bcdate = result.getString("bcdate");
-				bcviews = result.getString("bcviews");
-				bclikes = result.getString("bclikes");
-				bcno = result.getString("bcno");
-				System.out.println(bcno);
-				
-			}
+
+		
+         
+		Connection2 con2 = new Connection2();
+
+//		ReadDao readDao = new ReadDao();
+	//	ResultSet rs = readDao.iselect();
 	
-//		JButton btnNewButton_6 = new JButton(img);
-//		GridBagConstraints gbc_btnNewButton_6 = new GridBagConstraints();
-//		gbc_btnNewButton_6.gridheight = 3;
-//		gbc_btnNewButton_6.gridwidth = 3;
-//		gbc_btnNewButton_6.insets = new Insets(0, 0, 5, 5);
-//		gbc_btnNewButton_6.gridx = 1;
-//		gbc_btnNewButton_6.gridy = 1;
-//		btnNewButton_6.setBorderPainted(false);
-//		btnNewButton_6.setContentAreaFilled(false);
-//		frame.getContentPane().add(btnNewButton_6, gbc_btnNewButton_6);
-//		
+		try {
+			pstmt =null;
+			con = DriverManager.getConnection(url, user, password);
+			String sql = " select * from bcontents where bcno = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1,i);
+			
+			System.out.println("pstmt: " + pstmt);
+			rs = pstmt.executeQuery();
+			System.out.println("rs : " + rs);
+
+			System.out.println(rs);
+			while (rs.next()) {
+				bcno = rs.getString("bcno");
+				bno = rs.getString("bno");
+				user_id = rs.getString("user_id");
+				bcnickname = rs.getString("bcnickname");
+				bctitle = rs.getString("bctitle");
+				bcontent = rs.getString("bcontent");
+				bcdate = rs.getString("bcdate");
+				bcdelete = rs.getString("bcdelete");
+				bcfilename = rs.getString("bcfilename");
+				bfiledata = rs.getBlob("bfiledata");
+				bcviews = rs.getInt("bcviews");
+				bclikes = rs.getInt("bclikes");
+		
+			// 실행시켜서 숫자 입력하고 확인해보면 null값이 나오는데 null이 아닌 값으로 나오게 하면 성공
+			// 값만 나오게 해서 붙이면 됨 그리고 연결할때 버튼에 있는 숫자 대입하면 될듯	
+//				InputStream inputStream = blob.getBinaryStream();
+//				BufferedImage image = ImageIO.read(inputStream);
+		System.out.println(bcno);
+//				icon = new ImageIcon(image);
+			}
+			System.out.println(bcno + " , " + bno + " , " + user_id + " , " + bcnickname + " , " + bctitle + " , "
+					+ bcontent + " , "+ bfiledata+ " , "+ bcdate + " , " + bcdelete + " , " + bcviews  + " , "	+ bclikes);
+	
+		
+		
+		
+			
 		model = new DefaultTableModel(ob,str);
 		table = new JTable(model);
 		
@@ -187,7 +247,19 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 		lblNewLabel_11.setFont(font2);
 		}catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			try {
+				if(rs !=null) {
+					rs.close();
+				}
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
+//	 catch (IOException e1) {
+//		// TODO Auto-generated catch block
+//		e1.printStackTrace();
+//	}
 		JLabel lblNewLabel_6 = new JLabel();
 		lblNewLabel_6.setBounds(556, 116, 104, 23);	//작성일자 칸
 		frame.getContentPane().add(lblNewLabel_6);
@@ -226,40 +298,44 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 		frame.getContentPane().add(lblNewLabel_16);
 		lblNewLabel_16.setBorder(bb);
 		
-		JLabel lblNewLabel_17 = new JLabel(bcviews); // 조회수 
+		String bviews = Integer.toString(bcviews);
+		JLabel lblNewLabel_17 = new JLabel(bviews); // 조회수 
 		lblNewLabel_17.setBounds(658, 139, 69, 23);
 		frame.getContentPane().add(lblNewLabel_17);
 		lblNewLabel_17.setBorder(bb);
 		
-		int currentBclikes;
-		int updateBclikes = 0;	
+	
+	//	int currentBclikes;
+		
 		JButton btnNewButton_2 = new JButton("추천 버튼");
 		btnNewButton_2.setBounds(352, 700, 97, 36);
 		frame.getContentPane().add(btnNewButton_2);
 		btnNewButton_2.addActionListener(new ActionListener() { // 추천 버튼
 			public void actionPerformed(ActionEvent e) {
-				int currentBclikes = readDao.getBclikes();
+				int currentBclikes = getBclikes();
 				 int updateBclikes = currentBclikes +1;
-				readDao.updatebclikes(updateBclikes);
-				System.out.println(readDao.getBclikes());
-				System.out.println(currentBclikes);
+				updatebclikes(updateBclikes);
+				System.out.println(getBclikes());
+		//		System.out.println(currentBclikes);
 				System.out.println("추천수 : "+ updateBclikes);
+				
 		
 			}
 		});
-		int like =Integer.parseInt(bclikes);
-		int likes =like + updateBclikes;
-		String tlike = Integer.toString(likes);
 		
-		JLabel lblNewLabel_18 = new JLabel(tlike);// 추천수 
+		String blikes = Integer.toString(bclikes);
+		JLabel lblNewLabel_18 = new JLabel(blikes);// 추천수 
 		lblNewLabel_18.setBounds(727, 139, 57, 23);
 		frame.getContentPane().add(lblNewLabel_18);
 		lblNewLabel_18.setBorder(bb);
 
-		JLabel lblNewLabel_3 = new JLabel(bcontent);
-		lblNewLabel_3.setBounds(15, 177, 757, 513);
-		frame.getContentPane().add(lblNewLabel_3); 	// 내용칸
+		JTextArea lblNewLabel_3 = new JTextArea(bcontent);
+		JScrollPane scrollPane = new JScrollPane(lblNewLabel_3);
+		scrollPane.setBounds(15, 177, 757, 513); // 위치 및 크기 설정
+		lblNewLabel_3.setEditable(false);
+		frame.getContentPane().add(scrollPane); 	// 내용칸
 		lblNewLabel_3.setBorder(bb);
+		
 
 		JLabel lblNewLabel_22 = new JLabel(); // 내용
 		lblNewLabel_22.setBounds(15, 177, 757, 513);
@@ -276,10 +352,8 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 		JLabel lblNewLabel_21 = new JLabel();	//추천수
 		lblNewLabel_21.setBounds(731, 138, 57, 23);
 		frame.getContentPane().add(lblNewLabel_21);
-//		JScrollPane scrollPane = new JScrollPane(con2.getBcontent());
-//		scrollPane.setBounds(11, 168, 760, 518);
-//		frame.getContentPane().add(scrollPane);
-//		
+
+		
 		JButton btnNewButton = new JButton("수정"); // 수정 창으로 이동
 		btnNewButton.setBounds(566, 700, 97, 36);
 		frame.getContentPane().add(btnNewButton);
@@ -301,8 +375,22 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 				  frame.dispose();	
 			}
 		});
+		JButton btnNewButton_4 = new JButton("이미지");	
+		btnNewButton_4.setBounds(200, 700, 97, 36);
+		frame.getContentPane().add(btnNewButton_4);
+		btnNewButton_4.addActionListener(new ActionListener() { // 수정 버튼
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(e.getActionCommand().equals("이미지")) {
+					Tab tab = new Tab();
+				
+				}
+			
+			}
+		});
 		
-		
+		lblNewLabel_17.setHorizontalAlignment(JLabel.CENTER); // 조회수 가운데 정렬
+		lblNewLabel_18.setHorizontalAlignment(JLabel.CENTER); // 추천수 가운데 정렬
 //		
 //		JButton btnNewButton_2 = new JButton("추천 버튼");
 //		btnNewButton_2.setBounds(352, 700, 97, 36);
@@ -363,8 +451,14 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 		        Correct.showFrame();
 		        System.out.println("눌러짐");
 		    }
+		    if (e.getActionCommand().equals("이미지")) {
+		    	Tab tab = new Tab();
+		    	Tab.showFrame();
+		    	 System.out.println("눌러짐");
+		    }
+		    
 		
-		 Read read = new Read();
+//		 Read read = new Read();
 	}
 }
 
