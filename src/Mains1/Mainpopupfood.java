@@ -253,9 +253,6 @@ public class Mainpopupfood {
 				foodtext.append(String.format("백미 칼로리: %.0f kcal\n", foodcalories));
 			}
 		});
-		f.add(whitericebutton1);
-
-		f.add(foodtext);
 
 		whitericebutton1.setSize(100, 30);
 		whitericebutton1.setLocation(550, 195);
@@ -267,12 +264,9 @@ public class Mainpopupfood {
 		brownricebutton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double foodcalories = 129; // 칼로리 소모량
-				foodtext.append(String.format("현미 칼로리: %.0f kcal", foodcalories));
+				foodtext.append(String.format("현미 칼로리: %.0f kcal\n", foodcalories));
 			}
 		});
-		f.add(brownricebutton1);
-
-		f.add(foodtext);
 
 		brownricebutton1.setSize(100, 30);
 		brownricebutton1.setLocation(550, 235);
@@ -284,12 +278,9 @@ public class Mainpopupfood {
 		sugarbutton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double foodcalories = 387; // 칼로리 소모량
-				foodtext.append(String.format("설탕 칼로리: %.0f kcal", foodcalories));
+				foodtext.append(String.format("설탕 칼로리: %.0f kcal\n", foodcalories));
 			}
 		});
-		f.add(brownricebutton1);
-
-		f.add(foodtext);
 
 		sugarbutton1.setSize(100, 30);
 		sugarbutton1.setLocation(550, 275);
@@ -301,12 +292,9 @@ public class Mainpopupfood {
 		saltbutton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double foodcalories = 0; // 칼로리 소모량
-				foodtext.append(String.format("소금 칼로리: %.0f kcal", foodcalories));
+				foodtext.append(String.format("소금 칼로리: %.0f kcal\n", foodcalories));
 			}
 		});
-		f.add(saltbutton1);
-
-		f.add(foodtext);
 		
 		saltbutton1.setSize(100, 30);
 		saltbutton1.setLocation(550, 315);
@@ -319,12 +307,9 @@ public class Mainpopupfood {
 		misobutton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double foodcalories = 38; // 칼로리 소모량
-				foodtext.append(String.format("미소된장국 칼로리: %.0f kcal", foodcalories));
+				foodtext.append(String.format("미소된장국 칼로리: %.0f kcal\n", foodcalories));
 			}
 		});
-		f.add(misobutton1);
-
-		f.add(foodtext);
 
 		misobutton1.setSize(100, 30);
 		misobutton1.setLocation(550, 355);
@@ -337,12 +322,9 @@ public class Mainpopupfood {
 		breastbutton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double foodcalories = 195; // 칼로리 소모량
-				foodtext.append(String.format("닭가슴살 칼로리: %.0f kcal", foodcalories));
+				foodtext.append(String.format("닭가슴살 칼로리: %.0f kcal\n", foodcalories));
 			}
 		});
-		f.add(breastbutton1);
-
-		f.add(foodtext);
 
 		breastbutton1.setSize(100, 30);
 		breastbutton1.setLocation(550, 395);
@@ -355,12 +337,9 @@ public class Mainpopupfood {
 		breastbutton12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double foodcalories = 195; // 칼로리 소모량
-				foodtext.append(String.format("닭가슴살(구이) 칼로리: %.0f kcal", foodcalories));
+				foodtext.append(String.format("닭가슴살(구이) 칼로리: %.0f kcal\n", foodcalories));
 			}
 		});
-		f.add(breastbutton12);
-
-		f.add(foodtext);
 		
 
 		breastbutton12.setSize(100, 30);
@@ -374,12 +353,9 @@ public class Mainpopupfood {
 		steakbutton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double foodcalories = 252; // 칼로리 소모량
-				foodtext.append(String.format("쇠고기스테이크 칼로리: %.0f kcal", foodcalories));
+				foodtext.append(String.format("쇠고기스테이크 칼로리: %.0f kcal\n", foodcalories));
 			}
 		});
-		f.add(steakbutton1);
-
-		f.add(foodtext);
 
 		steakbutton1.setSize(100, 30);
 		steakbutton1.setLocation(550, 475);
@@ -392,12 +368,9 @@ public class Mainpopupfood {
 		saladbutton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double foodcalories = 98; // 칼로리 소모량
-				foodtext.append(String.format("야채샐러드 칼로리: %.0f kcal", foodcalories));
+				foodtext.append(String.format("야채샐러드 칼로리: %.0f kcal\n", foodcalories));
 			}
 		});
-		f.add(saladbutton1);
-
-		f.add(foodtext);
 
 		saladbutton1.setSize(100, 30);
 		saladbutton1.setLocation(550, 515);
@@ -410,12 +383,9 @@ public class Mainpopupfood {
 		saladbutton12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double foodcalories = 67; // 칼로리 소모량
-				foodtext.append(String.format("야채샐러드(드레싱X) 칼로리: %.0f kcal", foodcalories));
+				foodtext.append(String.format("야채샐러드(드레싱X) 칼로리: %.0f kcal\n", foodcalories));
 			}
 		});
-		f.add(saladbutton12);
-
-		f.add(foodtext);
 
 		saladbutton12.setSize(100, 30);
 		saladbutton12.setLocation(550, 555);
@@ -428,12 +398,9 @@ public class Mainpopupfood {
 		mangobutton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double foodcalories = 65; // 칼로리 소모량
-				foodtext.append(String.format("망고 칼로리: %.0f kcal", foodcalories));
+				foodtext.append(String.format("망고 칼로리: %.0f kcal\n", foodcalories));
 			}
 		});
-		f.add(mangobutton1);
-
-		f.add(foodtext);
 
 		mangobutton1.setSize(100, 30);
 		mangobutton1.setLocation(550, 595);
@@ -446,12 +413,9 @@ public class Mainpopupfood {
 		melonbutton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				double foodcalories = 34; // 칼로리 소모량
-				foodtext.append(String.format("멜론 칼로리: %.0f kcal", foodcalories));
+				foodtext.append(String.format("멜론 칼로리: %.0f kcal\n", foodcalories));
 			}
 		});
-		f.add(melonbutton1);
-
-		f.add(foodtext);
 	
 		melonbutton1.setSize(100, 30);
 		melonbutton1.setLocation(550, 635);
