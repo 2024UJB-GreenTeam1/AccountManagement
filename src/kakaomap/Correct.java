@@ -1,5 +1,7 @@
 package kakaomap;
+//사용함
 
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -14,11 +16,13 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
@@ -33,22 +37,25 @@ public class Correct extends ComDto implements ActionListener, WindowListener{
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
-//	private Statement stmt;
 
+    private JComboBox<String> comboBox;
+    private Map<String, Integer> itemToNumberMap;
 //	private ResultSet rs;
 	private JButton btnNewButton_2,btnNewButton_3,btnNewButton_1,btnNewButton;
 	private JLabel lblNewLabel,lblNewLabel_1,lblNewLabel_2,lblNewLabel_3;
 	private JComboBox gbc_cateCombo;
 	private JTextArea textField2;
-	Scanner sc = new Scanner(System.in);
-	int i = sc.nextInt();
+//	Scanner sc = new Scanner(System.in);
+	static int i ;
 	String driver = "ora"+ "cle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	String user = "c##green";
 	String password = "green1234";
 	Connection con = null;
 	PreparedStatement pstmt= null;
-	ResultSet rs = null;	
+	PreparedStatement pstmt1= null;
+	ResultSet rs = null;
+	ResultSet rs1 = null;
 	String bcno;	
 	String bno;
 	String bctitle;
@@ -63,12 +70,15 @@ public class Correct extends ComDto implements ActionListener, WindowListener{
 	Blob bcfiledata;
 	ImageIcon icon;
 	String pwd;
-    public static void showFrame() {
+	JDialog info1,info;
+	
+	  int selectedNumber=0;
+    public static void showFrame(int i) {
     	System.out.println("눌러짐");
-        Correct correct = new Correct();
+        Correct correct = new Correct(i);
         correct.frame.setVisible(true);
     }
-	public Correct() {
+	public Correct(int i) {
 		
 		con = null;
 
@@ -102,13 +112,45 @@ public class Correct extends ComDto implements ActionListener, WindowListener{
 		gbc_lblNewLabel_1.gridy = 6;
 		frame.getContentPane().add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
-		String[] category = { " 전체 "," 운동 ", " 음식 " , " 수면시간"};
-		JComboBox cateCombo = new JComboBox(category);
+//		String[] category = { " 전체 "," 운동 ", " 음식 " , " 수면시간"};
+		
+		
+		comboBox = new JComboBox<>();
+		itemToNumberMap = new HashMap<>();
+		
+		addItemWithNumber("전체", 1);
+        addItemWithNumber("운동", 2);
+        addItemWithNumber("음식", 3);
+        addItemWithNumber("수면시간", 4);
+        
+
+        comboBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int selectedIndex = comboBox.getSelectedIndex();
+                selectedNumber = selectedIndex ;
+                System.out.println("선택한 값의 번호: " + selectedNumber);
+            }
+        });
 		GridBagConstraints gbc_cateCombo = new GridBagConstraints();
 		gbc_cateCombo.insets = new Insets(0, 0, 5, 5);
 		gbc_cateCombo.gridx = 1;
 		gbc_cateCombo.gridy = 6;
-		frame.getContentPane().add(cateCombo, gbc_cateCombo);
+		frame.getContentPane().add(comboBox, gbc_cateCombo);
+		
+		
+//		int selectedIndex = comboBox.getSelectedIndex();
+//		String selectedItem = null;
+//		if (selectedIndex >= 0 && selectedIndex < comboBox.getItemCount()) {
+//		    selectedItem = comboBox.getItemAt(selectedIndex);
+//		}
+//		if (selectedItem != null) {
+//		    comboBox.setSelectedItem(selectedItem);
+//		}
+//		int selectedNumber = selectedIndex + 1;
+//
+//		System.out.println("선택한 값의 번호: " + selectedIndex);
+		
+		
 		
 		
 		try {
@@ -138,7 +180,7 @@ public class Correct extends ComDto implements ActionListener, WindowListener{
 				bclikes = rs.getInt("bclikes");
 		
 	
-		System.out.println(bcno);
+		//System.out.println(bcno);
 //				icon = new ImageIcon(image);
 			}
 			System.out.println(bcno + " , " + bno + " , " + user_id + " , " + bcnickname + " , " + bctitle + " , "
@@ -237,25 +279,47 @@ public class Correct extends ComDto implements ActionListener, WindowListener{
 					String textField6 = textField2.getText();
 					pstmt =null;
 					con = DriverManager.getConnection(url, user, password);
-					String sql = " UPDATE BCONTENTS SET BCTITLE = ?, BCONTENT = ?WHERE BCNO = ?";
+					String sql = " UPDATE BCONTENTS SET BCTITLE = ?, BCONTENT = ?, BNO = ? WHERE BCNO = ?";
 					pstmt = con.prepareStatement(sql);
-					
+				//	System.out.println("bno 번호 :" +selectedNumber);
 					pstmt.setString(1,textField5);
 					pstmt.setString(2,textField6);
-					pstmt.setInt(3,i);
+					pstmt.setInt(3,selectedNumber);
+					pstmt.setInt(4,i);
 					
 					System.out.println("pstmt: " + pstmt);
 					rs = pstmt.executeQuery();
 					System.out.println("rs : " + rs);
-
-
+					
+//					String sql1 = " UPDATE BOARDS SET BNO=? WHERE BCNO = ?";
+//					pstmt1 = con.prepareStatement(sql1);
+//					pstmt1.setInt(1,selectedIndex);
+//					pstmt1.setInt(2,i);
+//					System.out.println("pstmt1: " + pstmt1);
+//					rs1 = pstmt1.executeQuery();
+//					System.out.println("rs1 : " + rs1);
 					// 실행시켜서 숫자 입력하고 확인해보면 null값이 나오는데 null이 아닌 값으로 나오게 하면 성공
 					// 값만 나오게 해서 붙이면 됨 그리고 연결할때 버튼에 있는 숫자 대입하면 될듯	
 //						InputStream inputStream = blob.getBinaryStream();
 //						BufferedImage image = ImageIO.read(inputStream);
 //						icon = new ImageIcon(image);
 			
-			
+					 info1 = new JDialog(frame,"안내창",true);
+					info1.setSize(200,100);
+					info1.setLocation(400,400);
+					info1.setLayout(new FlowLayout());
+					
+					JLabel mas = new JLabel("정상적으로 수정되었습니다.",JLabel.CENTER);
+					JButton ok1 = new JButton("확인");
+					info1.add(mas);
+					info1.add(ok1);
+
+					ok1.addActionListener(new ActionListener() { // 수정 버튼
+						public void actionPerformed(ActionEvent e) {
+							info1.dispose(); 
+						}
+					});
+					info1.setVisible(true);
 				}catch (SQLException e1) {
 					e1.printStackTrace();
 				}finally {
@@ -267,7 +331,8 @@ public class Correct extends ComDto implements ActionListener, WindowListener{
 						e2.printStackTrace();
 					}
 				}
-				  frame.dispose();		}
+				 // frame.dispose();		
+				}
 		});
 
 		
@@ -384,10 +449,28 @@ public class Correct extends ComDto implements ActionListener, WindowListener{
 							String pwd2= new String (pwd1);
 							System.out.println(pwd2);
 							if( ! pwd2.equals(pwd)) { // db에서 로그인 한 비밀번호 확인 후 수정 gpwd 
-									System.out.print("비밀번호를 확인해주세요."); // 팝업창 나오게하기
-
+								//frame = new JFrame("확인해주세요");
+								 info = new JDialog(frame,"안내창",true);
+								info.setSize(200,100);
+								info.setLocation(400,400);
+								info.setLayout(new FlowLayout());
+								
+								JLabel mas = new JLabel("비밀번호를 확인해주세요.",JLabel.CENTER);
+								JButton ok = new JButton("확인");
+								info.add(mas);
+								info.add(ok);
+								ok.addActionListener(new ActionListener() { // ok버튼
+									public void actionPerformed(ActionEvent e) {
+										info.dispose(); 
+									}
+								});
+								
+								System.out.print("비밀번호를 확인해주세요."); // 팝업창 나오게하기
+								info.setVisible(true);
+								
+								
 								} else {
-									System.out.print("확인되었습니다.");
+									System.out.println("확인되었습니다.");
 									btnNewButton_3.setEnabled(true);
 									btnNewButton_4.setEnabled(true);
 							
@@ -408,39 +491,20 @@ public class Correct extends ComDto implements ActionListener, WindowListener{
 		});
 	}
 	
-//		btnNewButton_3.addActionListener(new ActionListener() { // 수정 버튼
-//			String title2 = textField.getText();
-//			String content = tx.getText();
-//			public void mouseClicked(ActionEvent e) {
-//				Statement stmt;
-//	
-//				String sql = "update BCONTENTs set  title  " + title2+ " content  " +content + "where num = ?";
-//				stmt = null;
-//				try{
-//				stmt = con.createStatement();
-//					
-//				int rs = stmt.executeUpdate(sql);
-//				if( rs > 0) {
-//					System.out.println("수정 성공");
-//				}else {
-//					System.out.println("수정 실패");
-//
-//				}
-//				}catch (Exception c) {
-//				c.printStackTrace();
-//			}finally {
-//				try {
-//					stmt.close();
-//					con.close();
-//				}catch(SQLException c) {
-//					c.printStackTrace();
-//				}
-//			}
-//			}
-//		});
+
+
 			
+	private void addItemWithNumber(String category, int j) {
+		itemToNumberMap.put(category, j);
+        comboBox.addItem(category);
+		
+	}
+	public int getNumberForItem(String item) {
+        return itemToNumberMap.get(item);
+    }
 	public void windowClosing(WindowEvent e) {
 	      System.exit(0);  //닫기 눌러서 창닫기
+	   
 	   }
 
 
@@ -454,7 +518,10 @@ public class Correct extends ComDto implements ActionListener, WindowListener{
 	   @Override
 	   public void windowClosed(WindowEvent e) {
 	      // TODO Auto-generated method stub
-	      
+		   frame.dispose(); 
+		   info.dispose();
+		   info1.dispose();
+		   
 	   }
 
 
@@ -493,7 +560,7 @@ public class Correct extends ComDto implements ActionListener, WindowListener{
 	   }
 	public static void main(String[] args) {
 		 SwingUtilities.invokeLater(new Runnable() {
-			 Correct cor = new Correct();
+			 Correct cor = new Correct(i);
 					//EventQueue.invokeLater(new Runnable() {
 						public void run() {
 							try {
@@ -511,31 +578,3 @@ public class Correct extends ComDto implements ActionListener, WindowListener{
 		 });	
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

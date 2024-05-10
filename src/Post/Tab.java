@@ -1,6 +1,11 @@
 package Post;
+//사용함
 
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.Blob;
@@ -23,11 +28,11 @@ import javax.swing.SwingUtilities;
 
 import kakaomap.Correct;
 
-public class Tab  extends JFrame{
+public class Tab  extends JFrame implements ActionListener, WindowListener{
 	private JTabbedPane jTabbedPane;
 	private JPanel tab1Panel;
 	private JPanel tab2Panel;
-	private JFrame frame;
+	private JFrame frame1;
 	String sql = null;
 	Connection con = null;
 	PreparedStatement pstmt = null;
@@ -36,19 +41,19 @@ public class Tab  extends JFrame{
 	Image image;
 	Image img;
 	Blob bfiledata;
-	
+	static int i;
 	String driver = "ora" + "cle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	String user = "c##green";
 	String password = "green1234";
 	Scanner sc = new Scanner(System.in);
-	int i = sc.nextInt();
+
 	
-	public static void showFrame() {
+	public static void showFrame(int i) {
 
 		System.out.println("눌러짐");
-		Tab tab = new Tab();
-		tab.frame.setVisible(true);
+		Tab tab = new Tab(i);
+		tab.frame1.setVisible(true);
 	//	tab.Tabframe();
 	}
 
@@ -58,12 +63,12 @@ public class Tab  extends JFrame{
 //
 //	}
 	
-	public Tab() {
-		frame = new JFrame("이미지 출력");
+	public Tab(int i) {
+		frame1 = new JFrame("이미지 출력");
 
-		frame.setBounds(200, 200, 280, 280);
+		frame1.setBounds(200, 200, 280, 280);
 	
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	try {
 		Class.forName(driver);
 		con = DriverManager.getConnection(url, user, password);
@@ -76,51 +81,119 @@ public class Tab  extends JFrame{
 		System.out.println("rs : " + rs);
 		if(rs.next()) {
 			bfiledata = rs.getBlob("bfiledata");
-			
+			System.out.println(bfiledata);
 			try {
 				  byte[] imageData = bfiledata.getBytes(1, (int) bfiledata.length()); // Blob 데이터를 바이트 배열로 변환
 				    ByteArrayInputStream bis = new ByteArrayInputStream(imageData); // ByteArrayInputStream을 사용하여 바이트 배열을 스트림으로 읽음
 				    img = ImageIO.read(bis); // 이미지 읽기
 				    icon = new ImageIcon(img); // ImageIcon 생성
 				    JLabel label = new JLabel(icon);
-				    frame.getContentPane().add(label);
+				    frame1.getContentPane().add(label);
+				    System.out.println(imageData);
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+				 System.out.println(e1);
 			}
 			}
-		
-	} catch (Exception e) {
-		e.printStackTrace();
-	} finally {
-		try {
-			if (rs != null)
-				rs.close();
-			if (pstmt != null)
-				pstmt.close();
-			if (con != null)
-				con.close();
+	//	
+//	} catch (Exception e) {
+//		e.printStackTrace();
+//	} finally {
+//		try {
+//			if (rs != null)
+//				rs.close();
+//			if (pstmt != null)
+//				pstmt.close();
+//			if (con != null)
+//				con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+			 System.out.println(e);
+	//	}
 	}
 	
 
-}   
-	
+}
+
+
+
+	@Override
+	public void windowOpened(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void windowClosed(WindowEvent e) {
+	 
+		
+
+	}
+
+
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void windowDeactivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e) {
+		// TODO Auto-generated method stub
+		frame1.dispose();   //닫기 눌러서 창닫기
+		
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 	public static void main(String[] args) {
 //		Tab tab = new Tab();
 //		tab.showFrame();
-		 SwingUtilities.invokeLater(new Runnable() {
+//		SwingUtilities.invokeLater(new Runnable() {
+//			
+//			//EventQueue.invokeLater(new Runnable() {
+//			public void run() {2
+//				
+				Tab.showFrame(i);
+			}
 			
-					//EventQueue.invokeLater(new Runnable() {
-						public void run() {
-							
-							Tab.showFrame();
-						}
-				
-				
-							// 
-		 });	
-	}
+			
+			// 
+	//	});	
+	//}
+
+
 }
+
