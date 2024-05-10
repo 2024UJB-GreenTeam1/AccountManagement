@@ -32,13 +32,13 @@ public class Mainscreen {
 		Font font2 = new Font("맑은 고딕", Font.BOLD, 20);
 		Font font3 = new Font("나눔고딕", Font.PLAIN, 12);
 
-		JLabel logo = new JLabel(new ImageIcon("C:\\Users\\Manic-063\\git\\AccountManagement\\img\\logoMainscreen.jpg"));
+		JLabel logo = new JLabel(new ImageIcon("../img/logo.jpg"));
 		logo.setSize(100, 100);
 		logo.setLocation(60, 60);
 		
 		//버튼을 누르면 다른 클래스로 이동
-		JButton mapimg = new JButton(new ImageIcon("C:\\Users\\Manic-063\\git\\AccountManagement\\img\\mapimg.jpg.jpg"));
-		JButton calenderimg = new JButton(new ImageIcon("C:\\Users\\Manic-063\\git\\AccountManagement\\img\\calenderimg.jpg.jpg"));
+		JButton mapimg = new JButton(new ImageIcon("../img/mapimg.jpg"));
+		JButton calenderimg = new JButton(new ImageIcon("../img/calenderimg.jpg"));
 		mapimg.setSize(330, 200);
 		mapimg.setLocation(50, 550);
 		calenderimg.setSize(330, 200);
