@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Connection;
@@ -18,6 +19,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
@@ -47,7 +49,6 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 	private String[] research5;
 	public Boardset() {
 		f = new JFrame("1o0");
-		f.addWindowListener(this);
 		logo = new JButton(new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/1o0.jpg"));
 		logo.setBorderPainted(false);
 		logo.setFocusPainted(false);
@@ -128,7 +129,22 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 
 		f.getContentPane().setLayout(null);
 		f.setSize(800, 800);
-		f.addWindowListener(this); // 이거 없으면 창닫기도 안된다.
+		
+		//창닫기
+		f.addWindowListener(new WindowAdapter() {
+	    public void windowClosing(WindowEvent evt) {
+	        int resp = JOptionPane.showConfirmDialog(f, "정말 로그아웃 하시겠습니까?",
+	            "Exit?", JOptionPane.YES_NO_OPTION);
+
+	        if (resp == JOptionPane.YES_OPTION) {
+//	            f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	        	f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	        } else {
+	            f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+	        }
+	    }
+		});
+		
 		f.setLocationRelativeTo(null);
 		np.addActionListener(this);
 

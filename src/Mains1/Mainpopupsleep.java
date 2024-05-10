@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 
 public class Mainpopupsleep {
 
-	public static void main(String[] args) {
+	public void excute() {
 		Frame f = new Frame("수면시간");
 		f.setSize(650, 700);
 		f.setLayout(null);
@@ -150,7 +150,7 @@ public class Mainpopupsleep {
 		f.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent we) {
-				System.exit(0);
+				f.setVisible(false);
 			}
 		});
 

@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 
 public class Mainpopupwater {
 
-	public static void main(String[] args) {
+	public void excute() {
 		Frame f = new Frame("메인페이지 팝업");
 		f.setSize(600, 350);
 		f.setLayout(null);
@@ -75,7 +75,7 @@ public class Mainpopupwater {
 		f.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent we) {
-				System.exit(0);
+				f.setVisible(false);
 			}
 		});
 

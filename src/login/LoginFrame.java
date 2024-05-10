@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 
 import IDsearch.IdSearch;
 import IDsearch.PwdSearch;
+import Mains1.Mainpopup;
 import Mains1.Mainscreen;
 import Member.Mframe;
 
@@ -43,8 +44,8 @@ public class LoginFrame extends JFrame {
 		tab1Panel.add(jLabel);
 		tab1Panel.setLocation(140, 10);
 		tab1Panel.setSize(400, 400);
-		
-		//화면중앙배치
+
+		// 화면중앙배치
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		Point centerPoint = ge.getCenterPoint();
 		int leftTopX = centerPoint.x - f.getWidth() / 2;
@@ -54,8 +55,7 @@ public class LoginFrame extends JFrame {
 		JLabel lId = new JLabel("ID");
 		lId.setLocation(170, 440);
 		lId.setSize(50, 50);
-		
-		
+
 		JLabel lPwd = new JLabel("PWD");
 		lPwd.setLocation(170, 480);
 		lPwd.setSize(50, 50);
@@ -64,7 +64,7 @@ public class LoginFrame extends JFrame {
 		tfId.setLocation(220, 450);
 		tfId.setSize(200, 30);
 //		String id = getTfId().getText();							//
-		
+
 		tfPwd = new JPasswordField(10);
 //		tfPwd.setEchoChar('*');
 		tfPwd.setLocation(220, 490);
@@ -90,22 +90,21 @@ public class LoginFrame extends JFrame {
 		btnS.setLocation(400, 570);
 		btnS.setSize(100, 40);
 
-		
 		btnS.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new Mframe();								//회원가입열기
+				new Mframe(); // 회원가입열기
 			}
 		});
-		
-		btnL.addActionListener(new ActionListener() {		//로그인
+
+		btnL.addActionListener(new ActionListener() { // 로그인
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				String pwd = new String(tfPwd.getPassword());//SWING에서 .getPassword()는 char[]이기때문에 String변환
-				
+
+				String pwd = new String(tfPwd.getPassword());// SWING에서 .getPassword()는 char[]이기때문에 String변환
+
 				System.out.println(getTfId().getText() + " : " + pwd);
-				String id = tfId.getText();							
+				String id = tfId.getText();
 
 				list = dao.list(id);
 
@@ -117,21 +116,22 @@ public class LoginFrame extends JFrame {
 
 						System.out.println(gid + " :: " + gpwd);
 
-						if (getTfId().getText().equals(gid) && pwd.equals(gpwd)) {	//성공 메인페이지열기
+						if (getTfId().getText().equals(gid) && pwd.equals(gpwd)) { // 성공 메인페이지열기
 							tfMsg.setText("로그인이 성공했습니다.");
 							Mainscreen mainscreen = new Mainscreen();//
-							
+							Mainpopup mainpopup = new Mainpopup();
 							mainscreen.excute();
-			                f.setVisible(false); 		//
+							mainpopup.excute();
+							f.setVisible(false); //
 						} else {
-							new FailMessage();  		//로그인 실패
+							new FailMessage(); // 로그인 실패
 						}
 					}
 				} else {
-					new FailMessage();				
+					new FailMessage();
 				}
 
-				for (int i = 0; i < list.size(); i++) {			//이거 왜 중복이냐
+				for (int i = 0; i < list.size(); i++) { // 이거 왜 중복이냐
 					InfoVo data = (InfoVo) list.get(i);
 					String gid = data.getId();
 					String gpwd = data.getPwd();
@@ -140,32 +140,23 @@ public class LoginFrame extends JFrame {
 				}
 			}
 		});
-		
+
 		btnI.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 new IdSearch();					//
-										//ID찾기열기
+				new IdSearch(); //
+				// ID찾기열기
 			}
 		});
-		
+
 		btnP.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				 new PwdSearch();		//PWD찾기열기
-				
+				new PwdSearch(); // PWD찾기열기
+
 			}
 		});
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		f.getContentPane().add(tab1Panel);
 
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -184,10 +175,6 @@ public class LoginFrame extends JFrame {
 		f.setVisible(true);
 	}
 
-	
-	
-	
-	
 	public class FailMessage extends JFrame {
 		public FailMessage() {
 			setSize(300, 200);
@@ -222,17 +209,15 @@ public class LoginFrame extends JFrame {
 			this.add(lFail);
 			this.add(lFail2);
 			this.add(btnE);
-			
+
 		}
 
 	}
 
-	
 	public static void main(String[] args) {
 		new LoginFrame();
 
 	}
-
 
 	public JTextField getTfId() {
 		return tfId;

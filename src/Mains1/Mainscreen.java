@@ -6,16 +6,24 @@ import java.awt.Frame;
 import java.awt.Label;
 import java.awt.TextField;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import Board.Boardset;
+import HealthCheck.HealthCheck;
+import Profile.Pframe;
 
 public class Mainscreen {
-	public static void main(String[] args) {
-		Frame f = new Frame("메인페이지");
+	public void excute() {
+		JFrame f = new JFrame("메인페이지");
 		f.setSize(800, 800);
 		f.setLayout(null);
 
@@ -48,10 +56,32 @@ public class Mainscreen {
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Dimension screenSize = tk.getScreenSize();
 		f.setLocation(screenSize.width / 2 - 800 / 2, screenSize.height / 2 - 800 / 2);
-			//버튼
+			
+		//버튼
 		Button mpg = new Button("마이페이지");
+		mpg.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new Pframe(); 
+			}
+		});
+		
 		Button healthbutton = new Button("나의건강일지");
+		healthbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new HealthCheck();
+			}
+		});
+		
 		Button boardbutton = new Button("게시판이동");
+		boardbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new Boardset();
+			}
+		});
+		
 		mpg.setFont(font1);
 		healthbutton.setFont(font1);
 		boardbutton.setFont(font1);
@@ -93,12 +123,21 @@ public class Mainscreen {
 		calendarlink.setLocation(405, 490);
 			//닫기
 		f.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent we) {
-                System.exit(0);
-            }
-        });
+		    public void windowClosing(WindowEvent evt) {
+		        int resp = JOptionPane.showConfirmDialog(f, "정말 로그아웃 하시겠습니까?",
+		            "Exit?", JOptionPane.YES_NO_OPTION);
 
+		        if (resp == JOptionPane.YES_OPTION) {
+//		            f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		        	f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		        } else {
+		            f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		        }
+		    }
+		});
+		
+		
+		
 		f.add(logo);
 		f.add(mapimg);
 		f.add(calenderimg);
@@ -113,5 +152,10 @@ public class Mainscreen {
 		f.add(calendarlink);
 
 		f.setVisible(true);
+	}
+
+	private void addWindowListener(WindowAdapter windowAdapter) {
+		// TODO Auto-generated method stub
+		
 	}
 }

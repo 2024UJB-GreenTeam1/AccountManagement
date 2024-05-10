@@ -34,7 +34,7 @@ public class Mframe {
 		f.setLayout(null);
 
 		btlogo = new JButton();
-		btlogo.setIcon(new ImageIcon(getClass().getResource("../img/logo2.jpg")));
+		btlogo.setIcon(new ImageIcon(getClass().getResource("../img/logo.jpg")));
 		// 로고 이미지 크기 및 위치
 		btlogo.setSize(181, 163);
 		btlogo.setLocation(10, 10);

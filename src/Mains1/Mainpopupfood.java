@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 public class Mainpopupfood {
 
 	// 프레임 생성
-	public static void main(String[] args) {
+	public void excute() {
 		Frame f = new Frame("음식칼로리");
 		f.setSize(800, 800);
 		f.setLayout(null);
@@ -425,7 +425,7 @@ public class Mainpopupfood {
 		f.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent we) {
-				System.exit(0);
+				f.setVisible(false);
 			}
 		});
 

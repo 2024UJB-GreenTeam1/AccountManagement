@@ -58,7 +58,7 @@ public class Pframe {
 		});
 
 		logo = new JButton();
-		logo.setIcon(new ImageIcon(getClass().getResource("../img/logo3.jpg")));
+		logo.setIcon(new ImageIcon(getClass().getResource("../img/logo.jpg")));
 		logo.setLayout(null);
 		logo.setSize(127, 115);
 		logo.setLocation(10, 10);

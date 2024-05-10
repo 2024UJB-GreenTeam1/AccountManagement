@@ -6,17 +6,21 @@ import java.awt.Frame;
 import java.awt.Label;
 import java.awt.TextField;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import IDsearch.PwdSearch;
+
 public class Mainpopup {
 	// todayweightText 필드 생성
 	 static TextField todayweightText = new TextField(7);
 	// 프레임 생성
-	public static void main(String[] args) {
+	public void excute() {
 		Frame f = new Frame("메인페이지 팝업");
 		f.setSize(800, 800);
 		f.setLayout(null);
@@ -120,11 +124,58 @@ public class Mainpopup {
 
 		// 버튼 생성
 		Button todayexercisebutton = new Button("운동");
+		todayexercisebutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Mainpopupexercise exercise = new Mainpopupexercise();
+				exercise.excute();
+			}
+		});
+		
 		Button todayfoodbutton = new Button("음식");
+		todayfoodbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Mainpopupfood food = new Mainpopupfood();
+				food.excute();
+			}
+		});
+		
 		Button todaysleepbutton = new Button("수면시간은");
+		todaysleepbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Mainpopupsleep sleep = new Mainpopupsleep();
+				sleep.excute();
+			}
+		});
+		
 		Button todayweightbutton = new Button("체중은");
+		todayweightbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 // 체중입력창 넣어야함
+			}
+		});
+		
 		Button todaywaterbutton = new Button("수분섭취는");
+		todaywaterbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Mainpopupwater water = new Mainpopupwater();
+				water.excute();
+			}
+		});
+		
 		Button scc = new Button("완료");
+		scc.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 // 입력완료 구현
+
+			}
+		});
+		
 		scc.setFont(font1);
 		todayexercisebutton.setFont(font1);
 		todayfoodbutton.setFont(font1);
