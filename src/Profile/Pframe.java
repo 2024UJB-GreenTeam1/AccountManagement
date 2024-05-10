@@ -52,8 +52,8 @@ public class Pframe {
 			public void actionPerformed(ActionEvent arg0) {
 
 				// TODO Auto-generated method stub
-				Pdel delf = new Pdel();
-				delf.setVisible(true);
+				new Pdel();
+				f.dispose();
 			}
 		});
 
@@ -71,9 +71,9 @@ public class Pframe {
 				f.dispose();
 			}
 		});
-		String userId = getCurrentUserId();// 현재 사용자 아이디 가져오는 방법 구현 예정
+		String userId = getCurrentUserId();
 		DTO user = dao.getUserProfile(userId);
-		// login 페이지에서 로그인을 하면 로그인 한 사람의 데이터를 가져와야 하는데 후후후후후 이해가 안되고
+		
 		
 		pane = new JTabbedPane();
 		PTab profileTab = new PTab("내 프로필", user);

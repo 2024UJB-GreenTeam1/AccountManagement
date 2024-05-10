@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
 import login.LoginFrame;
 
 public class Mframe {
@@ -188,7 +189,7 @@ public class Mframe {
 
 	// 비밀번호에 특수문자가 포함되어 있는지 검증
 	public boolean isValidPassword(String password) {
-		return !password.matches(".*[!@#$%^&*()-_=+\\|[{]};:'\",<.>/?].*");
+	    return password.matches("[a-zA-Z0-9]+");
 	}
 }
 

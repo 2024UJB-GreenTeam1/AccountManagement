@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import Member.MessageDialog;
+import login.InfoVo;
 
 public class PTab extends JPanel {
 	private DTO user;
@@ -80,7 +81,7 @@ public class PTab extends JPanel {
 		JLabel weight = new JLabel("몸무게");
 		weight.setBounds(100, 380, 100, 30);
 		profilePanel.add(weight);
-		JLabel dweight = new JLabel("String.valueOf(user.getWeight())");
+		JLabel dweight = new JLabel(String.valueOf(user.getWeight()));
 		dweight.setBounds(200, 380, 100, 30);
 		profilePanel.add(dweight);
 
@@ -94,6 +95,7 @@ public class PTab extends JPanel {
 				// TODO Auto-generated method stub
 				Ptab1hw frame = new Ptab1hw();
 				frame.setVisible(true);
+				
 			}
 		});
 
@@ -126,7 +128,7 @@ public class PTab extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				String userId = user.getID();
+				String userId = InfoVo.getInstance().getId();
 				String email = newIdField.getText();
 				dao.updatemail(email, userId);
 			}
@@ -171,9 +173,12 @@ public class PTab extends JPanel {
 					new MessageDialog(null, "알림", "빈칸 없이 채워주세요.");
 				} else if (!password.equals(confirmPassword)) {
 					new MessageDialog(null, "알림", "비밀번호가 일치하지 않습니다.");
-				} else {
+				} else if (!isValidPassword(password)) {
+					new MessageDialog(null, "알림", "특수문자를 포함하지 않습니다.");
+				}else {
 					// 비밀번호 업데이트
-//					int res = dao.updatepwd(password, confirmPassword);
+					String userId = InfoVo.getInstance().getId();
+					dao.updatepwd(password, userId);
 					new MessageDialog(null, "알림", "비밀번호 변경 완료");
 				}
 			}
@@ -181,4 +186,9 @@ public class PTab extends JPanel {
 
 		return passwordChangePanel;
 	}
+	
+	// 비밀번호에 특수문자가 포함되어 있는지 검증
+		public boolean isValidPassword(String password) {
+		    return password.matches("[a-zA-Z0-9]+");
+		}
 }
