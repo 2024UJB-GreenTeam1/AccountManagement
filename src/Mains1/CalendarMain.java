@@ -164,14 +164,14 @@ public class CalendarMain extends JPanel implements ActionListener, ItemListener
 			titlePane.add(lbl); // 요일 라벨을 요일 표시 패널에 추가
 		}
 	}
-
-	public static void main(String[] args) {
-		JFrame frame = new JFrame("달력"); // 메인 윈도우 생성
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().add(new CalendarMain()); // CalendarMain 인스턴스를 윈도우에 추가
-		frame.pack(); // 윈도우 크기 자동 조절
-		frame.setSize(800, 800); // 윈도우 크기 설정
-		frame.setLocationRelativeTo(null); // 화면 중앙에 윈도우 위치
-		frame.setVisible(true); // 윈도우 표시
+//달력이 Jframe 이라 이걸로 연결해줬음
+	public static void displayCalendar() {
+	    JFrame frame = new JFrame("달력");
+	    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	    frame.add(new CalendarMain());
+	    frame.pack();
+	    frame.setSize(800, 800);  // 적절한 크기로 설정
+	    frame.setLocationRelativeTo(null);  // 화면 중앙에 위치
+	    frame.setVisible(true);  // 프레임을 화면에 표시
 	}
 }
