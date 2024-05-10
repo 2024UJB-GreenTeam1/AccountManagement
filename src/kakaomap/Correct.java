@@ -267,7 +267,7 @@ public class Correct extends ComDto implements ActionListener, WindowListener{
 						e2.printStackTrace();
 					}
 				}
-			}
+				  frame.dispose();		}
 		});
 
 		
@@ -317,7 +317,7 @@ public class Correct extends ComDto implements ActionListener, WindowListener{
 						e2.printStackTrace();
 					}
 				}
-			}
+				  frame.dispose();	}
 		});
 
 		
@@ -404,7 +404,7 @@ public class Correct extends ComDto implements ActionListener, WindowListener{
 						e2.printStackTrace();
 					}
 				}
-			}
+				 	}
 		});
 	}
 	
