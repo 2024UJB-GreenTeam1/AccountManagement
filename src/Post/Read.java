@@ -1,8 +1,9 @@
 package Post;
-
+// 사용함
 import java.awt.Choice;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.TextField;
@@ -10,8 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,11 +18,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Scanner;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -32,7 +33,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import read.Tab;
+
 import kakaomap.Correct;
 
 
@@ -45,11 +46,12 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 	private JPanel main;
 	private Choice category;
 	private LineBorder bb = new LineBorder(Color.black, 1, true); 
-	private ReadDao readDao;
+//	private ReadDao readDao;
+	Instant lastLikeTime;
 	
 	Scanner sc = new Scanner (System.in);
 	int i = sc.nextInt();
-	
+	JLabel lblNewLabel_18;
 	String driver = "ora"+ "cle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	String user = "c##green";
@@ -77,7 +79,7 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 	Blob bfiledata;
 	ImageIcon icon;
 	Image image;
-
+	JDialog info5;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -92,6 +94,7 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 				}
 			}
 		});
+	
 	}
 
 	/**
@@ -99,7 +102,7 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 	 */
 	public Read() {
 		initialize();
-	readDao = new ReadDao();
+	//readDao = new ReadDao();
 		
 	}
 
@@ -130,6 +133,8 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 	try (PreparedStatement pstmt = con.prepareStatement(sql)){
 		pstmt.setInt(1,i);
 		pstmt.executeUpdate();
+		
+		lblNewLabel_18.setText(Integer.toString(newBclikes));
 	}
 	}catch(SQLException e) {
 		e.printStackTrace();
@@ -196,7 +201,7 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 				bclikes = rs.getInt("bclikes");
 		
 
-		System.out.println(bcno);
+	//	System.out.println(bcno);
 //				icon = new ImageIcon(image);
 			}
 			System.out.println(bcno + " , " + bno + " , " + user_id + " , " + bcnickname + " , " + bctitle + " , "
@@ -310,6 +315,10 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 		frame.getContentPane().add(btnNewButton_2);
 		btnNewButton_2.addActionListener(new ActionListener() { // 추천 버튼
 			public void actionPerformed(ActionEvent e) {
+				 Instant currentTime = Instant.now();
+				if(lastLikeTime == null || Duration.between(lastLikeTime, currentTime).getSeconds() >= 60) {
+					
+				
 				int currentBclikes = getBclikes();
 				 int updateBclikes = currentBclikes +1;
 				updatebclikes(updateBclikes);
@@ -317,12 +326,32 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 		//		System.out.println(currentBclikes);
 				System.out.println("추천수 : "+ updateBclikes);
 				
+				lastLikeTime = currentTime;
 		
+				} else {
+					
+						info5 = new JDialog(frame,"안내창",true);
+						info5.setSize(220,100);
+						info5.setLocation(400,400);
+						info5.setLayout(new FlowLayout());
+						
+						JLabel mas = new JLabel("1분에 한 번만 추천할 수 있습니다.",JLabel.CENTER);
+						JButton ok1 = new JButton("확인");
+						info5.add(mas);
+						info5.add(ok1);
+
+						ok1.addActionListener(new ActionListener() { // 수정 버튼
+							public void actionPerformed(ActionEvent e) {
+								info5.dispose(); 
+							}
+						});
+						info5.setVisible(true);
+						
+				}
 			}
 		});
-		
 		String blikes = Integer.toString(bclikes);
-		JLabel lblNewLabel_18 = new JLabel(blikes);// 추천수 
+		 lblNewLabel_18 = new JLabel(blikes);// 추천수 
 		lblNewLabel_18.setBounds(727, 139, 57, 23);
 		frame.getContentPane().add(lblNewLabel_18);
 		lblNewLabel_18.setBorder(bb);
@@ -359,8 +388,8 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("수정")) {
-					Correct correct = new Correct();
-					frame.dispose();	
+					Correct correct = new Correct(i);
+				//	frame.dispose();	
 				}
 			
 			}
@@ -376,12 +405,16 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 		JButton btnNewButton_4 = new JButton("이미지");	
 		btnNewButton_4.setBounds(200, 700, 97, 36);
 		frame.getContentPane().add(btnNewButton_4);
-		btnNewButton_4.addActionListener(new ActionListener() { // 수정 버튼
+		btnNewButton_4.setEnabled(false);
+		if (bfiledata != null) {
+			btnNewButton_4.setEnabled(true);
+		}
+		btnNewButton_4.addActionListener(new ActionListener() { // 이미지 버튼
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("이미지")) {
-					Tab tab = new Tab();
-				
+					Tab.showFrame(i);
+					
 				}
 			
 			}
@@ -396,6 +429,7 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 //	
 }
 
+	
 		public void windowClosing(WindowEvent e) {
 			  frame.dispose();   //닫기 눌러서 창닫기
 		}
@@ -445,13 +479,13 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 		    if(e.getActionCommand().equals("수정")) {
-		    	Correct correct = new Correct();
-		        Correct.showFrame();
+		    	Correct correct = new Correct(i);
+		        Correct.showFrame(i);
 		        System.out.println("눌러짐");
 		    }
 		    if (e.getActionCommand().equals("이미지")) {
-		    	Tab tab = new Tab();
-		    	Tab.showFrame();
+		    	Tab tab = new Tab(i);
+		    	Tab.showFrame(i);
 		    	 System.out.println("눌러짐");
 		    }
 		    

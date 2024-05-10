@@ -1,4 +1,5 @@
 package Post;  //DB 접속 클래스
+// 아마 사용함
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,13 +17,13 @@ public class Connection2 {
 	private String bcdelete;
 	private String bcfilename;
 	private int bcviews;
-	private String bcfiledata;
+	private String bfiledata;
 	private int bclikes;
 	public Connection2(){
 		super();
 	}
 	
-	public Connection2(String bcno,String bno,String user_id,String bcnickname,String bctitle, String bcontent,String bcdate,String bcdelete,String bcfilename,int bcviews,String bcfiledata,int bclikes) {
+	public Connection2(String bcno,String bno,String user_id,String bcnickname,String bctitle, String bcontent,String bcdate,String bcdelete,String bcfilename,int bcviews,String bfiledata,int bclikes) {
 		this.bcno = bcno;
 		this.bno = bno;
 		this.user_id = user_id;
@@ -33,7 +34,7 @@ public class Connection2 {
 		this.bcdelete = bcdelete;
 		this.bcfilename = bcfilename;
 		this.bcviews = bcviews;
-		this.bcfiledata = bcfiledata;
+		this.bfiledata = bfiledata;
 		this.bclikes = bclikes;
 		
 		
@@ -120,12 +121,12 @@ public class Connection2 {
 		this.bcviews = bcviews;
 	}
 
-	public String getBcfiledata() {
-		return bcfiledata;
+	public String getBfiledata() {
+		return bfiledata;
 	}
 
-	public void setBcfiledata(String bcfiledata) {
-		this.bcfiledata = bcfiledata;
+	public void setBfiledata(String bfiledata) {
+		this.bfiledata = bfiledata;
 	}
 
 	public int getBclikes() {
