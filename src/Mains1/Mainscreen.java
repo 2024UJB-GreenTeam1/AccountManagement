@@ -71,6 +71,7 @@ public class Mainscreen {
 			//코멘트 받아오기
 		String healthComment = Healthcoment.getHealthComment();
 		healthcommentext.setText(healthComment);
+		
 		popboardtext.setSize(690, 180);
 		popboardtext.setLocation(50, 310);
 			//라벨

@@ -267,6 +267,8 @@ public class Mainpopupexercise {
 
 		// 완료 버튼
 		Button exercisesccbutton = new Button("완료");
+		
+		
 
 		exercisesccbutton.setSize(50, 30);
 		exercisesccbutton.setLocation(300, 670);
