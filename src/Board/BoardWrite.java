@@ -20,11 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-<<<<<<< HEAD
-public class BoardWrite extends BoardCommand implements WindowListener, ActionListener {
-=======
 public class BoardWrite extends BoardDTO implements WindowListener, ActionListener {
->>>>>>> branch 'master' of https://github.com/2024UJB-GreenTeam1/AccountManagement.git
 	private JTextArea maincontent2;
 	private JFrame f;
 	private JLabel title;
@@ -45,8 +41,6 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 		JButton write = new JButton("작성");
 		write.setBounds(12, 584, 102, 40);
 		write.addActionListener(this);
-<<<<<<< HEAD
-=======
 		
 		category = new Choice();
 		category.add("");
@@ -57,7 +51,6 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 		category.setSize(200, 100); // 카테고리
 		category.setLocation(50, 10);
 		f.add(category);
->>>>>>> branch 'master' of https://github.com/2024UJB-GreenTeam1/AccountManagement.git
 
 		JButton cancle = new JButton("취소");
 		cancle.setBounds(670, 584, 102, 40);
