@@ -196,12 +196,14 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 				e2.printStackTrace();
 			} finally {
 			}
-			try {
+			try {	
 				pstmt.close();
 				// System.exit(0);
 			} catch (SQLException e3) {
 				e3.printStackTrace();
 			}
+			
+			
 		}
 	}
 
