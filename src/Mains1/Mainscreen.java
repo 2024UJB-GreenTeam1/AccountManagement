@@ -13,6 +13,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -139,6 +140,10 @@ public class Mainscreen {
 		    }
 		});
 		
+
+		
+		
+		
 		
 		
 		f.add(logo);
@@ -155,6 +160,11 @@ public class Mainscreen {
 		f.add(calendarlink);
 
 		f.setVisible(true);
+		
+//		JOptionPane optionPane = new JOptionPane("ErrorMsg", JOptionPane.ERROR_MESSAGE);    
+//		JDialog dialog = optionPane.createDialog("Failure");
+//		dialog.setAlwaysOnTop(true);
+//		dialog.setVisible(true);
 	}
 
 	private void addWindowListener(WindowAdapter windowAdapter) {

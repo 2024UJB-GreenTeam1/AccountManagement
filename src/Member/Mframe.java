@@ -1,6 +1,9 @@
 package Member;
 
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.awt.Image;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -10,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -24,7 +28,13 @@ public class Mframe {
 
 	private JLabel lheight, lYear, lName, lId, lPwd, lPwda, lPhone, lEmail;
 	Font font = new Font("SansSerif", Font.PLAIN, 15);
-	
+	// 이미지크기조절기능
+	ImageIcon imageSetSize(ImageIcon icon, int i, int j) { // image Size Setting
+		Image ximg = icon.getImage(); // ImageIcon을 Image로 변환.
+		Image yimg = ximg.getScaledInstance(i, j, java.awt.Image.SCALE_SMOOTH);
+		ImageIcon xyimg = new ImageIcon(yimg);
+		return xyimg;
+	}
 
 	public Mframe() {
 		dao = new MemberDAO();
@@ -33,8 +43,14 @@ public class Mframe {
 		f.setSize(800, 800);
 		f.setLayout(null);
 
+		
+		
+		
 		btlogo = new JButton();
-		btlogo.setIcon(new ImageIcon(getClass().getResource("../img/logo.jpg")));
+		// 이미지크기조절&삽입
+		ImageIcon imgTest = new ImageIcon(getClass().getResource("../img/logo.jpg"));
+		imgTest = imageSetSize(imgTest, 150, 150);
+		btlogo.setIcon(imgTest);
 		// 로고 이미지 크기 및 위치
 		btlogo.setSize(181, 163);
 		btlogo.setLocation(10, 10);
@@ -171,6 +187,13 @@ public class Mframe {
 		f.setFont(font);
 		f.addWindowListener(new EventHandler());
 		f.setVisible(true);
+		
+		// 화면중앙배치
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		Point centerPoint = ge.getCenterPoint();
+		int leftTopX = centerPoint.x - f.getWidth() / 2;
+		int leftTopY = centerPoint.y - f.getHeight() / 2;
+		f.setLocation(leftTopX, leftTopY);
 	}
 
 	public static void main(String[] args) {

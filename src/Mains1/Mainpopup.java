@@ -13,6 +13,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import IDsearch.PwdSearch;
 
@@ -225,12 +226,12 @@ public class Mainpopup {
 		todaywaterText.setLocation(460, 470);
 
 		// 프로그램 창 닫기
-		f.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent we) {
-				System.exit(0);
-			}
-		});
+//		f.addWindowListener(new WindowAdapter() {
+//			@Override
+//			public void windowClosing(WindowEvent we) {
+//				System.exit(0);
+//			}
+//		});
 
 		f.add(logo);
 		f.add(todayLabel);
@@ -263,11 +264,20 @@ public class Mainpopup {
 		f.add(todaywaterText);
 
 		f.setVisible(true);
+		
+		
+		// 프로그램 창 닫기
+		f.addWindowListener(new WindowAdapter() {
+		    public void windowClosing(WindowEvent evt) {
+				JOptionPane.showMessageDialog(f, 
+						  "일일입력을 완료해주십시오", "ErrorMsg", JOptionPane.ERROR_MESSAGE);
+		    }
+		});
+		
 	}
 
 	public static void updateWeightText(String weight) {
 		todayweightText.setText(weight); // 텍스트 필드 업데이트
-
 	}
 
 }
