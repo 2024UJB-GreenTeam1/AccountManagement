@@ -9,13 +9,14 @@ public class DTO {
 	private int height;
 	private int weight;
 
-	public DTO(String name, String ID, String email, String phone, String year, int height) {
+	public DTO(String name, String ID, String email, String phone, String year, int height, int weight) {
 		this.name = name;
 		this.ID = ID;
 		this.email = email;
 		this.phone = phone;
 		this.year = year;
 		this.height = height;
+		this.weight = weight;
 	}
 
 	public DTO() {
