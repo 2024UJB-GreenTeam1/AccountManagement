@@ -1,8 +1,6 @@
 package Mains1;
-import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.Label;
 import java.awt.TextField;
 import java.awt.Toolkit;
@@ -12,12 +10,14 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class Mainpopupsleep {
 
 	public void excute() {
-		Frame f = new Frame("수면시간");
+		JFrame f = new JFrame("수면시간");
 		f.setSize(650, 700);
 		f.setLayout(null);
 
@@ -140,17 +140,23 @@ public class Mainpopupsleep {
 		todaysleeplastText.setFont(font1);
 		
 		//단추
-		Button todayexercisebutton = new Button("완료");
+		JButton todayexercisebutton = new JButton("완료");
 
 		todayexercisebutton.setSize(80, 40);
 		todayexercisebutton.setLocation(285, 540);
 		todayexercisebutton.setFont(font2);
+		todayexercisebutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 f.dispose();
+			}
+		});
 		
 		// 프로그램 창 닫기
 		f.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent we) {
-				f.setVisible(false);
+				f.dispose();
 			}
 		});
 

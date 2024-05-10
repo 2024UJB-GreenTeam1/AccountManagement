@@ -14,11 +14,10 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import IDsearch.IdSearch;
-import Member.Mframe;
+import Board.Boardset;
+import Mains1.Mainscreen;
 
 //extends WindowAdapter 
 public class HealthCheck extends JFrame { 
@@ -194,26 +193,29 @@ public class HealthCheck extends JFrame {
 
 		btnI = new JButton("메인페이지이동");
 		btnI.setLocation(170, 570);
-		btnI.setSize(100, 40);
-
-		btnS = new JButton("게시판이동");
-		btnS.setLocation(400, 570);
-		btnS.setSize(100, 40);
-
-		btnS.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new Mframe(); // 회원가입열기
-			}
-		});
-
+		btnI.setSize(150, 40);
 		btnI.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new IdSearch(); //
+				Mainscreen mainscreen = new Mainscreen(); //
+				f.dispose();
+				mainscreen.excute();
 				// 메인페이지열기
 			}
 		});
+
+		btnS = new JButton("게시판이동");
+		btnS.setLocation(370, 570);
+		btnS.setSize(150, 40);
+		btnS.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				f.dispose();
+				new Boardset(); 
+			}
+		});
+
+
 
 		lAt.setFont(font);
 		lUc.setFont(font);

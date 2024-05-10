@@ -62,6 +62,7 @@ public class Mainscreen {
 		mpg.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				f.dispose();
 				new Pframe(); 
 			}
 		});
@@ -70,6 +71,7 @@ public class Mainscreen {
 		healthbutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				f.dispose();
 				new HealthCheck();
 			}
 		});
@@ -78,6 +80,7 @@ public class Mainscreen {
 		boardbutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				f.dispose();
 				new Boardset();
 			}
 		});
@@ -121,7 +124,7 @@ public class Mainscreen {
 		maplink.setLocation(50, 490);
 		calendarlink.setSize(250, 60);
 		calendarlink.setLocation(405, 490);
-			//닫기
+			//창닫기
 		f.addWindowListener(new WindowAdapter() {
 		    public void windowClosing(WindowEvent evt) {
 		        int resp = JOptionPane.showConfirmDialog(f, "정말 로그아웃 하시겠습니까?",

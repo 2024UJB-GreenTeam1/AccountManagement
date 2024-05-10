@@ -243,6 +243,12 @@ public class Mainpopupfood {
 		foodsccbutton.setSize(50, 30);
 		foodsccbutton.setLocation(300, 670);
 		foodsccbutton.setFont(font1);
+		foodsccbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 f.dispose();
+			}
+		});
 
 		// 백미 버튼
 		Button whitericebutton1 = new Button("100g");

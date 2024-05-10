@@ -171,8 +171,8 @@ public class Mainpopup {
 		scc.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				f.dispose();
 				 // 입력완료 구현
-
 			}
 		});
 		

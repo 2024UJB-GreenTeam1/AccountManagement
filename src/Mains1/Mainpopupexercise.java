@@ -278,6 +278,13 @@ public class Mainpopupexercise {
 		exercisesccbutton.setSize(50, 30);
 		exercisesccbutton.setLocation(300, 670);
 		exercisesccbutton.setFont(font1);
+		exercisesccbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 f.dispose();
+			}
+		});
+
 
 		// 걷기 버튼
 		Button walkingbutton1 = new Button("15분");

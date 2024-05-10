@@ -1,6 +1,8 @@
 package Profile;
 
 import java.awt.Font;
+import java.awt.GraphicsEnvironment;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -9,8 +11,9 @@ import java.awt.event.WindowEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JTabbedPane;
+
+import Mains1.Mainscreen;
 
 //import Mains.MainScreen;
 
@@ -21,7 +24,6 @@ public class Pframe {
 	private ProfileDAO dao;
 	private PTab tab;
 	Font font = new Font("SansSerif", Font.PLAIN, 15);
-
 
 	public Pframe() {
 		dao = new ProfileDAO();
@@ -37,9 +39,8 @@ public class Pframe {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-//				new MainScreen();
-//				MainScreen Main = new MainScreen();
-//				Main.excute();
+				Mainscreen mainscreen = new Mainscreen();
+				mainscreen.excute();
 				f.dispose();
 			}
 		});
@@ -67,14 +68,14 @@ public class Pframe {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-//				new MainScreen();
+				Mainscreen mainscreen = new Mainscreen();
+				mainscreen.excute();
 				f.dispose();
 			}
 		});
 		String userId = getCurrentUserId();
 		DTO user = dao.getUserProfile(userId);
-		
-		
+
 		pane = new JTabbedPane();
 		PTab profileTab = new PTab("내 프로필", user);
 		pane.addTab("내 프로필", profileTab);
@@ -89,6 +90,13 @@ public class Pframe {
 		f.add(pane);
 		f.add(logo);
 		f.setVisible(true);
+
+		// 화면중앙배치
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		Point centerPoint = ge.getCenterPoint();
+		int leftTopX = centerPoint.x - f.getWidth() / 2;
+		int leftTopY = centerPoint.y - f.getHeight() / 2;
+		f.setLocation(leftTopX, leftTopY);
 	}
 
 	private String getCurrentUserId() {
@@ -100,7 +108,7 @@ public class Pframe {
 		// TODO Auto-generated method stub
 		new Pframe();
 	}
-	
+
 }
 
 class EventHandler extends WindowAdapter {

@@ -6,6 +6,8 @@ import java.awt.Frame;
 import java.awt.Label;
 import java.awt.TextField;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -70,12 +72,18 @@ public class Mainpopupwater {
 		todaywatersscbutton.setSize(70, 30);
 		todaywatersscbutton.setLocation(270, 280);
 		todaywatersscbutton.setFont(font3);
+		todaywatersscbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				 f.dispose();
+			}
+		});
 
 		// 프로그램 창 닫기
 		f.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent we) {
-				f.setVisible(false);
+				f.dispose();
 			}
 		});
 
