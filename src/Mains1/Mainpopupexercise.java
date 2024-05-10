@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Label;
+import java.awt.TextArea;
 import java.awt.TextField;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -41,11 +42,13 @@ public class Mainpopupexercise {
 
 		// 텍스트필드
 		TextField myweighttext = new TextField(7);
-		TextField exercisetext = new TextField(100);
 
 		myweighttext.setSize(70, 25);
 		myweighttext.setLocation(225, 162);
 		myweighttext.setFont(font1);
+
+		// 텍스트 아리아
+		TextArea exercisetext = new TextArea();
 
 		exercisetext.setSize(300, 465);
 		exercisetext.setLocation(50, 200);
@@ -119,11 +122,10 @@ public class Mainpopupexercise {
 		exercisereference.setSize(400, 35);
 		exercisereference.setLocation(360, 670);
 		exercisereference.setFont(font3);
-		
+
 		exercisereference2.setSize(400, 35);
 		exercisereference2.setLocation(360, 700);
 		exercisereference2.setFont(font3);
-		
 
 		// 걷기 라벨
 		walkingnameLabel.setSize(60, 60);
@@ -255,13 +257,20 @@ public class Mainpopupexercise {
 		exercisedirectbutton.setLocation(240, 670);
 		exercisedirectbutton.setFont(font1);
 
+		exercisedirectbutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				exercisetext.setText(""); // TextArea 내용을 비웁니다.
+			}
+		});
+
+		f.add(exercisedirectbutton);
+
 		// 완료 버튼
 		Button exercisesccbutton = new Button("완료");
 
 		exercisesccbutton.setSize(50, 30);
 		exercisesccbutton.setLocation(300, 670);
 		exercisesccbutton.setFont(font1);
-		
 
 		// 걷기 버튼
 		Button walkingbutton1 = new Button("15분");
@@ -270,13 +279,22 @@ public class Mainpopupexercise {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
-					double minutes = 1; // 15분
-					double caloriePerMinute = 0.9; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double minutes = 1;
+					double caloriePerMinute = 0.9;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("걷기 15분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
+			}
+		});
+		f.add(walkingbutton1);
+
+		f.add(exercisetext);
+
+		f.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				System.exit(0);
 			}
 		});
 
@@ -286,13 +304,22 @@ public class Mainpopupexercise {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
-					double minutes = 2; // 15분
-					double caloriePerMinute = 0.9; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double minutes = 2; // 15분 = 1 unit
+					double caloriePerMinute = 0.9; // 15분 동안의 칼로리 소모량
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("걷기 30분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
+			}
+		});
+		f.add(walkingbutton2);
+
+		f.add(exercisetext);
+
+		f.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				System.exit(0);
 			}
 		});
 
@@ -302,13 +329,22 @@ public class Mainpopupexercise {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
-					double minutes = 3; // 15분
-					double caloriePerMinute = 0.9; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double minutes = 3;
+					double caloriePerMinute = 0.9;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("걷기 45분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
+			}
+		});
+		f.add(walkingbutton3);
+
+		f.add(exercisetext);
+
+		f.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				System.exit(0);
 			}
 		});
 
@@ -318,13 +354,22 @@ public class Mainpopupexercise {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
-					double minutes = 4; // 15분
-					double caloriePerMinute = 0.9; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double minutes = 4;
+					double caloriePerMinute = 0.9;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("걷기 60분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
+			}
+		});
+		f.add(walkingbutton4);
+
+		f.add(exercisetext);
+
+		f.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				System.exit(0);
 			}
 		});
 
@@ -352,13 +397,22 @@ public class Mainpopupexercise {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
-					double minutes = 1; // 15분
-					double caloriePerMinute = 1.2; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double minutes = 1;
+					double caloriePerMinute = 1.2;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("빨리걷기 15분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
+			}
+		});
+		f.add(briskwalkingbutton1);
+
+		f.add(exercisetext);
+
+		f.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				System.exit(0);
 			}
 		});
 
@@ -368,13 +422,22 @@ public class Mainpopupexercise {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
-					double minutes = 2; // 15분
-					double caloriePerMinute = 1.2; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double minutes = 2;
+					double caloriePerMinute = 1.2;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("빨리걷기 30분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
+			}
+		});
+		f.add(briskwalkingbutton2);
+
+		f.add(exercisetext);
+
+		f.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				System.exit(0);
 			}
 		});
 
@@ -384,13 +447,22 @@ public class Mainpopupexercise {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
-					double minutes = 3; // 15분
-					double caloriePerMinute = 1.2; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double minutes = 3;
+					double caloriePerMinute = 1.2;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("빨리걷기 45분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
+			}
+		});
+		f.add(briskwalkingbutton3);
+
+		f.add(exercisetext);
+
+		f.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				System.exit(0);
 			}
 		});
 
@@ -400,13 +472,22 @@ public class Mainpopupexercise {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
-					double minutes = 4; // 15분
-					double caloriePerMinute = 1.2; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double minutes = 4;
+					double caloriePerMinute = 1.2;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("빨리걷기 60분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
+			}
+		});
+		f.add(briskwalkingbutton4);
+
+		f.add(exercisetext);
+
+		f.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				System.exit(0);
 			}
 		});
 
@@ -427,7 +508,6 @@ public class Mainpopupexercise {
 		briskwalkingbutton4.setLocation(625, 235);
 		briskwalkingbutton4.setFont(font1);
 
-		// 달리기 버튼
 		Button runbutton1 = new Button("15분");
 
 		runbutton1.addActionListener(new ActionListener() {
@@ -435,12 +515,21 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 1;
-					double caloriePerMinute = 2.0; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 2.0;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("달리기 15분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
+			}
+		});
+		f.add(runbutton1);
+
+		f.add(exercisetext);
+
+		f.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				System.exit(0);
 			}
 		});
 
@@ -451,12 +540,21 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 2;
-					double caloriePerMinute = 2.0; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 2.0;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("달리기 30분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
+			}
+		});
+		f.add(runbutton2);
+
+		f.add(exercisetext);
+
+		f.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				System.exit(0);
 			}
 		});
 
@@ -467,12 +565,21 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 3;
-					double caloriePerMinute = 2.0; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 2.0;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("달리기 45분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
+			}
+		});
+		f.add(runbutton3);
+
+		f.add(exercisetext);
+
+		f.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				System.exit(0);
 			}
 		});
 
@@ -483,14 +590,24 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 4;
-					double caloriePerMinute = 2.0; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 2.0;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("달리기 60분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(runbutton4);
+
+		f.add(exercisetext);
+
+		f.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				System.exit(0);
+			}
+		});
+
 
 		// 달리기 버튼 위치
 
@@ -518,12 +635,21 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 1;
-					double caloriePerMinute = 1.6; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.6;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("계단오르기 15분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
+			}
+		});
+		f.add(climbingstairsbutton1);
+
+		f.add(exercisetext);
+
+		f.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				System.exit(0);
 			}
 		});
 
@@ -534,12 +660,21 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 2;
-					double caloriePerMinute = 1.6; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.6;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("계단오르기 30분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
+			}
+		});
+		f.add(climbingstairsbutton2);
+
+		f.add(exercisetext);
+
+		f.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				System.exit(0);
 			}
 		});
 
@@ -550,14 +685,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 3;
-					double caloriePerMinute = 1.6; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.6;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("계단오르기 45분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(climbingstairsbutton3);
+
+		f.add(exercisetext);
 
 		Button climbingstairsbutton4 = new Button("60분");
 
@@ -566,14 +704,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 4;
-					double caloriePerMinute = 1.6; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.6;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("계단오르기 60분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(climbingstairsbutton4);
+
+		f.add(exercisetext);
 
 		// 계단오르기 버튼 위치
 
@@ -602,14 +743,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 1;
-					double caloriePerMinute = 1.5; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.5;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("자전거타기 15분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(bicyclebutton1);
+
+		f.add(exercisetext);
 
 		Button bicyclebutton2 = new Button("30분");
 
@@ -618,14 +762,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 2;
-					double caloriePerMinute = 1.5; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.5;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("자전거타기 30분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(bicyclebutton2);
+
+		f.add(exercisetext);
 
 		Button bicyclebutton3 = new Button("45분");
 
@@ -634,14 +781,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 3;
-					double caloriePerMinute = 1.5; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.5;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("자전거타기 45분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(bicyclebutton3);
+
+		f.add(exercisetext);
 
 		Button bicyclebutton4 = new Button("60분");
 
@@ -650,14 +800,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 4;
-					double caloriePerMinute = 1.5; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.5;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("자전거타기 60분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(bicyclebutton4);
+
+		f.add(exercisetext);
 
 		// 자전거타기 버튼 위치
 
@@ -686,14 +839,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 1;
-					double caloriePerMinute = 2.6; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 2.6;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("줄넘기 15분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(JumpRopebutton1);
+
+		f.add(exercisetext);
 
 		Button JumpRopebutton2 = new Button("30분");
 
@@ -702,14 +858,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 2;
-					double caloriePerMinute = 2.6; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 2.6;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("줄넘기 30분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(JumpRopebutton2);
+
+		f.add(exercisetext);
 
 		Button JumpRopebutton3 = new Button("45분");
 
@@ -718,14 +877,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 3;
-					double caloriePerMinute = 2.6; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 2.6;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("줄넘기 45분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(JumpRopebutton3);
+
+		f.add(exercisetext);
 
 		Button JumpRopebutton4 = new Button("60분");
 
@@ -734,14 +896,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 4;
-					double caloriePerMinute = 2.6; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 2.6;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("줄넘기 60분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(JumpRopebutton4);
+
+		f.add(exercisetext);
 
 		// 줄넘기 버튼 위치
 
@@ -770,14 +935,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 1;
-					double caloriePerMinute = 1.5; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.5;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("등산 15분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(climbingbutton1);
+
+		f.add(exercisetext);
 
 		Button climbingbutton2 = new Button("30분");
 
@@ -786,14 +954,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 2;
-					double caloriePerMinute = 1.5; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.5;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("등산 30분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(climbingbutton2);
+
+		f.add(exercisetext);
 
 		Button climbingbutton3 = new Button("45분");
 
@@ -802,14 +973,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 3;
-					double caloriePerMinute = 1.5; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.5;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("등산 45분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(climbingbutton3);
+
+		f.add(exercisetext);
 
 		Button climbingbutton4 = new Button("60분");
 
@@ -818,14 +992,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 4;
-					double caloriePerMinute = 1.5; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.5;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("등산 60분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(climbingbutton4);
+
+		f.add(exercisetext);
 
 		// 등산 버튼 위치
 
@@ -854,14 +1031,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 1;
-					double caloriePerMinute = 2.0; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 2.0;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("수영 15분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(swimmingbutton1);
+
+		f.add(exercisetext);
 
 		Button swimmingbutton2 = new Button("30분");
 
@@ -870,14 +1050,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 2;
-					double caloriePerMinute = 2.0; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 2.0;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("수영 30분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(swimmingbutton2);
+
+		f.add(exercisetext);
 
 		Button swimmingbutton3 = new Button("45분");
 
@@ -886,14 +1069,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 3;
-					double caloriePerMinute = 2.0; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 2.0;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("수영 45분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(swimmingbutton3);
+
+		f.add(exercisetext);
 
 		Button swimmingbutton4 = new Button("60분");
 
@@ -902,14 +1088,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 4;
-					double caloriePerMinute = 2.0; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 2.0;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("수영 60분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(swimmingbutton4);
+
+		f.add(exercisetext);
 
 		// 수영 버튼 위치
 
@@ -938,14 +1127,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 1;
-					double caloriePerMinute = 1.5; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.5;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("에어로빅 15분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(aerobicbutton1);
+
+		f.add(exercisetext);
 
 		Button aerobicbutton2 = new Button("30분");
 
@@ -954,14 +1146,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 2;
-					double caloriePerMinute = 1.5; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.5;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("에어로빅 30분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(aerobicbutton2);
+
+		f.add(exercisetext);
 
 		Button aerobicbutton3 = new Button("45분");
 
@@ -970,14 +1165,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 3;
-					double caloriePerMinute = 1.5; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.5;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("에어로빅 45분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(aerobicbutton3);
+
+		f.add(exercisetext);
 
 		Button aerobicbutton4 = new Button("60분");
 
@@ -986,14 +1184,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 4;
-					double caloriePerMinute = 1.5; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.5;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("에어로빅 60분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(aerobicbutton4);
+
+		f.add(exercisetext);
 
 		// 에어로빅 버튼 위치
 
@@ -1022,14 +1223,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 1;
-					double caloriePerMinute = 1.0; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.0;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("체조 15분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(gymnasticsbutton1);
+
+		f.add(exercisetext);
 
 		Button gymnasticsbutton2 = new Button("30분");
 
@@ -1038,14 +1242,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 2;
-					double caloriePerMinute = 1.0; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.0;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("체조 30분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(gymnasticsbutton2);
+
+		f.add(exercisetext);
 
 		Button gymnasticsbutton3 = new Button("45분");
 
@@ -1054,14 +1261,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 3;
-					double caloriePerMinute = 1.0; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.0;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("체조 45분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(gymnasticsbutton3);
+
+		f.add(exercisetext);
 
 		Button gymnasticsbutton4 = new Button("60분");
 
@@ -1070,14 +1280,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 4;
-					double caloriePerMinute = 1.0; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.0;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("체조 60분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(gymnasticsbutton4);
+
+		f.add(exercisetext);
 
 		// 체조 버튼 위치
 
@@ -1106,14 +1319,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 1;
-					double caloriePerMinute = 1.9; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.9;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("테니스 15분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(tennisbutton1);
+
+		f.add(exercisetext);
 
 		Button tennisbutton2 = new Button("30분");
 
@@ -1122,14 +1338,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 2;
-					double caloriePerMinute = 1.9; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.9;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("테니스 30분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(tennisbutton2);
+
+		f.add(exercisetext);
 
 		Button tennisbutton3 = new Button("45분");
 
@@ -1138,14 +1357,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 3;
-					double caloriePerMinute = 1.9; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.9;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("테니스 45분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(tennisbutton3);
+
+		f.add(exercisetext);
 
 		Button tennisbutton4 = new Button("60분");
 
@@ -1154,14 +1376,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 4;
-					double caloriePerMinute = 1.9; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.9;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("테니스 60분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(tennisbutton4);
+
+		f.add(exercisetext);
 
 		// 테니스 버튼 위치
 
@@ -1190,14 +1415,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 1;
-					double caloriePerMinute = 1.6; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.6;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("스키 15분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(skibutton1);
+
+		f.add(exercisetext);
 
 		Button skibutton2 = new Button("30분");
 
@@ -1206,14 +1434,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 2;
-					double caloriePerMinute = 1.6; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.6;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("스키 30분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(skibutton2);
+
+		f.add(exercisetext);
 
 		Button skibutton3 = new Button("45분");
 
@@ -1222,14 +1453,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 3;
-					double caloriePerMinute = 1.6; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.6;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("스키 45분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(skibutton3);
+
+		f.add(exercisetext);
 
 		Button skibutton4 = new Button("60분");
 
@@ -1238,14 +1472,17 @@ public class Mainpopupexercise {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
 					double minutes = 4;
-					double caloriePerMinute = 1.6; // 분당 칼로리 소모량
-					double totalCalories = weight * minutes * caloriePerMinute; // 총 칼로리 계산
-					exercisetext.setText(String.format("소비 칼로리: %.2f kcal", totalCalories));
+					double caloriePerMinute = 1.6;
+					double totalCalories = weight * minutes * caloriePerMinute;
+					exercisetext.append("스키 60분: " + String.format("%.2f kcal\n", totalCalories));
 				} catch (NumberFormatException nfe) {
-					exercisetext.setText("유효한 숫자를 입력하세요.");
+					exercisetext.append("유효한 숫자를 입력하세요.\n");
 				}
 			}
 		});
+		f.add(skibutton4);
+
+		f.add(exercisetext);
 
 		// 스키 버튼 위치
 
@@ -1321,7 +1558,7 @@ public class Mainpopupexercise {
 		f.add(todayexercisebutton);
 		f.add(exercisedirectbutton);
 		f.add(exercisesccbutton);
-		
+
 		f.add(walkingbutton1);
 		f.add(walkingbutton2);
 		f.add(walkingbutton3);

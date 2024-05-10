@@ -6,6 +6,8 @@ import java.awt.Frame;
 import java.awt.Label;
 import java.awt.TextField;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -115,6 +117,7 @@ public class Mainpopupsleep {
 		TextField todaygetupText2 = new TextField(2);
 		
 		TextField todaysleeplastText = new TextField(20);
+		
 		//취침
 		todaysleepText.setSize(50, 25);
 		todaysleepText.setLocation(270, 355);

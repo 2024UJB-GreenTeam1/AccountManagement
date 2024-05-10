@@ -2,6 +2,8 @@ package Mains1;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.TextArea;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,14 +22,21 @@ public class CalendarMemo {
 		TextArea comments = new TextArea("내용을 입력해주세요.", 10, 50);
 		
 		//버튼 생성
-		JButton registrationButton = new JButton("등록");
-		JButton modificationButton = new JButton("수정");
-		JButton deleteButton = new JButton("삭제");
+		JButton registrationButton = new JButton("리셋");
+		
+		registrationButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				comments.setText("");
+			}
+		});
+		
+		JButton modificationButton = new JButton("등록");
+
+		f.add(modificationButton);
 		
 		f.add(comments);
 		f.add(registrationButton);
 		f.add(modificationButton);
-		f.add(deleteButton);
 		comments.selectAll();
 		f.setVisible(true);
 
