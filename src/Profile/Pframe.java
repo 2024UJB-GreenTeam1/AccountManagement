@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 
 import Mains1.Mainscreen;
+import login.InfoVo;
 
 //import Mains.MainScreen;
 
@@ -101,6 +102,7 @@ public class Pframe {
 
 	private String getCurrentUserId() {
 		// TODO Auto-generated method stub
+//		return InfoVo.getInstance().getId();
 		return null;
 	}
 

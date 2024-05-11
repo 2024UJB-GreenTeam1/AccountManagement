@@ -1,34 +1,37 @@
 package Mains1;
-import java.awt.Button;
-import java.awt.Dimension;
+
 import java.awt.Font;
-import java.awt.Frame;
-import java.awt.Label;
-import java.awt.TextArea;
-import java.awt.TextField;
-import java.awt.Toolkit;
+import java.awt.GraphicsEnvironment;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public class Mainpopupexercise {
 
 	// 프레임 생성
 	public void excute() {
-		Frame f = new Frame("운동칼로리");
+		JFrame f = new JFrame("운동칼로리");
 		f.setSize(800, 800);
 		f.setLayout(null);
 
-		// 중앙배치
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		Dimension screenSize = tk.getScreenSize();
-		f.setLocation(screenSize.width / 2 - 800 / 2, screenSize.height / 2 - 800 / 2);
+		// 화면중앙배치
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		Point centerPoint = ge.getCenterPoint();
+		int leftTopX = centerPoint.x - f.getWidth() / 2;
+		int leftTopY = centerPoint.y - f.getHeight() / 2;
+		f.setLocation(leftTopX, leftTopY);
 
 		// 글씨체
+		Font font0 = new Font("맑은 고딕",Font.PLAIN, 12);
 		Font font1 = new Font("맑은 고딕", Font.BOLD, 18);
 		Font font2 = new Font("맑은 고딕", Font.BOLD, 25);
 		Font font3 = new Font("맑은 고딕", Font.BOLD, 16);
@@ -41,72 +44,73 @@ public class Mainpopupexercise {
 		logo.setLocation(50, 60);
 
 		// 텍스트필드
-		TextField myweighttext = new TextField(7);
+		JTextField myweighttext = new JTextField(7);
 
 		myweighttext.setSize(70, 25);
 		myweighttext.setLocation(225, 162);
 		myweighttext.setFont(font1);
 
 		// 텍스트 아리아
-		TextArea exercisetext = new TextArea();
+		JTextArea exercisetext = new JTextArea();
 
 		exercisetext.setSize(300, 465);
 		exercisetext.setLocation(50, 200);
 		exercisetext.setFont(font3);
+		
 
 		// 라벨
-		Label exerciseMainLabel = new Label("오늘의 운동 칼로리 계산");
-		Label myweightLabel = new Label("몸무게를 입력하세요");
-		Label exercisename = new Label("운동명");
-		Label exercisetime = new Label("운동시간");
-		Label exercisekcal = new Label("소비칼로리");
-		Label exercisereference = new Label("※kcal: 몸무게X운동시간X소비칼로리");
-		Label exercisereference2 = new Label("※운동시간: 15분=1, 30분=2, 45분=3, 60분=4");
-		Label exercisereference3 = new Label("총 칼로리 값");
+		JLabel exerciseMainJLabel = new JLabel("오늘의 운동 칼로리 계산");
+		JLabel myweightJLabel = new JLabel("몸무게를 입력하세요");
+		JLabel exercisename = new JLabel("운동명");
+		JLabel exercisetime = new JLabel("운동시간");
+		JLabel exercisekcal = new JLabel("소비칼로리");
+		JLabel exercisereference = new JLabel("※kcal: 몸무게X운동시간X소비칼로리");
+		JLabel exercisereference2 = new JLabel("※운동시간: 15분=1, 30분=2, 45분=3, 60분=4");
+		JLabel exercisereference3 = new JLabel("총 칼로리 값");
 
-		Label walkingnameLabel = new Label("걷기");
-		Label walkingkcalLabel = new Label("0.9kcal");
+		JLabel walkingnameJLabel = new JLabel("걷기");
+		JLabel walkingkcalJLabel = new JLabel("0.9kcal");
 
-		Label briskwalkingnameLabel = new Label("빨리걷기");
-		Label briskwalkingkcalLabel = new Label("1.2kcal");
+		JLabel briskwalkingnameJLabel = new JLabel("빨리걷기");
+		JLabel briskwalkingkcalJLabel = new JLabel("1.2kcal");
 
-		Label runnameLabel = new Label("달리기");
-		Label runkcalLabel = new Label("2.0kcal");
+		JLabel runnameJLabel = new JLabel("달리기");
+		JLabel runkcalJLabel = new JLabel("2.0kcal");
 
-		Label climbingstairsnameLabel = new Label("계단오르기");
-		Label climbingstairskcalLabel = new Label("1.6kcal");
+		JLabel climbingstairsnameJLabel = new JLabel("계단오르기");
+		JLabel climbingstairskcalJLabel = new JLabel("1.6kcal");
 
-		Label bicyclenameLabel = new Label("자전거타기");
-		Label bicyclekcalLabel = new Label("1.5kcal");
+		JLabel bicyclenameJLabel = new JLabel("자전거타기");
+		JLabel bicyclekcalJLabel = new JLabel("1.5kcal");
 
-		Label JumpRopenameLabel = new Label("줄넘기");
-		Label JumpRopekcalLabel = new Label("2.6kcal");
+		JLabel JumpRopenameJLabel = new JLabel("줄넘기");
+		JLabel JumpRopekcalJLabel = new JLabel("2.6kcal");
 
-		Label climbingnameLabel = new Label("등산");
-		Label climbingkcalLabel = new Label("1.5kcal");
+		JLabel climbingnameJLabel = new JLabel("등산");
+		JLabel climbingkcalJLabel = new JLabel("1.5kcal");
 
-		Label swimmingnameLabel = new Label("수영");
-		Label swimmingkcalLabel = new Label("2.0kcal");
+		JLabel swimmingnameJLabel = new JLabel("수영");
+		JLabel swimmingkcalJLabel = new JLabel("2.0kcal");
 
-		Label aerobicnameLabel = new Label("에어로빅");
-		Label aerobickcalLabel = new Label("1.5kcal");
+		JLabel aerobicnameJLabel = new JLabel("에어로빅");
+		JLabel aerobickcalJLabel = new JLabel("1.5kcal");
 
-		Label gymnasticsnameLabel = new Label("체조");
-		Label gymnasticskcalLabel = new Label("1.0kcal");
+		JLabel gymnasticsnameJLabel = new JLabel("체조");
+		JLabel gymnasticskcalJLabel = new JLabel("1.0kcal");
 
-		Label tennisnameLabel = new Label("테니스");
-		Label tenniskcalLabel = new Label("1.9kcal");
+		JLabel tennisnameJLabel = new JLabel("테니스");
+		JLabel tenniskcalJLabel = new JLabel("1.9kcal");
 
-		Label skinameLabel = new Label("스키");
-		Label skikcalLabel = new Label("1.6kcal");
+		JLabel skinameJLabel = new JLabel("스키");
+		JLabel skikcalJLabel = new JLabel("1.6kcal");
 
-		exerciseMainLabel.setSize(280, 70);
-		exerciseMainLabel.setLocation(260, 60);
-		exerciseMainLabel.setFont(font2);
+		exerciseMainJLabel.setSize(280, 70);
+		exerciseMainJLabel.setLocation(260, 60);
+		exerciseMainJLabel.setFont(font2);
 		// 몸무게 라벨
-		myweightLabel.setSize(250, 70);
-		myweightLabel.setLocation(45, 140);
-		myweightLabel.setFont(font1);
+		myweightJLabel.setSize(250, 70);
+		myweightJLabel.setLocation(45, 140);
+		myweightJLabel.setFont(font1);
 		// 운동명 라벨
 		exercisename.setSize(70, 50);
 		exercisename.setLocation(360, 145);
@@ -133,152 +137,152 @@ public class Mainpopupexercise {
 		exercisereference3.setFont(font3);
 
 		// 걷기 라벨
-		walkingnameLabel.setSize(60, 60);
-		walkingnameLabel.setLocation(360, 180);
-		walkingnameLabel.setFont(font1);
+		walkingnameJLabel.setSize(60, 60);
+		walkingnameJLabel.setLocation(360, 180);
+		walkingnameJLabel.setFont(font1);
 
-		walkingkcalLabel.setSize(70, 60);
-		walkingkcalLabel.setLocation(685, 180);
-		walkingkcalLabel.setFont(font1);
+		walkingkcalJLabel.setSize(70, 60);
+		walkingkcalJLabel.setLocation(686, 180);
+		walkingkcalJLabel.setFont(font1);
 
 		// 빨리 걷기 라벨
-		briskwalkingnameLabel.setSize(75, 60);
-		briskwalkingnameLabel.setLocation(360, 220);
-		briskwalkingnameLabel.setFont(font1);
+		briskwalkingnameJLabel.setSize(75, 60);
+		briskwalkingnameJLabel.setLocation(360, 220);
+		briskwalkingnameJLabel.setFont(font1);
 
-		briskwalkingkcalLabel.setSize(70, 60);
-		briskwalkingkcalLabel.setLocation(685, 220);
-		briskwalkingkcalLabel.setFont(font1);
+		briskwalkingkcalJLabel.setSize(70, 60);
+		briskwalkingkcalJLabel.setLocation(686, 220);
+		briskwalkingkcalJLabel.setFont(font1);
 
 		// 달리기 라벨
-		runnameLabel.setSize(60, 60);
-		runnameLabel.setLocation(360, 260);
-		runnameLabel.setFont(font1);
+		runnameJLabel.setSize(60, 60);
+		runnameJLabel.setLocation(360, 260);
+		runnameJLabel.setFont(font1);
 
-		runkcalLabel.setSize(70, 60);
-		runkcalLabel.setLocation(685, 260);
-		runkcalLabel.setFont(font1);
+		runkcalJLabel.setSize(70, 60);
+		runkcalJLabel.setLocation(686, 260);
+		runkcalJLabel.setFont(font1);
 
 		// 계단오르기 라벨
-		climbingstairsnameLabel.setSize(100, 60);
-		climbingstairsnameLabel.setLocation(360, 300);
-		climbingstairsnameLabel.setFont(font1);
+		climbingstairsnameJLabel.setSize(100, 60);
+		climbingstairsnameJLabel.setLocation(360, 300);
+		climbingstairsnameJLabel.setFont(font1);
 
-		climbingstairskcalLabel.setSize(70, 60);
-		climbingstairskcalLabel.setLocation(685, 300);
-		climbingstairskcalLabel.setFont(font1);
+		climbingstairskcalJLabel.setSize(70, 60);
+		climbingstairskcalJLabel.setLocation(686, 300);
+		climbingstairskcalJLabel.setFont(font1);
 
 		// 자전거타기 라벨
-		bicyclenameLabel.setSize(100, 60);
-		bicyclenameLabel.setLocation(360, 340);
-		bicyclenameLabel.setFont(font1);
+		bicyclenameJLabel.setSize(100, 60);
+		bicyclenameJLabel.setLocation(360, 340);
+		bicyclenameJLabel.setFont(font1);
 
-		bicyclekcalLabel.setSize(70, 60);
-		bicyclekcalLabel.setLocation(685, 340);
-		bicyclekcalLabel.setFont(font1);
+		bicyclekcalJLabel.setSize(70, 60);
+		bicyclekcalJLabel.setLocation(686, 340);
+		bicyclekcalJLabel.setFont(font1);
 
 		// 줄넘기 라벨
 
-		JumpRopenameLabel.setSize(100, 60);
-		JumpRopenameLabel.setLocation(360, 380);
-		JumpRopenameLabel.setFont(font1);
+		JumpRopenameJLabel.setSize(100, 60);
+		JumpRopenameJLabel.setLocation(360, 380);
+		JumpRopenameJLabel.setFont(font1);
 
-		JumpRopekcalLabel.setSize(70, 60);
-		JumpRopekcalLabel.setLocation(685, 380);
-		JumpRopekcalLabel.setFont(font1);
+		JumpRopekcalJLabel.setSize(70, 60);
+		JumpRopekcalJLabel.setLocation(686, 380);
+		JumpRopekcalJLabel.setFont(font1);
 
 		// 등산 라벨
 
-		climbingnameLabel.setSize(100, 60);
-		climbingnameLabel.setLocation(360, 420);
-		climbingnameLabel.setFont(font1);
+		climbingnameJLabel.setSize(100, 60);
+		climbingnameJLabel.setLocation(360, 420);
+		climbingnameJLabel.setFont(font1);
 
-		climbingkcalLabel.setSize(70, 60);
-		climbingkcalLabel.setLocation(685, 420);
-		climbingkcalLabel.setFont(font1);
+		climbingkcalJLabel.setSize(70, 60);
+		climbingkcalJLabel.setLocation(686, 420);
+		climbingkcalJLabel.setFont(font1);
 
 		// 수영 라벨
 
-		swimmingnameLabel.setSize(100, 60);
-		swimmingnameLabel.setLocation(360, 460);
-		swimmingnameLabel.setFont(font1);
+		swimmingnameJLabel.setSize(100, 60);
+		swimmingnameJLabel.setLocation(360, 460);
+		swimmingnameJLabel.setFont(font1);
 
-		swimmingkcalLabel.setSize(70, 60);
-		swimmingkcalLabel.setLocation(685, 460);
-		swimmingkcalLabel.setFont(font1);
+		swimmingkcalJLabel.setSize(70, 60);
+		swimmingkcalJLabel.setLocation(686, 460);
+		swimmingkcalJLabel.setFont(font1);
 
 		// 에어로빅 라벨
 
-		aerobicnameLabel.setSize(100, 60);
-		aerobicnameLabel.setLocation(360, 500);
-		aerobicnameLabel.setFont(font1);
+		aerobicnameJLabel.setSize(100, 60);
+		aerobicnameJLabel.setLocation(360, 500);
+		aerobicnameJLabel.setFont(font1);
 
-		aerobickcalLabel.setSize(70, 60);
-		aerobickcalLabel.setLocation(685, 500);
-		aerobickcalLabel.setFont(font1);
+		aerobickcalJLabel.setSize(70, 60);
+		aerobickcalJLabel.setLocation(686, 500);
+		aerobickcalJLabel.setFont(font1);
 
 		// 체조 라벨
 
-		gymnasticsnameLabel.setSize(100, 60);
-		gymnasticsnameLabel.setLocation(360, 540);
-		gymnasticsnameLabel.setFont(font1);
+		gymnasticsnameJLabel.setSize(100, 60);
+		gymnasticsnameJLabel.setLocation(360, 540);
+		gymnasticsnameJLabel.setFont(font1);
 
-		gymnasticskcalLabel.setSize(70, 60);
-		gymnasticskcalLabel.setLocation(685, 540);
-		gymnasticskcalLabel.setFont(font1);
+		gymnasticskcalJLabel.setSize(70, 60);
+		gymnasticskcalJLabel.setLocation(686, 540);
+		gymnasticskcalJLabel.setFont(font1);
 
 		// 테니스 라벨
 
-		tennisnameLabel.setSize(100, 60);
-		tennisnameLabel.setLocation(360, 580);
-		tennisnameLabel.setFont(font1);
+		tennisnameJLabel.setSize(100, 60);
+		tennisnameJLabel.setLocation(360, 580);
+		tennisnameJLabel.setFont(font1);
 
-		tenniskcalLabel.setSize(70, 60);
-		tenniskcalLabel.setLocation(685, 580);
-		tenniskcalLabel.setFont(font1);
+		tenniskcalJLabel.setSize(70, 60);
+		tenniskcalJLabel.setLocation(686, 580);
+		tenniskcalJLabel.setFont(font1);
 
 		// 스키 라벨
 
-		skinameLabel.setSize(100, 55);
-		skinameLabel.setLocation(360, 620);
-		skinameLabel.setFont(font1);
+		skinameJLabel.setSize(100, 55);
+		skinameJLabel.setLocation(360, 620);
+		skinameJLabel.setFont(font1);
 
-		skikcalLabel.setSize(70, 60);
-		skikcalLabel.setLocation(685, 620);
-		skikcalLabel.setFont(font1);
+		skikcalJLabel.setSize(70, 60);
+		skikcalJLabel.setLocation(686, 620);
+		skikcalJLabel.setFont(font1);
 
 		// 버튼
 		// 몸무게 입력 버튼
-		Button todayexercisebutton = new Button("입력");
+		JButton todayexerciseJButton = new JButton("입력");
 
-		todayexercisebutton.setSize(50, 30);
-		todayexercisebutton.setLocation(300, 159);
-		todayexercisebutton.setFont(font1);
+		todayexerciseJButton.setSize(59, 30);
+		todayexerciseJButton.setLocation(299, 159);
+		todayexerciseJButton.setFont(font0);
 
 		// 삭제 버튼
-		Button exercisedirectbutton = new Button("리셋");
+		JButton exercisedirectJButton = new JButton("리셋");
 
-		exercisedirectbutton.setSize(50, 30);
-		exercisedirectbutton.setLocation(240, 670);
-		exercisedirectbutton.setFont(font1);
+		exercisedirectJButton.setSize(70, 30);
+		exercisedirectJButton.setLocation(210, 670);
+		exercisedirectJButton.setFont(font1);
 
-		exercisedirectbutton.addActionListener(new ActionListener() {
+		exercisedirectJButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				exercisetext.setText(""); // TextArea 내용을 비웁니다.
 			}
 		});
 
-		f.add(exercisedirectbutton);
+		f.add(exercisedirectJButton);
 
 		// 완료 버튼
-		Button exercisesccbutton = new Button("완료");
+		JButton exercisesccJButton = new JButton("완료");
 		
 		
 
-		exercisesccbutton.setSize(50, 30);
-		exercisesccbutton.setLocation(300, 670);
-		exercisesccbutton.setFont(font1);
-		exercisesccbutton.addActionListener(new ActionListener() {
+		exercisesccJButton.setSize(70, 30);
+		exercisesccJButton.setLocation(280, 670);
+		exercisesccJButton.setFont(font1);
+		exercisesccJButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				 f.dispose();
@@ -287,9 +291,9 @@ public class Mainpopupexercise {
 
 
 		// 걷기 버튼
-		Button walkingbutton1 = new Button("15분");
+		JButton walkingJButton1 = new JButton("15분");
 
-		walkingbutton1.addActionListener(new ActionListener() {
+		walkingJButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -302,7 +306,7 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(walkingbutton1);
+		f.add(walkingJButton1);
 
 		f.add(exercisetext);
 
@@ -312,9 +316,9 @@ public class Mainpopupexercise {
 			}
 		});
 
-		Button walkingbutton2 = new Button("30분");
+		JButton walkingJButton2 = new JButton("30분");
 
-		walkingbutton2.addActionListener(new ActionListener() {
+		walkingJButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -327,7 +331,7 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(walkingbutton2);
+		f.add(walkingJButton2);
 
 		f.add(exercisetext);
 
@@ -337,9 +341,9 @@ public class Mainpopupexercise {
 			}
 		});
 
-		Button walkingbutton3 = new Button("45분");
+		JButton walkingJButton3 = new JButton("45분");
 
-		walkingbutton3.addActionListener(new ActionListener() {
+		walkingJButton3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -352,19 +356,20 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(walkingbutton3);
+		f.add(walkingJButton3);
 
 		f.add(exercisetext);
 
 		f.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent we) {
-				System.exit(0);
+//				System.exit(0);
+				f.dispose();
 			}
 		});
 
-		Button walkingbutton4 = new Button("60분");
+		JButton walkingJButton4 = new JButton("60분");
 
-		walkingbutton4.addActionListener(new ActionListener() {
+		walkingJButton4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -377,7 +382,7 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(walkingbutton4);
+		f.add(walkingJButton4);
 
 		f.add(exercisetext);
 
@@ -388,26 +393,26 @@ public class Mainpopupexercise {
 		});
 
 		// 걷기 시간 버튼 위치
-		walkingbutton1.setSize(50, 30);
-		walkingbutton1.setLocation(460, 195);
-		walkingbutton1.setFont(font1);
+		walkingJButton1.setSize(59, 30);
+		walkingJButton1.setLocation(453, 195);
+		walkingJButton1.setFont(font0);
 
-		walkingbutton2.setSize(50, 30);
-		walkingbutton2.setLocation(515, 195);
-		walkingbutton2.setFont(font1);
+		walkingJButton2.setSize(59, 30);
+		walkingJButton2.setLocation(511, 195);
+		walkingJButton2.setFont(font0);
 
-		walkingbutton3.setSize(50, 30);
-		walkingbutton3.setLocation(570, 195);
-		walkingbutton3.setFont(font1);
+		walkingJButton3.setSize(59, 30);
+		walkingJButton3.setLocation(569, 195);
+		walkingJButton3.setFont(font0);
 
-		walkingbutton4.setSize(50, 30);
-		walkingbutton4.setLocation(625, 195);
-		walkingbutton4.setFont(font1);
+		walkingJButton4.setSize(59, 30);
+		walkingJButton4.setLocation(627, 195);
+		walkingJButton4.setFont(font0);
 
 		// 빨리 걷기 버튼
-		Button briskwalkingbutton1 = new Button("15분");
+		JButton briskwalkingJButton1 = new JButton("15분");
 
-		briskwalkingbutton1.addActionListener(new ActionListener() {
+		briskwalkingJButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -420,7 +425,7 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(briskwalkingbutton1);
+		f.add(briskwalkingJButton1);
 
 		f.add(exercisetext);
 
@@ -430,9 +435,9 @@ public class Mainpopupexercise {
 			}
 		});
 
-		Button briskwalkingbutton2 = new Button("30분");
+		JButton briskwalkingJButton2 = new JButton("30분");
 
-		briskwalkingbutton2.addActionListener(new ActionListener() {
+		briskwalkingJButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -445,7 +450,7 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(briskwalkingbutton2);
+		f.add(briskwalkingJButton2);
 
 		f.add(exercisetext);
 
@@ -455,9 +460,9 @@ public class Mainpopupexercise {
 			}
 		});
 
-		Button briskwalkingbutton3 = new Button("45분");
+		JButton briskwalkingJButton3 = new JButton("45분");
 
-		briskwalkingbutton3.addActionListener(new ActionListener() {
+		briskwalkingJButton3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -470,7 +475,7 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(briskwalkingbutton3);
+		f.add(briskwalkingJButton3);
 
 		f.add(exercisetext);
 
@@ -480,9 +485,9 @@ public class Mainpopupexercise {
 			}
 		});
 
-		Button briskwalkingbutton4 = new Button("60분");
+		JButton briskwalkingJButton4 = new JButton("60분");
 
-		briskwalkingbutton4.addActionListener(new ActionListener() {
+		briskwalkingJButton4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -495,7 +500,7 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(briskwalkingbutton4);
+		f.add(briskwalkingJButton4);
 
 		f.add(exercisetext);
 
@@ -506,25 +511,25 @@ public class Mainpopupexercise {
 		});
 
 		// 빨리 걷기 버튼 위치
-		briskwalkingbutton1.setSize(50, 30);
-		briskwalkingbutton1.setLocation(460, 235);
-		briskwalkingbutton1.setFont(font1);
+		briskwalkingJButton1.setSize(59, 30);
+		briskwalkingJButton1.setLocation(453, 235);
+		briskwalkingJButton1.setFont(font0);
 
-		briskwalkingbutton2.setSize(50, 30);
-		briskwalkingbutton2.setLocation(515, 235);
-		briskwalkingbutton2.setFont(font1);
+		briskwalkingJButton2.setSize(59, 30);
+		briskwalkingJButton2.setLocation(511, 235);
+		briskwalkingJButton2.setFont(font0);
 
-		briskwalkingbutton3.setSize(50, 30);
-		briskwalkingbutton3.setLocation(570, 235);
-		briskwalkingbutton3.setFont(font1);
+		briskwalkingJButton3.setSize(59, 30);
+		briskwalkingJButton3.setLocation(569, 235);
+		briskwalkingJButton3.setFont(font0);
 
-		briskwalkingbutton4.setSize(50, 30);
-		briskwalkingbutton4.setLocation(625, 235);
-		briskwalkingbutton4.setFont(font1);
+		briskwalkingJButton4.setSize(59, 30);
+		briskwalkingJButton4.setLocation(627, 235);
+		briskwalkingJButton4.setFont(font0);
 
-		Button runbutton1 = new Button("15분");
+		JButton runJButton1 = new JButton("15분");
 
-		runbutton1.addActionListener(new ActionListener() {
+		runJButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -537,7 +542,7 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(runbutton1);
+		f.add(runJButton1);
 
 		f.add(exercisetext);
 
@@ -547,9 +552,9 @@ public class Mainpopupexercise {
 			}
 		});
 
-		Button runbutton2 = new Button("30분");
+		JButton runJButton2 = new JButton("30분");
 
-		runbutton2.addActionListener(new ActionListener() {
+		runJButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -562,7 +567,7 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(runbutton2);
+		f.add(runJButton2);
 
 		f.add(exercisetext);
 
@@ -572,9 +577,9 @@ public class Mainpopupexercise {
 			}
 		});
 
-		Button runbutton3 = new Button("45분");
+		JButton runJButton3 = new JButton("45분");
 
-		runbutton3.addActionListener(new ActionListener() {
+		runJButton3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -587,7 +592,7 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(runbutton3);
+		f.add(runJButton3);
 
 		f.add(exercisetext);
 
@@ -597,9 +602,9 @@ public class Mainpopupexercise {
 			}
 		});
 
-		Button runbutton4 = new Button("60분");
+		JButton runJButton4 = new JButton("60분");
 
-		runbutton4.addActionListener(new ActionListener() {
+		runJButton4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -612,7 +617,7 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(runbutton4);
+		f.add(runJButton4);
 
 		f.add(exercisetext);
 
@@ -625,26 +630,26 @@ public class Mainpopupexercise {
 
 		// 달리기 버튼 위치
 
-		runbutton1.setSize(50, 30);
-		runbutton1.setLocation(460, 275);
-		runbutton1.setFont(font1);
+		runJButton1.setSize(59, 30);
+		runJButton1.setLocation(453, 275);
+		runJButton1.setFont(font0);
 
-		runbutton2.setSize(50, 30);
-		runbutton2.setLocation(515, 275);
-		runbutton2.setFont(font1);
+		runJButton2.setSize(59, 30);
+		runJButton2.setLocation(511, 275);
+		runJButton2.setFont(font0);
 
-		runbutton3.setSize(50, 30);
-		runbutton3.setLocation(570, 275);
-		runbutton3.setFont(font1);
+		runJButton3.setSize(59, 30);
+		runJButton3.setLocation(569, 275);
+		runJButton3.setFont(font0);
 
-		runbutton4.setSize(50, 30);
-		runbutton4.setLocation(625, 275);
-		runbutton4.setFont(font1);
+		runJButton4.setSize(59, 30);
+		runJButton4.setLocation(627, 275);
+		runJButton4.setFont(font0);
 
 		// 계단 오르기 버튼
-		Button climbingstairsbutton1 = new Button("15분");
+		JButton climbingstairsJButton1 = new JButton("15분");
 
-		climbingstairsbutton1.addActionListener(new ActionListener() {
+		climbingstairsJButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -657,7 +662,7 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(climbingstairsbutton1);
+		f.add(climbingstairsJButton1);
 
 		f.add(exercisetext);
 
@@ -667,9 +672,9 @@ public class Mainpopupexercise {
 			}
 		});
 
-		Button climbingstairsbutton2 = new Button("30분");
+		JButton climbingstairsJButton2 = new JButton("30분");
 
-		climbingstairsbutton2.addActionListener(new ActionListener() {
+		climbingstairsJButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -682,7 +687,7 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(climbingstairsbutton2);
+		f.add(climbingstairsJButton2);
 
 		f.add(exercisetext);
 
@@ -692,9 +697,9 @@ public class Mainpopupexercise {
 			}
 		});
 
-		Button climbingstairsbutton3 = new Button("45분");
+		JButton climbingstairsJButton3 = new JButton("45분");
 
-		climbingstairsbutton3.addActionListener(new ActionListener() {
+		climbingstairsJButton3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -707,13 +712,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(climbingstairsbutton3);
+		f.add(climbingstairsJButton3);
 
 		f.add(exercisetext);
 
-		Button climbingstairsbutton4 = new Button("60분");
+		JButton climbingstairsJButton4 = new JButton("60분");
 
-		climbingstairsbutton4.addActionListener(new ActionListener() {
+		climbingstairsJButton4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -726,33 +731,33 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(climbingstairsbutton4);
+		f.add(climbingstairsJButton4);
 
 		f.add(exercisetext);
 
 		// 계단오르기 버튼 위치
 
-		climbingstairsbutton1.setSize(50, 30);
-		climbingstairsbutton1.setLocation(460, 315);
-		climbingstairsbutton1.setFont(font1);
+		climbingstairsJButton1.setSize(59, 30);
+		climbingstairsJButton1.setLocation(453, 315);
+		climbingstairsJButton1.setFont(font0);
 
-		climbingstairsbutton2.setSize(50, 30);
-		climbingstairsbutton2.setLocation(515, 315);
-		climbingstairsbutton2.setFont(font1);
+		climbingstairsJButton2.setSize(59, 30);
+		climbingstairsJButton2.setLocation(511, 315);
+		climbingstairsJButton2.setFont(font0);
 
-		climbingstairsbutton3.setSize(50, 30);
-		climbingstairsbutton3.setLocation(570, 315);
-		climbingstairsbutton3.setFont(font1);
+		climbingstairsJButton3.setSize(59, 30);
+		climbingstairsJButton3.setLocation(569, 315);
+		climbingstairsJButton3.setFont(font0);
 
-		climbingstairsbutton4.setSize(50, 30);
-		climbingstairsbutton4.setLocation(625, 315);
-		climbingstairsbutton4.setFont(font1);
+		climbingstairsJButton4.setSize(59, 30);
+		climbingstairsJButton4.setLocation(627, 315);
+		climbingstairsJButton4.setFont(font0);
 
 		// 자전거타기 버튼
 
-		Button bicyclebutton1 = new Button("15분");
+		JButton bicycleJButton1 = new JButton("15분");
 
-		bicyclebutton1.addActionListener(new ActionListener() {
+		bicycleJButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -765,13 +770,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(bicyclebutton1);
+		f.add(bicycleJButton1);
 
 		f.add(exercisetext);
 
-		Button bicyclebutton2 = new Button("30분");
+		JButton bicycleJButton2 = new JButton("30분");
 
-		bicyclebutton2.addActionListener(new ActionListener() {
+		bicycleJButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -784,13 +789,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(bicyclebutton2);
+		f.add(bicycleJButton2);
 
 		f.add(exercisetext);
 
-		Button bicyclebutton3 = new Button("45분");
+		JButton bicycleJButton3 = new JButton("45분");
 
-		bicyclebutton3.addActionListener(new ActionListener() {
+		bicycleJButton3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -803,13 +808,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(bicyclebutton3);
+		f.add(bicycleJButton3);
 
 		f.add(exercisetext);
 
-		Button bicyclebutton4 = new Button("60분");
+		JButton bicycleJButton4 = new JButton("60분");
 
-		bicyclebutton4.addActionListener(new ActionListener() {
+		bicycleJButton4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -822,33 +827,33 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(bicyclebutton4);
+		f.add(bicycleJButton4);
 
 		f.add(exercisetext);
 
 		// 자전거타기 버튼 위치
 
-		bicyclebutton1.setSize(50, 30);
-		bicyclebutton1.setLocation(460, 355);
-		bicyclebutton1.setFont(font1);
+		bicycleJButton1.setSize(59, 30);
+		bicycleJButton1.setLocation(453, 355);
+		bicycleJButton1.setFont(font0);
 
-		bicyclebutton2.setSize(50, 30);
-		bicyclebutton2.setLocation(515, 355);
-		bicyclebutton2.setFont(font1);
+		bicycleJButton2.setSize(59, 30);
+		bicycleJButton2.setLocation(511, 355);
+		bicycleJButton2.setFont(font0);
 
-		bicyclebutton3.setSize(50, 30);
-		bicyclebutton3.setLocation(570, 355);
-		bicyclebutton3.setFont(font1);
+		bicycleJButton3.setSize(59, 30);
+		bicycleJButton3.setLocation(569, 355);
+		bicycleJButton3.setFont(font0);
 
-		bicyclebutton4.setSize(50, 30);
-		bicyclebutton4.setLocation(625, 355);
-		bicyclebutton4.setFont(font1);
+		bicycleJButton4.setSize(59, 30);
+		bicycleJButton4.setLocation(627, 355);
+		bicycleJButton4.setFont(font0);
 
 		// 줄넘기 버튼
 
-		Button JumpRopebutton1 = new Button("15분");
+		JButton JumpRopeJButton1 = new JButton("15분");
 
-		JumpRopebutton1.addActionListener(new ActionListener() {
+		JumpRopeJButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -861,13 +866,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(JumpRopebutton1);
+		f.add(JumpRopeJButton1);
 
 		f.add(exercisetext);
 
-		Button JumpRopebutton2 = new Button("30분");
+		JButton JumpRopeJButton2 = new JButton("30분");
 
-		JumpRopebutton2.addActionListener(new ActionListener() {
+		JumpRopeJButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -880,13 +885,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(JumpRopebutton2);
+		f.add(JumpRopeJButton2);
 
 		f.add(exercisetext);
 
-		Button JumpRopebutton3 = new Button("45분");
+		JButton JumpRopeJButton3 = new JButton("45분");
 
-		JumpRopebutton3.addActionListener(new ActionListener() {
+		JumpRopeJButton3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -899,13 +904,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(JumpRopebutton3);
+		f.add(JumpRopeJButton3);
 
 		f.add(exercisetext);
 
-		Button JumpRopebutton4 = new Button("60분");
+		JButton JumpRopeJButton4 = new JButton("60분");
 
-		JumpRopebutton4.addActionListener(new ActionListener() {
+		JumpRopeJButton4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -918,33 +923,33 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(JumpRopebutton4);
+		f.add(JumpRopeJButton4);
 
 		f.add(exercisetext);
 
 		// 줄넘기 버튼 위치
 
-		JumpRopebutton1.setSize(50, 30);
-		JumpRopebutton1.setLocation(460, 395);
-		JumpRopebutton1.setFont(font1);
+		JumpRopeJButton1.setSize(59, 30);
+		JumpRopeJButton1.setLocation(453, 395);
+		JumpRopeJButton1.setFont(font0);
 
-		JumpRopebutton2.setSize(50, 30);
-		JumpRopebutton2.setLocation(515, 395);
-		JumpRopebutton2.setFont(font1);
+		JumpRopeJButton2.setSize(59, 30);
+		JumpRopeJButton2.setLocation(511, 395);
+		JumpRopeJButton2.setFont(font0);
 
-		JumpRopebutton3.setSize(50, 30);
-		JumpRopebutton3.setLocation(570, 395);
-		JumpRopebutton3.setFont(font1);
+		JumpRopeJButton3.setSize(59, 30);
+		JumpRopeJButton3.setLocation(569, 395);
+		JumpRopeJButton3.setFont(font0);
 
-		JumpRopebutton4.setSize(50, 30);
-		JumpRopebutton4.setLocation(625, 395);
-		JumpRopebutton4.setFont(font1);
+		JumpRopeJButton4.setSize(59, 30);
+		JumpRopeJButton4.setLocation(627, 395);
+		JumpRopeJButton4.setFont(font0);
 
 		// 등산 버튼
 
-		Button climbingbutton1 = new Button("15분");
+		JButton climbingJButton1 = new JButton("15분");
 
-		climbingbutton1.addActionListener(new ActionListener() {
+		climbingJButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -957,13 +962,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(climbingbutton1);
+		f.add(climbingJButton1);
 
 		f.add(exercisetext);
 
-		Button climbingbutton2 = new Button("30분");
+		JButton climbingJButton2 = new JButton("30분");
 
-		climbingbutton2.addActionListener(new ActionListener() {
+		climbingJButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -976,13 +981,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(climbingbutton2);
+		f.add(climbingJButton2);
 
 		f.add(exercisetext);
 
-		Button climbingbutton3 = new Button("45분");
+		JButton climbingJButton3 = new JButton("45분");
 
-		climbingbutton3.addActionListener(new ActionListener() {
+		climbingJButton3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -995,13 +1000,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(climbingbutton3);
+		f.add(climbingJButton3);
 
 		f.add(exercisetext);
 
-		Button climbingbutton4 = new Button("60분");
+		JButton climbingJButton4 = new JButton("60분");
 
-		climbingbutton4.addActionListener(new ActionListener() {
+		climbingJButton4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -1014,33 +1019,33 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(climbingbutton4);
+		f.add(climbingJButton4);
 
 		f.add(exercisetext);
 
 		// 등산 버튼 위치
 
-		climbingbutton1.setSize(50, 30);
-		climbingbutton1.setLocation(460, 435);
-		climbingbutton1.setFont(font1);
+		climbingJButton1.setSize(59, 30);
+		climbingJButton1.setLocation(453, 435);
+		climbingJButton1.setFont(font0);
 
-		climbingbutton2.setSize(50, 30);
-		climbingbutton2.setLocation(515, 435);
-		climbingbutton2.setFont(font1);
+		climbingJButton2.setSize(59, 30);
+		climbingJButton2.setLocation(511, 435);
+		climbingJButton2.setFont(font0);
 
-		climbingbutton3.setSize(50, 30);
-		climbingbutton3.setLocation(570, 435);
-		climbingbutton3.setFont(font1);
+		climbingJButton3.setSize(59, 30);
+		climbingJButton3.setLocation(569, 435);
+		climbingJButton3.setFont(font0);
 
-		climbingbutton4.setSize(50, 30);
-		climbingbutton4.setLocation(625, 435);
-		climbingbutton4.setFont(font1);
+		climbingJButton4.setSize(59, 30);
+		climbingJButton4.setLocation(627, 435);
+		climbingJButton4.setFont(font0);
 
 		// 수영 버튼
 
-		Button swimmingbutton1 = new Button("15분");
+		JButton swimmingJButton1 = new JButton("15분");
 
-		swimmingbutton1.addActionListener(new ActionListener() {
+		swimmingJButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -1053,13 +1058,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(swimmingbutton1);
+		f.add(swimmingJButton1);
 
 		f.add(exercisetext);
 
-		Button swimmingbutton2 = new Button("30분");
+		JButton swimmingJButton2 = new JButton("30분");
 
-		swimmingbutton2.addActionListener(new ActionListener() {
+		swimmingJButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -1072,13 +1077,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(swimmingbutton2);
+		f.add(swimmingJButton2);
 
 		f.add(exercisetext);
 
-		Button swimmingbutton3 = new Button("45분");
+		JButton swimmingJButton3 = new JButton("45분");
 
-		swimmingbutton3.addActionListener(new ActionListener() {
+		swimmingJButton3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -1091,13 +1096,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(swimmingbutton3);
+		f.add(swimmingJButton3);
 
 		f.add(exercisetext);
 
-		Button swimmingbutton4 = new Button("60분");
+		JButton swimmingJButton4 = new JButton("60분");
 
-		swimmingbutton4.addActionListener(new ActionListener() {
+		swimmingJButton4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -1110,33 +1115,33 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(swimmingbutton4);
+		f.add(swimmingJButton4);
 
 		f.add(exercisetext);
 
 		// 수영 버튼 위치
 
-		swimmingbutton1.setSize(50, 30);
-		swimmingbutton1.setLocation(460, 475);
-		swimmingbutton1.setFont(font1);
+		swimmingJButton1.setSize(59, 30);
+		swimmingJButton1.setLocation(453, 475);
+		swimmingJButton1.setFont(font0);
 
-		swimmingbutton2.setSize(50, 30);
-		swimmingbutton2.setLocation(515, 475);
-		swimmingbutton2.setFont(font1);
+		swimmingJButton2.setSize(59, 30);
+		swimmingJButton2.setLocation(511, 475);
+		swimmingJButton2.setFont(font0);
 
-		swimmingbutton3.setSize(50, 30);
-		swimmingbutton3.setLocation(570, 475);
-		swimmingbutton3.setFont(font1);
+		swimmingJButton3.setSize(59, 30);
+		swimmingJButton3.setLocation(569, 475);
+		swimmingJButton3.setFont(font0);
 
-		swimmingbutton4.setSize(50, 30);
-		swimmingbutton4.setLocation(625, 475);
-		swimmingbutton4.setFont(font1);
+		swimmingJButton4.setSize(59, 30);
+		swimmingJButton4.setLocation(627, 475);
+		swimmingJButton4.setFont(font0);
 
 		// 에어로빅 버튼
 
-		Button aerobicbutton1 = new Button("15분");
+		JButton aerobicJButton1 = new JButton("15분");
 
-		aerobicbutton1.addActionListener(new ActionListener() {
+		aerobicJButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -1149,13 +1154,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(aerobicbutton1);
+		f.add(aerobicJButton1);
 
 		f.add(exercisetext);
 
-		Button aerobicbutton2 = new Button("30분");
+		JButton aerobicJButton2 = new JButton("30분");
 
-		aerobicbutton2.addActionListener(new ActionListener() {
+		aerobicJButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -1168,13 +1173,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(aerobicbutton2);
+		f.add(aerobicJButton2);
 
 		f.add(exercisetext);
 
-		Button aerobicbutton3 = new Button("45분");
+		JButton aerobicJButton3 = new JButton("45분");
 
-		aerobicbutton3.addActionListener(new ActionListener() {
+		aerobicJButton3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -1187,13 +1192,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(aerobicbutton3);
+		f.add(aerobicJButton3);
 
 		f.add(exercisetext);
 
-		Button aerobicbutton4 = new Button("60분");
+		JButton aerobicJButton4 = new JButton("60분");
 
-		aerobicbutton4.addActionListener(new ActionListener() {
+		aerobicJButton4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -1206,33 +1211,33 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(aerobicbutton4);
+		f.add(aerobicJButton4);
 
 		f.add(exercisetext);
 
 		// 에어로빅 버튼 위치
 
-		aerobicbutton1.setSize(50, 30);
-		aerobicbutton1.setLocation(460, 515);
-		aerobicbutton1.setFont(font1);
+		aerobicJButton1.setSize(59, 30);
+		aerobicJButton1.setLocation(453, 515);
+		aerobicJButton1.setFont(font0);
 
-		aerobicbutton2.setSize(50, 30);
-		aerobicbutton2.setLocation(515, 515);
-		aerobicbutton2.setFont(font1);
+		aerobicJButton2.setSize(59, 30);
+		aerobicJButton2.setLocation(511, 515);
+		aerobicJButton2.setFont(font0);
 
-		aerobicbutton3.setSize(50, 30);
-		aerobicbutton3.setLocation(570, 515);
-		aerobicbutton3.setFont(font1);
+		aerobicJButton3.setSize(59, 30);
+		aerobicJButton3.setLocation(569, 515);
+		aerobicJButton3.setFont(font0);
 
-		aerobicbutton4.setSize(50, 30);
-		aerobicbutton4.setLocation(625, 515);
-		aerobicbutton4.setFont(font1);
+		aerobicJButton4.setSize(59, 30);
+		aerobicJButton4.setLocation(627, 515);
+		aerobicJButton4.setFont(font0);
 
 		// 체조 버튼
 
-		Button gymnasticsbutton1 = new Button("15분");
+		JButton gymnasticsJButton1 = new JButton("15분");
 
-		gymnasticsbutton1.addActionListener(new ActionListener() {
+		gymnasticsJButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -1245,13 +1250,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(gymnasticsbutton1);
+		f.add(gymnasticsJButton1);
 
 		f.add(exercisetext);
 
-		Button gymnasticsbutton2 = new Button("30분");
+		JButton gymnasticsJButton2 = new JButton("30분");
 
-		gymnasticsbutton2.addActionListener(new ActionListener() {
+		gymnasticsJButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -1264,13 +1269,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(gymnasticsbutton2);
+		f.add(gymnasticsJButton2);
 
 		f.add(exercisetext);
 
-		Button gymnasticsbutton3 = new Button("45분");
+		JButton gymnasticsJButton3 = new JButton("45분");
 
-		gymnasticsbutton3.addActionListener(new ActionListener() {
+		gymnasticsJButton3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -1283,13 +1288,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(gymnasticsbutton3);
+		f.add(gymnasticsJButton3);
 
 		f.add(exercisetext);
 
-		Button gymnasticsbutton4 = new Button("60분");
+		JButton gymnasticsJButton4 = new JButton("60분");
 
-		gymnasticsbutton4.addActionListener(new ActionListener() {
+		gymnasticsJButton4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -1302,33 +1307,33 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(gymnasticsbutton4);
+		f.add(gymnasticsJButton4);
 
 		f.add(exercisetext);
 
 		// 체조 버튼 위치
 
-		gymnasticsbutton1.setSize(50, 30);
-		gymnasticsbutton1.setLocation(460, 555);
-		gymnasticsbutton1.setFont(font1);
+		gymnasticsJButton1.setSize(59, 30);
+		gymnasticsJButton1.setLocation(453, 555);
+		gymnasticsJButton1.setFont(font0);
 
-		gymnasticsbutton2.setSize(50, 30);
-		gymnasticsbutton2.setLocation(515, 555);
-		gymnasticsbutton2.setFont(font1);
+		gymnasticsJButton2.setSize(59, 30);
+		gymnasticsJButton2.setLocation(511, 555);
+		gymnasticsJButton2.setFont(font0);
 
-		gymnasticsbutton3.setSize(50, 30);
-		gymnasticsbutton3.setLocation(570, 555);
-		gymnasticsbutton3.setFont(font1);
+		gymnasticsJButton3.setSize(59, 30);
+		gymnasticsJButton3.setLocation(569, 555);
+		gymnasticsJButton3.setFont(font0);
 
-		gymnasticsbutton4.setSize(50, 30);
-		gymnasticsbutton4.setLocation(625, 555);
-		gymnasticsbutton4.setFont(font1);
+		gymnasticsJButton4.setSize(59, 30);
+		gymnasticsJButton4.setLocation(627, 555);
+		gymnasticsJButton4.setFont(font0);
 
 		// 테니스 버튼
 
-		Button tennisbutton1 = new Button("15분");
+		JButton tennisJButton1 = new JButton("15분");
 
-		tennisbutton1.addActionListener(new ActionListener() {
+		tennisJButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -1341,13 +1346,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(tennisbutton1);
+		f.add(tennisJButton1);
 
 		f.add(exercisetext);
 
-		Button tennisbutton2 = new Button("30분");
+		JButton tennisJButton2 = new JButton("30분");
 
-		tennisbutton2.addActionListener(new ActionListener() {
+		tennisJButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -1360,13 +1365,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(tennisbutton2);
+		f.add(tennisJButton2);
 
 		f.add(exercisetext);
 
-		Button tennisbutton3 = new Button("45분");
+		JButton tennisJButton3 = new JButton("45분");
 
-		tennisbutton3.addActionListener(new ActionListener() {
+		tennisJButton3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -1379,13 +1384,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(tennisbutton3);
+		f.add(tennisJButton3);
 
 		f.add(exercisetext);
 
-		Button tennisbutton4 = new Button("60분");
+		JButton tennisJButton4 = new JButton("60분");
 
-		tennisbutton4.addActionListener(new ActionListener() {
+		tennisJButton4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -1398,33 +1403,33 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(tennisbutton4);
+		f.add(tennisJButton4);
 
 		f.add(exercisetext);
 
 		// 테니스 버튼 위치
 
-		tennisbutton1.setSize(50, 30);
-		tennisbutton1.setLocation(460, 595);
-		tennisbutton1.setFont(font1);
+		tennisJButton1.setSize(59, 30);
+		tennisJButton1.setLocation(453, 595);
+		tennisJButton1.setFont(font0);
 
-		tennisbutton2.setSize(50, 30);
-		tennisbutton2.setLocation(515, 595);
-		tennisbutton2.setFont(font1);
+		tennisJButton2.setSize(59, 30);
+		tennisJButton2.setLocation(511, 595);
+		tennisJButton2.setFont(font0);
 
-		tennisbutton3.setSize(50, 30);
-		tennisbutton3.setLocation(570, 595);
-		tennisbutton3.setFont(font1);
+		tennisJButton3.setSize(59, 30);
+		tennisJButton3.setLocation(569, 595);
+		tennisJButton3.setFont(font0);
 
-		tennisbutton4.setSize(50, 30);
-		tennisbutton4.setLocation(625, 595);
-		tennisbutton4.setFont(font1);
+		tennisJButton4.setSize(59, 30);
+		tennisJButton4.setLocation(627, 595);
+		tennisJButton4.setFont(font0);
 
 		// 스키 버튼
 
-		Button skibutton1 = new Button("15분");
+		JButton skiJButton1 = new JButton("15분");
 
-		skibutton1.addActionListener(new ActionListener() {
+		skiJButton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -1437,13 +1442,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(skibutton1);
+		f.add(skiJButton1);
 
 		f.add(exercisetext);
 
-		Button skibutton2 = new Button("30분");
+		JButton skiJButton2 = new JButton("30분");
 
-		skibutton2.addActionListener(new ActionListener() {
+		skiJButton2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -1456,13 +1461,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(skibutton2);
+		f.add(skiJButton2);
 
 		f.add(exercisetext);
 
-		Button skibutton3 = new Button("45분");
+		JButton skiJButton3 = new JButton("45분");
 
-		skibutton3.addActionListener(new ActionListener() {
+		skiJButton3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -1475,13 +1480,13 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(skibutton3);
+		f.add(skiJButton3);
 
 		f.add(exercisetext);
 
-		Button skibutton4 = new Button("60분");
+		JButton skiJButton4 = new JButton("60분");
 
-		skibutton4.addActionListener(new ActionListener() {
+		skiJButton4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					double weight = Double.parseDouble(myweighttext.getText());
@@ -1494,30 +1499,30 @@ public class Mainpopupexercise {
 				}
 			}
 		});
-		f.add(skibutton4);
+		f.add(skiJButton4);
 
 		f.add(exercisetext);
 
 		// 스키 버튼 위치
 
-		skibutton1.setSize(50, 30);
-		skibutton1.setLocation(460, 635);
-		skibutton1.setFont(font1);
+		skiJButton1.setSize(59, 30);
+		skiJButton1.setLocation(453, 635);
+		skiJButton1.setFont(font0);
 
-		skibutton2.setSize(50, 30);
-		skibutton2.setLocation(515, 635);
-		skibutton2.setFont(font1);
+		skiJButton2.setSize(59, 30);
+		skiJButton2.setLocation(511, 635);
+		skiJButton2.setFont(font0);
 
-		skibutton3.setSize(50, 30);
-		skibutton3.setLocation(570, 635);
-		skibutton3.setFont(font1);
+		skiJButton3.setSize(59, 30);
+		skiJButton3.setLocation(569, 635);
+		skiJButton3.setFont(font0);
 
-		skibutton4.setSize(50, 30);
-		skibutton4.setLocation(625, 635);
-		skibutton4.setFont(font1);
+		skiJButton4.setSize(59, 30);
+		skiJButton4.setLocation(627, 635);
+		skiJButton4.setFont(font0);
 
 		// 버튼을 입력하면 다른 클래스에 입력됨(진행중)
-		todayexercisebutton.addActionListener(new ActionListener() {
+		todayexerciseJButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Mainpopup.updateWeightText(myweighttext.getText()); // Mainpopup 클래스의 메서드 호출
 			}
@@ -1535,92 +1540,92 @@ public class Mainpopupexercise {
 		f.add(myweighttext);
 		f.add(exercisetext);
 
-		f.add(exerciseMainLabel);
-		f.add(myweightLabel);
+		f.add(exerciseMainJLabel);
+		f.add(myweightJLabel);
 		f.add(exercisename);
 		f.add(exercisetime);
 		f.add(exercisekcal);
 		f.add(exercisereference);
 		f.add(exercisereference2);
 
-		f.add(walkingnameLabel);
-		f.add(walkingkcalLabel);
-		f.add(briskwalkingnameLabel);
-		f.add(briskwalkingkcalLabel);
-		f.add(runnameLabel);
-		f.add(runkcalLabel);
-		f.add(climbingstairsnameLabel);
-		f.add(climbingstairskcalLabel);
-		f.add(climbingstairskcalLabel);
-		f.add(bicyclenameLabel);
-		f.add(bicyclekcalLabel);
-		f.add(JumpRopenameLabel);
-		f.add(JumpRopekcalLabel);
-		f.add(climbingnameLabel);
-		f.add(climbingkcalLabel);
-		f.add(swimmingnameLabel);
-		f.add(swimmingkcalLabel);
-		f.add(aerobicnameLabel);
-		f.add(aerobickcalLabel);
-		f.add(gymnasticsnameLabel);
-		f.add(gymnasticskcalLabel);
-		f.add(tennisnameLabel);
-		f.add(tenniskcalLabel);
-		f.add(skinameLabel);
-		f.add(skikcalLabel);
+		f.add(walkingnameJLabel);
+		f.add(walkingkcalJLabel);
+		f.add(briskwalkingnameJLabel);
+		f.add(briskwalkingkcalJLabel);
+		f.add(runnameJLabel);
+		f.add(runkcalJLabel);
+		f.add(climbingstairsnameJLabel);
+		f.add(climbingstairskcalJLabel);
+		f.add(climbingstairskcalJLabel);
+		f.add(bicyclenameJLabel);
+		f.add(bicyclekcalJLabel);
+		f.add(JumpRopenameJLabel);
+		f.add(JumpRopekcalJLabel);
+		f.add(climbingnameJLabel);
+		f.add(climbingkcalJLabel);
+		f.add(swimmingnameJLabel);
+		f.add(swimmingkcalJLabel);
+		f.add(aerobicnameJLabel);
+		f.add(aerobickcalJLabel);
+		f.add(gymnasticsnameJLabel);
+		f.add(gymnasticskcalJLabel);
+		f.add(tennisnameJLabel);
+		f.add(tenniskcalJLabel);
+		f.add(skinameJLabel);
+		f.add(skikcalJLabel);
 
-		f.add(todayexercisebutton);
-		f.add(exercisedirectbutton);
-		f.add(exercisesccbutton);
+		f.add(todayexerciseJButton);
+		f.add(exercisedirectJButton);
+		f.add(exercisesccJButton);
 
-		f.add(walkingbutton1);
-		f.add(walkingbutton2);
-		f.add(walkingbutton3);
-		f.add(walkingbutton4);
-		f.add(briskwalkingbutton1);
-		f.add(briskwalkingbutton2);
-		f.add(briskwalkingbutton3);
-		f.add(briskwalkingbutton4);
-		f.add(climbingstairsbutton1);
-		f.add(climbingstairsbutton2);
-		f.add(climbingstairsbutton3);
-		f.add(climbingstairsbutton4);
-		f.add(runbutton1);
-		f.add(runbutton2);
-		f.add(runbutton3);
-		f.add(runbutton4);
-		f.add(bicyclebutton1);
-		f.add(bicyclebutton2);
-		f.add(bicyclebutton3);
-		f.add(bicyclebutton4);
-		f.add(JumpRopebutton1);
-		f.add(JumpRopebutton2);
-		f.add(JumpRopebutton3);
-		f.add(JumpRopebutton4);
-		f.add(climbingbutton1);
-		f.add(climbingbutton2);
-		f.add(climbingbutton3);
-		f.add(climbingbutton4);
-		f.add(swimmingbutton1);
-		f.add(swimmingbutton2);
-		f.add(swimmingbutton3);
-		f.add(swimmingbutton4);
-		f.add(aerobicbutton1);
-		f.add(aerobicbutton2);
-		f.add(aerobicbutton3);
-		f.add(aerobicbutton4);
-		f.add(gymnasticsbutton1);
-		f.add(gymnasticsbutton2);
-		f.add(gymnasticsbutton3);
-		f.add(gymnasticsbutton4);
-		f.add(tennisbutton1);
-		f.add(tennisbutton2);
-		f.add(tennisbutton3);
-		f.add(tennisbutton4);
-		f.add(skibutton1);
-		f.add(skibutton2);
-		f.add(skibutton3);
-		f.add(skibutton4);
+		f.add(walkingJButton1);
+		f.add(walkingJButton2);
+		f.add(walkingJButton3);
+		f.add(walkingJButton4);
+		f.add(briskwalkingJButton1);
+		f.add(briskwalkingJButton2);
+		f.add(briskwalkingJButton3);
+		f.add(briskwalkingJButton4);
+		f.add(climbingstairsJButton1);
+		f.add(climbingstairsJButton2);
+		f.add(climbingstairsJButton3);
+		f.add(climbingstairsJButton4);
+		f.add(runJButton1);
+		f.add(runJButton2);
+		f.add(runJButton3);
+		f.add(runJButton4);
+		f.add(bicycleJButton1);
+		f.add(bicycleJButton2);
+		f.add(bicycleJButton3);
+		f.add(bicycleJButton4);
+		f.add(JumpRopeJButton1);
+		f.add(JumpRopeJButton2);
+		f.add(JumpRopeJButton3);
+		f.add(JumpRopeJButton4);
+		f.add(climbingJButton1);
+		f.add(climbingJButton2);
+		f.add(climbingJButton3);
+		f.add(climbingJButton4);
+		f.add(swimmingJButton1);
+		f.add(swimmingJButton2);
+		f.add(swimmingJButton3);
+		f.add(swimmingJButton4);
+		f.add(aerobicJButton1);
+		f.add(aerobicJButton2);
+		f.add(aerobicJButton3);
+		f.add(aerobicJButton4);
+		f.add(gymnasticsJButton1);
+		f.add(gymnasticsJButton2);
+		f.add(gymnasticsJButton3);
+		f.add(gymnasticsJButton4);
+		f.add(tennisJButton1);
+		f.add(tennisJButton2);
+		f.add(tennisJButton3);
+		f.add(tennisJButton4);
+		f.add(skiJButton1);
+		f.add(skiJButton2);
+		f.add(skiJButton3);
+		f.add(skiJButton4);
 
 		f.setVisible(true);
 

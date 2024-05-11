@@ -58,12 +58,6 @@ public class HealthCheck extends JFrame {
 		tab1Panel.setLocation(10, 20);
 		tab1Panel.setSize(150, 150);
 
-		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		Point centerPoint = ge.getCenterPoint();
-		int leftTopX = centerPoint.x - f.getWidth() / 2;
-		int leftTopY = centerPoint.y - f.getHeight() / 2;
-		f.setLocation(leftTopX, leftTopY);
-
 		JComboBox<String> ctl20 = new JComboBox<String>();
 		ctl20.setFont(new Font("Serif", Font.BOLD, 30));
 		ctl20.addItem("<주간분석>");
@@ -239,6 +233,7 @@ public class HealthCheck extends JFrame {
 
 		f.add(btnI);
 		f.add(btnS);
+		f.setLocationRelativeTo(null);
 //		f.add(lb1);
 
 		f.setVisible(true);

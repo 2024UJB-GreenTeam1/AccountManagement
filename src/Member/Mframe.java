@@ -52,7 +52,7 @@ public class Mframe {
 		imgTest = imageSetSize(imgTest, 150, 150);
 		btlogo.setIcon(imgTest);
 		// 로고 이미지 크기 및 위치
-		btlogo.setSize(181, 163);
+		btlogo.setSize(151, 151);
 		btlogo.setLocation(10, 10);
 		btlogo.addActionListener(new ActionListener() {
 			// 로그인 창으로 이동하게 해야함
@@ -186,14 +186,15 @@ public class Mframe {
 
 		f.setFont(font);
 		f.addWindowListener(new EventHandler());
+		f.setLocationRelativeTo(null);
 		f.setVisible(true);
 		
-		// 화면중앙배치
-		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		Point centerPoint = ge.getCenterPoint();
-		int leftTopX = centerPoint.x - f.getWidth() / 2;
-		int leftTopY = centerPoint.y - f.getHeight() / 2;
-		f.setLocation(leftTopX, leftTopY);
+//		// 화면중앙배치
+//		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+//		Point centerPoint = ge.getCenterPoint();
+//		int leftTopX = centerPoint.x - f.getWidth() / 2;
+//		int leftTopY = centerPoint.y - f.getHeight() / 2;
+//		f.setLocation(leftTopX, leftTopY);
 	}
 
 	public static void main(String[] args) {

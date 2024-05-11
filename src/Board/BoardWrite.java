@@ -20,6 +20,8 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import login.InfoVo;
+
 public class BoardWrite extends BoardDTO implements WindowListener, ActionListener {
 	private JTextArea maincontent2;
 	private JFrame f;
@@ -177,9 +179,13 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 			
 			try {
 				ConnectionB cb = new ConnectionB(); // 연결
+				String userId1 = InfoVo.getInstance().getId();					//로그인아이디얻기 싱클톤패턴
 				Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
-				String sql = "" + "insert into post(bno,User_id,bcno, btitle,bcontent, bdate,blikes,bviews) "
-						+ "values(+"+b+",default,BCNO.NEXTVAL,?,?,to_char(Sysdate,'YYYY-MM-DD'),?,?) ";
+				String sql = "" + "insert into bcontents(bno,bcno, "
+						+ "bctitle,bcontent, "
+						+ "bcdate,bclikes,"
+						+ "bcviews,User_id) "
+						+ "values(+"+b+",SEQ_BCNO.NEXTVAL,?,?,to_char(Sysdate,'YYYY-MM-DD'),?,?,?) ";/*SEQ_BCNO.NEXTVAL*/
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, maindptitlecontent.getText());
 				// System.out.println(maindptitlecontent.getText());
@@ -187,6 +193,7 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 				// System.out.println(maincontent2.getText());
 				pstmt.setInt(3, 0);
 				pstmt.setInt(4, 0);
+				pstmt.setString(5, userId1);									//USER_ID넣기
 				pstmt.executeUpdate();
 
 				maindptitlecontent.setText("");

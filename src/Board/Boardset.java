@@ -4,6 +4,7 @@ package Board;
 import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,6 +25,9 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import Mains1.Mainscreen;
+import Profile.Pframe;
+
 public class Boardset extends ConnectionB implements ActionListener, WindowListener {
 	private JFrame f;
 	private JButton np, search2, before, after, logo, click;
@@ -33,8 +37,8 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 	private Choice category;
 	private JLabel writingno_1, writingno_2, writingno_3, writingno_4, writingno_5, writingno_6, writingno_7,
 			writingno_8, writingno_9, writingno_10, dateno_1, dateno_2, dateno_3, dateno_4, dateno_5, dateno_6,
-			dateno_7, dateno_8, dateno_9, dateno_10, blikes_1, blikes_2, blikes_3, blikes_4, blikes_5, blikes_6,
-			blikes_7, blikes_8, blikes_9, blikes_10, clickno_1, clickno_2, clickno_3, clickno_4, clickno_5, clickno_6,
+			dateno_7, dateno_8, dateno_9, dateno_10, bclikes_1, bclikes_2, bclikes_3, bclikes_4, bclikes_5, bclikes_6,
+			bclikes_7, bclikes_8, bclikes_9, bclikes_10, clickno_1, clickno_2, clickno_3, clickno_4, clickno_5, clickno_6,
 			clickno_7, clickno_8, clickno_9, clickno_10;
 	private JButton titleno_1, titleno_2, titleno_3, titleno_4, titleno_5, titleno_6, titleno_7, titleno_8, titleno_9,
 			titleno_10;
@@ -47,27 +51,44 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 	private String[] search5;
 	private String[] research4;
 	private String[] research5;
+	// 이미지크기조절셋업
+	ImageIcon imageSetSize(ImageIcon icon, int i, int j) { // image Size Setting
+		Image ximg = icon.getImage(); // ImageIcon을 Image로 변환.
+		Image yimg = ximg.getScaledInstance(i, j, java.awt.Image.SCALE_SMOOTH);
+		ImageIcon xyimg = new ImageIcon(yimg);
+		return xyimg;
+	}
+
 	public Boardset() {
 		f = new JFrame("1o0");
-		logo = new JButton(new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/1o0.jpg"));
+		
+		ImageIcon imgTest = new ImageIcon(getClass().getResource("../img/logo.jpg"));
+		imgTest = imageSetSize(imgTest, 60, 60);
+		logo = new JButton(imgTest);
 		logo.setBorderPainted(false);
 		logo.setFocusPainted(false);
 		logo.setContentAreaFilled(false);
-
+		logo.addActionListener(new ActionListener() {		//로고클릭 메인스크린으로
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Mainscreen mainscreen = new Mainscreen();
+				f.dispose();
+				mainscreen.excute(); 
+			}
+		});
+		
 		Font font = new Font("맑은 고딕", Font.BOLD, 50); // 게시판
 		Font font2 = new Font("맑은 고딕", Font.BOLD, 20); // 작성자 내용 날짜 추천수 조회수 카테고리
 
-		np = new JButton("새글작성");
-		np.addActionListener(this);
-
-		ImageIcon search3 = new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/test/search2.jpg");
+		ImageIcon search3 = new ImageIcon(getClass().getResource("/img/search2.jpg"));
 		search2 = new JButton(search3);// 검색 버튼
 		search2.setBorderPainted(false);
 		search2.setFocusPainted(false);
 		search2.setContentAreaFilled(false);
 		search2.addActionListener(this);
 
-		ImageIcon before1 = new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/test/before.jpg");
+
+		ImageIcon before1 = new ImageIcon(getClass().getResource("../img/before.jpg"));
 		before = new JButton(before1);
 		before.addActionListener(this);
 		before.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
@@ -76,7 +97,8 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		// before.setFocusPainted(false); //초점 잡히냐
 		// before.setContentAreaFilled(false); //테두리
 
-		ImageIcon after1 = new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/test/after.jpg");
+
+		ImageIcon after1 = new ImageIcon(getClass().getResource("../img/after.jpg"));
 		after = new JButton(after1);
 		after.addActionListener(this);
 		after.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
@@ -86,6 +108,9 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 
 		click = new JButton("조회");
 
+		np = new JButton("새글작성");
+		np.addActionListener(this);
+		
 		board = new JLabel("게시판");
 		board.setFont(font);
 		page = new JLabel("페이지");
@@ -135,9 +160,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 	    public void windowClosing(WindowEvent evt) {
 	        int resp = JOptionPane.showConfirmDialog(f, "정말 로그아웃 하시겠습니까?",
 	            "Exit?", JOptionPane.YES_NO_OPTION);
-
 	        if (resp == JOptionPane.YES_OPTION) {
-//	            f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	        	f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	        } else {
 	            f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -146,7 +169,6 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		});
 		
 		f.setLocationRelativeTo(null);
-		np.addActionListener(this);
 
 		board.setSize(200, 100); // x 클수록 오른쪽 y 클수록 아래로
 		board.setLocation(320, 10); // 게시판 라벨
@@ -155,7 +177,8 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		logo.setLocation(10, 10);
 
 		np.setSize(85, 30); // 새글작성
-		np.setLocation(7, 700);
+//		np.setLocation(7, 700);		//★☆★☆★☆★☆원위치임 지우지마(노트북모니터가작아서 버튼안보임)★☆★☆										/////
+		np.setLocation(7, 7);
 
 		writing.setSize(100, 100); // 내용
 		writing.setLocation(300, 115);
@@ -181,10 +204,12 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		main.setLocation(0, 150);
 
 		search.setSize(200, 30); // 검색창
-		search.setLocation(285, 730);
+//		search.setLocation(285, 730);//★☆★☆★☆★☆원위치임 지우지마(노트북모니터가작아서 버튼안보임)★☆★☆
+		search.setLocation(285, 20);
 
 		search2.setSize(50, 30); // 검색버튼
-		search2.setLocation(485, 730);
+//		search2.setLocation(485, 730);//★☆★☆★☆★☆원위치임 지우지마(노트북모니터가작아서 버튼안보임)★☆★☆
+		search2.setLocation(485, 20);
 
 		category.setSize(200, 100); // 카테고리
 		category.setLocation(10, 100);
@@ -193,14 +218,17 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		page.setLocation(350, 685);
 
 		before.setSize(50, 30); // 이전
-		before.setLocation(300, 685);
+//		before.setLocation(300, 685);//★☆★☆★☆★☆원위치임 지우지마(노트북모니터가작아서 버튼안보임)★☆★☆
+		before.setLocation(300, 50);
 
 		after.setSize(50, 30); // 다음
-		after.setLocation(420, 685);
+//		after.setLocation(420, 685);//★☆★☆★☆★☆원위치임 지우지마(노트북모니터가작아서 버튼안보임)★☆★☆
+		after.setLocation(420, 50);
 		after.setVisible(false);
 
 		click.setSize(100, 50); // 조회버튼
-		click.setLocation(650, 700);
+//		click.setLocation(650, 700);//★☆★☆★☆★☆원위치임 지우지마(노트북모니터가작아서 버튼안보임)★☆★☆
+		click.setLocation(650, 30);
 		click.addActionListener(this);
 
 		f.getContentPane().add(click);
@@ -344,65 +372,65 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		dateno_10.setBounds(546, 478, 80, 52);
 		main.add(dateno_10);
 
-		blikes_1 = new JLabel(""); // 1번글 추천수
-		blikes_1.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
-		blikes_1.setBounds(624, 28, 85, 52);
-		blikes_1.setHorizontalAlignment(JLabel.CENTER);
-		main.add(blikes_1);
+		bclikes_1 = new JLabel(""); // 1번글 추천수
+		bclikes_1.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
+		bclikes_1.setBounds(624, 28, 85, 52);
+		bclikes_1.setHorizontalAlignment(JLabel.CENTER);
+		main.add(bclikes_1);
 
-		blikes_2 = new JLabel("");
-		blikes_2.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
-		blikes_2.setBounds(624, 78, 85, 52);
-		blikes_2.setHorizontalAlignment(JLabel.CENTER);
-		main.add(blikes_2);
+		bclikes_2 = new JLabel("");
+		bclikes_2.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
+		bclikes_2.setBounds(624, 78, 85, 52);
+		bclikes_2.setHorizontalAlignment(JLabel.CENTER);
+		main.add(bclikes_2);
 
-		blikes_3 = new JLabel("");
-		blikes_3.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
-		blikes_3.setBounds(624, 128, 85, 52);
-		blikes_3.setHorizontalAlignment(JLabel.CENTER);
-		main.add(blikes_3);
+		bclikes_3 = new JLabel("");
+		bclikes_3.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
+		bclikes_3.setBounds(624, 128, 85, 52);
+		bclikes_3.setHorizontalAlignment(JLabel.CENTER);
+		main.add(bclikes_3);
 
-		blikes_4 = new JLabel("");
-		blikes_4.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
-		blikes_4.setBounds(624, 178, 85, 52);
-		blikes_4.setHorizontalAlignment(JLabel.CENTER);
-		main.add(blikes_4);
+		bclikes_4 = new JLabel("");
+		bclikes_4.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
+		bclikes_4.setBounds(624, 178, 85, 52);
+		bclikes_4.setHorizontalAlignment(JLabel.CENTER);
+		main.add(bclikes_4);
 
-		blikes_5 = new JLabel("");
-		blikes_5.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
-		blikes_5.setBounds(624, 228, 85, 52);
-		blikes_5.setHorizontalAlignment(JLabel.CENTER);
-		main.add(blikes_5);
+		bclikes_5 = new JLabel("");
+		bclikes_5.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
+		bclikes_5.setBounds(624, 228, 85, 52);
+		bclikes_5.setHorizontalAlignment(JLabel.CENTER);
+		main.add(bclikes_5);
 
-		blikes_6 = new JLabel("");
-		blikes_6.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
-		blikes_6.setBounds(624, 278, 85, 52);
-		blikes_6.setHorizontalAlignment(JLabel.CENTER);
-		main.add(blikes_6);
+		bclikes_6 = new JLabel("");
+		bclikes_6.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
+		bclikes_6.setBounds(624, 278, 85, 52);
+		bclikes_6.setHorizontalAlignment(JLabel.CENTER);
+		main.add(bclikes_6);
 
-		blikes_7 = new JLabel("");
-		blikes_7.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
-		blikes_7.setBounds(624, 328, 85, 52);
-		blikes_7.setHorizontalAlignment(JLabel.CENTER);
-		main.add(blikes_7);
+		bclikes_7 = new JLabel("");
+		bclikes_7.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
+		bclikes_7.setBounds(624, 328, 85, 52);
+		bclikes_7.setHorizontalAlignment(JLabel.CENTER);
+		main.add(bclikes_7);
 
-		blikes_8 = new JLabel("");
-		blikes_8.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
-		blikes_8.setBounds(624, 378, 85, 52);
-		blikes_8.setHorizontalAlignment(JLabel.CENTER);
-		main.add(blikes_8);
+		bclikes_8 = new JLabel("");
+		bclikes_8.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
+		bclikes_8.setBounds(624, 378, 85, 52);
+		bclikes_8.setHorizontalAlignment(JLabel.CENTER);
+		main.add(bclikes_8);
 
-		blikes_9 = new JLabel("");
-		blikes_9.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
-		blikes_9.setBounds(624, 428, 85, 52);
-		blikes_9.setHorizontalAlignment(JLabel.CENTER);
-		main.add(blikes_9);
+		bclikes_9 = new JLabel("");
+		bclikes_9.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
+		bclikes_9.setBounds(624, 428, 85, 52);
+		bclikes_9.setHorizontalAlignment(JLabel.CENTER);
+		main.add(bclikes_9);
 
-		blikes_10 = new JLabel("");
-		blikes_10.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
-		blikes_10.setBounds(624, 478, 85, 52);
-		blikes_10.setHorizontalAlignment(JLabel.CENTER);
-		main.add(blikes_10);
+		bclikes_10 = new JLabel("");
+		bclikes_10.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
+		bclikes_10.setBounds(624, 478, 85, 52);
+		bclikes_10.setHorizontalAlignment(JLabel.CENTER);
+		main.add(bclikes_10);
 
 		clickno_1 = new JLabel(""); // 1번글 조회수
 		clickno_1.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
@@ -527,7 +555,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 			b = Integer.toString(a);
 
 			try {
-				String sql = "" + "select user_id,btitle,bdate,blikes,bviews " + "from post " + "order by bdate DESC";
+				String sql = "" + "select user_id,bctitle,bcdate,bclikes,bcviews " + "from bcontents " + "order by bcdate DESC";
 				ConnectionB cb = new ConnectionB(); // 연결
 				Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
 				PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -539,13 +567,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 				show2 = new String[1000];
 				while (getRs().next()) {
 					String user_id = getRs().getString("user_id");
-					String btitle = getRs().getString("btitle");
-					String bdate = getRs().getString("bdate");
-					int blikes = getRs().getInt("blikes");
-					int bviews = getRs().getInt("bviews");
-					show[i] = (user_id + " " + " " + bdate + " " + blikes + " " + bviews);
-					show2[i] = (btitle);
-					// System.out.print(btitle+" "+bmain+" "+bdate+" "+busy+ "\n");
+					String bctitle = getRs().getString("bctitle");
+					String bcdate = getRs().getString("bcdate");
+					int bclikes = getRs().getInt("bclikes");
+					int bcviews = getRs().getInt("bcviews");
+					show[i] = (user_id + " " + " " + bcdate + " " + bclikes + " " + bcviews);
+					show2[i] = (bctitle);
+					// System.out.print(bctitle+" "+bmain+" "+bcdate+" "+busy+ "\n");
 					i++;
 				}
 				if (i > 9) {
@@ -560,13 +588,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_1.setText(show[0 + pageplus].split(" ")[0]);
 					titleno_1.setText(show2[0 + pageplus]);
 					dateno_1.setText(show[0 + pageplus].split(" ")[2]); // 데이트가 2,3번을 먹음
-					blikes_1.setText(show[0 + pageplus].split(" ")[4]);
+					bclikes_1.setText(show[0 + pageplus].split(" ")[4]);
 					clickno_1.setText(show[0 + pageplus].split(" ")[5]);
 				} else {
 					writingno_1.setText("");
 					titleno_1.setText("");
 					dateno_1.setText(""); // 데이트가 2,3번을 먹음
-					blikes_1.setText("");
+					bclikes_1.setText("");
 					clickno_1.setText("");
 					after.setVisible(false);
 				}
@@ -574,13 +602,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_2.setText(show[1 + pageplus].split(" ")[0]);
 					titleno_2.setText(show2[1 + pageplus]);
 					dateno_2.setText(show[1 + pageplus].split(" ")[2]);
-					blikes_2.setText(show[1 + pageplus].split(" ")[4]);
+					bclikes_2.setText(show[1 + pageplus].split(" ")[4]);
 					clickno_2.setText(show[1 + pageplus].split(" ")[5]);
 				} else {
 					writingno_2.setText("");
 					titleno_2.setText("");
 					dateno_2.setText(""); // 데이트가 2,3번을 먹음
-					blikes_2.setText("");
+					bclikes_2.setText("");
 					clickno_2.setText("");
 					after.setVisible(false);
 				}
@@ -589,13 +617,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_3.setText(show[2 + pageplus].split(" ")[0]);
 					titleno_3.setText(show2[2 + pageplus]);
 					dateno_3.setText(show[2 + pageplus].split(" ")[2]);
-					blikes_3.setText(show[2 + pageplus].split(" ")[4]);
+					bclikes_3.setText(show[2 + pageplus].split(" ")[4]);
 					clickno_3.setText(show[2 + pageplus].split(" ")[5]);
 				} else {
 					writingno_3.setText("");
 					titleno_3.setText("");
 					dateno_3.setText(""); // 데이트가 2,3번을 먹음
-					blikes_3.setText("");
+					bclikes_3.setText("");
 					clickno_3.setText("");
 					after.setVisible(false);
 				}
@@ -604,13 +632,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_4.setText(show[3 + pageplus].split(" ")[0]);
 					titleno_4.setText(show2[3 + pageplus]);
 					dateno_4.setText(show[3 + pageplus].split(" ")[2]);
-					blikes_4.setText(show[3 + pageplus].split(" ")[4]);
+					bclikes_4.setText(show[3 + pageplus].split(" ")[4]);
 					clickno_4.setText(show[3 + pageplus].split(" ")[5]);
 				} else {
 					writingno_4.setText("");
 					titleno_4.setText("");
 					dateno_4.setText(""); // 데이트가 2,3번을 먹음
-					blikes_4.setText("");
+					bclikes_4.setText("");
 					clickno_4.setText("");
 					after.setVisible(false);
 				}
@@ -619,13 +647,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_5.setText(show[4 + pageplus].split(" ")[0]);
 					titleno_5.setText(show2[4 + pageplus]);
 					dateno_5.setText(show[4 + pageplus].split(" ")[2]);
-					blikes_5.setText(show[4 + pageplus].split(" ")[4]);
+					bclikes_5.setText(show[4 + pageplus].split(" ")[4]);
 					clickno_5.setText(show[4 + pageplus].split(" ")[5]);
 				} else {
 					writingno_5.setText("");
 					titleno_5.setText("");
 					dateno_5.setText(""); // 데이트가 2,3번을 먹음
-					blikes_5.setText("");
+					bclikes_5.setText("");
 					clickno_5.setText("");
 					after.setVisible(false);
 				}
@@ -634,13 +662,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_6.setText(show[5 + pageplus].split(" ")[0]);
 					titleno_6.setText(show2[5 + pageplus]);
 					dateno_6.setText(show[5 + pageplus].split(" ")[2]);
-					blikes_6.setText(show[5 + pageplus].split(" ")[4]);
+					bclikes_6.setText(show[5 + pageplus].split(" ")[4]);
 					clickno_6.setText(show[5 + pageplus].split(" ")[5]);
 				} else {
 					writingno_6.setText("");
 					titleno_6.setText("");
 					dateno_6.setText(""); // 데이트가 2,3번을 먹음
-					blikes_6.setText("");
+					bclikes_6.setText("");
 					clickno_6.setText("");
 					after.setVisible(false);
 				}
@@ -649,13 +677,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_7.setText(show[6 + pageplus].split(" ")[0]);
 					titleno_7.setText(show2[6 + pageplus]);
 					dateno_7.setText(show[6 + pageplus].split(" ")[2]);
-					blikes_7.setText(show[6 + pageplus].split(" ")[4]);
+					bclikes_7.setText(show[6 + pageplus].split(" ")[4]);
 					clickno_7.setText(show[6 + pageplus].split(" ")[5]);
 				} else {
 					writingno_7.setText("");
 					titleno_7.setText("");
 					dateno_7.setText(""); // 데이트가 2,3번을 먹음
-					blikes_7.setText("");
+					bclikes_7.setText("");
 					clickno_7.setText("");
 					after.setVisible(false);
 				}
@@ -664,13 +692,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_8.setText(show[7 + pageplus].split(" ")[0]);
 					titleno_8.setText(show2[7 + pageplus]);
 					dateno_8.setText(show[7 + pageplus].split(" ")[2]);
-					blikes_8.setText(show[7 + pageplus].split(" ")[4]);
+					bclikes_8.setText(show[7 + pageplus].split(" ")[4]);
 					clickno_8.setText(show[7 + pageplus].split(" ")[5]);
 				} else {
 					writingno_8.setText("");
 					titleno_8.setText("");
 					dateno_8.setText(""); // 데이트가 2,3번을 먹음
-					blikes_8.setText("");
+					bclikes_8.setText("");
 					clickno_8.setText("");
 					after.setVisible(false);
 				}
@@ -679,13 +707,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_9.setText(show[8 + pageplus].split(" ")[0]);
 					titleno_9.setText(show2[8 + pageplus]);
 					dateno_9.setText(show[8 + pageplus].split(" ")[2]);
-					blikes_9.setText(show[8 + pageplus].split(" ")[4]);
+					bclikes_9.setText(show[8 + pageplus].split(" ")[4]);
 					clickno_9.setText(show[8 + pageplus].split(" ")[5]);
 				} else {
 					writingno_9.setText("");
 					titleno_9.setText("");
 					dateno_9.setText(""); // 데이트가 2,3번을 먹음
-					blikes_9.setText("");
+					bclikes_9.setText("");
 					clickno_9.setText("");
 					after.setVisible(false);
 				}
@@ -694,13 +722,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_10.setText(show[9 + pageplus].split(" ")[0]);
 					titleno_10.setText(show2[9 + pageplus]);
 					dateno_10.setText(show[9 + pageplus].split(" ")[2]);
-					blikes_10.setText(show[9 + pageplus].split(" ")[4]);
+					bclikes_10.setText(show[9 + pageplus].split(" ")[4]);
 					clickno_10.setText(show[9 + pageplus].split(" ")[5]);
 				} else {
 					writingno_10.setText("");
 					titleno_10.setText("");
 					dateno_10.setText(""); // 데이트가 2,3번을 먹음
-					blikes_10.setText("");
+					bclikes_10.setText("");
 					clickno_10.setText("");
 					after.setVisible(false);
 				}
@@ -782,7 +810,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 				a = 0;
 				b = Integer.toString(a);
 			try {  //카테고리x + 검색
-				String sql = "" + "select user_id,btitle,bdate,blikes,bviews " + "from post " + "where btitle like "
+				String sql = "" + "select user_id,bctitle,bcdate,bclikes,bcviews " + "from bcontents " + "where bctitle like "
 						+ "'" + "%" + want + "%" + "'";
 				ConnectionB cb = new ConnectionB(); // 연결
 				Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
@@ -793,12 +821,12 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 				search5 = new String[1000];
 				while (getRs().next()) {
 					String user_id = getRs().getString("user_id");
-					String btitle = getRs().getString("btitle");
-					String bdate = getRs().getString("bdate");
-					int blikes = getRs().getInt("blikes");
-					int bviews = getRs().getInt("bviews");
-					search4[i] = (user_id + " " + " " + bdate + " " + blikes + " " + bviews);
-					search5[i] = (btitle);
+					String bctitle = getRs().getString("bctitle");
+					String bcdate = getRs().getString("bcdate");
+					int bclikes = getRs().getInt("bclikes");
+					int bcviews = getRs().getInt("bcviews");
+					search4[i] = (user_id + " " + " " + bcdate + " " + bclikes + " " + bcviews);
+					search5[i] = (bctitle);
 					i++;
 				}
 				if (search4[i] == null) {
@@ -814,13 +842,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_1.setText(search4[0 + pageplus].split(" ")[0]);
 					titleno_1.setText(search5[0 + pageplus]);
 					dateno_1.setText(search4[0 + pageplus].split(" ")[2]); // 데이트가 2,3번을 먹음
-					blikes_1.setText(search4[0 + pageplus].split(" ")[4]);
+					bclikes_1.setText(search4[0 + pageplus].split(" ")[4]);
 					clickno_1.setText(search4[0 + pageplus].split(" ")[5]);
 				} else {
 					writingno_1.setText("");
 					titleno_1.setText("");
 					dateno_1.setText(""); // 데이트가 2,3번을 먹음
-					blikes_1.setText("");
+					bclikes_1.setText("");
 					clickno_1.setText("");
 					after.setVisible(false);
 				}
@@ -828,13 +856,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_2.setText(search4[1 + pageplus].split(" ")[0]);
 					titleno_2.setText(search5[1 + pageplus]);
 					dateno_2.setText(search4[1 + pageplus].split(" ")[2]);
-					blikes_2.setText(search4[1 + pageplus].split(" ")[4]);
+					bclikes_2.setText(search4[1 + pageplus].split(" ")[4]);
 					clickno_2.setText(search4[1 + pageplus].split(" ")[5]);
 				} else {
 					writingno_2.setText("");
 					titleno_2.setText("");
 					dateno_2.setText(""); // 데이트가 2,3번을 먹음
-					blikes_2.setText("");
+					bclikes_2.setText("");
 					clickno_2.setText("");
 					after.setVisible(false);
 				}
@@ -843,13 +871,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_3.setText(search4[2 + pageplus].split(" ")[0]);
 					titleno_3.setText(search5[2 + pageplus]);
 					dateno_3.setText(search4[2 + pageplus].split(" ")[2]);
-					blikes_3.setText(search4[2 + pageplus].split(" ")[4]);
+					bclikes_3.setText(search4[2 + pageplus].split(" ")[4]);
 					clickno_3.setText(search4[2 + pageplus].split(" ")[5]);
 				} else {
 					writingno_3.setText("");
 					titleno_3.setText("");
 					dateno_3.setText(""); // 데이트가 2,3번을 먹음
-					blikes_3.setText("");
+					bclikes_3.setText("");
 					clickno_3.setText("");
 					after.setVisible(false);
 				}
@@ -858,13 +886,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_4.setText(search4[3 + pageplus].split(" ")[0]);
 					titleno_4.setText(search5[3 + pageplus]);
 					dateno_4.setText(search4[3 + pageplus].split(" ")[2]);
-					blikes_4.setText(search4[3 + pageplus].split(" ")[4]);
+					bclikes_4.setText(search4[3 + pageplus].split(" ")[4]);
 					clickno_4.setText(search4[3 + pageplus].split(" ")[5]);
 				} else {
 					writingno_4.setText("");
 					titleno_4.setText("");
 					dateno_4.setText(""); // 데이트가 2,3번을 먹음
-					blikes_4.setText("");
+					bclikes_4.setText("");
 					clickno_4.setText("");
 					after.setVisible(false);
 				}
@@ -873,13 +901,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_5.setText(search4[4 + pageplus].split(" ")[0]);
 					titleno_5.setText(search5[4 + pageplus]);
 					dateno_5.setText(search4[4 + pageplus].split(" ")[2]);
-					blikes_5.setText(search4[4 + pageplus].split(" ")[4]);
+					bclikes_5.setText(search4[4 + pageplus].split(" ")[4]);
 					clickno_5.setText(search4[4 + pageplus].split(" ")[5]);
 				} else {
 					writingno_5.setText("");
 					titleno_5.setText("");
 					dateno_5.setText(""); // 데이트가 2,3번을 먹음
-					blikes_5.setText("");
+					bclikes_5.setText("");
 					clickno_5.setText("");
 					after.setVisible(false);
 				}
@@ -888,13 +916,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_6.setText(search4[5 + pageplus].split(" ")[0]);
 					titleno_6.setText(search5[5 + pageplus]);
 					dateno_6.setText(search4[5 + pageplus].split(" ")[2]);
-					blikes_6.setText(search4[5 + pageplus].split(" ")[4]);
+					bclikes_6.setText(search4[5 + pageplus].split(" ")[4]);
 					clickno_6.setText(search4[5 + pageplus].split(" ")[5]);
 				} else {
 					writingno_6.setText("");
 					titleno_6.setText("");
 					dateno_6.setText(""); // 데이트가 2,3번을 먹음
-					blikes_6.setText("");
+					bclikes_6.setText("");
 					clickno_6.setText("");
 					after.setVisible(false);
 				}
@@ -903,13 +931,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_7.setText(search4[6 + pageplus].split(" ")[0]);
 					titleno_7.setText(search5[6 + pageplus]);
 					dateno_7.setText(search4[6 + pageplus].split(" ")[2]);
-					blikes_7.setText(search4[6 + pageplus].split(" ")[4]);
+					bclikes_7.setText(search4[6 + pageplus].split(" ")[4]);
 					clickno_7.setText(search4[6 + pageplus].split(" ")[5]);
 				} else {
 					writingno_7.setText("");
 					titleno_7.setText("");
 					dateno_7.setText(""); // 데이트가 2,3번을 먹음
-					blikes_7.setText("");
+					bclikes_7.setText("");
 					clickno_7.setText("");
 					after.setVisible(false);
 				}
@@ -918,13 +946,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_8.setText(search4[7 + pageplus].split(" ")[0]);
 					titleno_8.setText(search5[7 + pageplus]);
 					dateno_8.setText(search4[7 + pageplus].split(" ")[2]);
-					blikes_8.setText(search4[7 + pageplus].split(" ")[4]);
+					bclikes_8.setText(search4[7 + pageplus].split(" ")[4]);
 					clickno_8.setText(search4[7 + pageplus].split(" ")[5]);
 				} else {
 					writingno_8.setText("");
 					titleno_8.setText("");
 					dateno_8.setText(""); // 데이트가 2,3번을 먹음
-					blikes_8.setText("");
+					bclikes_8.setText("");
 					clickno_8.setText("");
 					after.setVisible(false);
 				}
@@ -933,13 +961,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_9.setText(search4[8 + pageplus].split(" ")[0]);
 					titleno_9.setText(search5[8 + pageplus]);
 					dateno_9.setText(search4[8 + pageplus].split(" ")[2]);
-					blikes_9.setText(search4[8 + pageplus].split(" ")[4]);
+					bclikes_9.setText(search4[8 + pageplus].split(" ")[4]);
 					clickno_9.setText(search4[8 + pageplus].split(" ")[5]);
 				} else {
 					writingno_9.setText("");
 					titleno_9.setText("");
 					dateno_9.setText(""); // 데이트가 2,3번을 먹음
-					blikes_9.setText("");
+					bclikes_9.setText("");
 					clickno_9.setText("");
 					after.setVisible(false);
 				}
@@ -948,13 +976,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_10.setText(search4[9 + pageplus].split(" ")[0]);
 					titleno_10.setText(search5[9 + pageplus]);
 					dateno_10.setText(search4[9 + pageplus].split(" ")[2]);
-					blikes_10.setText(search4[9 + pageplus].split(" ")[4]);
+					bclikes_10.setText(search4[9 + pageplus].split(" ")[4]);
 					clickno_10.setText(search4[9 + pageplus].split(" ")[5]);
 				} else {
 					writingno_10.setText("");
 					titleno_10.setText("");
 					dateno_10.setText(""); // 데이트가 2,3번을 먹음
-					blikes_10.setText("");
+					bclikes_10.setText("");
 					clickno_10.setText("");
 					after.setVisible(false);
 				}
@@ -974,8 +1002,8 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 				b = Integer.toString(a);
 			}
 			try {
-				String sql = "" + "select user_id,btitle,bdate,blikes,bviews " + "from post " + "where bno="+b
-						+" and btitle like "+ "'" + "%" + want + "%" + "'";
+				String sql = "" + "select user_id,bctitle,bcdate,bclikes,bcviews " + "from bcontents " + "where bno="+b
+						+" and bctitle like "+ "'" + "%" + want + "%" + "'";
 				ConnectionB cb = new ConnectionB(); // 연결
 				Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
 				PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -985,12 +1013,12 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 				research5 = new String[1000];
 				while (getRs().next()) {
 					String user_id = getRs().getString("user_id");
-					String btitle = getRs().getString("btitle");
-					String bdate = getRs().getString("bdate");
-					int blikes = getRs().getInt("blikes");
-					int bviews = getRs().getInt("bviews");
-					research4[i] = (user_id + " " + " " + bdate + " " + blikes + " " + bviews);
-					research5[i] = (btitle);
+					String bctitle = getRs().getString("bctitle");
+					String bcdate = getRs().getString("bcdate");
+					int bclikes = getRs().getInt("bclikes");
+					int bcviews = getRs().getInt("bcviews");
+					research4[i] = (user_id + " " + " " + bcdate + " " + bclikes + " " + bcviews);
+					research5[i] = (bctitle);
 					i++;
 				}
 				if (search4[i] == null) {
@@ -1006,13 +1034,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_1.setText(research4[0 + pageplus].split(" ")[0]);
 					titleno_1.setText(research5[0 + pageplus]);
 					dateno_1.setText(research4[0 + pageplus].split(" ")[2]); // 데이트가 2,3번을 먹음
-					blikes_1.setText(research4[0 + pageplus].split(" ")[4]);
+					bclikes_1.setText(research4[0 + pageplus].split(" ")[4]);
 					clickno_1.setText(research4[0 + pageplus].split(" ")[5]);
 				} else {
 					writingno_1.setText("");
 					titleno_1.setText("");
 					dateno_1.setText(""); // 데이트가 2,3번을 먹음
-					blikes_1.setText("");
+					bclikes_1.setText("");
 					clickno_1.setText("");
 					after.setVisible(false);
 				}
@@ -1020,13 +1048,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_2.setText(research4[1 + pageplus].split(" ")[0]);
 					titleno_2.setText(research5[1 + pageplus]);
 					dateno_2.setText(research4[1 + pageplus].split(" ")[2]);
-					blikes_2.setText(research4[1 + pageplus].split(" ")[4]);
+					bclikes_2.setText(research4[1 + pageplus].split(" ")[4]);
 					clickno_2.setText(research4[1 + pageplus].split(" ")[5]);
 				} else {
 					writingno_2.setText("");
 					titleno_2.setText("");
 					dateno_2.setText(""); // 데이트가 2,3번을 먹음
-					blikes_2.setText("");
+					bclikes_2.setText("");
 					clickno_2.setText("");
 					after.setVisible(false);
 				}
@@ -1035,13 +1063,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_3.setText(research4[2 + pageplus].split(" ")[0]);
 					titleno_3.setText(research5[2 + pageplus]);
 					dateno_3.setText(research4[2 + pageplus].split(" ")[2]);
-					blikes_3.setText(research4[2 + pageplus].split(" ")[4]);
+					bclikes_3.setText(research4[2 + pageplus].split(" ")[4]);
 					clickno_3.setText(research4[2 + pageplus].split(" ")[5]);
 				} else {
 					writingno_3.setText("");
 					titleno_3.setText("");
 					dateno_3.setText(""); // 데이트가 2,3번을 먹음
-					blikes_3.setText("");
+					bclikes_3.setText("");
 					clickno_3.setText("");
 					after.setVisible(false);
 				}
@@ -1050,13 +1078,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_4.setText(research4[3 + pageplus].split(" ")[0]);
 					titleno_4.setText(research5[3 + pageplus]);
 					dateno_4.setText(research4[3 + pageplus].split(" ")[2]);
-					blikes_4.setText(research4[3 + pageplus].split(" ")[4]);
+					bclikes_4.setText(research4[3 + pageplus].split(" ")[4]);
 					clickno_4.setText(research4[3 + pageplus].split(" ")[5]);
 				} else {
 					writingno_4.setText("");
 					titleno_4.setText("");
 					dateno_4.setText(""); // 데이트가 2,3번을 먹음
-					blikes_4.setText("");
+					bclikes_4.setText("");
 					clickno_4.setText("");
 					after.setVisible(false);
 				}
@@ -1065,13 +1093,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_5.setText(research4[4 + pageplus].split(" ")[0]);
 					titleno_5.setText(research5[4 + pageplus]);
 					dateno_5.setText(research4[4 + pageplus].split(" ")[2]);
-					blikes_5.setText(research4[4 + pageplus].split(" ")[4]);
+					bclikes_5.setText(research4[4 + pageplus].split(" ")[4]);
 					clickno_5.setText(research4[4 + pageplus].split(" ")[5]);
 				} else {
 					writingno_5.setText("");
 					titleno_5.setText("");
 					dateno_5.setText(""); // 데이트가 2,3번을 먹음
-					blikes_5.setText("");
+					bclikes_5.setText("");
 					clickno_5.setText("");
 					after.setVisible(false);
 				}
@@ -1080,13 +1108,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_6.setText(research4[5 + pageplus].split(" ")[0]);
 					titleno_6.setText(research5[5 + pageplus]);
 					dateno_6.setText(research4[5 + pageplus].split(" ")[2]);
-					blikes_6.setText(research4[5 + pageplus].split(" ")[4]);
+					bclikes_6.setText(research4[5 + pageplus].split(" ")[4]);
 					clickno_6.setText(research4[5 + pageplus].split(" ")[5]);
 				} else {
 					writingno_6.setText("");
 					titleno_6.setText("");
 					dateno_6.setText(""); // 데이트가 2,3번을 먹음
-					blikes_6.setText("");
+					bclikes_6.setText("");
 					clickno_6.setText("");
 					after.setVisible(false);
 				}
@@ -1095,13 +1123,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_7.setText(research4[6 + pageplus].split(" ")[0]);
 					titleno_7.setText(research5[6 + pageplus]);
 					dateno_7.setText(research4[6 + pageplus].split(" ")[2]);
-					blikes_7.setText(research4[6 + pageplus].split(" ")[4]);
+					bclikes_7.setText(research4[6 + pageplus].split(" ")[4]);
 					clickno_7.setText(research4[6 + pageplus].split(" ")[5]);
 				} else {
 					writingno_7.setText("");
 					titleno_7.setText("");
 					dateno_7.setText(""); // 데이트가 2,3번을 먹음
-					blikes_7.setText("");
+					bclikes_7.setText("");
 					clickno_7.setText("");
 					after.setVisible(false);
 				}
@@ -1110,13 +1138,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_8.setText(research4[7 + pageplus].split(" ")[0]);
 					titleno_8.setText(research5[7 + pageplus]);
 					dateno_8.setText(research4[7 + pageplus].split(" ")[2]);
-					blikes_8.setText(research4[7 + pageplus].split(" ")[4]);
+					bclikes_8.setText(research4[7 + pageplus].split(" ")[4]);
 					clickno_8.setText(research4[7 + pageplus].split(" ")[5]);
 				} else {
 					writingno_8.setText("");
 					titleno_8.setText("");
 					dateno_8.setText(""); // 데이트가 2,3번을 먹음
-					blikes_8.setText("");
+					bclikes_8.setText("");
 					clickno_8.setText("");
 					after.setVisible(false);
 				}
@@ -1125,13 +1153,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_9.setText(research4[8 + pageplus].split(" ")[0]);
 					titleno_9.setText(research5[8 + pageplus]);
 					dateno_9.setText(research4[8 + pageplus].split(" ")[2]);
-					blikes_9.setText(research4[8 + pageplus].split(" ")[4]);
+					bclikes_9.setText(research4[8 + pageplus].split(" ")[4]);
 					clickno_9.setText(research4[8 + pageplus].split(" ")[5]);
 				} else {
 					writingno_9.setText("");
 					titleno_9.setText("");
 					dateno_9.setText(""); // 데이트가 2,3번을 먹음
-					blikes_9.setText("");
+					bclikes_9.setText("");
 					clickno_9.setText("");
 					after.setVisible(false);
 				}
@@ -1140,13 +1168,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 					writingno_10.setText(research4[9 + pageplus].split(" ")[0]);
 					titleno_10.setText(research5[9 + pageplus]);
 					dateno_10.setText(research4[9 + pageplus].split(" ")[2]);
-					blikes_10.setText(research4[9 + pageplus].split(" ")[4]);
+					bclikes_10.setText(research4[9 + pageplus].split(" ")[4]);
 					clickno_10.setText(research4[9 + pageplus].split(" ")[5]);
 				} else {
 					writingno_10.setText("");
 					titleno_10.setText("");
 					dateno_10.setText(""); // 데이트가 2,3번을 먹음
-					blikes_10.setText("");
+					bclikes_10.setText("");
 					clickno_10.setText("");
 					after.setVisible(false);
 				}
@@ -1176,8 +1204,8 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		}
 		
 		try {
-			String sql = "" + "select user_id,btitle,bdate,blikes,bviews " + "from post " + "where bno = " + b
-					+ " order by bdate DESC";
+			String sql = "" + "select user_id,bctitle,bcdate,bclikes,bcviews " + "from bcontents " + "where bno = " + b
+					+ " order by bcdate DESC";
 			ConnectionB cb = new ConnectionB(); // 연결
 			Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
 			PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -1191,13 +1219,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 			
 			while (getRs().next()) {
 				String user_id = getRs().getString("user_id");
-				String btitle = getRs().getString("btitle");
-				String bdate = getRs().getString("bdate");
-				int blikes = getRs().getInt("blikes");
-				int bviews = getRs().getInt("bviews");
-				look[i] = (user_id + " " + " " + bdate + " " + blikes + " " + bviews);
-				look2[i] = (btitle);
-				// System.out.print(btitle+" "+bmain+" "+bdate+" "+busy+ "\n");
+				String bctitle = getRs().getString("bctitle");
+				String bcdate = getRs().getString("bcdate");
+				int bclikes = getRs().getInt("bclikes");
+				int bcviews = getRs().getInt("bcviews");
+				look[i] = (user_id + " " + " " + bcdate + " " + bclikes + " " + bcviews);
+				look2[i] = (bctitle);
+				// System.out.print(bctitle+" "+bmain+" "+bcdate+" "+busy+ "\n");
 				i++;
 			}
 			if (i > 9) {
@@ -1211,13 +1239,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 				writingno_1.setText(look[0 + pageplus].split(" ")[0]);
 				titleno_1.setText(look2[0 + pageplus]);
 				dateno_1.setText(look[0 + pageplus].split(" ")[2]); // 데이트가 2,3번을 먹음
-				blikes_1.setText(look[0 + pageplus].split(" ")[4]);
+				bclikes_1.setText(look[0 + pageplus].split(" ")[4]);
 				clickno_1.setText(look[0 + pageplus].split(" ")[5]);
 			} else {
 				writingno_1.setText("");
 				titleno_1.setText("");
 				dateno_1.setText(""); // 데이트가 2,3번을 먹음
-				blikes_1.setText("");
+				bclikes_1.setText("");
 				clickno_1.setText("");
 		
 			}
@@ -1225,13 +1253,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 				writingno_2.setText(look[1 + pageplus].split(" ")[0]);
 				titleno_2.setText(look2[1 + pageplus]);
 				dateno_2.setText(look[1 + pageplus].split(" ")[2]);
-				blikes_2.setText(look[1 + pageplus].split(" ")[4]);
+				bclikes_2.setText(look[1 + pageplus].split(" ")[4]);
 				clickno_2.setText(look[1 + pageplus].split(" ")[5]);
 			} else {
 				writingno_2.setText("");
 				titleno_2.setText("");
 				dateno_2.setText(""); // 데이트가 2,3번을 먹음
-				blikes_2.setText("");
+				bclikes_2.setText("");
 				clickno_2.setText("");
 				after.setVisible(false);
 			}
@@ -1240,13 +1268,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 				writingno_3.setText(look[2 + pageplus].split(" ")[0]);
 				titleno_3.setText(look2[2 + pageplus]);
 				dateno_3.setText(look[2 + pageplus].split(" ")[2]);
-				blikes_3.setText(look[2 + pageplus].split(" ")[4]);
+				bclikes_3.setText(look[2 + pageplus].split(" ")[4]);
 				clickno_3.setText(look[2 + pageplus].split(" ")[5]);
 			} else {
 				writingno_3.setText("");
 				titleno_3.setText("");
 				dateno_3.setText(""); // 데이트가 2,3번을 먹음
-				blikes_3.setText("");
+				bclikes_3.setText("");
 				clickno_3.setText("");
 				after.setVisible(false);
 			}
@@ -1255,13 +1283,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 				writingno_4.setText(look[3 + pageplus].split(" ")[0]);
 				titleno_4.setText(look2[3 + pageplus]);
 				dateno_4.setText(look[3 + pageplus].split(" ")[2]);
-				blikes_4.setText(look[3 + pageplus].split(" ")[4]);
+				bclikes_4.setText(look[3 + pageplus].split(" ")[4]);
 				clickno_4.setText(look[3 + pageplus].split(" ")[5]);
 			} else {
 				writingno_4.setText("");
 				titleno_4.setText("");
 				dateno_4.setText(""); // 데이트가 2,3번을 먹음
-				blikes_4.setText("");
+				bclikes_4.setText("");
 				clickno_4.setText("");
 				after.setVisible(false);
 			}
@@ -1270,13 +1298,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 				writingno_5.setText(look[4 + pageplus].split(" ")[0]);
 				titleno_5.setText(look2[4 + pageplus]);
 				dateno_5.setText(look[4 + pageplus].split(" ")[2]);
-				blikes_5.setText(look[4 + pageplus].split(" ")[4]);
+				bclikes_5.setText(look[4 + pageplus].split(" ")[4]);
 				clickno_5.setText(look[4 + pageplus].split(" ")[5]);
 			} else {
 				writingno_5.setText("");
 				titleno_5.setText("");
 				dateno_5.setText(""); // 데이트가 2,3번을 먹음
-				blikes_5.setText("");
+				bclikes_5.setText("");
 				clickno_5.setText("");
 				after.setVisible(false);
 			}
@@ -1285,13 +1313,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 				writingno_6.setText(look[5 + pageplus].split(" ")[0]);
 				titleno_6.setText(look2[5 + pageplus]);
 				dateno_6.setText(look[5 + pageplus].split(" ")[2]);
-				blikes_6.setText(look[5 + pageplus].split(" ")[4]);
+				bclikes_6.setText(look[5 + pageplus].split(" ")[4]);
 				clickno_6.setText(look[5 + pageplus].split(" ")[5]);
 			} else {
 				writingno_6.setText("");
 				titleno_6.setText("");
 				dateno_6.setText(""); // 데이트가 2,3번을 먹음
-				blikes_6.setText("");
+				bclikes_6.setText("");
 				clickno_6.setText("");
 				after.setVisible(false);
 			}
@@ -1300,13 +1328,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 				writingno_7.setText(look[6 + pageplus].split(" ")[0]);
 				titleno_7.setText(look2[6 + pageplus]);
 				dateno_7.setText(look[6 + pageplus].split(" ")[2]);
-				blikes_7.setText(look[6 + pageplus].split(" ")[4]);
+				bclikes_7.setText(look[6 + pageplus].split(" ")[4]);
 				clickno_7.setText(look[6 + pageplus].split(" ")[5]);
 			} else {
 				writingno_7.setText("");
 				titleno_7.setText("");
 				dateno_7.setText(""); // 데이트가 2,3번을 먹음
-				blikes_7.setText("");
+				bclikes_7.setText("");
 				clickno_7.setText("");
 				after.setVisible(false);
 			}
@@ -1315,13 +1343,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 				writingno_8.setText(look[7 + pageplus].split(" ")[0]);
 				titleno_8.setText(look2[7 + pageplus]);
 				dateno_8.setText(look[7 + pageplus].split(" ")[2]);
-				blikes_8.setText(look[7 + pageplus].split(" ")[4]);
+				bclikes_8.setText(look[7 + pageplus].split(" ")[4]);
 				clickno_8.setText(look[7 + pageplus].split(" ")[5]);
 			} else {
 				writingno_8.setText("");
 				titleno_8.setText("");
 				dateno_8.setText(""); // 데이트가 2,3번을 먹음
-				blikes_8.setText("");
+				bclikes_8.setText("");
 				clickno_8.setText("");
 				after.setVisible(false);
 			}
@@ -1330,13 +1358,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 				writingno_9.setText(look[8 + pageplus].split(" ")[0]);
 				titleno_9.setText(look2[8 + pageplus]);
 				dateno_9.setText(look[8 + pageplus].split(" ")[2]);
-				blikes_9.setText(look[8 + pageplus].split(" ")[4]);
+				bclikes_9.setText(look[8 + pageplus].split(" ")[4]);
 				clickno_9.setText(look[8 + pageplus].split(" ")[5]);
 			} else {
 				writingno_9.setText("");
 				titleno_9.setText("");
 				dateno_9.setText(""); // 데이트가 2,3번을 먹음
-				blikes_9.setText("");
+				bclikes_9.setText("");
 				clickno_9.setText("");
 				after.setVisible(false);
 			}
@@ -1345,13 +1373,13 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 				writingno_10.setText(look[9 + pageplus].split(" ")[0]);
 				titleno_10.setText(look2[9 + pageplus]);
 				dateno_10.setText(look[9 + pageplus].split(" ")[2]);
-				blikes_10.setText(look[9 + pageplus].split(" ")[4]);
+				bclikes_10.setText(look[9 + pageplus].split(" ")[4]);
 				clickno_10.setText(look[9 + pageplus].split(" ")[5]);
 			} else {
 				writingno_10.setText("");
 				titleno_10.setText("");
 				dateno_10.setText(""); // 데이트가 2,3번을 먹음
-				blikes_10.setText("");
+				bclikes_10.setText("");
 				clickno_10.setText("");
 				after.setVisible(false);
 			}

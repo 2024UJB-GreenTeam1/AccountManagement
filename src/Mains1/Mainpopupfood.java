@@ -1,31 +1,33 @@
 package Mains1;
 import java.awt.Button;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Frame;
-import java.awt.Label;
-import java.awt.TextArea;
-import java.awt.Toolkit;
+import java.awt.GraphicsEnvironment;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
 public class Mainpopupfood {
 
 	// 프레임 생성
 	public void excute() {
-		Frame f = new Frame("음식칼로리");
+		JFrame f = new JFrame("음식칼로리");
 		f.setSize(800, 800);
 		f.setLayout(null);
 
-		// 중앙배치
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		Dimension screenSize = tk.getScreenSize();
-		f.setLocation(screenSize.width / 2 - 800 / 2, screenSize.height / 2 - 800 / 2);
+		// 화면중앙배치
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		Point centerPoint = ge.getCenterPoint();
+		int leftTopX = centerPoint.x - f.getWidth() / 2;
+		int leftTopY = centerPoint.y - f.getHeight() / 2;
+		f.setLocation(leftTopX, leftTopY);
 
 		// 글씨체
 		Font font1 = new Font("맑은 고딕", Font.BOLD, 18);
@@ -40,53 +42,53 @@ public class Mainpopupfood {
 		logo.setLocation(50, 60);
 
 		// 아리아
-		TextArea foodtext = new TextArea();
+		JTextArea foodtext = new JTextArea();
 
 		foodtext.setSize(300, 465);
 		foodtext.setLocation(50, 200);
 		foodtext.setFont(font3);
 
 		// 라벨
-		Label foodMainLabel = new Label("오늘의 음식 칼로리 계산");
-		Label foodname = new Label("음식명");
-		Label foodservingsizeLabel = new Label("1회 제공량");
-		Label foodkcal = new Label("음식칼로리");
+		JLabel foodMainLabel = new JLabel("오늘의 음식 칼로리 계산");
+		JLabel foodname = new JLabel("음식명");
+		JLabel foodservingsizeLabel = new JLabel("1회 제공량");
+		JLabel foodkcal = new JLabel("음식칼로리");
 
-		Label whitericenameLabel = new Label("백미");
-		Label whitericekcalLabel = new Label("129kcal");
+		JLabel whitericenameLabel = new JLabel("백미");
+		JLabel whitericekcalLabel = new JLabel("129kcal");
 
-		Label brownricenameLabel = new Label("현미");
-		Label brownricekcalLabel = new Label("110kcal");
+		JLabel brownricenameLabel = new JLabel("현미");
+		JLabel brownricekcalLabel = new JLabel("110kcal");
 
-		Label sugarnameLabel = new Label("설탕");
-		Label sugarkcalLabel = new Label("387kcal");
+		JLabel sugarnameLabel = new JLabel("설탕");
+		JLabel sugarkcalLabel = new JLabel("387kcal");
 
-		Label saltnameLabel = new Label("소금");
-		Label saltkcalLabel = new Label("0kcal");
+		JLabel saltnameLabel = new JLabel("소금");
+		JLabel saltkcalLabel = new JLabel("0kcal");
 
-		Label misonameLabel = new Label("미소된장국");
-		Label misokcalLabel = new Label("38kcal");
+		JLabel misonameLabel = new JLabel("미소된장국");
+		JLabel misokcalLabel = new JLabel("38kcal");
 
-		Label breastnameLabel = new Label("닭가슴살");
-		Label breastkcalLabel = new Label("195kcal");
+		JLabel breastnameLabel = new JLabel("닭가슴살");
+		JLabel breastkcalLabel = new JLabel("195kcal");
 
-		Label breastnameLabel2 = new Label("닭가슴살(구이)");
-		Label breastkcalLabel2 = new Label("195kcal");
+		JLabel breastnameLabel2 = new JLabel("닭가슴살(구이)");
+		JLabel breastkcalLabel2 = new JLabel("195kcal");
 
-		Label steaknameLabel = new Label("쇠고기스테이크");
-		Label steakkcalLabel = new Label("252kcal");
+		JLabel steaknameLabel = new JLabel("쇠고기스테이크");
+		JLabel steakkcalLabel = new JLabel("252kcal");
 
-		Label saladnameLabel = new Label("야채샐러드");
-		Label saladkcalLabel = new Label("98kcal");
+		JLabel saladnameLabel = new JLabel("야채샐러드");
+		JLabel saladkcalLabel = new JLabel("98kcal");
 
-		Label saladnameLabel2 = new Label("야채샐러드(드레싱X)");
-		Label saladkcalLabel2 = new Label("67kcal");
+		JLabel saladnameLabel2 = new JLabel("야채샐러드(드레싱X)");
+		JLabel saladkcalLabel2 = new JLabel("67kcal");
 
-		Label mangonameLabel = new Label("망고");
-		Label mangokcalLabel = new Label("65kcal");
+		JLabel mangonameLabel = new JLabel("망고");
+		JLabel mangokcalLabel = new JLabel("65kcal");
 
-		Label melonnameLabel = new Label("멜론");
-		Label melonkcalLabel = new Label("34kcal");
+		JLabel melonnameLabel = new JLabel("멜론");
+		JLabel melonkcalLabel = new JLabel("34kcal");
 
 		foodMainLabel.setSize(280, 70);
 		foodMainLabel.setLocation(260, 60);
@@ -223,7 +225,7 @@ public class Mainpopupfood {
 		// 버튼
 
 		// 리셋 버튼
-		Button fooddirectbutton = new Button("리셋");
+		JButton fooddirectbutton = new JButton("리셋");
 
 		fooddirectbutton.setSize(50, 30);
 		fooddirectbutton.setLocation(240, 670);
@@ -238,7 +240,7 @@ public class Mainpopupfood {
 		f.add(fooddirectbutton);
 
 		// 완료 버튼
-		Button foodsccbutton = new Button("완료");
+		JButton foodsccbutton = new JButton("완료");
 
 		foodsccbutton.setSize(50, 30);
 		foodsccbutton.setLocation(300, 670);
@@ -251,7 +253,7 @@ public class Mainpopupfood {
 		});
 
 		// 백미 버튼
-		Button whitericebutton1 = new Button("100g");
+		JButton whitericebutton1 = new JButton("100g");
 
 		whitericebutton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -265,7 +267,7 @@ public class Mainpopupfood {
 		whitericebutton1.setFont(font1);
 
 		// 현미 버튼
-		Button brownricebutton1 = new Button("100g");
+		JButton brownricebutton1 = new JButton("100g");
 
 		brownricebutton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -279,7 +281,7 @@ public class Mainpopupfood {
 		brownricebutton1.setFont(font1);
 
 		// 설탕 버튼
-		Button sugarbutton1 = new Button("100g");
+		JButton sugarbutton1 = new JButton("100g");
 
 		sugarbutton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -293,7 +295,7 @@ public class Mainpopupfood {
 		sugarbutton1.setFont(font1);
 
 		// 소금 버튼
-		Button saltbutton1 = new Button("100g");
+		JButton saltbutton1 = new JButton("100g");
 
 		saltbutton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -308,7 +310,7 @@ public class Mainpopupfood {
 
 		// 미소된장국 버튼
 
-		Button misobutton1 = new Button("100g");
+		JButton misobutton1 = new JButton("100g");
 
 		misobutton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -323,7 +325,7 @@ public class Mainpopupfood {
 
 		// 닭가슴살
 
-		Button breastbutton1 = new Button("100g");
+		JButton breastbutton1 = new JButton("100g");
 
 		breastbutton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -338,7 +340,7 @@ public class Mainpopupfood {
 
 		// 닭가슴살2
 
-		Button breastbutton12 = new Button("100g");
+		JButton breastbutton12 = new JButton("100g");
 
 		breastbutton12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -354,7 +356,7 @@ public class Mainpopupfood {
 
 		// 스테이크
 
-		Button steakbutton1 = new Button("100g");
+		JButton steakbutton1 = new JButton("100g");
 
 		steakbutton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -369,7 +371,7 @@ public class Mainpopupfood {
 
 		// 샐러드
 
-		Button saladbutton1 = new Button("100g");
+		JButton saladbutton1 = new JButton("100g");
 
 		saladbutton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -384,7 +386,7 @@ public class Mainpopupfood {
 
 		// 샐러드2 버튼
 
-		Button saladbutton12 = new Button("100g");
+		JButton saladbutton12 = new JButton("100g");
 
 		saladbutton12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -399,7 +401,7 @@ public class Mainpopupfood {
 
 		// 망고
 
-		Button mangobutton1 = new Button("100g");
+		JButton mangobutton1 = new JButton("100g");
 
 		mangobutton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -414,7 +416,7 @@ public class Mainpopupfood {
 
 		// 멜론 버튼
 
-		Button melonbutton1 = new Button("100g");
+		JButton melonbutton1 = new JButton("100g");
 
 		melonbutton1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

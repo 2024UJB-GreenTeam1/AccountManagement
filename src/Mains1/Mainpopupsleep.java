@@ -1,9 +1,7 @@
 package Mains1;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Label;
-import java.awt.TextField;
-import java.awt.Toolkit;
+import java.awt.GraphicsEnvironment;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -13,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class Mainpopupsleep {
 
@@ -21,10 +20,12 @@ public class Mainpopupsleep {
 		f.setSize(650, 700);
 		f.setLayout(null);
 
-		// 중앙배치
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		Dimension screenSize = tk.getScreenSize();
-		f.setLocation(screenSize.width / 2 - 650 / 2, screenSize.height / 2 - 700 / 2);
+		// 화면중앙배치
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		Point centerPoint = ge.getCenterPoint();
+		int leftTopX = centerPoint.x - f.getWidth() / 2;
+		int leftTopY = centerPoint.y - f.getHeight() / 2;
+		f.setLocation(leftTopX, leftTopY);
 
 		// 글씨체
 		Font font1 = new Font("맑은 고딕", Font.BOLD, 18);
@@ -39,21 +40,21 @@ public class Mainpopupsleep {
 		logo.setLocation(50, 60);
 		
 		//라벨 생성
-		Label sleepMainLabel = new Label("오늘의 수면시간 계산");
-		Label sleepMainLabel2 = new Label("시간을 24시간제로 입력하면");
-		Label sleepMainLabel3 = new Label("오늘의 수면시간을 계산합니다.");
-		Label sleepMainLabel4 = new Label("※예시: 오후 10시 -> 22시");
+		JLabel sleepMainLabel = new JLabel("오늘의 수면시간 계산");
+		JLabel sleepMainLabel2 = new JLabel("시간을 24시간제로 입력하면");
+		JLabel sleepMainLabel3 = new JLabel("오늘의 수면시간을 계산합니다.");
+		JLabel sleepMainLabel4 = new JLabel("※예시: 오후 10시 -> 22시");
 		
-		Label sleeptimeLabel1 = new Label("취침시간");
-		Label sleeptimeLabel2 = new Label("시");
-		Label sleeptimeLabel3 = new Label("분");
+		JLabel sleeptimeLabel1 = new JLabel("취침시간");
+		JLabel sleeptimeLabel2 = new JLabel("시");
+		JLabel sleeptimeLabel3 = new JLabel("분");
 		
-		Label getuptimeLabel1 = new Label("기상시간");
-		Label getuptimeLabel2 = new Label("시");
-		Label getuptimeLabel3 = new Label("분");
+		JLabel getuptimeLabel1 = new JLabel("기상시간");
+		JLabel getuptimeLabel2 = new JLabel("시");
+		JLabel getuptimeLabel3 = new JLabel("분");
 		
-		Label sleeplastLabel1 = new Label("오늘 당신의 수면시간은");
-		Label sleeplastLabel2 = new Label("입니다.");
+		JLabel sleeplastLabel1 = new JLabel("오늘 당신의 수면시간은");
+		JLabel sleeplastLabel2 = new JLabel("입니다.");
 		
 		sleepMainLabel.setSize(280, 60);
 		sleepMainLabel.setLocation(190, 130);
@@ -110,13 +111,13 @@ public class Mainpopupsleep {
 		sleeplastLabel2.setFont(font1);
 		
 		//텍스트 필드
-		TextField todaysleepText = new TextField(2);
-		TextField todaysleepText2 = new TextField(2);
+		JTextField todaysleepText = new JTextField(2);
+		JTextField todaysleepText2 = new JTextField(2);
 		
-		TextField todaygetupText = new TextField(2);
-		TextField todaygetupText2 = new TextField(2);
+		JTextField todaygetupText = new JTextField(2);
+		JTextField todaygetupText2 = new JTextField(2);
 		
-		TextField todaysleeplastText = new TextField(20);
+		JTextField todaysleeplastText = new JTextField(20);
 		
 		//취침
 		todaysleepText.setSize(50, 25);
@@ -142,7 +143,7 @@ public class Mainpopupsleep {
 		//단추
 		JButton todayexercisebutton = new JButton("완료");
 
-		todayexercisebutton.setSize(80, 40);
+		todayexercisebutton.setSize(90, 40);
 		todayexercisebutton.setLocation(285, 540);
 		todayexercisebutton.setFont(font2);
 		todayexercisebutton.addActionListener(new ActionListener() {

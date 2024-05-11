@@ -1,39 +1,44 @@
 package Mains1;
-import java.awt.Button;
-import java.awt.Dimension;
+import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.Frame;
-import java.awt.Label;
-import java.awt.TextField;
-import java.awt.Toolkit;
+import java.awt.GraphicsEnvironment;
+import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import IDsearch.PwdSearch;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class Mainpopup {
 	// todayweightText 필드 생성
-	 static TextField todayweightText = new TextField(7);
+	 static JTextField todayweightText = new JTextField(7);
 	// 프레임 생성
 	public void excute() {
-		Frame f = new Frame("메인페이지 팝업");
-		f.setSize(800, 800);
-		f.setLayout(null);
+		JFrame f = new JFrame("메인페이지 팝업");
+		f.setSize(700, 700);
+		f.setLayout(null);  //
 
-		// 중앙배치
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		Dimension screenSize = tk.getScreenSize();
-		f.setLocation(screenSize.width / 2 - 800 / 2, screenSize.height / 2 - 800 / 2);
+//		// 화면중앙배치
+//		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+//		Point centerPoint = ge.getCenterPoint();
+//		int leftTopX = centerPoint.x - f.getWidth() / 2;
+//		int leftTopY = centerPoint.y - f.getHeight() / 2;
+//		f.setLocation(leftTopX, leftTopY);
 
 		// 글씨체
 		Font font1 = new Font("맑은 고딕", Font.BOLD, 20);
 		Font font2 = new Font("맑은 고딕", Font.BOLD, 40);
+		
+		
+		
 		// 로고 객체 생성
 		JLabel logo;
 		// 로고 이미지 생성
@@ -42,44 +47,46 @@ public class Mainpopup {
 		logo.setSize(80, 80);
 		logo.setLocation(60, 60);
 
+//		JPanel centerPanel = new JPanel(new GridLayout(0, 1));
+		
 		// 라벨 생성
-		Label todayLabel = new Label("Today");
+		JLabel todayLabel = new JLabel("Today");
 		todayLabel.setFont(font2);
 		
-		Label referenceLabel = new Label("※입력된 값은 나의건강일지로 이동합니다.");
+		JLabel referenceLabel = new JLabel("※입력된 값은 나의건강일지로 이동합니다.");
 		referenceLabel.setFont(font1);
 
-		Label todaydateLabel = new Label("오늘 날짜는");
-		Label todaydateLabel2 = new Label("입니다.");
+		JLabel todaydateLabel = new JLabel("오늘 날짜는");
+		JLabel todaydateLabel2 = new JLabel("입니다.");
 		todaydateLabel.setFont(font1);
 		todaydateLabel2.setFont(font1);
 
-		Label todayHealthLabel = new Label("오늘 나의");
-		Label todayHealthLabel2 = new Label("칼로리는");
-		Label todayHealthLabel3 = new Label("입니다.");
+		JLabel todayHealthLabel = new JLabel("오늘 나의");
+		JLabel todayHealthLabel2 = new JLabel("칼로리는");
+		JLabel todayHealthLabel3 = new JLabel("입니다.");
 		todayHealthLabel.setFont(font1);
 		todayHealthLabel2.setFont(font1);
 		todayHealthLabel3.setFont(font1);
 
-		Label todayfoodLabel = new Label("오늘 나의");
-		Label todayfoodLabel2 = new Label("칼로리는");
-		Label todayfoodLabel3 = new Label("입니다.");
+		JLabel todayfoodLabel = new JLabel("오늘 나의");
+		JLabel todayfoodLabel2 = new JLabel("칼로리는");
+		JLabel todayfoodLabel3 = new JLabel("입니다.");
 		todayfoodLabel.setFont(font1);
 		todayfoodLabel2.setFont(font1);
 		todayfoodLabel3.setFont(font1);
 
-		Label todaysleepLabel = new Label("오늘 나의");
-		Label todaysleepLabel2 = new Label("입니다.");
+		JLabel todaysleepLabel = new JLabel("오늘 나의");
+		JLabel todaysleepLabel2 = new JLabel("입니다.");
 		todaysleepLabel.setFont(font1);
 		todaysleepLabel2.setFont(font1);
 
-		Label todayweightLabel = new Label("오늘 나의");
-		Label todayweightLabel2 = new Label("입니다.");
+		JLabel todayweightLabel = new JLabel("오늘 나의");
+		JLabel todayweightLabel2 = new JLabel("입니다.");
 		todayweightLabel.setFont(font1);
 		todayweightLabel2.setFont(font1);
 
-		Label todaywaterLabel = new Label("오늘 나의");
-		Label todaywaterLabel2 = new Label("입니다.");
+		JLabel todaywaterLabel = new JLabel("오늘 나의");
+		JLabel todaywaterLabel2 = new JLabel("입니다.");
 		todaywaterLabel.setFont(font1);
 		todaywaterLabel2.setFont(font1);
 
@@ -124,7 +131,7 @@ public class Mainpopup {
 		todaywaterLabel2.setLocation(560, 460);
 
 		// 버튼 생성
-		Button todayexercisebutton = new Button("운동");
+		JButton todayexercisebutton = new JButton("운동");
 		todayexercisebutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -133,7 +140,7 @@ public class Mainpopup {
 			}
 		});
 		
-		Button todayfoodbutton = new Button("음식");
+		JButton todayfoodbutton = new JButton("음식");
 		todayfoodbutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -142,7 +149,7 @@ public class Mainpopup {
 			}
 		});
 		
-		Button todaysleepbutton = new Button("수면시간은");
+		JButton todaysleepbutton = new JButton("수면시간은");
 		todaysleepbutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -151,7 +158,7 @@ public class Mainpopup {
 			}
 		});
 		
-		Button todayweightbutton = new Button("체중은");
+		JButton todayweightbutton = new JButton("체중은");
 		todayweightbutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -159,7 +166,7 @@ public class Mainpopup {
 			}
 		});
 		
-		Button todaywaterbutton = new Button("수분섭취는");
+		JButton todaywaterbutton = new JButton("수분섭취는");
 		todaywaterbutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -168,7 +175,7 @@ public class Mainpopup {
 			}
 		});
 		
-		Button scc = new Button("완료");
+		JButton scc = new JButton("완료");
 		scc.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -186,9 +193,9 @@ public class Mainpopup {
 
 		scc.setSize(100, 60);
 		scc.setLocation(360, 600);
-		todayexercisebutton.setSize(70, 30);
+		todayexercisebutton.setSize(80, 30);
 		todayexercisebutton.setLocation(265, 310);
-		todayfoodbutton.setSize(70, 30);
+		todayfoodbutton.setSize(80, 30);
 		todayfoodbutton.setLocation(265, 350);
 		todaysleepbutton.setSize(170, 30);
 		todaysleepbutton.setLocation(265, 390);
@@ -198,17 +205,17 @@ public class Mainpopup {
 		todaywaterbutton.setLocation(265, 470);
 
 		// 텍스트 필드 생성
-		TextField todaydateText = new TextField(15);
+		JTextField todaydateText = new JTextField(15);
 		todaydateText.setFont(font1);
-		TextField todayHealthText = new TextField(10);
+		JTextField todayHealthText = new JTextField(10);
 		todayHealthText.setFont(font1);
-		TextField todayfoodText = new TextField(10);
+		JTextField todayfoodText = new JTextField(10);
 		todayfoodText.setFont(font1);
-		TextField todaysleepText = new TextField(10);
+		JTextField todaysleepText = new JTextField(10);
 		todaysleepText.setFont(font1);
-		TextField todayweightText = new TextField(10);
+		JTextField todayweightText = new JTextField(10);
 		todayweightText.setFont(font1);
-		TextField todaywaterText = new TextField(10);
+		JTextField todaywaterText = new JTextField(10);
 		todaywaterText.setFont(font1);
 
 		todaydateText.setSize(250, 30);
@@ -262,7 +269,8 @@ public class Mainpopup {
 		f.add(todaysleepText);
 		f.add(todayweightText);
 		f.add(todaywaterText);
-
+		f.setLocationRelativeTo(null);
+		
 		f.setVisible(true);
 		
 		
