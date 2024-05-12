@@ -80,7 +80,8 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 	ImageIcon icon;
 	Image image;
 	JDialog info5;
-	public static void main(String[] args) {
+//	public static void main(String[] args) {
+	public void excute() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -391,7 +392,6 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 					Correct correct = new Correct(i);
 				//	frame.dispose();	
 				}
-			
 			}
 		});
 		JButton btnNewButton_1 = new JButton("나가기");	
@@ -490,7 +490,10 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 		    }
 		    
 		
-//		 Read read = new Read();
+		  
 	}
+		
+//		 Read read = new Read();
+	
 }
 

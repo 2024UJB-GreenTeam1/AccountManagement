@@ -177,7 +177,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		logo.setLocation(10, 10);
 
 		np.setSize(85, 30); // 새글작성
-//		np.setLocation(7, 700);		//★☆★☆★☆★☆원위치임 지우지마(노트북모니터가작아서 버튼안보임)★☆★☆										/////
+//		np.setLocation(7, 700);		//★☆★☆★☆★☆원위치임 지우지마★☆★☆										/////
 		np.setLocation(7, 7);
 
 		writing.setSize(100, 100); // 내용
@@ -204,11 +204,11 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		main.setLocation(0, 150);
 
 		search.setSize(200, 30); // 검색창
-//		search.setLocation(285, 730);//★☆★☆★☆★☆원위치임 지우지마(노트북모니터가작아서 버튼안보임)★☆★☆
+//		search.setLocation(285, 730);//★☆★☆★☆★☆원위치임 지우지마★☆★☆
 		search.setLocation(285, 20);
 
 		search2.setSize(50, 30); // 검색버튼
-//		search2.setLocation(485, 730);//★☆★☆★☆★☆원위치임 지우지마(노트북모니터가작아서 버튼안보임)★☆★☆
+//		search2.setLocation(485, 730);//★☆★☆★☆★☆원위치임 지우지마★☆★☆
 		search2.setLocation(485, 20);
 
 		category.setSize(200, 100); // 카테고리
@@ -218,16 +218,16 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		page.setLocation(350, 685);
 
 		before.setSize(50, 30); // 이전
-//		before.setLocation(300, 685);//★☆★☆★☆★☆원위치임 지우지마(노트북모니터가작아서 버튼안보임)★☆★☆
+//		before.setLocation(300, 685);//★☆★☆★☆★☆원위치임 지우지마★☆★☆
 		before.setLocation(300, 50);
 
 		after.setSize(50, 30); // 다음
-//		after.setLocation(420, 685);//★☆★☆★☆★☆원위치임 지우지마(노트북모니터가작아서 버튼안보임)★☆★☆
+//		after.setLocation(420, 685);//★☆★☆★☆★☆원위치임 지우지마★☆★☆
 		after.setLocation(420, 50);
 		after.setVisible(false);
 
 		click.setSize(100, 50); // 조회버튼
-//		click.setLocation(650, 700);//★☆★☆★☆★☆원위치임 지우지마(노트북모니터가작아서 버튼안보임)★☆★☆
+//		click.setLocation(650, 700);//★☆★☆★☆★☆원위치임 지우지마★☆★☆
 		click.setLocation(650, 30);
 		click.addActionListener(this);
 
@@ -1213,7 +1213,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 
 			
 			int i = 0;
-			int cnt = 0;
+			int cnt = 0;												//////////////////////cnt NOT USED
 			look = new String[1000];
 			look2 = new String[1000];  //카테고리 선택할때마다 칸 비워줘야 기존꺼 사라짐
 			

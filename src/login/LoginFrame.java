@@ -20,7 +20,7 @@ import Mains1.Mainpopup;
 import Mains1.Mainscreen;
 import Member.Mframe;
 
-//extends WindowAdapter 
+
 public class LoginFrame extends JFrame {
 	private JFrame f;
 	private JTextField tfId;
@@ -32,7 +32,6 @@ public class LoginFrame extends JFrame {
 
 	public LoginFrame() {
 
-//		this.setExtendedState(JFrame.MAXIMIZED_BOTH);	//
 		
 		dao = new InfoDAO();
 
@@ -81,11 +80,11 @@ public class LoginFrame extends JFrame {
 
 		
 
-		btnL = new JButton("Login");
+		btnL = new JButton("로그인");
 		btnL.setLocation(420, 448);
 		btnL.setSize(80, 80);
 
-		btnI = new JButton("ID찾기");
+		btnI = new JButton("아이디찾기");
 		btnI.setLocation(170, 570);
 		btnI.setSize(100, 40);
 
@@ -93,7 +92,7 @@ public class LoginFrame extends JFrame {
 		btnP.setLocation(285, 570);
 		btnP.setSize(100, 40);
 
-		btnS = new JButton("SIGN IN");
+		btnS = new JButton("회원가입");
 		btnS.setLocation(400, 570);
 		btnS.setSize(100, 40);
 

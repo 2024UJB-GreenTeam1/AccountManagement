@@ -1,11 +1,7 @@
 package Mains1;
-import java.awt.Dimension;
+
 import java.awt.Font;
-import java.awt.GraphicsEnvironment;
 import java.awt.Image;
-import java.awt.Label;
-import java.awt.Point;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -71,11 +67,11 @@ public class Mainscreen {
 		});
         
 		// 화면중앙배치
-		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		Point centerPoint = ge.getCenterPoint();
-		int leftTopX = centerPoint.x - f.getWidth() / 2;
-		int leftTopY = centerPoint.y - f.getHeight() / 2;
-		f.setLocation(leftTopX, leftTopY);
+//		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+//		Point centerPoint = ge.getCenterPoint();
+//		int leftTopX = centerPoint.x - f.getWidth() / 2;
+//		int leftTopY = centerPoint.y - f.getHeight() / 2;
+//		f.setLocation(leftTopX, leftTopY);
 			
 		//버튼
 		JButton mpg = new JButton("마이페이지");
