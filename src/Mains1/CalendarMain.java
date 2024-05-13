@@ -10,7 +10,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -22,19 +29,25 @@ public class CalendarMain extends JPanel implements ActionListener, ItemListener
    Font fnt = new Font("맑은 고딕", Font.BOLD, 20); // 기본 폰트 설정
 
    // UI 컴포넌트 선언
+//	public static final String DRIVER_NAME = "oracle.jdbc.OracleDriver";
+//	public static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
+//	public static final String USERID = "c##green";
+//	public static final String USERPWD = "green1234";
+   
    JPanel selectPane = new JPanel(); // 상단의 선택 패널
    JButton prevBtn = new JButton("◀"), nextBtn = new JButton("▶"); // 이전, 다음 버튼
    JComboBox<Integer> yearCombo = new JComboBox<>(), monthCombo = new JComboBox<>(); // 연도, 월 선택 콤보 박스
    JLabel yearLabel = new JLabel("년"), monthLabel = new JLabel("월"); // 연도, 월 라벨
    JPanel centerPane = new JPanel(new BorderLayout()), titlePane = new JPanel(new GridLayout(1, 7)); // 중앙 패널 및 요일 표시
    JLabel lblNewLabel = new JLabel("");
-                                                                              // 패널
+   private List<JButton> dayButtons = new ArrayList<>();                                             // 패널
    
    JPanel dayPane = new JPanel(new GridLayout(0, 7)); // 날짜를 표시할 패널
    String[] title = { "일", "월", "화", "수", "목", "금", "토" }; // 요일 배열
 
    Calendar date; // 캘린더 객체
    int year, month; // 선택된 연도 및 월
+
 
    public CalendarMain() {
       setLayout(new BorderLayout());
@@ -47,6 +60,7 @@ public class CalendarMain extends JPanel implements ActionListener, ItemListener
       setMonth(); // 월 설정
       setCalendarTitle(); // 요일 헤더 설정
       setDay(); // 날짜 버튼 설정
+
 
       yearCombo.addItemListener(this); // 콤보 박스 이벤트 리스너 등록
       monthCombo.addItemListener(this);
@@ -72,7 +86,7 @@ public class CalendarMain extends JPanel implements ActionListener, ItemListener
    }
    
    private void setupButton(JButton btn) {
-       selectPane.add(lblNewLabel);
+//       selectPane.add(lblNewLabel);										//
        selectPane.add(btn); // 버튼 추가
        btn.setFont(fnt); // 버튼 폰트 설정
    }
@@ -140,15 +154,21 @@ public class CalendarMain extends JPanel implements ActionListener, ItemListener
        }
        for (int day = 1; day <= lastDay; day++) {
            JButton btn = new JButton(String.valueOf(day));
+           dayButtons.add(btn);
            btn.setFont(fnt);
            btn.setHorizontalAlignment(JButton.CENTER);
            date.set(Calendar.DATE, day);
            int w = date.get(Calendar.DAY_OF_WEEK);
            if (w == 1) btn.setForeground(Color.RED);
            if (w == 7) btn.setForeground(Color.BLUE);
+           
+//           memoDAO CalendarInfo = new memoDAO();////////////////////////
+//           CalendarInfo.displayCalendarInfo();
+           
            btn.addActionListener(new ActionListener() {
                public void actionPerformed(ActionEvent e) {
-            	   CalendarMemo memo = new CalendarMemo();
+            	   String selectedDate = btn.getText();
+            	   CalendarMemo memo = new CalendarMemo(selectedDate);
                    memo.excute(); // CalendarMemo 창을 표시
                }
            });
@@ -191,4 +211,8 @@ public class CalendarMain extends JPanel implements ActionListener, ItemListener
        frame.setLocationRelativeTo(null);  // 화면 중앙에 위치
        frame.setVisible(true);  // 프레임을 화면에 표시
    }
+   public JButton getDayButton(int dayIndex) {
+       return dayButtons.get(dayIndex);
+   }
+   
 }

@@ -47,13 +47,6 @@ public class LoginFrame extends JFrame {
 		tab1Panel.setLocation(140, 10);
 		tab1Panel.setSize(400, 400);
 
-//		// 화면중앙배치
-//		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-//		Point centerPoint = ge.getCenterPoint();
-//		int leftTopX = centerPoint.x - f.getWidth() / 2;
-//		int leftTopY = centerPoint.y - f.getHeight() / 2;
-//		f.setLocation(leftTopX, leftTopY);
-
 		JLabel lId = new JLabel("ID");
 		lId.setLocation(170, 440);
 		lId.setSize(50, 50);

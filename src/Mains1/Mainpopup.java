@@ -41,7 +41,8 @@ public class Mainpopup {
       // 로고 객체 생성
       JLabel logo;
       // 로고 이미지 생성
-      logo = new JLabel(new ImageIcon("C:\\Users\\Manic-063\\git\\AccountManagement\\img\\logoMap.jpg"));
+		ImageIcon imgTest = new ImageIcon(getClass().getResource("../img/logo.jpg"));
+      logo = new JLabel(imgTest);
       // 로고 이미지 크기 및 위치
       logo.setSize(80, 80);
       logo.setLocation(60, 60);
