@@ -41,7 +41,7 @@ public class Tab  extends JFrame implements ActionListener, WindowListener{
 	Image image;
 	Image img;
 	Blob bfiledata;
-	static int i;
+	static int plz;
 	String driver = "ora" + "cle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	String user = "c##green";
@@ -49,10 +49,10 @@ public class Tab  extends JFrame implements ActionListener, WindowListener{
 	Scanner sc = new Scanner(System.in);
 
 	
-	public static void showFrame(int i) {
+	public static void showFrame(int plz) {
 
 		System.out.println("눌러짐");
-		Tab tab = new Tab(i);
+		Tab tab = new Tab(plz);
 		tab.frame1.setVisible(true);
 	//	tab.Tabframe();
 	}
@@ -63,7 +63,7 @@ public class Tab  extends JFrame implements ActionListener, WindowListener{
 //
 //	}
 	
-	public Tab(int i) {
+	public Tab(int plz) {
 		frame1 = new JFrame("이미지 출력");
 
 		frame1.setBounds(200, 200, 280, 280);
@@ -75,7 +75,7 @@ public class Tab  extends JFrame implements ActionListener, WindowListener{
 
 		sql = "select bfiledata from bcontents where bcno = ?";
 		pstmt = con.prepareStatement(sql);
-		pstmt.setInt(1,i);
+		pstmt.setInt(1,plz);
 		System.out.println("pstmt: " + pstmt);
 		rs = pstmt.executeQuery();
 		System.out.println("rs : " + rs);
@@ -186,7 +186,7 @@ public class Tab  extends JFrame implements ActionListener, WindowListener{
 //			//EventQueue.invokeLater(new Runnable() {
 //			public void run() {2
 //				
-				Tab.showFrame(i);
+				Tab.showFrame(plz);
 			}
 			
 			
