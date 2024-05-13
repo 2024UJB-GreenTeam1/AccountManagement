@@ -188,13 +188,7 @@ public class Mframe {
 		f.addWindowListener(new EventHandler());
 		f.setLocationRelativeTo(null);
 		f.setVisible(true);
-		
-//		// 화면중앙배치
-//		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-//		Point centerPoint = ge.getCenterPoint();
-//		int leftTopX = centerPoint.x - f.getWidth() / 2;
-//		int leftTopY = centerPoint.y - f.getHeight() / 2;
-//		f.setLocation(leftTopX, leftTopY);
+
 	}
 
 	public static void main(String[] args) {

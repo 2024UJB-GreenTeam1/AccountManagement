@@ -4,6 +4,7 @@ import java.awt.Button;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
+import java.awt.Image;
 import java.awt.Label;
 import java.awt.TextField;
 import java.awt.Toolkit;
@@ -16,12 +17,27 @@ import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import Board.Boardset;
+import HealthCheck.HealthCheck;
+import Profile.Pframe;
+
 public class Mainscreen {
-	public static void main(String[] args) {
-		Frame f = new Frame("메인페이지");
+	// 이미지크기조절셋업
+	ImageIcon imageSetSize(ImageIcon icon, int i, int j) { // image Size Setting
+		Image ximg = icon.getImage(); // ImageIcon을 Image로 변환.
+		Image yimg = ximg.getScaledInstance(i, j, java.awt.Image.SCALE_SMOOTH);
+		ImageIcon xyimg = new ImageIcon(yimg);
+		return xyimg;
+	}
+	
+	
+	public void excute() {
+		JFrame f = new JFrame("메인페이지");
 		DAO dao = new DAO();
 
 		f.setSize(800, 800);
@@ -31,16 +47,19 @@ public class Mainscreen {
 		Font font2 = new Font("맑은 고딕", Font.BOLD, 20);
 		Font font3 = new Font("나눔고딕", Font.PLAIN, 12);
 
-		JLabel logo = new JLabel(
-				new ImageIcon("C:\\Users\\Manic-063\\git\\AccountManagement\\img\\logoMainscreen.jpg"));
+		// 로고크기조절&삽입
+		ImageIcon imgTest = new ImageIcon(getClass().getResource("../img/logo.jpg"));
+		imgTest = imageSetSize(imgTest, 60, 60);
+		JLabel logo = new JLabel(imgTest);
+//		logo.setIcon(imgTest);
 		logo.setSize(100, 100);
 		logo.setLocation(60, 60);
 
-		// 버튼을 누르면 다른 클래스로 이동
-		JButton mapimg = new JButton(
-				new ImageIcon("C:\\Users\\Manic-063\\git\\AccountManagement\\img\\mapimg.jpg.jpg"));
-		JButton calenderimg = new JButton(
-				new ImageIcon("C:\\Users\\Manic-063\\git\\AccountManagement\\img\\calenderimg.jpg.jpg"));
+		//버튼을 누르면 다른 클래스로 이동
+				java.net.URL imageUrl2 = getClass().getResource("../img/mapimg.jpg");
+				JButton mapimg = new JButton(new ImageIcon(imageUrl2));
+				java.net.URL imageUrl3 = getClass().getResource("../img/calenderimg.jpg");
+				JButton calenderimg = new JButton(new ImageIcon(imageUrl3));
 		mapimg.setSize(330, 200);
 		mapimg.setLocation(50, 550);
 		calenderimg.setSize(330, 200);
@@ -60,9 +79,33 @@ public class Mainscreen {
 		Dimension screenSize = tk.getScreenSize();
 		f.setLocation(screenSize.width / 2 - 800 / 2, screenSize.height / 2 - 800 / 2);
 		// 버튼
-		Button mpg = new Button("마이페이지");
-		Button healthbutton = new Button("나의건강일지");
-		Button boardbutton = new Button("게시판이동");
+		//버튼
+				JButton mpg = new JButton("마이페이지");
+				mpg.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						f.dispose();
+						new Pframe(); 
+					}
+				});
+				
+				JButton healthbutton = new JButton("나의건강일지");
+				healthbutton.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						f.dispose();
+						new HealthCheck();
+					}
+				});
+				
+				JButton boardbutton = new JButton("게시판이동");
+				boardbutton.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						f.dispose();
+						new Boardset();
+					}
+				});
 		mpg.setFont(font1);
 		healthbutton.setFont(font1);
 		boardbutton.setFont(font1);
@@ -227,13 +270,18 @@ public class Mainscreen {
 		maplink.setLocation(50, 490);
 		calendarlink.setSize(250, 60);
 		calendarlink.setLocation(405, 490);
-		// 닫기
-		f.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent we) {
-				System.exit(0);
-			}
-		});
+		//창닫기
+	f.addWindowListener(new WindowAdapter() {
+	    public void windowClosing(WindowEvent evt) {
+	        int resp = JOptionPane.showConfirmDialog(f, "정말 로그아웃 하시겠습니까?",
+	            "Exit?", JOptionPane.YES_NO_OPTION);
+	        if (resp == JOptionPane.YES_OPTION) {
+	        	f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	        } else {
+	            f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+	        }
+	    }
+	});
 
 		f.add(logo);
 		f.add(mapimg);

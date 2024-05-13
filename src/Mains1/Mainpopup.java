@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class Mainpopup {
 
@@ -379,11 +380,7 @@ public class Mainpopup {
          }
       });
 
-      f.addWindowListener(new WindowAdapter() {
-         public void windowClosing(WindowEvent we) {
-            System.exit(0);
-         }
-      });
+
       
 
       f.add(logo);
@@ -425,6 +422,17 @@ public class Mainpopup {
       f.add(sleepchoice2);
 
       f.setVisible(true);
+      
+		// 프로그램 창 닫기
+		f.addWindowListener(new WindowAdapter() {
+		    public void windowClosing(WindowEvent evt) {
+				JOptionPane.showMessageDialog(f, 
+						  "일일입력을 완료해주십시오", "ErrorMsg", JOptionPane.ERROR_MESSAGE);
+		    }
+		});
+		
+	
+
 
    }
 

@@ -148,7 +148,8 @@ public class CalendarMain extends JPanel implements ActionListener, ItemListener
            if (w == 7) btn.setForeground(Color.BLUE);
            btn.addActionListener(new ActionListener() {
                public void actionPerformed(ActionEvent e) {
-                   CalendarMemo.display(); // CalendarMemo 창을 표시
+            	   CalendarMemo memo = new CalendarMemo();
+                   memo.excute(); // CalendarMemo 창을 표시
                }
            });
            dayPane.add(btn);

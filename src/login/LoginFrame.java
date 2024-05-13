@@ -138,13 +138,13 @@ public class LoginFrame extends JFrame {
 					new FailMessage();
 				}
 
-				for (int i = 0; i < list.size(); i++) { // 이거 왜 중복이냐
-					InfoVo data = (InfoVo) list.get(i);
-					String gid = data.getId();
-					String gpwd = data.getPwd();
-
-					System.out.println(gid + " :: " + gpwd);
-				}
+//				for (int i = 0; i < list.size(); i++) { // 이거 왜 중복이냐
+//					InfoVo data = (InfoVo) list.get(i);
+//					String gid = data.getId();
+//					String gpwd = data.getPwd();
+//
+//					System.out.println(gid + " :: " + gpwd);
+//				}
 			}
 		});
 

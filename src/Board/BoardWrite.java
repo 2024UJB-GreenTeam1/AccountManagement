@@ -60,7 +60,7 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 	       
 	        
 		category = new Choice();
-		category.add("");
+		category.add("게시판선택");
 		category.add("exercise");  //1
 		category.add("food");  //2
 		category.add("sleep"); //3
