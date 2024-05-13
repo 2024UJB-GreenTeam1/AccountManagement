@@ -5,7 +5,6 @@ import java.awt.Button;
 import java.awt.Choice;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Frame;
 import java.awt.Label;
 import java.awt.TextField;
 import java.awt.Toolkit;
@@ -16,6 +15,7 @@ import java.awt.event.WindowEvent;
 import java.time.LocalDate;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class Mainpopup {
@@ -25,7 +25,7 @@ public class Mainpopup {
 
    // 프레임 생성
    public void excute() {
-      Frame f = new Frame("메인페이지 팝업");
+      JFrame f = new JFrame("메인페이지 팝업");
       f.setSize(800, 800);
       f.setLayout(null);
 
