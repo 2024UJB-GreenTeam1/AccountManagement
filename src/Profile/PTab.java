@@ -14,6 +14,7 @@ import login.InfoVo;
 
 public class PTab extends JPanel {
 	private DTO user;
+
 	public PTab(String tabName, DTO user) {
 		this.user = user;
 		setLayout(new BorderLayout());
@@ -95,7 +96,7 @@ public class PTab extends JPanel {
 				// TODO Auto-generated method stub
 				Ptab1hw frame = new Ptab1hw();
 				frame.setVisible(true);
-				
+
 			}
 		});
 
@@ -130,18 +131,18 @@ public class PTab extends JPanel {
 				// TODO Auto-generated method stub
 				String userId = InfoVo.getInstance().getId();
 				String email = newIdField.getText();
-				dao.updatemail(email, userId);
+				if (email.isEmpty()) {
+					new MessageDialog(null, "알림", "email 입력해주세요.");
+				} else {
+					dao.updatemail(email, userId);
+					new MessageDialog(null, "알림", "변경 되었습니다.");
+				}
 			}
 		});
 
 		return emailChangePanel;
 	}
 
-	
-	
-	
-	
-	
 	private JPanel createPasswordChangePanel() {
 		JPanel passwordChangePanel = new JPanel();
 		passwordChangePanel.setLayout(null);
@@ -175,7 +176,7 @@ public class PTab extends JPanel {
 					new MessageDialog(null, "알림", "비밀번호가 일치하지 않습니다.");
 				} else if (!isValidPassword(password)) {
 					new MessageDialog(null, "알림", "특수문자를 포함하지 않습니다.");
-				}else {
+				} else {
 					// 비밀번호 업데이트
 					String userId = InfoVo.getInstance().getId();
 					dao.updatepwd(password, userId);
@@ -186,9 +187,9 @@ public class PTab extends JPanel {
 
 		return passwordChangePanel;
 	}
-	
+
 	// 비밀번호에 특수문자가 포함되어 있는지 검증
-		public boolean isValidPassword(String password) {
-		    return password.matches("[a-zA-Z0-9]+");
-		}
+	public boolean isValidPassword(String password) {
+		return password.matches("[a-zA-Z0-9]+");
+	}
 }
