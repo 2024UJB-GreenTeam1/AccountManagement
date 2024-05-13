@@ -7,11 +7,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,13 +24,15 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import login.InfoVo;
+
 public class BoardWrite extends BoardDTO implements WindowListener, ActionListener {
 	private JTextArea maincontent2;
 	private JFrame f;
 	private JLabel title;
 	private JPanel maindp, maindptitle2, content2;
-	private JButton write, cancle, maincontent;
-	private JTextField maindptitlecontent;
+	private JButton write, cancle, maincontent,fileButton;
+	private JTextField maindptitlecontent,fileTextField;
 	private Choice category;
 	public BoardWrite() {
 		Font font = new Font("맑은 고딕", Font.BOLD, 50);
@@ -42,8 +48,19 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 		write.setBounds(12, 584, 102, 40);
 		write.addActionListener(this);
 		
+		//첨부파일 버튼 //
+		 fileTextField = new JTextField();
+	        fileTextField.setEditable(false);
+	        fileTextField.setColumns(20);
+	        fileTextField.setBounds(300, 584, 102, 40);
+	        fileButton = new JButton("첨부파일...");
+	        fileButton.setBounds(405, 584, 102, 40);
+	        fileButton.addActionListener(this);
+	       
+	       
+	        
 		category = new Choice();
-		category.add("");
+		category.add("게시판선택");
 		category.add("exercise");  //1
 		category.add("food");  //2
 		category.add("sleep"); //3
@@ -71,6 +88,8 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 		f.getContentPane().add(cancle);
 		f.getContentPane().add(write);
 		f.getContentPane().add(content2);
+		f.getContentPane().add(fileTextField);
+		f.getContentPane().add(fileButton);
 		content2.setLayout(null);
 
 		JPanel maindptitle2_1 = new JPanel();
@@ -177,9 +196,15 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 			
 			try {
 				ConnectionB cb = new ConnectionB(); // 연결
+				 File file = new File(fileTextField.getText());
+				 String fileName = file.getName();
+				String userId1 = InfoVo.getInstance().getId();					//로그인아이디얻기 싱클톤패턴
 				Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
-				String sql = "" + "insert into post(bno,User_id,bcno, btitle,bcontent, bdate,blikes,bviews) "
-						+ "values(+"+b+",default,BCNO.NEXTVAL,?,?,to_char(Sysdate,'YYYY-MM-DD'),?,?) ";
+				String sql = "" + "insert into bcontents(bno,bcno, "
+						+ "bctitle,bcontent, "
+						+ "bcdate,bclikes,"
+						+ "bcviews,bcfilename,bfiledata,User_id) "
+						+ "values(+"+b+",SEQ_BCNO.NEXTVAL,?,?,to_char(Sysdate,'YYYY-MM-DD'),?,?,?,?,?) ";/*SEQ_BCNO.NEXTVAL*/
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, maindptitlecontent.getText());
 				// System.out.println(maindptitlecontent.getText());
@@ -187,24 +212,43 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 				// System.out.println(maincontent2.getText());
 				pstmt.setInt(3, 0);
 				pstmt.setInt(4, 0);
+				pstmt.setString(5, fileName);						
+				FileInputStream inputStream = new FileInputStream(file);
+				pstmt.setBlob(6,inputStream);	
+				pstmt.setString(7, userId1);									//USER_ID넣기
 				pstmt.executeUpdate();
 
 				maindptitlecontent.setText("");
 				maincontent2.setText("");
 
-			} catch (SQLException e2) {
+			} catch (SQLException | FileNotFoundException e2) {
 				e2.printStackTrace();
 			} finally {
-			}
-			try {	
-				pstmt.close();
-				// System.exit(0);
-			} catch (SQLException e3) {
-				e3.printStackTrace();
+				try {	
+					pstmt.close();
+					// System.exit(0);
+				} catch (SQLException e3) {
+					e3.printStackTrace();
+				}
+				
 			}
 			
 			
 		}
+		//첨부파일창
+		if (e.getSource() == fileButton) {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+            fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            fileChooser.setAcceptAllFileFilterUsed(false);
+            fileChooser.addChoosableFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Image Files", "jpg", "png", "gif", "jpeg"));
+
+            int result = fileChooser.showOpenDialog(f);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                fileTextField.setText(selectedFile.getAbsolutePath());
+            }
+        }
 	}
 
 }

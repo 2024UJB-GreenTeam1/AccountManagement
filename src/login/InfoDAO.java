@@ -44,10 +44,10 @@ public class InfoDAO {
                 list.add(data);
 
                 // Insert into LOGIN table
-                String insertQuery = "INSERT INTO LOGIN(USER_ID, LNO, LDATE) VALUES (?, 1, DEFAULT)";
-                PreparedStatement insertStmt = con.prepareStatement(insertQuery);
-                insertStmt.setString(1, pid);
-                insertStmt.executeUpdate();
+//                String insertQuery = "INSERT INTO LOGIN(USER_ID, LNO, LDATE) VALUES (?, 1, DEFAULT)";
+//                PreparedStatement insertStmt = con.prepareStatement(insertQuery);
+//                insertStmt.setString(1, pid);
+//                insertStmt.executeUpdate();
             }
         } catch (Exception e) {
             e.printStackTrace();

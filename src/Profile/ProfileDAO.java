@@ -131,7 +131,14 @@ public class ProfileDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			// 리소스 해제 코드??
+			//리소스해제코드?
+//		    try {
+//		        if (rs != null) rs.close();
+//		        if (pstmt != null) pstmt.close();
+//		        if (con != null) con.close();
+//		    } catch (SQLException e) {
+//		        e.printStackTrace();
+//		    }
 		}
 
 		return userProfile;

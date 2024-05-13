@@ -4,6 +4,7 @@ package Board;
 import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+
 
 import Post.Read;
 
@@ -1786,6 +1788,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
       Boardset bs = new Boardset();
 
    }
+
 }
 //  % : 임의의 길이의 문자열% 모든 문자 (글자수제한이없음) %자바 : 
 //  '자바'로 끝나는 문자 예 ) 신나는 자바 , 재밌는 자바 
