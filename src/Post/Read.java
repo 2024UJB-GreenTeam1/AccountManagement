@@ -35,7 +35,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import kakaomap.Correct;
-
+import Board1.Boardset;
 
 public class Read extends Connection2 implements ActionListener, WindowListener{
 
@@ -45,12 +45,13 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 	private TextField search;
 	private JPanel main;
 	private Choice category;
+	static int plz;
 	private LineBorder bb = new LineBorder(Color.black, 1, true); 
 //	private ReadDao readDao;
 	Instant lastLikeTime;
 	
-	Scanner sc = new Scanner (System.in);
-	int i = sc.nextInt();
+//	Scanner sc = new Scanner (System.in);
+//	int i = sc.nextInt();
 	JLabel lblNewLabel_18;
 	String driver = "ora"+ "cle.jdbc.driver.OracleDriver";
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -80,29 +81,48 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 	ImageIcon icon;
 	Image image;
 	JDialog info5;
-//	public static void main(String[] args) {
-	public void excute() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-				
-					Read read = new Read();
-					read.frame.setVisible(true);
-//					ReadDao readdao = new ReadDao();
-				//	readdao.iselect();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	
+
+	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//				
+//					Read read = new Read(plz);
+//					read.frame.setVisible(true);
+////					ReadDao readdao = new ReadDao();
+//				//	readdao.iselect();
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	
+
 	}
 
+	  public static void showFrame(int plz) {
+		  EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+					
+						Read read = new Read(plz);
+						read.frame.setVisible(true);
+//						ReadDao readdao = new ReadDao();
+					//	readdao.iselect();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+	  }
+//		  //	System.out.println("눌러짐");
+//		  Read read = new Read(plz);
+//		  read.frame.setVisible(true);
 	/**
 	 * Create the application.
 	 */
-	public Read() {
-		initialize();
+	public Read(int plz) {
+		initialize(plz);
 	//readDao = new ReadDao();
 		
 	}
@@ -132,7 +152,7 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 	con=DriverManager.getConnection(url,user,password);
 	String sql = "update bcontents set bclikes = bclikes + 1 where bcno = ?"; 
 	try (PreparedStatement pstmt = con.prepareStatement(sql)){
-		pstmt.setInt(1,i);
+		pstmt.setInt(1,plz);
 		pstmt.executeUpdate();
 		
 		lblNewLabel_18.setText(Integer.toString(newBclikes));
@@ -149,9 +169,23 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 		}
 	}
 }
+//	btnNewButton_2.addActionListener(new ActionListener() { // 추천 버튼
+//		public void actionPerformed(ActionEvent e) {
+//			 Instant currentTime = Instant.now();
+//			if(lastLikeTime == null || Duration.between(lastLikeTime, currentTime).getSeconds() >= 60) {
+//				
+//			
+//			int currentBclikes = getBclikes();
+//			 int updateBclikes = currentBclikes +1;
+//			updatebclikes(updateBclikes);
+//			System.out.println(getBclikes());
+//	//		System.out.println(currentBclikes);
+//			System.out.println("추천수 : "+ updateBclikes);
+//			
+//			lastLikeTime = currentTime;
+	
 
-
-	private void initialize() {
+	private void initialize(int plz) {
 		
 		
 		Font font = new Font("맑은 고딕",Font.BOLD,40);  //게시판 
@@ -159,7 +193,7 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 		
 		frame = new JFrame("게시글");
 		frame.setBounds(100, 100, 800, 800);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	//	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		JLabel imageLabel = new JLabel();
 		JLabel lblNewLabel = new JLabel("게시글");
@@ -180,7 +214,7 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 			con = DriverManager.getConnection(url, user, password);
 			String sql = " select * from bcontents where bcno = ?";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1,i);
+			pstmt.setInt(1,plz);
 			
 			System.out.println("pstmt: " + pstmt);
 			rs = pstmt.executeQuery();
@@ -191,7 +225,6 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 				bcno = rs.getString("bcno");
 				bno = rs.getString("bno");
 				user_id = rs.getString("user_id");
-				bcnickname = rs.getString("bcnickname");
 				bctitle = rs.getString("bctitle");
 				bcontent = rs.getString("bcontent");
 				bcdate = rs.getString("bcdate");
@@ -319,6 +352,21 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 				 Instant currentTime = Instant.now();
 				if(lastLikeTime == null || Duration.between(lastLikeTime, currentTime).getSeconds() >= 60) {
 					
+					try {
+						pstmt =null;
+						con = DriverManager.getConnection(url, user, password);
+						String sql = "update bcontents set bclikes = bclikes + 1 where bcno = ?";
+						pstmt = con.prepareStatement(sql);
+						pstmt.setInt(1,plz);
+						
+						System.out.println("pstmt: " + pstmt);
+						rs = pstmt.executeQuery();
+						System.out.println("rs : " + rs);
+						}catch (Exception e3) {
+						e3.printStackTrace();
+						}
+					
+						
 				
 				int currentBclikes = getBclikes();
 				 int updateBclikes = currentBclikes +1;
@@ -389,7 +437,7 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("수정")) {
-					Correct correct = new Correct(i);
+					Correct correct = new Correct(plz);
 				//	frame.dispose();	
 				}
 			}
@@ -413,7 +461,7 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(e.getActionCommand().equals("이미지")) {
-					Tab.showFrame(i);
+					Tab.showFrame(plz);
 					
 				}
 			
@@ -479,21 +527,20 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 		    if(e.getActionCommand().equals("수정")) {
-		    	Correct correct = new Correct(i);
-		        Correct.showFrame(i);
+		    	Correct correct = new Correct(plz);
+		        Correct.showFrame(plz);
 		        System.out.println("눌러짐");
 		    }
 		    if (e.getActionCommand().equals("이미지")) {
-		    	Tab tab = new Tab(i);
-		    	Tab.showFrame(i);
+		    	Tab tab = new Tab(plz);
+		    	Tab.showFrame(plz);
 		    	 System.out.println("눌러짐");
 		    }
 		    
 		
 		  
 	}
-		
-//		 Read read = new Read();
+
 	
 }
 
