@@ -5,6 +5,7 @@ import java.awt.Button;
 import java.awt.Choice;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.Label;
 import java.awt.TextField;
 import java.awt.Toolkit;
@@ -15,7 +16,6 @@ import java.awt.event.WindowEvent;
 import java.time.LocalDate;
 
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -25,8 +25,8 @@ public class Mainpopup {
    private static double totalFoodCalories = 0; // 마찬가지임
 
    // 프레임 생성
-   public void excute() {
-      JFrame f = new JFrame("메인페이지 팝업");
+   public static void main(String[] args) {
+      Frame f = new Frame("메인페이지 팝업");
       f.setSize(800, 800);
       f.setLayout(null);
 
@@ -41,8 +41,7 @@ public class Mainpopup {
       // 로고 객체 생성
       JLabel logo;
       // 로고 이미지 생성
-		ImageIcon imgTest = new ImageIcon(getClass().getResource("../img/logo.jpg"));
-      logo = new JLabel(imgTest);
+      logo = new JLabel(new ImageIcon("C:\\Users\\Manic-063\\git\\AccountManagement\\img\\logoMap.jpg"));
       // 로고 이미지 크기 및 위치
       logo.setSize(80, 80);
       logo.setLocation(60, 60);
@@ -228,21 +227,31 @@ public class Mainpopup {
 
       // 버튼
 
+      // 완료 버튼
       Button scc = new Button("완료");
       scc.setFont(font1);
       scc.setSize(80, 60);
       scc.setLocation(430, 600);
-         
       scc.addActionListener(new ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
+    	    public void actionPerformed(ActionEvent e) {
+    	        try {
+    	            int weight = Integer.parseInt(todayweightText.getText());
+    	            int useupc = Integer.parseInt(todayHealthText.getText());
+    	            int intakec = Integer.parseInt(todayfoodText.getText());
+    	            int sleep = Integer.parseInt(todaysleepText.getText());
+    	            int water = Integer.parseInt(todaywaterText.getText());
 
-              f.setVisible(false);
-              // main 메소드를 호출합니다.
-             Mainscreen mainscreen = new Mainscreen();
-             mainscreen.excute();
-          }
-      });
+    	            MainpopupDAO dao = new MainpopupDAO();
+    	            dao.insertDailyInput(weight, useupc, intakec, sleep, water);
+    	            JOptionPane.showMessageDialog(f, "데이터가 성공적으로 저장되었습니다.");
+    	        } catch (NumberFormatException ex) {
+    	            JOptionPane.showMessageDialog(f, "입력 형식이 올바르지 않습니다. 숫자를 입력하세요.");
+    	        } catch (Exception ex) {
+    	            JOptionPane.showMessageDialog(f, "데이터 저장 중 오류가 발생했습니다: " + ex.getMessage());
+    	        }
+    	    }
+    	});
+
 
       Button resetButton = new Button("리셋");
       resetButton.setFont(font1);
@@ -266,7 +275,7 @@ public class Mainpopup {
          @Override
          public void actionPerformed(ActionEvent e) {
             try {
-               double weight = Double.parseDouble(todayweightText.getText());
+               int weight = Integer.parseInt(todayweightText.getText());
             } catch (NumberFormatException ex) {
                todayweightText.setText("Error!");
             }
@@ -280,7 +289,7 @@ public class Mainpopup {
          @Override
          public void actionPerformed(ActionEvent e) {
             try {
-               double weight = Double.parseDouble(todayweightText.getText());
+               int weight = Integer.parseInt(todayweightText.getText());
                double factor = 0;
                double time = Double.parseDouble(exercisechoice2.getSelectedItem().replace("분", "")) / 15;
 
@@ -309,7 +318,7 @@ public class Mainpopup {
                }
 
                totalCalories += weight * factor * time; // 기존 칼로리에 추가
-               todayHealthText.setText(String.format("%.2f", totalCalories)); // 텍스트 필드에 누적 칼로리 표시
+               todayHealthText.setText(String.format("%.0f", totalCalories)); // 텍스트 필드에 누적 칼로리 표시
             } catch (NumberFormatException ex) {
                todayweightText.setText("Error!");
             }
@@ -347,7 +356,7 @@ public class Mainpopup {
             }
             int quantity = Integer.parseInt(foodchoice2.getSelectedItem().replace("g", ""));
             totalFoodCalories += (caloriesPer100g * quantity / 100);
-            todayfoodText.setText(String.format("%.2f", totalFoodCalories));
+            todayfoodText.setText(String.format("%.0f", totalFoodCalories));
          }
       });
 
@@ -362,7 +371,7 @@ public class Mainpopup {
             if (sleepHours < 0) {
                sleepHours += 24; // 다음 날까지 수면이 이어지는 경우
             }
-            todaysleepText.setText(sleepHours + "시간");
+            todaysleepText.setText(sleepHours + "");
          }
       });
 
@@ -374,13 +383,20 @@ public class Mainpopup {
          @Override
          public void actionPerformed(ActionEvent e) {
             try {
-               double water = Double.parseDouble(todaywaterText.getText());
+               int water = Integer.parseInt(todaywaterText.getText());
             } catch (NumberFormatException ex) {
                todaywaterText.setText("Error!");
             }
          }
       });
-
+      
+   // 프로그램 창 닫기
+   		f.addWindowListener(new WindowAdapter() {
+   		    public void windowClosing(WindowEvent evt) {
+   				JOptionPane.showMessageDialog(f, 
+   						  "일일입력을 완료해주십시오", "ErrorMsg", JOptionPane.ERROR_MESSAGE);
+   		    }
+   		});
 
       
 
@@ -423,17 +439,6 @@ public class Mainpopup {
       f.add(sleepchoice2);
 
       f.setVisible(true);
-      
-		// 프로그램 창 닫기
-		f.addWindowListener(new WindowAdapter() {
-		    public void windowClosing(WindowEvent evt) {
-				JOptionPane.showMessageDialog(f, 
-						  "일일입력을 완료해주십시오", "ErrorMsg", JOptionPane.ERROR_MESSAGE);
-		    }
-		});
-		
-	
-
 
    }
 
