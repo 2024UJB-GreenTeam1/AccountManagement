@@ -10,16 +10,16 @@ public class ConnectionB {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 
-	public static final String DRIVER_NAME = "oracle.jdbc.OracleDriver";
-	public static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	public static final String USERID = "c##green";
-	public static final String USERPWD = "green1234";
+	public static final String driver = "oracle.jdbc.OracleDriver";
+	public static final String url = "jdbc:oracle:thin:@localhost:1521:xe";
+	public static final String user = "c##green";
+	public static final String password = "green1234";
 
 	public ConnectionB() {
 		try {
-			Class.forName(DRIVER_NAME);
+			Class.forName(driver);
 
-			conn = DriverManager.getConnection(URL, USERID, USERPWD);
+			conn = DriverManager.getConnection(url, user, password);
 
 		} catch (Exception e) {
 			e.printStackTrace();

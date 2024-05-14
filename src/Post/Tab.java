@@ -56,7 +56,8 @@ public class Tab  extends JFrame implements ActionListener, WindowListener{
 		tab.frame1.setVisible(true);
 	//	tab.Tabframe();
 	}
-
+	
+		// 
 	
 
 //	public  Tabframe() {
@@ -65,9 +66,7 @@ public class Tab  extends JFrame implements ActionListener, WindowListener{
 	
 	public Tab(int plz) {
 		frame1 = new JFrame("이미지 출력");
-
-		frame1.setBounds(200, 200, 280, 280);
-	
+		frame1.setBounds(850, 450, 280, 280);
 //		frame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	try {
 		Class.forName(driver);
