@@ -24,6 +24,7 @@ import javax.swing.JTextField;
 
 import Board.Boardset;
 import HealthCheck.HealthCheck;
+import Post.Read;
 import Profile.Pframe;
 
 public class Mainscreen {
@@ -34,8 +35,7 @@ public class Mainscreen {
 		ImageIcon xyimg = new ImageIcon(yimg);
 		return xyimg;
 	}
-	
-	
+
 	public void excute() {
 		JFrame f = new JFrame("메인페이지");
 		DAO dao = new DAO();
@@ -49,17 +49,17 @@ public class Mainscreen {
 
 		// 로고크기조절&삽입
 		ImageIcon imgTest = new ImageIcon(getClass().getResource("../img/logo.jpg"));
-		imgTest = imageSetSize(imgTest, 129, 129);
+		imgTest = imageSetSize(imgTest, 60, 60);
 		JLabel logo = new JLabel(imgTest);
 //		logo.setIcon(imgTest);
-		logo.setSize(130, 130);
+		logo.setSize(100, 100);
 		logo.setLocation(60, 60);
 
-		//버튼을 누르면 다른 클래스로 이동
-				java.net.URL imageUrl2 = getClass().getResource("../img/mapimg.jpg");
-				JButton mapimg = new JButton(new ImageIcon(imageUrl2));
-				java.net.URL imageUrl3 = getClass().getResource("../img/calenderimg.jpg");
-				JButton calenderimg = new JButton(new ImageIcon(imageUrl3));
+		// 버튼을 누르면 다른 클래스로 이동
+		java.net.URL imageUrl2 = getClass().getResource("../img/mapimg.jpg");
+		JButton mapimg = new JButton(new ImageIcon(imageUrl2));
+		java.net.URL imageUrl3 = getClass().getResource("../img/calenderimg.jpg");
+		JButton calenderimg = new JButton(new ImageIcon(imageUrl3));
 		mapimg.setSize(330, 200);
 		mapimg.setLocation(50, 550);
 		calenderimg.setSize(330, 200);
@@ -79,33 +79,33 @@ public class Mainscreen {
 		Dimension screenSize = tk.getScreenSize();
 		f.setLocation(screenSize.width / 2 - 800 / 2, screenSize.height / 2 - 800 / 2);
 		// 버튼
-		//버튼
-				JButton mpg = new JButton("마이페이지");
-				mpg.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						f.dispose();
-						new Pframe(); 
-					}
-				});
-				
-				JButton healthbutton = new JButton("나의건강일지");
-				healthbutton.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						f.dispose();
-						new HealthCheck();
-					}
-				});
-				
-				JButton boardbutton = new JButton("게시판이동");
-				boardbutton.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						f.dispose();
-						new Boardset();
-					}
-				});
+		// 버튼
+		JButton mpg = new JButton("마이페이지");
+		mpg.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				f.dispose();
+				new Pframe();
+			}
+		});
+
+		JButton healthbutton = new JButton("나의건강일지");
+		healthbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				f.dispose();
+				new HealthCheck();
+			}
+		});
+
+		JButton boardbutton = new JButton("게시판이동");
+		boardbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				f.dispose();
+				new Boardset();
+			}
+		});
 		mpg.setFont(font1);
 		healthbutton.setFont(font1);
 		boardbutton.setFont(font1);
@@ -130,6 +130,8 @@ public class Mainscreen {
 		popboardtext.setLocation(50, 310);
 
 		// 추가내용
+
+		int plz = 0;
 		JLabel bid = new JLabel("아이디");
 		bid.setBounds(0, 0, 155, 30);
 		bid.setHorizontalAlignment(JLabel.CENTER);
@@ -146,8 +148,7 @@ public class Mainscreen {
 		bviews.setBounds(570, 0, 120, 30);
 		bviews.setHorizontalAlignment(JLabel.CENTER);
 		popboardtext.add(bviews);
-		
-		
+
 		JLabel b1id = new JLabel();
 		b1id.setBounds(0, 30, 155, 50);
 		b1id.setHorizontalAlignment(JLabel.CENTER);
@@ -155,14 +156,17 @@ public class Mainscreen {
 		JButton b1title = new JButton();
 		b1title.setBounds(155, 30, 300, 50);
 		popboardtext.add(b1title);
+
+		// 버튼 클릭시 첫번째 게시글 나오게 하는 방법
 		b1title.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-
+				dao.showFrame1();
 			}
 		});
+
 		JLabel b1like = new JLabel();
 		b1like.setBounds(455, 30, 115, 50);
 		b1like.setHorizontalAlignment(JLabel.CENTER);
@@ -184,7 +188,7 @@ public class Mainscreen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				dao.showFrame2();
 			}
 		});
 		JLabel b2like = new JLabel();
@@ -208,7 +212,7 @@ public class Mainscreen {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				dao.showFrame3();
 			}
 		});
 		JLabel b3like = new JLabel();
@@ -246,7 +250,6 @@ public class Mainscreen {
 					b3like.setText(String.valueOf(like));
 					b3views.setText(String.valueOf(views));
 				}
-
 				i++;
 			}
 		} catch (SQLException e) {
@@ -270,18 +273,17 @@ public class Mainscreen {
 		maplink.setLocation(50, 490);
 		calendarlink.setSize(250, 60);
 		calendarlink.setLocation(405, 490);
-		//창닫기
-	f.addWindowListener(new WindowAdapter() {
-	    public void windowClosing(WindowEvent evt) {
-	        int resp = JOptionPane.showConfirmDialog(f, "정말 로그아웃 하시겠습니까?",
-	            "Exit?", JOptionPane.YES_NO_OPTION);
-	        if (resp == JOptionPane.YES_OPTION) {
-	        	f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-	        } else {
-	            f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-	        }
-	    }
-	});
+		// 창닫기
+		f.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent evt) {
+				int resp = JOptionPane.showConfirmDialog(f, "정말 로그아웃 하시겠습니까?", "Exit?", JOptionPane.YES_NO_OPTION);
+				if (resp == JOptionPane.YES_OPTION) {
+					f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				} else {
+					f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+				}
+			}
+		});
 
 		f.add(logo);
 		f.add(mapimg);

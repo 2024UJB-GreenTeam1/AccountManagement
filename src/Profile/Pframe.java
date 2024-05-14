@@ -70,7 +70,7 @@ public class Pframe {
 			}
 		});
 		// 로고크기조절&삽입
-		ImageIcon imgTest = new ImageIcon(getClass().getResource("../img/logo.jpg"));
+		ImageIcon imgTest = new ImageIcon(getClass().getResource("../img/logo1.jpg"));
 		imgTest = imageSetSize(imgTest, 119, 119);
 		JButton logo = new JButton(imgTest);
 //		logo.setIcon(imgTest);
