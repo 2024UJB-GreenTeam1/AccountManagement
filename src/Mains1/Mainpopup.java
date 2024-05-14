@@ -56,7 +56,7 @@ public class Mainpopup {
 		referenceLabel.setFont(font1);
 
 		referenceLabel.setSize(500, 50);
-		referenceLabel.setLocation(190, 530);
+		referenceLabel.setLocation(200, 530);
 
 		Label todaydateLabel = new Label("오늘 날짜는");
 		Label todaydateLabel2 = new Label("입니다.");
@@ -232,23 +232,28 @@ public class Mainpopup {
 		scc.setSize(80, 60);
 		scc.setLocation(430, 600);
 		scc.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					int weight = Integer.parseInt(todayweightText.getText());
-					int useupc = Integer.parseInt(todayHealthText.getText());
-					int intakec = Integer.parseInt(todayfoodText.getText());
-					int sleep = Integer.parseInt(todaysleepText.getText());
-					int water = Integer.parseInt(todaywaterText.getText());
+		    public void actionPerformed(ActionEvent e) {
+		        try {
+		            int weight = Integer.parseInt(todayweightText.getText());
+		            int useupc = Integer.parseInt(todayHealthText.getText());
+		            int intakec = Integer.parseInt(todayfoodText.getText());
+		            int sleep = Integer.parseInt(todaysleepText.getText());
+		            int water = Integer.parseInt(todaywaterText.getText());
 
-					MainpopupDAO dao = new MainpopupDAO();
-					dao.insertDailyInput(weight, useupc, intakec, sleep, water);
-					JOptionPane.showMessageDialog(f, "데이터가 성공적으로 저장되었습니다.");
-				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(f, "입력 형식이 올바르지 않습니다. 숫자를 입력하세요.");
-				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(f, "데이터 저장 중 오류가 발생했습니다: " + ex.getMessage());
-				}
-			}
+		            MainpopupDAO dao = new MainpopupDAO();
+		            dao.insertDailyInput(weight, useupc, intakec, sleep, water);
+		            JOptionPane.showMessageDialog(f, "데이터가 성공적으로 저장되었습니다.");
+		            
+		            f.setVisible(false);
+		            Mainscreen mainScreen = new Mainscreen();
+		            mainScreen.setVisible(true);
+
+		        } catch (NumberFormatException ex) {
+		            JOptionPane.showMessageDialog(f, "입력 형식이 올바르지 않습니다. 숫자를 입력하세요.");
+		        } catch (Exception ex) {
+		            JOptionPane.showMessageDialog(f, "데이터 저장 중 오류가 발생했습니다: " + ex.getMessage());
+		        }
+		    }
 		});
 
 		Button resetButton = new Button("리셋");

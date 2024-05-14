@@ -4,6 +4,8 @@ package Mains1;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -30,11 +33,17 @@ public class CalendarMemo {				/////////년월이 입력 안받아짐.
 	
     // 날짜 얻기
 	private String selectedDate;	
-    public CalendarMemo(String selectedDate) {
-        this.selectedDate = selectedDate;
-    }
+	private String selectedMonth;	
+	private String selectedYear;	
 
-   public void excute() {
+   public CalendarMemo(String selectedDate, String selectedMonth, String selectedYear) {
+		// TODO Auto-generated constructor stub
+	   this.selectedDate = selectedDate;
+	   this.selectedMonth = selectedMonth;
+	   this.selectedYear = selectedYear;
+	}
+
+public void excute() {
       
 	   
 	   dao = new memoDAO();
@@ -64,37 +73,19 @@ public class CalendarMemo {				/////////년월이 입력 안받아짐.
       JButton modificationButton = new JButton("등록");
       
       
-      
-      
-      ////////
-      
+
       modificationButton.addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent e) {
 //              saveData(titleField.getText(),comments.getText()); // 입력된 텍스트 데이터 저장
-        	  CalendarMain calendar = new CalendarMain();
-      	   ////////////////////////////////////
-            calendar.yearCombo.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-			   String year = calendar.yearCombo.getSelectedItem().toString();
-					}
-            });
-            calendar.yearCombo.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-				String month = calendar.monthCombo.getSelectedItem().toString();
-					}
-            });
-///////////////////////////////////
-              // 날짜 얻기
-              System.out.println("선택된 날짜: " + selectedDate);
-            		  ;
+        	  CalendarMain1 calendar = new CalendarMain1();
 
               // 월과 일을 MM과 dd 포맷으로 맞추기 위해 필요하면 '0'을 추가
-              month = String.format("%02d", Integer.parseInt(month));
+        	  selectedMonth = String.format("%02d", Integer.parseInt(selectedMonth));
               String date1 = String.format("%02d", Integer.parseInt(selectedDate));
 
               // 포맷을 사용하여 LocalDate 객체 생성
               DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-              LocalDate date5 = LocalDate.parse(year + month + date1, formatter);
+              LocalDate date5 = LocalDate.parse(selectedYear + selectedMonth + date1, formatter);
 
       		PreparedStatement pstmt = null;
 			////////////////////
@@ -117,6 +108,9 @@ public class CalendarMemo {				/////////년월이 입력 안받아짐.
 				comments.setText("");
 				System.out.println("저장완료");
 				f.dispose();
+				// 완료메시지
+				JOptionPane.showMessageDialog(f, 
+						"일정이 등록되었습니다.", "BoardWrite", JOptionPane.ERROR_MESSAGE);
 
 			} catch (SQLException e1) {
 				e1.printStackTrace();
@@ -144,13 +138,18 @@ public class CalendarMemo {				/////////년월이 입력 안받아짐.
       f.add(modificationButton);
       comments.selectAll();
       f.setVisible(true);
-//		// 프로그램 창 닫기
-//		f.addWindowListener(new WindowAdapter() {
-//		    public void windowClosing(WindowEvent evt) {
-//				JOptionPane.showMessageDialog(f, 
-//						  "ㅁ을 완료해주십시오", "ErrorMsg", JOptionPane.ERROR_MESSAGE);
-//		    }
-//		});
+  	//창닫기
+  	f.addWindowListener(new WindowAdapter() {
+  	    public void windowClosing(WindowEvent evt) {
+  	        int resp = JOptionPane.showConfirmDialog(f, "일정입력을 중단하시겠습니까?",
+  	            "Exit?", JOptionPane.YES_NO_OPTION);
+  	        if (resp == JOptionPane.YES_OPTION) {
+  	        	f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+  	        } else {
+  	            f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+  	        }
+  	    }
+  	});
 		
 
 

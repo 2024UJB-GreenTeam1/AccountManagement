@@ -33,7 +33,7 @@ public class memoDAO {
         // 데이터베이스에서 날짜별 메모 데이터 가져오기
         try (Connection conn = DriverManager.getConnection(url, user, password)) {
             for (JButton btn : dayButtons) {
-            	   CalendarMain calendar = new CalendarMain();
+            	   CalendarMain1 calendar = new CalendarMain1();
                    String year = calendar.yearCombo.getSelectedItem().toString();
                    String month = calendar.monthCombo.getSelectedItem().toString();
                    String day = btn.getText();
