@@ -238,9 +238,6 @@ public class Mainpopup {
           public void actionPerformed(ActionEvent e) {
 
               f.setVisible(false);
-              // main 메소드를 호출합니다.
-             Mainscreen mainscreen = new Mainscreen();
-             mainscreen.excute();
           }
       });
 
