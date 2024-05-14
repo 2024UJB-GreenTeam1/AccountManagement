@@ -4,6 +4,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import login.InfoVo;
+
 //자바 프로그램에서 데이터베이스 작업만 수행, 자바 프로그램의 다른 기능을 하는 클래스와 구분해 작업
 public class MainpopupDAO {
     String driver = "oracle.jdbc.driver.OracleDriver";
@@ -34,13 +36,15 @@ public class MainpopupDAO {
     public void insertDailyInput(int weight, int useupc, int intakec, int sleep, int water) {
         try {
             connDB(); // 데이터베이스 연결 확인 및 연결
-            String sql = "INSERT INTO DAILYINPUT (WEIGHT, USEUPC, INTAKEC, SLEEP, WATER) VALUES (?, ?, ?, ?, ?)";
+            String userId1 = InfoVo.getInstance().getId();	
+            String sql = "INSERT INTO DAILYINPUT (WEIGHT, USEUPC, INTAKEC, SLEEP, WATER,USER_ID,DNO_SEQ) VALUES (?,?, ?, ?, ?, ?,SEQ_DNO_SEQ.NEXTVAL)";
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, weight);
             pstmt.setInt(2, useupc);
             pstmt.setInt(3, intakec);
             pstmt.setInt(4, sleep);
             pstmt.setInt(5, water);
+            pstmt.setString(6, userId1);
             pstmt.executeUpdate(); // 쿼리 실행
         } catch (ClassNotFoundException e) {
             System.err.println("JDBC 드라이버를 찾을 수 없습니다.");
