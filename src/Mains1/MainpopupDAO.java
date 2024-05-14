@@ -33,18 +33,19 @@ public class MainpopupDAO {
         }
     }
 
-    public void insertDailyInput(int weight, int useupc, int intakec, int sleep, int water) {
+    public void insertDailyInput(int weight, int useupc, int intakec, int sleep, int water, int exercisehour) {
         try {
             connDB(); // 데이터베이스 연결 확인 및 연결
             String userId1 = InfoVo.getInstance().getId();	
-            String sql = "INSERT INTO DAILYINPUT (WEIGHT, USEUPC, INTAKEC, SLEEP, WATER,USER_ID,DNO_SEQ) VALUES (?,?, ?, ?, ?, ?,SEQ_DNO_SEQ.NEXTVAL)";
+            String sql = "INSERT INTO DAILYINPUT (WEIGHT, USEUPC, INTAKEC, SLEEP, WATER,EXHOUR,USER_ID,DNO_SEQ) VALUES (?,?,?, ?, ?, ?, ?,SEQ_DNO_SEQ.NEXTVAL)";
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, weight);
             pstmt.setInt(2, useupc);
             pstmt.setInt(3, intakec);
             pstmt.setInt(4, sleep);
             pstmt.setInt(5, water);
-            pstmt.setString(6, userId1);
+            pstmt.setInt(6, exercisehour); 
+            pstmt.setString(7, userId1);
             pstmt.executeUpdate(); // 쿼리 실행
         } catch (ClassNotFoundException e) {
             System.err.println("JDBC 드라이버를 찾을 수 없습니다.");
