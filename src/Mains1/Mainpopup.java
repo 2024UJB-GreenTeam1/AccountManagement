@@ -1,6 +1,6 @@
 package Mains1;
 
-
+//수정본
 import java.awt.Button;
 import java.awt.Choice;
 import java.awt.Dimension;
@@ -238,17 +238,33 @@ public class Mainpopup {
       // 버튼
 
       Button scc = new Button("완료");
-      scc.setFont(font1);
-      scc.setSize(80, 60);
-      scc.setLocation(430, 600);
-         
-      scc.addActionListener(new ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
+		scc.setFont(font1);
+		scc.setSize(80, 60);
+		scc.setLocation(430, 600);
+		scc.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        try {
+		            int weight = Integer.parseInt(todayweightText.getText());
+		            int useupc = Integer.parseInt(todayHealthText.getText());
+		            int intakec = Integer.parseInt(todayfoodText.getText());
+		            int sleep = Integer.parseInt(todaysleepText.getText());
+		            int water = Integer.parseInt(todaywaterText.getText());
 
-              f.setVisible(false);
-          }
-      });
+		            MainpopupDAO dao = new MainpopupDAO();
+		            dao.insertDailyInput(weight, useupc, intakec, sleep, water);
+		            JOptionPane.showMessageDialog(f, "데이터가 성공적으로 저장되었습니다.");
+		            
+		            f.setVisible(false);
+		            Mainscreen mainScreen = new Mainscreen();
+		            mainScreen.setVisible(true);
+
+		        } catch (NumberFormatException ex) {
+		            JOptionPane.showMessageDialog(f, "입력 형식이 올바르지 않습니다. 숫자를 입력하세요.");
+		        } catch (Exception ex) {
+		            JOptionPane.showMessageDialog(f, "데이터 저장 중 오류가 발생했습니다: " + ex.getMessage());
+		        }
+		    }
+		});
 
       Button resetButton = new Button("리셋");
       resetButton.setFont(font1);
@@ -315,7 +331,7 @@ public class Mainpopup {
                }
 
                totalCalories += weight * factor * time; // 기존 칼로리에 추가
-               todayHealthText.setText(String.format("%.2f", totalCalories)); // 텍스트 필드에 누적 칼로리 표시
+               todayHealthText.setText(String.format("%.0f", totalCalories)); // 텍스트 필드에 누적 칼로리 표시
             } catch (NumberFormatException ex) {
                todayweightText.setText("Error!");
             }
@@ -353,7 +369,7 @@ public class Mainpopup {
             }
             int quantity = Integer.parseInt(foodchoice2.getSelectedItem().replace("g", ""));
             totalFoodCalories += (caloriesPer100g * quantity / 100);
-            todayfoodText.setText(String.format("%.2f", totalFoodCalories));
+            todayfoodText.setText(String.format("%.0f", totalFoodCalories));
          }
       });
 
@@ -368,7 +384,7 @@ public class Mainpopup {
             if (sleepHours < 0) {
                sleepHours += 24; // 다음 날까지 수면이 이어지는 경우
             }
-            todaysleepText.setText(sleepHours + "시간");
+            todaysleepText.setText(sleepHours + "");
          }
       });
 
