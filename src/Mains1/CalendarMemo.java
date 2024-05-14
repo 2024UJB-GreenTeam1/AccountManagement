@@ -28,8 +28,8 @@ public class CalendarMemo {				/////////년월이 입력 안받아짐.
 	public static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
 	public static final String USERID = "c##green";
 	public static final String USERPWD = "green1234";
-	private memoDAO dao;
-	ArrayList<memoVo> list;
+//	private memoDAO dao;
+//	ArrayList<memoVo> list;
 	
     // 날짜 얻기
 	private String selectedDate;	
@@ -46,7 +46,7 @@ public class CalendarMemo {				/////////년월이 입력 안받아짐.
 public void excute() {
       
 	   
-	   dao = new memoDAO();
+//	   dao = new memoDAO();
 
       JFrame f = new JFrame("일정관리 입력");
       f.setSize(400, 300);
