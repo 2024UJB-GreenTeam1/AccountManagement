@@ -1,11 +1,22 @@
 package Mains1;						/////일정확인달력프레임
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Calendar;
 import javax.swing.*;					
 
 public class CalendarMain extends JPanel implements ActionListener, ItemListener {
 	Font fnt = new Font("맑은 고딕", Font.BOLD, 20); // 기본 폰트 설정
+	// 데이터베이스 연결 정보
+	String DRIVER = "oracle.jdbc.driver.OracleDriver";
+	String URL = "jdbc:oracle:thin:@localhost:1521:xe";
+	String USER = "c##green";
+	String PASSWORD = "green1234";
+
 
 	// UI 컴포넌트 선언
 	JPanel selectPane = new JPanel(); // 상단의 선택 패널
@@ -24,6 +35,8 @@ public class CalendarMain extends JPanel implements ActionListener, ItemListener
 	int year, month; // 선택된 연도 및 월
 
 	public CalendarMain(JFrame frame) {
+		
+
 		this.mainFrame = frame;
 		setLayout(new BorderLayout());
 		date = Calendar.getInstance(); // 현재 날짜와 시간을 가져오기
@@ -143,20 +156,77 @@ public class CalendarMain extends JPanel implements ActionListener, ItemListener
 			dayPane.add(new JLabel(" ")); // 첫째 날 전까지 공백 추가
 		}
 		for (int day = 1; day <= lastDay; day++) {
+			JPanel buttonPanel = new JPanel(new BorderLayout());
 			JButton btn = new JButton(String.valueOf(day));
 			btn.setFont(fnt);
 			btn.setHorizontalAlignment(JButton.CENTER);
+			JLabel label1 = new JLabel("<html>"+"<br/>" + getScheduleTitle(year, month, day) + "</html>");
+			label1.setHorizontalAlignment(JLabel.CENTER);
 			date.set(Calendar.DATE, day); // 날짜 설정
 			int w = date.get(Calendar.DAY_OF_WEEK);
 			if (w == 1)
 				btn.setForeground(Color.RED); // 일요일은 빨간색으로 표시
 			if (w == 7)
 				btn.setForeground(Color.BLUE); // 토요일은 파란색으로 표시
-			btn.addActionListener(this); // 이벤트 리스너 추가
-			dayPane.add(btn); // 버튼을 날짜 패널에 추가
+			  btn.addActionListener(new ActionListener() {
+		            public void actionPerformed(ActionEvent e) {
+//		            	int day = btn.getText();
+		            	int day = Integer.parseInt(btn.getText());
+		            	   int month = Integer.parseInt(monthCombo.getSelectedItem().toString());
+		            	   int year = Integer.parseInt(yearCombo.getSelectedItem().toString());         	
+//		            	   EventDetails event = new EventDetails();
+		                showDetailWindow(year, month, day); // 상세 창 표시
+		            }
+		        }); // 이벤트 리스너 추가
+//			dayPane.add(btn); // 버튼을 날짜 패널에 추가
+//			btn.add(label1);
+			
+			buttonPanel.add(btn, BorderLayout.NORTH);
+			buttonPanel.add(label1, BorderLayout.CENTER);
+			dayPane.add(buttonPanel);
 		}
 	}
+	   private void showDetailWindow(int year, int month, int day) {
+		   
+	        EventDetails details = getEventDetails(year, month, day);
+	        JOptionPane.showMessageDialog(mainFrame, 
+	            "일정: " + details.title + "\n내용: " + details.content, 
+	            "Event Details", 
+	            JOptionPane.INFORMATION_MESSAGE);
+	    }
+//////////////////////////////////////////////////////////////////////
+	    private String getScheduleTitle(int year, int month, int day) {
+	        // 데이터베이스 연결 및 SQL 쿼리 실행
+	        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+	             PreparedStatement pstmt = conn.prepareStatement("SELECT CMTITLE FROM Calendar_Memo WHERE cmdate = ?")) {
+	            pstmt.setDate(1, java.sql.Date.valueOf(year + "-" + month + "-" + day));
+	            try (ResultSet rs = pstmt.executeQuery()) {
+	                if (rs.next()) {
+	                    return rs.getString("CMTITLE");
+	                }
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return "";
+	    }
 
+	    private EventDetails getEventDetails(int year, int month, int day) {
+	        // 데이터베이스 연결 및 SQL 쿼리 실행
+	        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+	             PreparedStatement pstmt = conn.prepareStatement("SELECT CMTITLE, cmcontent FROM Calendar_Memo WHERE cmdate = ?")) {
+	            pstmt.setDate(1, java.sql.Date.valueOf(year + "-" + month + "-" + day));
+	            try (ResultSet rs = pstmt.executeQuery()) {
+	                if (rs.next()) {
+	                    return new EventDetails(rs.getString("CMTITLE"), rs.getString("cmcontent"));
+	                }
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        return new EventDetails("", "");
+	    }
+	//////////////////////////////////////////////////////////
 	public void setYear() {
 		for (int i = year - 50; i < year + 20; i++) {
 			yearCombo.addItem(i); // 연도 콤보 박스에 연도 추가
@@ -184,7 +254,7 @@ public class CalendarMain extends JPanel implements ActionListener, ItemListener
 	}
 //달력이 Jframe 이라 이걸로 연결해줬음
 	public static void displayCalendar() {
-	    JFrame frame = new JFrame("달력");
+	    JFrame frame = new JFrame("일정확인");
 	    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	    frame.add(new CalendarMain(frame));
 	    frame.pack();
@@ -194,4 +264,6 @@ public class CalendarMain extends JPanel implements ActionListener, ItemListener
 	    
 	    
 	}
+
 }
+

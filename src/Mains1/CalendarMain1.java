@@ -211,7 +211,7 @@ public void nextMonth() {
    }
 //달력이 Jframe 이라 이걸로 연결해줬음
    public static void displayCalendar1() {
-     frame1 = new JFrame("달력");
+     frame1 = new JFrame("일정입력");
        frame1.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
        frame1.add(new CalendarMain1());
        frame1.pack();

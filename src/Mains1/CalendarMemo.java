@@ -73,28 +73,11 @@ public void excute() {
       JButton modificationButton = new JButton("등록");
       
       
-      
-//      calendar.yearCombo.addActionListener(new ActionListener() {
-//				public void actionPerformed(ActionEvent e) {
-//			String month = calendar.monthCombo.getSelectedItem().toString();
-//				}
-//      });
-      
-      
-      ////////
-      
+
       modificationButton.addActionListener(new ActionListener() {
           public void actionPerformed(ActionEvent e) {
 //              saveData(titleField.getText(),comments.getText()); // 입력된 텍스트 데이터 저장
         	  CalendarMain1 calendar = new CalendarMain1();
-
-//			   String year = calendar.yearCombo.getSelectedItem().toString();
-//				String month = calendar.monthCombo.selectedMonth.toString();
-
-///////////////////////////////////
-              // 날짜 얻기
-//              System.out.println("선택된 날짜: " + selectedDate);
-            	
 
               // 월과 일을 MM과 dd 포맷으로 맞추기 위해 필요하면 '0'을 추가
         	  selectedMonth = String.format("%02d", Integer.parseInt(selectedMonth));
