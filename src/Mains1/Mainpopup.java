@@ -5,6 +5,7 @@ import java.awt.Button;
 import java.awt.Choice;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Label;
 import java.awt.TextField;
 import java.awt.Toolkit;
@@ -23,7 +24,14 @@ public class Mainpopup {
 
    private static double totalCalories = 0; // 전역변수로 칼로리를 누적해서 관리해줌
    private static double totalFoodCalories = 0; // 마찬가지임
-
+	// 이미지크기조절셋업
+	ImageIcon imageSetSize(ImageIcon icon, int i, int j) { // image Size Setting
+		Image ximg = icon.getImage(); // ImageIcon을 Image로 변환.
+		Image yimg = ximg.getScaledInstance(i, j, java.awt.Image.SCALE_SMOOTH);
+		ImageIcon xyimg = new ImageIcon(yimg);
+		return xyimg;
+	}
+	
    // 프레임 생성
    public void excute() {
       JFrame f = new JFrame("메인페이지 팝업");
@@ -41,7 +49,8 @@ public class Mainpopup {
       // 로고 객체 생성
       JLabel logo;
       // 로고 이미지 생성
-		ImageIcon imgTest = new ImageIcon(getClass().getResource("../img/logo.jpg"));
+  	ImageIcon imgTest = new ImageIcon(getClass().getResource("../img/logo.jpg"));
+	imgTest = imageSetSize(imgTest, 79, 79);
       logo = new JLabel(imgTest);
       // 로고 이미지 크기 및 위치
       logo.setSize(80, 80);
