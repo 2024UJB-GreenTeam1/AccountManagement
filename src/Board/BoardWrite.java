@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
@@ -18,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -220,6 +222,11 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 
 				maindptitlecontent.setText("");
 				maincontent2.setText("");
+				
+				// 완료메시지
+				JOptionPane.showMessageDialog(f, 
+						"게시글 등록이 완료되었습니다.", "BoardWrite", JOptionPane.INFORMATION_MESSAGE);
+
 
 			} catch (SQLException | FileNotFoundException e2) {
 				e2.printStackTrace();

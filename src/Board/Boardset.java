@@ -25,6 +25,9 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+
+// import Mains1.Mainscreen;
+
 import Post.Read;
 
 
@@ -67,13 +70,23 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
    int plz = 0;
    int bcno;
    int cnt =0;
-//   ContainerObject.revalidate();
-//   ContainerObject.repaint();
 
-public Boardset() {
-		
+// 이미지크기조절셋업
+	ImageIcon imageSetSize(ImageIcon icon, int i, int j) { // image Size Setting
+		Image ximg = icon.getImage(); // ImageIcon을 Image로 변환.
+		Image yimg = ximg.getScaledInstance(i, j, java.awt.Image.SCALE_SMOOTH);
+		ImageIcon xyimg = new ImageIcon(yimg);
+		return xyimg;
+	}
+   
+   public Boardset() {
+
       f = new JFrame("게시판");
-      logo = new JButton(new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/1o0.jpg"));
+      
+   // 이미지크기조절&삽입
+		ImageIcon imgTest = new ImageIcon(getClass().getResource("../img/logo.jpg"));
+		imgTest = imageSetSize(imgTest, 92, 92);
+      logo = new JButton(imgTest);
       logo.setBorderPainted(false);
       logo.setFocusPainted(false);
       logo.setContentAreaFilled(false);
@@ -83,15 +96,15 @@ public Boardset() {
 
       np = new JButton("새글작성");
       np.addActionListener(this);
-      
-      ImageIcon search3 = new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/test/search2.jpg");
+    
+      ImageIcon search3 = new ImageIcon(getClass().getResource("../img/search2.jpg"));
       search2 = new JButton(search3);// 검색 버튼
       search2.setBorderPainted(false);
       search2.setFocusPainted(false);
       search2.setContentAreaFilled(false);
       search2.addActionListener(this);
 
-      ImageIcon before1 = new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/test/before.jpg");
+      ImageIcon before1 = new ImageIcon(getClass().getResource("../img/before.jpg"));
       before = new JButton(before1);
       before.addActionListener(this);
       before.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
@@ -100,7 +113,7 @@ public Boardset() {
       // before.setFocusPainted(false); //초점 잡히냐
       // before.setContentAreaFilled(false); //테두리
 
-      ImageIcon after1 = new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/test/after.jpg");
+      ImageIcon after1 = new ImageIcon(getClass().getResource("../img/after.jpg"));
       after = new JButton(after1);
       after.addActionListener(this);
       after.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
@@ -175,8 +188,16 @@ public Boardset() {
       board.setSize(200, 100); // x 클수록 오른쪽 y 클수록 아래로
       board.setLocation(320, 10); // 게시판 라벨
 
-      logo.setSize(100, 100); // 로고
+      logo.setSize(93, 93); // 로고
       logo.setLocation(10, 10);
+		logo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Mainscreen main = new Mainscreen(); // 메인페이지열기
+				f.dispose();
+				main.excute();
+			}
+		});
 
       np.setSize(85, 30); // 새글작성
       np.setLocation(7, 700);
