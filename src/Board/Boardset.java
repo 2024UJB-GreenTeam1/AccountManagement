@@ -4,7 +4,6 @@ package Board;
 import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,11 +25,19 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-
 import Post.Read;
 
+
+
+// 실행시켜서 가운데 아래 검색기능 오류 고치기 
+// 왜 뜨는지 납득이 안됨 
+// 이거만 고치고 인터페이스 수정만 하면 얼추 게시판 게시글은 다 될듯
+// 해결 빨리 되면 추천수랑 조회수 바로 업데이트 되게 
+
+
+
 public class Boardset extends ConnectionB implements ActionListener, WindowListener {
-   private JFrame f;
+   public JFrame f;
    private JButton np, search2, before, after, logo, click;
    private JLabel board, writer, writing, date, recommend, check, page, writer2, writing2, date2, recommend2, check2;
    private TextField search;
@@ -60,7 +67,11 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
    int plz = 0;
    int bcno;
    int cnt =0;
-   public Boardset() {
+//   ContainerObject.revalidate();
+//   ContainerObject.repaint();
+
+public Boardset() {
+		
       f = new JFrame("게시판");
       logo = new JButton(new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/1o0.jpg"));
       logo.setBorderPainted(false);
@@ -195,7 +206,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 
       search.setSize(200, 30); // 검색창
       search.setLocation(285, 730);
-
+      
       search2.setSize(50, 30); // 검색버튼
       search2.setLocation(485, 730);
 
@@ -363,6 +374,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
       blikes_1.setHorizontalAlignment(JLabel.CENTER);
       main.add(blikes_1);
 
+
       blikes_2 = new JLabel("");
       blikes_2.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
       blikes_2.setBounds(624, 78, 85, 52);
@@ -492,16 +504,17 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
             String sql  = "" + "select bcno,bctitle,bcviews " + "from BCONTENTS " + "where BCNO = "
                   + "'" +  plz  + "'";
             ConnectionB cb = new ConnectionB(); // 연결
-            Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+            Connection conn = DriverManager.getConnection(url, user, password);
             PreparedStatement pstmt = conn.prepareStatement(sql);
             setRs(pstmt.executeQuery());
        //     System.out.println(getRs());
+       //    f.dispose();
             Read read = new Read(plz);
             read.showFrame(plz);
-                  
-           
-            
+           //       list();
+      
      
+            
 
             }catch(SQLException e1) {
          e1.printStackTrace();
@@ -510,9 +523,10 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
             String sql  = "" + "update bcontents " + "set BCVIEWS = BCVIEWS +1 " + "where BCNO = "
                   + "'" +  plz  + "'";
             ConnectionB cb = new ConnectionB(); // 연결
-            Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+            Connection conn = DriverManager.getConnection(url, user, password);
             PreparedStatement pstmt = conn.prepareStatement(sql);
             setRs(pstmt.executeQuery());
+            f.dispose();
             }   catch(SQLException e1) {
                 e1.printStackTrace();
             }  
@@ -539,7 +553,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
              String sql  = "" + "select bcno,bctitle,bcviews " + "from BCONTENTS " + "where BCTITLE = "
                    + "'" +  plz  + "'";
              ConnectionB cb = new ConnectionB(); // 연결
-             Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+             Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement pstmt = conn.prepareStatement(sql);
              setRs(pstmt.executeQuery());
         //     System.out.println(getRs());
@@ -555,9 +569,10 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
         String sql  = "" + "update bcontents " + "set BCVIEWS = BCVIEWS +1 " + "where BCNO = "
                 + "'" +  plz  + "'";
           ConnectionB cb = new ConnectionB(); // 연결
-          Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+          Connection conn = DriverManager.getConnection(url, user, password);
           PreparedStatement pstmt = conn.prepareStatement(sql);
           setRs(pstmt.executeQuery());
+          f.dispose();
           }   catch(SQLException e1) {
               e1.printStackTrace();
           }  
@@ -580,7 +595,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
              String sql  = "" + "select bcno,bctitle,bcviews " + "from BCONTENTS " + "where BCTITLE = "
                    + "'" +  plz  + "'";
              ConnectionB cb = new ConnectionB(); // 연결
-             Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+             Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement pstmt = conn.prepareStatement(sql);
              setRs(pstmt.executeQuery());
         //     System.out.println(getRs());
@@ -597,9 +612,10 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
                  String sql  = "" + "update bcontents " + "set BCVIEWS = BCVIEWS +1 " + "where BCNO = "
                        + "'" +  plz  + "'";
                  ConnectionB cb = new ConnectionB(); // 연결
-                 Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+                 Connection conn = DriverManager.getConnection(url, user, password);
                  PreparedStatement pstmt = conn.prepareStatement(sql);
                  setRs(pstmt.executeQuery());
+                 f.dispose();
                  }   catch(SQLException e1) {
                      e1.printStackTrace();
                  }  
@@ -620,9 +636,10 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
              String sql  = "" + "select bcno,bctitle,bcviews " + "from BCONTENTS " + "where BCTITLE = "
                    + "'" +  plz  + "'";
              ConnectionB cb = new ConnectionB(); // 연결
-             Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+             Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement pstmt = conn.prepareStatement(sql);
              setRs(pstmt.executeQuery());
+             
         //     System.out.println(getRs());
              Read read = new Read(plz);
              read.showFrame(plz);
@@ -635,9 +652,10 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
                  String sql  = "" + "update bcontents " + "set BCVIEWS = BCVIEWS +1 " + "where BCNO = "
                        + "'" +  plz  + "'";
                  ConnectionB cb = new ConnectionB(); // 연결
-                 Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+                 Connection conn = DriverManager.getConnection(url, user, password);
                  PreparedStatement pstmt = conn.prepareStatement(sql);
                  setRs(pstmt.executeQuery());
+                 f.dispose();
                  }   catch(SQLException e1) {
                      e1.printStackTrace();
                  }  
@@ -659,7 +677,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
              String sql  = "" + "select bcno,bctitle,bcviews " + "from BCONTENTS " + "where BCTITLE = "
                    + "'" +  plz  + "'";
              ConnectionB cb = new ConnectionB(); // 연결
-             Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+             Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement pstmt = conn.prepareStatement(sql);
              setRs(pstmt.executeQuery());
         //     System.out.println(getRs());
@@ -676,9 +694,10 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
                  String sql  = "" + "update bcontents " + "set BCVIEWS = BCVIEWS +1 " + "where BCNO = "
                        + "'" +  plz  + "'";
                  ConnectionB cb = new ConnectionB(); // 연결
-                 Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+                 Connection conn = DriverManager.getConnection(url, user, password);
                  PreparedStatement pstmt = conn.prepareStatement(sql);
                  setRs(pstmt.executeQuery());
+                 f.dispose();
                  }   catch(SQLException e1) {
                      e1.printStackTrace();
                  }  
@@ -698,7 +717,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
              String sql  = "" + "select bcno,bctitle,bcviews " + "from BCONTENTS " + "where BCTITLE = "
                    + "'" +  plz  + "'";
              ConnectionB cb = new ConnectionB(); // 연결
-             Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+             Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement pstmt = conn.prepareStatement(sql);
              setRs(pstmt.executeQuery());
         //     System.out.println(getRs());
@@ -714,9 +733,10 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
                  String sql  = "" + "update bcontents " + "set BCVIEWS = BCVIEWS +1 " + "where BCNO = "
                        + "'" +  plz  + "'";
                  ConnectionB cb = new ConnectionB(); // 연결
-                 Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+                 Connection conn = DriverManager.getConnection(url, user, password);
                  PreparedStatement pstmt = conn.prepareStatement(sql);
                  setRs(pstmt.executeQuery());
+                 f.dispose();
                  }   catch(SQLException e1) {
                      e1.printStackTrace();
                  }  
@@ -737,7 +757,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
              String sql  = "" + "select bcno,bctitle,bcviews " + "from BCONTENTS " + "where BCTITLE = "
                    + "'" +  plz  + "'";
              ConnectionB cb = new ConnectionB(); // 연결
-             Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+             Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement pstmt = conn.prepareStatement(sql);
              setRs(pstmt.executeQuery());
         //     System.out.println(getRs());
@@ -752,9 +772,10 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
                  String sql  = "" + "update bcontents " + "set BCVIEWS = BCVIEWS +1 " + "where BCNO = "
                        + "'" +  plz  + "'";
                  ConnectionB cb = new ConnectionB(); // 연결
-                 Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+                 Connection conn = DriverManager.getConnection(url, user, password);
                  PreparedStatement pstmt = conn.prepareStatement(sql);
                  setRs(pstmt.executeQuery());
+                 f.dispose();
                  }   catch(SQLException e1) {
                      e1.printStackTrace();
                  }  
@@ -775,7 +796,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
              String sql  = "" + "select bcno,bctitle,bcviews " + "from BCONTENTS " + "where BCTITLE = "
                    + "'" +  plz  + "'";
              ConnectionB cb = new ConnectionB(); // 연결
-             Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+             Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement pstmt = conn.prepareStatement(sql);
              setRs(pstmt.executeQuery());
         //     System.out.println(getRs());
@@ -791,9 +812,10 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
                  String sql  = "" + "update bcontents " + "set BCVIEWS = BCVIEWS +1 " + "where BCNO = "
                        + "'" +  plz  + "'";
                  ConnectionB cb = new ConnectionB(); // 연결
-                 Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+                 Connection conn = DriverManager.getConnection(url, user, password);
                  PreparedStatement pstmt = conn.prepareStatement(sql);
                  setRs(pstmt.executeQuery());
+                 f.dispose();
                  }   catch(SQLException e1) {
                      e1.printStackTrace();
                  }  
@@ -814,7 +836,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
              String sql  = "" + "select bcno,bctitle,bcviews " + "from BCONTENTS " + "where BCTITLE = "
                    + "'" +  plz  + "'";
              ConnectionB cb = new ConnectionB(); // 연결
-             Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+             Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement pstmt = conn.prepareStatement(sql);
              setRs(pstmt.executeQuery());
         //     System.out.println(getRs());
@@ -830,9 +852,10 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
                  String sql  = "" + "update bcontents " + "set BCVIEWS = BCVIEWS +1 " + "where BCNO = "
                        + "'" +  plz  + "'";
                  ConnectionB cb = new ConnectionB(); // 연결
-                 Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+                 Connection conn = DriverManager.getConnection(url, user, password);
                  PreparedStatement pstmt = conn.prepareStatement(sql);
                  setRs(pstmt.executeQuery());
+                 f.dispose();
                  }   catch(SQLException e1) {
                      e1.printStackTrace();
                  }  
@@ -853,7 +876,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
              String sql  = "" + "select bcno,bctitle,bcviews " + "from BCONTENTS " + "where BCTITLE = "
                    + "'" +  plz  + "'";
              ConnectionB cb = new ConnectionB(); // 연결
-             Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+             Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement pstmt = conn.prepareStatement(sql);
              setRs(pstmt.executeQuery());
         //     System.out.println(getRs());
@@ -868,9 +891,10 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
                  String sql  = "" + "update bcontents " + "set BCVIEWS = BCVIEWS +1 " + "where BCNO = "
                        + "'" +  plz  + "'";
                  ConnectionB cb = new ConnectionB(); // 연결
-                 Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+                 Connection conn = DriverManager.getConnection(url, user, password);
                  PreparedStatement pstmt = conn.prepareStatement(sql);
                  setRs(pstmt.executeQuery());
+                 f.dispose();
                  }   catch(SQLException e1) {
                      e1.printStackTrace();
                  }  
@@ -903,10 +927,16 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
    
     f.getContentPane().add(logo);
      f.getContentPane().add(board);
-     f.setVisible(true);
-     list();
+     if (f.isVisible()) {
+    	    f.setVisible(false);
+    	} else {
+    	    f.setVisible(true);
+    	    list();
+    	}
+     
    }
    public void list() { // 카테고리 없을때(전체)
+	//  f.revalidate();
       String num = category.getSelectedItem();
       int a = 0;
       String b = "";
@@ -917,8 +947,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
          try {
             String sql = "" + "select user_id,bctitle,bcdate,bclikes,bcviews,bcno " + "from BCONTENTS " + "order by bcdate DESC";
             ConnectionB cb = new ConnectionB(); // 연결
-            Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
-            PreparedStatement pstmt = conn.prepareStatement(sql);
+            Connection conn = DriverManager.getConnection(url, user, password);            PreparedStatement pstmt = conn.prepareStatement(sql);
             setRs(pstmt.executeQuery());
 
             int i = 0;
@@ -1120,7 +1149,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
          }
 
       } else {
-         list2();
+        list2();
       }
 
    }
@@ -1191,7 +1220,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
          search.setText("");
          String num = category.getSelectedItem();
          int a = 0;
-         String b = "";
+         String b = "0";
          if (num.equals("")) {
             a = 0;
             b = Integer.toString(a);
@@ -1199,7 +1228,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
             String sql = "" + "select user_id,bctitle,bcdate,bclikes,bcviews " + "from BCONTENTS " + "where bctitle = "
                   + "'" + "%" + want + "%" + "'";
             ConnectionB cb = new ConnectionB(); // 연결
-            Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+            Connection conn = DriverManager.getConnection(url, user, password);
             PreparedStatement pstmt = conn.prepareStatement(sql);
             setRs(pstmt.executeQuery());
             int i = 0;
@@ -1388,10 +1417,10 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
             b = Integer.toString(a);
          }
          try {  //카테고리x + 검색
-             String sql = "" + "select user_id,bctitle,bcdate,bclikes,bcviews " + "from BCONTENTS " + "where bno =" +b+
-             		" and bctitle like " + "'" + "%" + want + "%" + "'";
+             String sql =  " select user_id,bctitle,bcdate,bclikes,bcviews " + "from BCONTENTS " + "where bno =" +b+
+             		" and bctitle like " + "'%" + want + "%'";
              ConnectionB cb = new ConnectionB(); // 연결
-             Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+             Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement pstmt = conn.prepareStatement(sql);
              setRs(pstmt.executeQuery());
              int i = 0;
@@ -1399,10 +1428,10 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
              search5 = new String[1000];
              while (getRs().next()) {
                 String user_id = getRs().getString("user_id");
-                String bctitle = getRs().getString("bctitle");
                 String bcdate = getRs().getString("bcdate");
                 int bclikes = getRs().getInt("bclikes");
                 int bcviews = getRs().getInt("bcviews");
+                String bctitle = getRs().getString("bctitle");
                 search4[i] = (user_id + " " + " " + bcdate + " " + bclikes + " " + bcviews);
                 search5[i] = (bctitle);
                 i++;
@@ -1579,12 +1608,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
       int a = 0;
       String b = "";
       if (num.equals("Total")) {
-//         a = 1;
-//         b = Integer.toString(a);
-//         a = 2;
-//         b = Integer.toString(a);
-//         a = 3;
-//         b = Integer.toString(a);
+   
       }
       else if (num.equals("Exercise")) {
          a = 1;
@@ -1598,10 +1622,10 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
       }
       
       try {
-         String sql = "" + "select user_id,bctitle,bcdate,bclikes,bcviews " + "from bcontents " + "where bno = " + b
+         String sql = "" + "select user_id,bctitle,bcdate,bclikes,bcviews,bcno " + "from bcontents " + "where bno = " + b
                + " order by bcdate DESC";
          ConnectionB cb = new ConnectionB(); // 연결
-         Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+         Connection conn = DriverManager.getConnection(url, user, password);
          PreparedStatement pstmt = conn.prepareStatement(sql);
          setRs(pstmt.executeQuery());
 
@@ -1617,7 +1641,8 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
             String bcdate = getRs().getString("bcdate");
             int bclikes = getRs().getInt("bclikes");
             int bcviews = getRs().getInt("bcviews");
-            look[i] = (user_id + " " + " " + bcdate + " " + bclikes + " " + bcviews);
+            int bcno = getRs().getInt("bcno");
+            look[i] = (user_id + " "+ " "+ bcdate + " " + bclikes + " " + bcviews+ " " +bcno);
             look2[i] = (bctitle);
             // System.out.print(btitle+" "+bmain+" "+bdate+" "+busy+ "\n");
             i++;
@@ -1635,6 +1660,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
             dateno_1.setText(look[0 + pageplus].split(" ")[2]); // 데이트가 2,3번을 먹음
             blikes_1.setText(look[0 + pageplus].split(" ")[4]);
             clickno_1.setText(look[0 + pageplus].split(" ")[5]);
+            bcno_1.setText(look[0 + pageplus].split(" ")[6]);
          } else {
             writingno_1.setText("");
             titleno_1.setText("");
@@ -1649,6 +1675,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
             dateno_2.setText(look[1 + pageplus].split(" ")[2]);
             blikes_2.setText(look[1 + pageplus].split(" ")[4]);
             clickno_2.setText(look[1 + pageplus].split(" ")[5]);
+            bcno_2.setText(look[1 + pageplus].split(" ")[6]);
          } else {
             writingno_2.setText("");
             titleno_2.setText("");
@@ -1664,6 +1691,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
             dateno_3.setText(look[2 + pageplus].split(" ")[2]);
             blikes_3.setText(look[2 + pageplus].split(" ")[4]);
             clickno_3.setText(look[2 + pageplus].split(" ")[5]);
+            bcno_3.setText(look[2 + pageplus].split(" ")[6]);
          } else {
             writingno_3.setText("");
             titleno_3.setText("");
@@ -1679,6 +1707,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
             dateno_4.setText(look[3 + pageplus].split(" ")[2]);
             blikes_4.setText(look[3 + pageplus].split(" ")[4]);
             clickno_4.setText(look[3 + pageplus].split(" ")[5]);
+            bcno_4.setText(look[3 + pageplus].split(" ")[6]);
          } else {
             writingno_4.setText("");
             titleno_4.setText("");
@@ -1694,6 +1723,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
             dateno_5.setText(look[4 + pageplus].split(" ")[2]);
             blikes_5.setText(look[4 + pageplus].split(" ")[4]);
             clickno_5.setText(look[4 + pageplus].split(" ")[5]);
+            bcno_5.setText(look[4 + pageplus].split(" ")[6]);
          } else {
             writingno_5.setText("");
             titleno_5.setText("");
@@ -1709,6 +1739,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
             dateno_6.setText(look[5 + pageplus].split(" ")[2]);
             blikes_6.setText(look[5 + pageplus].split(" ")[4]);
             clickno_6.setText(look[5 + pageplus].split(" ")[5]);
+            bcno_6.setText(look[5 + pageplus].split(" ")[6]);
          } else {
             writingno_6.setText("");
             titleno_6.setText("");
@@ -1724,6 +1755,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
             dateno_7.setText(look[6 + pageplus].split(" ")[2]);
             blikes_7.setText(look[6 + pageplus].split(" ")[4]);
             clickno_7.setText(look[6 + pageplus].split(" ")[5]);
+            bcno_7.setText(look[6 + pageplus].split(" ")[6]);
          } else {
             writingno_7.setText("");
             titleno_7.setText("");
@@ -1739,6 +1771,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
             dateno_8.setText(look[7 + pageplus].split(" ")[2]);
             blikes_8.setText(look[7 + pageplus].split(" ")[4]);
             clickno_8.setText(look[7 + pageplus].split(" ")[5]);
+            bcno_8.setText(look[7 + pageplus].split(" ")[6]);
          } else {
             writingno_8.setText("");
             titleno_8.setText("");
@@ -1754,6 +1787,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
             dateno_9.setText(look[8 + pageplus].split(" ")[2]);
             blikes_9.setText(look[8 + pageplus].split(" ")[4]);
             clickno_9.setText(look[8 + pageplus].split(" ")[5]);
+            bcno_9.setText(look[8 + pageplus].split(" ")[6]);
          } else {
             writingno_9.setText("");
             titleno_9.setText("");
@@ -1769,6 +1803,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
             dateno_10.setText(look[9 + pageplus].split(" ")[2]);
             blikes_10.setText(look[9 + pageplus].split(" ")[4]);
             clickno_10.setText(look[9 + pageplus].split(" ")[5]);
+            bcno_10.setText(look[9 + pageplus].split(" ")[6]);
          } else {
             writingno_10.setText("");
             titleno_10.setText("");
@@ -1783,16 +1818,12 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
          sqle.printStackTrace();
       }
    }
-
+   
    public static void main(String[] args) {
       Boardset bs = new Boardset();
+      
+
 
    }
-
+   
 }
-//  % : 임의의 길이의 문자열% 모든 문자 (글자수제한이없음) %자바 : 
-//  '자바'로 끝나는 문자 예 ) 신나는 자바 , 재밌는 자바 
-//  자바% : '자바'로 시작하는 문자 예) 자바는 재미있다. 자바는 신난다. 
-//  %자바% : 앞에 와도되고 뒤에와도되고 중간에 와도되고 '자바'라는 문자가 포함되기만 하면 됨 
-
-//  select dname, loc from department where dname like 'H%n';

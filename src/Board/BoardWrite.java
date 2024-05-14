@@ -199,7 +199,7 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 				 File file = new File(fileTextField.getText());
 				 String fileName = file.getName();
 				String userId1 = InfoVo.getInstance().getId();					//로그인아이디얻기 싱클톤패턴
-				Connection conn = DriverManager.getConnection(URL, USERID, USERPWD);
+				Connection conn = DriverManager.getConnection(url, user, password);
 				String sql = "" + "insert into bcontents(bno,bcno, "
 						+ "bctitle,bcontent, "
 						+ "bcdate,bclikes,"

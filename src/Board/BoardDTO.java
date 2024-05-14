@@ -15,9 +15,10 @@ public class BoardDTO {		//btitle->bctitle, bmain->bcontents,bdate->bcdate
 	protected PreparedStatement pstmt; // 원래 private
 	private ResultSet rs;
 	
-	public static final String DRIVER_NAME = "oracle.jdbc.OracleDriver";
-	public static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	public static final String USERID = "c##green";
+	public static final String driver = "oracle.jdbc.OracleDriver";
+	public static final String url = "jdbc:oracle:thin:@localhost:1521:xe";
+	public static final String user = "c##green";
+	public static final String password = "green1234";
 	public Connection getConn() {
 		return conn;
 	}

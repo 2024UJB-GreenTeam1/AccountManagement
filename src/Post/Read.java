@@ -38,7 +38,7 @@ import kakaomap.Correct;
 import Board1.Boardset;
 
 public class Read extends Connection2 implements ActionListener, WindowListener{
-
+	
 	public JFrame frame;
 	private JButton np,search2,before,after,logo,click;
 	private JLabel board,writer,writing,date,recommend,check,page,writer2,writing2,date2,recommend2,check2;
@@ -81,34 +81,30 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 	ImageIcon icon;
 	Image image;
 	JDialog info5;
-
+	
+	
 	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//				
-//					Read read = new Read(plz);
-//					read.frame.setVisible(true);
-////					ReadDao readdao = new ReadDao();
-//				//	readdao.iselect();
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	
 
+//	
 	}
 
+	public static void refresh(Boardset call) {
+	call.list();
+
+	}
+	
+	
 	  public static void showFrame(int plz) {
 		  EventQueue.invokeLater(new Runnable() {
 				public void run() {
 					try {
 					
+						Boardset boardset = new Boardset();
+						boardset.f.dispose();
 						Read read = new Read(plz);
 						read.frame.setVisible(true);
-//						ReadDao readdao = new ReadDao();
-					//	readdao.iselect();
+
+			
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -124,8 +120,9 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 	public Read(int plz) {
 		initialize(plz);
 	//readDao = new ReadDao();
-		
+	
 	}
+
 
 	public void conDB() {
 		try {
@@ -143,6 +140,8 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 		
 		return bclikes;
 	}
+
+		
 
 	public void updatebclikes(int newBclikes) {
 	this.bclikes = newBclikes;
@@ -169,30 +168,16 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 		}
 	}
 }
-//	btnNewButton_2.addActionListener(new ActionListener() { // 추천 버튼
-//		public void actionPerformed(ActionEvent e) {
-//			 Instant currentTime = Instant.now();
-//			if(lastLikeTime == null || Duration.between(lastLikeTime, currentTime).getSeconds() >= 60) {
-//				
-//			
-//			int currentBclikes = getBclikes();
-//			 int updateBclikes = currentBclikes +1;
-//			updatebclikes(updateBclikes);
-//			System.out.println(getBclikes());
-//	//		System.out.println(currentBclikes);
-//			System.out.println("추천수 : "+ updateBclikes);
-//			
-//			lastLikeTime = currentTime;
-	
+
 
 	private void initialize(int plz) {
-		
+	
 		
 		Font font = new Font("맑은 고딕",Font.BOLD,40);  //게시판 
 		Font font2 = new Font("맑은 고딕",Font.BOLD,13); //작성자 내용 날짜 추천수 조회수 카테고리
 		
 		frame = new JFrame("게시글");
-		frame.setBounds(100, 100, 800, 800);
+		frame.setBounds(560, 180, 800, 800);
 	//	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		JLabel imageLabel = new JLabel();
@@ -374,14 +359,15 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 				System.out.println(getBclikes());
 		//		System.out.println(currentBclikes);
 				System.out.println("추천수 : "+ updateBclikes);
-				
+			
 				lastLikeTime = currentTime;
-		
+			
+	
 				} else {
 					
 						info5 = new JDialog(frame,"안내창",true);
 						info5.setSize(220,100);
-						info5.setLocation(400,400);
+						info5.setLocation(850, 550);
 						info5.setLayout(new FlowLayout());
 						
 						JLabel mas = new JLabel("1분에 한 번만 추천할 수 있습니다.",JLabel.CENTER);
@@ -440,6 +426,7 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 					Correct correct = new Correct(plz);
 				//	frame.dispose();	
 				}
+			
 			}
 		});
 		JButton btnNewButton_1 = new JButton("나가기");	
@@ -447,7 +434,9 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 		frame.getContentPane().add(btnNewButton_1);
 		btnNewButton_1.addActionListener(new ActionListener() { // 나가기 버튼
 			public void actionPerformed(ActionEvent e) {
-				  frame.dispose();	
+		
+				Boardset call = new Boardset();  
+				frame.dispose();	
 			}
 		});
 		JButton btnNewButton_4 = new JButton("이미지");	
@@ -538,7 +527,7 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 		    }
 		    
 		
-		  
+//		 Read read = new Read();
 	}
 
 	
