@@ -50,12 +50,12 @@ public class HealthCheck extends JFrame {
 		JLabel jLabel = new JLabel();
 		// 이미지크기조절&삽입
 		ImageIcon imgTest = new ImageIcon(getClass().getResource("../img/logo.jpg"));
-		imgTest = imageSetSize(imgTest, 145, 145);
+		imgTest = imageSetSize(imgTest, 138, 138);
 		jLabel.setIcon(imgTest);
 
 		tab1Panel.add(jLabel);
 		tab1Panel.setLocation(10, 20);
-		tab1Panel.setSize(150, 150);
+		tab1Panel.setSize(140, 140);
 
 		JComboBox<String> ctl20 = new JComboBox<String>();
 		ctl20.setFont(new Font("Serif", Font.BOLD, 30));

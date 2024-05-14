@@ -106,11 +106,11 @@ public void excute() {
 
 				titleField.setText("");
 				comments.setText("");
-				System.out.println("저장완료");
+//				System.out.println("저장완료");
 				f.dispose();
 				// 완료메시지
 				JOptionPane.showMessageDialog(f, 
-						"일정이 등록되었습니다.", "BoardWrite", JOptionPane.ERROR_MESSAGE);
+						"일정이 등록되었습니다.", "saved", JOptionPane.INFORMATION_MESSAGE);
 
 			} catch (SQLException e1) {
 				e1.printStackTrace();

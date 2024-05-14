@@ -1,4 +1,4 @@
-package Mains1;			/////일정입력달력프레임
+package Mains1;			/////일정입력프레임
 
 
 import java.awt.BorderLayout;	

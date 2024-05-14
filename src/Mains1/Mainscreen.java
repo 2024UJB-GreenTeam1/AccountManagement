@@ -49,10 +49,10 @@ public class Mainscreen {
 
 		// 로고크기조절&삽입
 		ImageIcon imgTest = new ImageIcon(getClass().getResource("../img/logo.jpg"));
-		imgTest = imageSetSize(imgTest, 60, 60);
+		imgTest = imageSetSize(imgTest, 129, 129);
 		JLabel logo = new JLabel(imgTest);
 //		logo.setIcon(imgTest);
-		logo.setSize(100, 100);
+		logo.setSize(130, 130);
 		logo.setLocation(60, 60);
 
 		//버튼을 누르면 다른 클래스로 이동

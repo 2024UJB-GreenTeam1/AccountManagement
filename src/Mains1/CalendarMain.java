@@ -1,4 +1,4 @@
-package Mains1;						/////일정확인달력프레임
+package Mains1;						/////일정확인프레임
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.Connection;
@@ -7,7 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
-import javax.swing.*;					
+import javax.swing.*;
+
+import login.InfoVo;					
 
 public class CalendarMain extends JPanel implements ActionListener, ItemListener {
 	Font fnt = new Font("맑은 고딕", Font.BOLD, 20); // 기본 폰트 설정
@@ -160,7 +162,8 @@ public class CalendarMain extends JPanel implements ActionListener, ItemListener
 			JButton btn = new JButton(String.valueOf(day));
 			btn.setFont(fnt);
 			btn.setHorizontalAlignment(JButton.CENTER);
-			JLabel label1 = new JLabel("<html>"+"<br/>" + getScheduleTitle(year, month, day) + "</html>");
+//			JLabel label1 = new JLabel("<html>"+"<br/>" + getScheduleTitle(year, month, day) + "</html>");
+			JLabel label1 = new JLabel("<html>"+getScheduleTitle(year, month, day) + "</html>");
 			label1.setHorizontalAlignment(JLabel.CENTER);
 			date.set(Calendar.DATE, day); // 날짜 설정
 			int w = date.get(Calendar.DAY_OF_WEEK);
@@ -197,9 +200,12 @@ public class CalendarMain extends JPanel implements ActionListener, ItemListener
 //////////////////////////////////////////////////////////////////////
 	    private String getScheduleTitle(int year, int month, int day) {
 	        // 데이터베이스 연결 및 SQL 쿼리 실행
+//	    	System.out.println(year + "-" + month + "-" + day);
+	    	String userId1 = InfoVo.getInstance().getId();	
 	        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-	             PreparedStatement pstmt = conn.prepareStatement("SELECT CMTITLE FROM Calendar_Memo WHERE cmdate = ?")) {
+	             PreparedStatement pstmt = conn.prepareStatement("SELECT CMTITLE FROM Calendar_Memo WHERE cmdate = ? AND USER_ID= ? ")) {
 	            pstmt.setDate(1, java.sql.Date.valueOf(year + "-" + month + "-" + day));
+	            pstmt.setString(2, userId1);
 	            try (ResultSet rs = pstmt.executeQuery()) {
 	                if (rs.next()) {
 	                    return rs.getString("CMTITLE");
@@ -213,9 +219,11 @@ public class CalendarMain extends JPanel implements ActionListener, ItemListener
 
 	    private EventDetails getEventDetails(int year, int month, int day) {
 	        // 데이터베이스 연결 및 SQL 쿼리 실행
+	    	String userId1 = InfoVo.getInstance().getId();	
 	        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-	             PreparedStatement pstmt = conn.prepareStatement("SELECT CMTITLE, cmcontent FROM Calendar_Memo WHERE cmdate = ?")) {
+	             PreparedStatement pstmt = conn.prepareStatement("SELECT CMTITLE, cmcontent FROM Calendar_Memo WHERE cmdate = ? AND USER_ID= ? ")) {
 	            pstmt.setDate(1, java.sql.Date.valueOf(year + "-" + month + "-" + day));
+	            pstmt.setString(2, userId1);
 	            try (ResultSet rs = pstmt.executeQuery()) {
 	                if (rs.next()) {
 	                    return new EventDetails(rs.getString("CMTITLE"), rs.getString("cmcontent"));

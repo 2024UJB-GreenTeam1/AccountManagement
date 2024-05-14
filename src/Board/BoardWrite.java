@@ -225,7 +225,7 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 				
 				// 완료메시지
 				JOptionPane.showMessageDialog(f, 
-						"게시글 등록이 완료되었습니다.", "BoardWrite", JOptionPane.ERROR_MESSAGE);
+						"게시글 등록이 완료되었습니다.", "BoardWrite", JOptionPane.INFORMATION_MESSAGE);
 
 
 			} catch (SQLException | FileNotFoundException e2) {
