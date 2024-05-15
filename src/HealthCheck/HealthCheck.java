@@ -49,7 +49,7 @@ public class HealthCheck extends JFrame {
 		tab1Panel = new JPanel();
 		JLabel jLabel = new JLabel();
 		// 이미지크기조절&삽입
-		ImageIcon imgTest = new ImageIcon(getClass().getResource("../img/logo.jpg"));
+		ImageIcon imgTest = new ImageIcon(getClass().getResource("/img/logo.jpg"));
 		imgTest = imageSetSize(imgTest, 138, 138);
 		jLabel.setIcon(imgTest);
 
@@ -74,22 +74,22 @@ public class HealthCheck extends JFrame {
 		lUc.setLocation(180, 230);
 		lUc.setSize(150, 50);
 		lUc.setFont(font);
-		
+
 		JLabel lIc = new JLabel("평균섭취cal : ");
 		lIc.setLocation(180, 280);
 		lIc.setSize(150, 50);
 		lIc.setFont(font);
-		
+
 		JLabel lIw = new JLabel("평균섭취수분 : ");
 		lIw.setLocation(180, 330);
 		lIw.setSize(150, 50);
 		lIw.setFont(font);
-		
+
 		JLabel lBmi = new JLabel("현재 BMI : ");
 		lBmi.setLocation(180, 450);
 		lBmi.setSize(180, 50);
 		lBmi.setFont(font);
-		
+
 		JLabel lS = new JLabel("평균수면시간 : ");
 		lS.setLocation(180, 380);
 		lS.setSize(150, 50);
@@ -113,32 +113,32 @@ public class HealthCheck extends JFrame {
 //				System.out.println(gid);
 
 //				("운동시간");
-				JLabel lAtT = new JLabel(avg_exercise_hours);
+				JLabel lAtT = new JLabel(avg_exercise_hours + " 분");
 				lAtT.setLocation(340, 180);
 				lAtT.setSize(150, 50);
 
 //				("소모cal");
-				JLabel lUcT = new JLabel(avg_calories_burned);
+				JLabel lUcT = new JLabel(avg_calories_burned + " kcal");
 				lUcT.setLocation(340, 230);
 				lUcT.setSize(150, 50);
 
 //				("섭취cal");
-				JLabel lIcT = new JLabel(avg_calories_intake);
+				JLabel lIcT = new JLabel(avg_calories_intake + " kcal");
 				lIcT.setLocation(340, 280);
 				lIcT.setSize(150, 50);
 
 //				("섭취수분");
-				JLabel lIwT = new JLabel(avg_water_intake);
+				JLabel lIwT = new JLabel(avg_water_intake + " 리터");
 				lIwT.setLocation(340, 330);
 				lIwT.setSize(150, 50);
 
 //				("BMI");
-				JLabel lBmiT = new JLabel(current_BMI);
+				JLabel lBmiT = new JLabel(current_BMI + " Kg/m²");
 				lBmiT.setLocation(340, 450);
 				lBmiT.setSize(150, 50);
 
 //				("평균수면시간");
-				JLabel lST = new JLabel(avg_sleep_hours);
+				JLabel lST = new JLabel(avg_sleep_hours + " 시간");
 				lST.setLocation(340, 380);
 				lST.setSize(200, 50);
 
@@ -165,15 +165,15 @@ public class HealthCheck extends JFrame {
 						if (ctl20.getSelectedItem().toString() == "<주간분석>") {
 							dispose();
 
-							lAtT.setText(avg_exercise_hours);
-							lUcT.setText(avg_calories_burned);
-							lIcT.setText(avg_calories_intake);
-							lIwT.setText(avg_water_intake);
-							lBmiT.setText(current_BMI);
-							lST.setText(avg_sleep_hours);
+							lAtT.setText(avg_exercise_hours + " 분");
+							lUcT.setText(avg_calories_burned + " kcal");
+							lIcT.setText(avg_calories_intake + " kcal");
+							lIwT.setText(avg_water_intake + " 리터");
+							lBmiT.setText(current_BMI + " Kg/m²");
+							lST.setText(avg_sleep_hours + " 시간");
 
 							// case2 월간평균
-						} else if(ctl20.getSelectedItem().toString() == "<월간분석>") {
+						} else if (ctl20.getSelectedItem().toString() == "<월간분석>") {
 							list2 = dao.list2();
 							if (list2.size() != 0) {
 								for (int i = 0; i < list2.size(); i++) {
@@ -184,17 +184,17 @@ public class HealthCheck extends JFrame {
 									String avg_water_intake = Integer.toString(data.getAvg_water_intake());
 									String avg_sleep_hours = Integer.toString(data.getAvg_sleep_hours());
 									String current_BMI = Integer.toString(data.getCurrent_BMI());
-						
-							lAtT.setText(avg_exercise_hours);
-							lUcT.setText(avg_calories_burned);
-							lIcT.setText(avg_calories_intake);
-							lIwT.setText(avg_water_intake);
-							lBmiT.setText(current_BMI);
-							lST.setText(avg_sleep_hours);
+
+									lAtT.setText(avg_exercise_hours + " 분");
+									lUcT.setText(avg_calories_burned + " kcal");
+									lIcT.setText(avg_calories_intake + " kcal");
+									lIwT.setText(avg_water_intake + " 리터");
+									lBmiT.setText(current_BMI + " Kg/m²");
+									lST.setText(avg_sleep_hours + " 시간");
 								}
 							}
-							//case3 연간평균
-						}else {
+							// case3 연간평균
+						} else {
 							list3 = dao.list3();
 							if (list3.size() != 0) {
 								for (int i = 0; i < list3.size(); i++) {
@@ -205,13 +205,13 @@ public class HealthCheck extends JFrame {
 									String avg_water_intake = Integer.toString(data.getAvg_water_intake());
 									String avg_sleep_hours = Integer.toString(data.getAvg_sleep_hours());
 									String current_BMI = Integer.toString(data.getCurrent_BMI());
-						
-							lAtT.setText(avg_exercise_hours);
-							lUcT.setText(avg_calories_burned);
-							lIcT.setText(avg_calories_intake);
-							lIwT.setText(avg_water_intake);
-							lBmiT.setText(current_BMI);
-							lST.setText(avg_sleep_hours);
+
+									lAtT.setText(avg_exercise_hours + " 분");
+									lUcT.setText(avg_calories_burned + " kcal");
+									lIcT.setText(avg_calories_intake + " kcal");
+									lIwT.setText(avg_water_intake + " 리터");
+									lBmiT.setText(current_BMI + " Kg/m²");
+									lST.setText(avg_sleep_hours + " 시간");
 								}
 							}
 						}
