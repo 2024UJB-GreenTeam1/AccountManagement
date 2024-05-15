@@ -418,6 +418,8 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 		
 		JButton btnNewButton = new JButton("수정"); // 수정 창으로 이동
 		btnNewButton.setBounds(566, 700, 97, 36);
+//		btnNewButton.setBounds(566, 50, 97, 36);
+
 		frame.getContentPane().add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() { // 수정 버튼
 			@Override
