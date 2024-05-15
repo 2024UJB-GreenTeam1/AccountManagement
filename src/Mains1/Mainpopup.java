@@ -287,10 +287,6 @@ public class Mainpopup {
 		resetButton.setLocation(320, 600);
 
 
-		Button resetButton = new Button("리셋");
-		resetButton.setFont(font1);
-		resetButton.setSize(80, 60);
-		resetButton.setLocation(320, 600);
 
 		resetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
