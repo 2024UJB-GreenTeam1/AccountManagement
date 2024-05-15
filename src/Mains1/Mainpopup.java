@@ -286,14 +286,28 @@ public class Mainpopup {
 		resetButton.setSize(80, 60);
 		resetButton.setLocation(320, 600);
 
+
+		Button resetButton = new Button("리셋");
+		resetButton.setFont(font1);
+		resetButton.setSize(80, 60);
+		resetButton.setLocation(320, 600);
+
 		resetButton.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        String userId = InfoVo.getInstance().getId();
-		        MainpopupDAO dao = new MainpopupDAO();
-		        dao.deleteTodayData(userId);
-		        // 필요한 UI 컴포넌트 초기화 로직
-		        JOptionPane.showMessageDialog(f, "오늘의 데이터가 초기화되었습니다.");
-		    }
+			public void actionPerformed(ActionEvent e) {
+				todayweightText.setText(""); // TextArea 내용을 비웁니다.
+				todayHealthText.setText("");
+				todayfoodText.setText("");
+				todaysleepText.setText("");
+				todaywaterText.setText("");
+			}
+// 		resetButton.addActionListener(new ActionListener() {
+// 		    public void actionPerformed(ActionEvent e) {
+// 		        String userId = InfoVo.getInstance().getId();
+// 		        MainpopupDAO dao = new MainpopupDAO();
+// 		        dao.deleteTodayData(userId);
+// 		        // 필요한 UI 컴포넌트 초기화 로직
+// 		        JOptionPane.showMessageDialog(f, "오늘의 데이터가 초기화되었습니다.");
+// 		    }
 		});
 
 		Button calculateWeightButton = new Button("입력");
