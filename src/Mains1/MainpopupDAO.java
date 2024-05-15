@@ -3,6 +3,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import login.InfoVo;
 
@@ -60,6 +61,23 @@ public class MainpopupDAO {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }
+    }
+                //리셋 당일 데이터 삭제
+    public void deleteTodayData(String userId) {
+        String sql = "DELETE FROM DAILYINPUT WHERE USER_ID = ? AND TRUNC(DIDATE) = TRUNC(SYSDATE)";
+        try (Connection con = DriverManager.getConnection(url, user, password);
+             PreparedStatement pstmt = con.prepareStatement(sql)) {
+            pstmt.setString(1, userId);
+            int rowsDeleted = pstmt.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("성공적으로 오늘 날짜의 데이터가 삭제되었습니다.");
+            } else {
+                System.out.println("삭제할 데이터가 없습니다.");
+            }
+        } catch (SQLException e) {
+            System.err.println("데이터 삭제 중 오류 발생:");
+            e.printStackTrace();
         }
     }
 }

@@ -20,6 +20,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import login.InfoVo;
+
 public class Mainpopup {
 
 	private static double totalCalories = 0; // 전역변수로 칼로리를 누적해서 관리해줌
@@ -278,6 +280,12 @@ public class Mainpopup {
 		        }
 		    }
 		});
+		// 리셋하면 오늘 데이터 삭제함
+		Button resetButton = new Button("리셋");
+		resetButton.setFont(font1);
+		resetButton.setSize(80, 60);
+		resetButton.setLocation(320, 600);
+
 
 		Button resetButton = new Button("리셋");
 		resetButton.setFont(font1);
@@ -292,6 +300,14 @@ public class Mainpopup {
 				todaysleepText.setText("");
 				todaywaterText.setText("");
 			}
+// 		resetButton.addActionListener(new ActionListener() {
+// 		    public void actionPerformed(ActionEvent e) {
+// 		        String userId = InfoVo.getInstance().getId();
+// 		        MainpopupDAO dao = new MainpopupDAO();
+// 		        dao.deleteTodayData(userId);
+// 		        // 필요한 UI 컴포넌트 초기화 로직
+// 		        JOptionPane.showMessageDialog(f, "오늘의 데이터가 초기화되었습니다.");
+// 		    }
 		});
 
 		Button calculateWeightButton = new Button("입력");

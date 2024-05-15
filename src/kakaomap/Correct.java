@@ -64,7 +64,7 @@ public class Correct extends ComDto implements ActionListener, WindowListener{
 	String bcdate ;
 	int bcviews;
 	int bclikes;
-	String bcnickname;
+//	String bcnickname;
 	String bcdelete ;
 	String bcfilename;
 	Blob bcfiledata;
@@ -169,7 +169,7 @@ public class Correct extends ComDto implements ActionListener, WindowListener{
 				bcno = rs.getString("bcno");
 				bno = rs.getString("bno");
 				user_id = rs.getString("user_id");
-				bcnickname = rs.getString("bcnickname");
+//				bcnickname = rs.getString("bcnickname");
 				bctitle = rs.getString("bctitle");
 				bcontent = rs.getString("bcontent");
 				bcdate = rs.getString("bcdate");
@@ -183,7 +183,9 @@ public class Correct extends ComDto implements ActionListener, WindowListener{
 		//System.out.println(bcno);
 //				icon = new ImageIcon(image);
 			}
-			System.out.println(bcno + " , " + bno + " , " + user_id + " , " + bcnickname + " , " + bctitle + " , "
+//			System.out.println(bcno + " , " + bno + " , " + user_id + " , " + bcnickname + " , " + bctitle + " , "
+//					+ bcontent + " , " + bcdate + " , " + bcdelete + " , " + bcviews  + " , "	+ bclikes);
+			System.out.println(bcno + " , " + bno + " , " + user_id + " , " + bctitle + " , "
 					+ bcontent + " , " + bcdate + " , " + bcdelete + " , " + bcviews  + " , "	+ bclikes);
 	
 

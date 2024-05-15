@@ -154,40 +154,51 @@ public class CalendarMain extends JPanel implements ActionListener, ItemListener
 		date.set(year, month - 1, 1); // 선택된 연도와 월로 날짜 설정
 		int week = date.get(Calendar.DAY_OF_WEEK); // 해당 월의 첫째 날의 요일
 		int lastDay = date.getActualMaximum(Calendar.DATE); // 해당 월의 마지막 날
+	    /////////////////////
+		dayPane.removeAll(); // 이전 설정 제거
+		//////////////////////////
 		for (int s = 1; s < week; s++) {
 			dayPane.add(new JLabel(" ")); // 첫째 날 전까지 공백 추가
 		}
 		for (int day = 1; day <= lastDay; day++) {
-			JPanel buttonPanel = new JPanel(new BorderLayout());
 			JButton btn = new JButton(String.valueOf(day));
 			btn.setFont(fnt);
 			btn.setHorizontalAlignment(JButton.CENTER);
-//			JLabel label1 = new JLabel("<html>"+"<br/>" + getScheduleTitle(year, month, day) + "</html>");
-			JLabel label1 = new JLabel("<html>"+getScheduleTitle(year, month, day) + "</html>");
+//			JLabel label1 = new JLabel("<html>"+getScheduleTitle(year, month, day) + "</html>");
+//			System.out.println("Running query with date: " + year + "-" + month + "-" + day);
+			JLabel label1 = new JLabel(getScheduleTitle(year, month, day));
+
 			label1.setHorizontalAlignment(JLabel.CENTER);
-			date.set(Calendar.DATE, day); // 날짜 설정
+			
+			date.set(Calendar.DATE, day); // 특정 날짜 설정
 			int w = date.get(Calendar.DAY_OF_WEEK);
 			if (w == 1)
 				btn.setForeground(Color.RED); // 일요일은 빨간색으로 표시
 			if (w == 7)
 				btn.setForeground(Color.BLUE); // 토요일은 파란색으로 표시
-			  btn.addActionListener(new ActionListener() {
-		            public void actionPerformed(ActionEvent e) {
-//		            	int day = btn.getText();
-		            	int day = Integer.parseInt(btn.getText());
-		            	   int month = Integer.parseInt(monthCombo.getSelectedItem().toString());
-		            	   int year = Integer.parseInt(yearCombo.getSelectedItem().toString());         	
-//		            	   EventDetails event = new EventDetails();
-		                showDetailWindow(year, month, day); // 상세 창 표시
-		            }
-		        }); // 이벤트 리스너 추가
-//			dayPane.add(btn); // 버튼을 날짜 패널에 추가
-//			btn.add(label1);
+			  
+	        btn.addActionListener(e -> showDetailWindow(year, month, Integer.parseInt(btn.getText())));
+
+//			btn.addActionListener(new ActionListener() {
+//		            public void actionPerformed(ActionEvent e) {
+////		            	int day = btn.getText();
+//		            	int day = Integer.parseInt(btn.getText());
+//		            	   int month = Integer.parseInt(monthCombo.getSelectedItem().toString());
+//		            	   int year = Integer.parseInt(yearCombo.getSelectedItem().toString());         	
+////		            	   EventDetails event = new EventDetails();
+//		                showDetailWindow(year, month, day); // 상세 창 표시
+//		            }
+//		        }); // 이벤트 리스너 추가
 			
+			JPanel buttonPanel = new JPanel(new BorderLayout());
 			buttonPanel.add(btn, BorderLayout.NORTH);
 			buttonPanel.add(label1, BorderLayout.CENTER);
 			dayPane.add(buttonPanel);
 		}
+			///////////////////////
+		  dayPane.revalidate(); // 패널을 새로 고침하여 새 버튼과 레이블 표시
+		    dayPane.repaint();
+		    //////////////////////////////////
 	}
 	   private void showDetailWindow(int year, int month, int day) {
 		   
@@ -203,12 +214,16 @@ public class CalendarMain extends JPanel implements ActionListener, ItemListener
 //	    	System.out.println(year + "-" + month + "-" + day);
 	    	String userId1 = InfoVo.getInstance().getId();	
 	        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-	             PreparedStatement pstmt = conn.prepareStatement("SELECT CMTITLE FROM Calendar_Memo WHERE cmdate = ? AND USER_ID= ? ")) {
+	             PreparedStatement pstmt = conn.prepareStatement("SELECT CMTITLE FROM Calendar_Memo WHERE TRUNC(cmdate) = ? AND USER_ID= ? ")) {
 	            pstmt.setDate(1, java.sql.Date.valueOf(year + "-" + month + "-" + day));
 	            pstmt.setString(2, userId1);
 	            try (ResultSet rs = pstmt.executeQuery()) {
 	                if (rs.next()) {
-	                    return rs.getString("CMTITLE");
+	                	 String title = rs.getString("CMTITLE");
+//	                	    System.out.println("Schedule Title: " + title);
+	                	    return title;
+	                }else {
+//	                    System.out.println("No data found for: " + year + "-" + month + "-" + day);
 	                }
 	            }
 	        } catch (SQLException e) {
@@ -221,7 +236,7 @@ public class CalendarMain extends JPanel implements ActionListener, ItemListener
 	        // 데이터베이스 연결 및 SQL 쿼리 실행
 	    	String userId1 = InfoVo.getInstance().getId();	
 	        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-	             PreparedStatement pstmt = conn.prepareStatement("SELECT CMTITLE, cmcontent FROM Calendar_Memo WHERE cmdate = ? AND USER_ID= ? ")) {
+	             PreparedStatement pstmt = conn.prepareStatement("SELECT CMTITLE, cmcontent FROM Calendar_Memo WHERE TRUNC(cmdate) = ? AND USER_ID= ? ")) {
 	            pstmt.setDate(1, java.sql.Date.valueOf(year + "-" + month + "-" + day));
 	            pstmt.setString(2, userId1);
 	            try (ResultSet rs = pstmt.executeQuery()) {
