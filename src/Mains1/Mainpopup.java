@@ -144,7 +144,8 @@ public class Mainpopup {
 		LocalDate today = LocalDate.now();
 		String formattedDate = today.toString();
 		todaydateText.setText(formattedDate);
-		TextField todayweightText = new TextField(10);
+		
+		TextField todayweightText = new TextField(3);
 		todayweightText.setFont(font1);
 
 		todayweightText.setSize(70, 30);
@@ -168,7 +169,7 @@ public class Mainpopup {
 		todaysleepText.setSize(70, 30);
 		todaysleepText.setLocation(560, 430);
 
-		TextField todaywaterText = new TextField(10);
+		TextField todaywaterText = new TextField(3);
 		todaywaterText.setFont(font1);
 
 		todaywaterText.setSize(70, 30);
