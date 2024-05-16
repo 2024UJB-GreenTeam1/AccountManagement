@@ -26,7 +26,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import Post.Read;
-import kakaomap.Correct;
+import Post.Correct;
 
 // 실행시켜서 가운데 아래 검색기능 오류 고치기 
 // 왜 뜨는지 납득이 안됨 
