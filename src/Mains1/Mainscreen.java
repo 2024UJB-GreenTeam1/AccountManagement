@@ -318,7 +318,7 @@ public class Mainscreen {
 		healthbutton.setBorder(new RoundedBorder(20));
 		boardbutton.setBorder(new RoundedBorder(20));
 		
-		// JLabel 및 JButton 센터 정렬
+		// JLabel 및 JButton 센터 정렬 
 		logo.setHorizontalAlignment(SwingConstants.CENTER);
 		mapimg.setHorizontalAlignment(SwingConstants.CENTER);
 		calenderimg.setHorizontalAlignment(SwingConstants.CENTER);
