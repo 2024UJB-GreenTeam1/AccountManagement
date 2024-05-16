@@ -27,17 +27,24 @@ public class ProfileDAO {
 	public void delete(DTO user) {
 		String userId1 = InfoVo.getInstance().getId();
 		try {
+					
+			String deletesql2 = "" + "DELETE FROM CALENDAR_MEMO WHERE USER_ID = ?";
+			PreparedStatement pstmt2 = con.prepareStatement(deletesql2);
+			pstmt2.setString(1, userId1);
+			pstmt2.executeUpdate();
+			pstmt2.close();
+			
+			String deletesql3 = "" + "DELETE FROM BCONTENTS WHERE USER_ID = ?";
+			PreparedStatement pstmt3 = con.prepareStatement(deletesql3);
+			pstmt3.setString(1, userId1);
+			pstmt3.executeUpdate();
+			pstmt3.close();
+			
 			String deletesql = "" + "DELETE FROM DAILYINPUT WHERE USER_ID = ?";
 			PreparedStatement pstmt1 = con.prepareStatement(deletesql);
 			pstmt1.setString(1, userId1);
 			pstmt1.executeUpdate();
 			pstmt1.close();
-			
-//			String deletesql2 = "" + "DELETE FROM LOGIN WHERE USER_ID = ?";
-//			PreparedStatement pstmt2 = con.prepareStatement(deletesql2);
-//			pstmt2.setString(1, userId1);
-//			pstmt2.executeUpdate();
-//			pstmt2.close();
 						
 			String sql = "" + "DELETE FROM USERS WHERE USER_ID = ?";
 			pstmt = con.prepareStatement(sql);

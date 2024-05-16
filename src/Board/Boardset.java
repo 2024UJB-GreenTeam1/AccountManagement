@@ -26,9 +26,8 @@ import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-
+import Mains1.Mainscreen;
 import Post.Read;
-import Post.Correct;
 
 // 실행시켜서 가운데 아래 검색기능 오류 고치기 
 // 왜 뜨는지 납득이 안됨 
@@ -67,14 +66,36 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 	int bcno;
 	int cnt = 0;
 	
+	// 이미지크기조절셋업
+	ImageIcon imageSetSize(ImageIcon icon, int i, int j) { // image Size Setting
+		Image ximg = icon.getImage(); // ImageIcon을 Image로 변환.
+		Image yimg = ximg.getScaledInstance(i, j, java.awt.Image.SCALE_SMOOTH);
+		ImageIcon xyimg = new ImageIcon(yimg);
+		return xyimg;
+	}
 	
 	public Boardset() {
 		f = new JFrame("게시판");
 		f.getContentPane().setBackground(Color.white);
-		logo = new JButton(new ImageIcon("C:/Users/Manic-063/git/AccountManagement/src/1o0.jpg"));
+//		JLabel jLabel = new JLabel();
+//		java.net.URL imageUrl1 = getClass().getResource("/img/logo.jpg");
+//		jLabel.setIcon(new ImageIcon(getClass().getResource("/img/logo1.jpg")));// bin폴더 넘어가면 안되는듯?
+		
+		ImageIcon imgTest = new ImageIcon(getClass().getResource("../img/logo1.jpg"));
+		imgTest = imageSetSize(imgTest, 99, 99);
+		logo = new JButton(imgTest);
 		logo.setBorderPainted(false);
 		logo.setFocusPainted(false);
 		logo.setContentAreaFilled(false);
+		logo.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				f.dispose();
+				Mainscreen main = new Mainscreen();
+				main.excute();
+			}
+		});
+
 
 		 Color gr = new Color(205, 250, 219);
 		
@@ -182,7 +203,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		board.setLocation(320, 10); // 게시판 라벨
 
 		logo.setSize(100, 100); // 로고
-		logo.setLocation(10, 10);
+		logo.setLocation(650, 10);
 
 		np.setSize(120, 30); // 새글작성
 		np.setLocation(7, 700);

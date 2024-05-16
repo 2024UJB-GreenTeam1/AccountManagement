@@ -216,7 +216,7 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 						+ "bcdate,bclikes,"
 						+ "bcviews,bcfilename,bfiledata,User_id) "
 // 						+ "values(" + b + ",BCNO.NEXTVAL,?,?,SYSDATE,?,?,?,?,'green') ";/*SEQ_BCNO.NEXTVAL*/
-=======
+
 						+ "values(+"+b+",SEQ_BCNO.NEXTVAL,?,?,to_char(Sysdate,'YYYY-MM-DD'),?,?,?,?,?) ";/*SEQ_BCNO.NEXTVAL*/
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, maindptitlecontent.getText());
