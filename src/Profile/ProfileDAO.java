@@ -54,7 +54,7 @@ public class ProfileDAO {
 	public void updateHW(int height, int weight) {
 		String userId1 = InfoVo.getInstance().getId();
 		try {
-						String updateUserSql = "UPDATE USERS SET HEIGHT = ? WHERE USER_ID = ?";
+			String updateUserSql = "UPDATE USERS SET HEIGHT = ? WHERE USER_ID = ?";
 			PreparedStatement updatePstmt = con.prepareStatement(updateUserSql);
 			updatePstmt.setInt(1, height);
 			updatePstmt.setString(2, userId1);

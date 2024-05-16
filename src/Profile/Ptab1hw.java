@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import login.InfoVo;
+import Profile.Pframe;
 
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
@@ -21,10 +22,10 @@ public class Ptab1hw extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	ProfileDAO dao = new ProfileDAO();
-
-	/**
-	 * Launch the application.
-	 */
+	int height1;
+	int weight1;
+	String height2;
+	String weight2;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -92,15 +93,17 @@ public class Ptab1hw extends JFrame {
 				// TODO Auto-generated method stub
 				String heightStr = textField.getText();
 				String weightStr = textField_1.getText();
-
+				height2 = heightStr;
+				weight2 = weightStr;
 				if (heightStr.isEmpty() || weightStr.isEmpty()) {
 					new MessageDialog(null, "알림", "키와 몸무게를 모두 입력하세요.");
 				} else {
 					new MessageDialog(null, "알림", "저장되었습니다");
-					int height = Integer.parseInt(heightStr);
-					int weight = Integer.parseInt(weightStr);
-					dao.updateHW(height, weight);
+					height1 = Integer.parseInt(heightStr);
+					weight1 = Integer.parseInt(weightStr);
+					dao.updateHW(height1, weight1);
 					dispose();
+					new Pframe();
 				}
 			}
 		});
