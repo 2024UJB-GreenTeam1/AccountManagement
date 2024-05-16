@@ -1,80 +1,66 @@
 package HealthCheck;
 
-import login.InfoVo;
-
 public class HealthVo {
-	private static HealthVo instance;
-	private String id;
+//	private String id;
 //	private String DIDATE;
-	private int AVG_EXERCISE_HOURS;
-	private int AVG_CALORIES_INTAKE;
-	private int AVG_CALORIES_BURNED;
-	private int AVG_SLEEP_HOURS;
-	private int AVG_BMI;
-	private int AVG_WATER_INTAKE;
+	private int avg_exercise_hours;
+	private int avg_calories_burned;
+	private int avg_calories_intake;
+	private int avg_water_intake;
+	private int avg_sleep_hours;
+	private int current_BMI;
 
-	public HealthVo() {
-
-	}
-
-	public void setDataHealth(String id, int AVG_EXERCISE_HOURS, int AVG_CALORIES_INTAKE,
-			int AVG_CALORIES_BURNED, int AVG_SLEEP_HOURS, int AVG_BMI, int AVG_WATER_INTAKE) {
-
-		this.id = id;
+	public HealthVo(int avg_exercise_hours, 
+			int avg_calories_burned,
+			int avg_calories_intake, 
+			int avg_water_intake, 
+			int avg_sleep_hours,
+			int current_BMI) {
+//		this.id = id;
 //		this.DIDATE = DIDATE;
-		this.AVG_EXERCISE_HOURS = AVG_EXERCISE_HOURS;
-		this.AVG_CALORIES_INTAKE = AVG_CALORIES_INTAKE;
-		this.AVG_CALORIES_BURNED = AVG_CALORIES_BURNED;
-		this.AVG_SLEEP_HOURS = AVG_SLEEP_HOURS;
-		this.AVG_BMI = AVG_BMI;
-		this.AVG_WATER_INTAKE = AVG_WATER_INTAKE;
+		this.avg_exercise_hours=avg_exercise_hours;
+		this.avg_calories_burned=avg_calories_burned;
+		this.avg_calories_intake=avg_calories_intake;
+		this.avg_water_intake=avg_water_intake;
+		this.avg_sleep_hours=avg_sleep_hours;
+		this.current_BMI=current_BMI;
 	}
 
-	//////////////////////////////////////////
-	public static HealthVo getInstance() {
-		if (instance == null) {
-			synchronized (HealthVo.class) {
-				instance = new HealthVo();
-			}
-		}
-		return instance;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-//////////////////////////////////////////////////////
-	public String getId() {
-		return id;
-	}
-
+//	public String getId() {
+//		return id;
+//	}
+//
+//	public void setId(String id) {
+//		this.id = id;
+//	}
+	
 //	public String getDIDATE() {
 //		return DIDATE;
 //	}
 
-	public int getAVG_CALORIES_INTAKE() {
-		return AVG_CALORIES_INTAKE;
+	public int getAvg_exercise_hours() {
+		return avg_exercise_hours;
 	}
 
-	public int getAVG_CALORIES_BURNED() {
-		return AVG_CALORIES_BURNED;
+	public int getAvg_calories_burned() {
+		return avg_calories_burned;
 	}
 
-	public int getAVG_SLEEP_HOURS() {
-		return AVG_SLEEP_HOURS;
+	public int getAvg_calories_intake() {
+		return avg_calories_intake;
 	}
 
-	public int getAVG_BMI() {
-		return AVG_BMI;
+	public int getAvg_water_intake() {
+		return avg_water_intake;
 	}
 
-	public int getAVG_WATER_INTAKE() {
-		return AVG_WATER_INTAKE;
+	public int getAvg_sleep_hours() {
+		return avg_sleep_hours;
 	}
 
-	public int getAVG_EXERCISE_HOURS() {
-		return AVG_EXERCISE_HOURS;
+	public int getCurrent_BMI() {
+		return current_BMI;
 	}
+
 
 }

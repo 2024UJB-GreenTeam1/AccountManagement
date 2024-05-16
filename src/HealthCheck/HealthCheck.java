@@ -16,10 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import HealthCheck2.HealthCheck;
-import IDsearch.IdSearch;
-import Member.Mframe;
-import login.InfoVo;
+import Board.Boardset;
+import Mains1.Mainscreen;
 
 //extends WindowAdapter 
 public class HealthCheck extends JFrame {
@@ -27,8 +25,7 @@ public class HealthCheck extends JFrame {
 //	private JPasswordField tfPwd;
 	private JButton btnI, btnS;
 	private HealthDAO dao;
-	ArrayList<HealthVo> list; // <HealthVo>list2
-	ArrayList<HealthVo> list2;
+	ArrayList<HealthVo> list, list2, list3; // <HealthVo>list2
 	private JPanel tab1Panel;
 
 	// 이미지크기조절기능
@@ -44,7 +41,7 @@ public class HealthCheck extends JFrame {
 		dao = new HealthDAO();
 
 //		Font fontT = new Font("SansSerif", Font.PLAIN, 35);
-		Font font = new Font("SansSerif", Font.PLAIN, 25);
+		Font font = new Font("SansSerif", Font.PLAIN, 20);
 		f = new JFrame("HealthCheck");
 		f.setSize(700, 700);
 		f.getContentPane().setLayout(null);
@@ -52,163 +49,169 @@ public class HealthCheck extends JFrame {
 		tab1Panel = new JPanel();
 		JLabel jLabel = new JLabel();
 		// 이미지크기조절&삽입
-		ImageIcon imgTest = new ImageIcon(getClass().getResource("../img/logo.jpg"));
-		imgTest = imageSetSize(imgTest, 145, 145);
+		ImageIcon imgTest = new ImageIcon(getClass().getResource("/img/logo.jpg"));
+		imgTest = imageSetSize(imgTest, 138, 138);
 		jLabel.setIcon(imgTest);
 
 		tab1Panel.add(jLabel);
 		tab1Panel.setLocation(10, 20);
-		tab1Panel.setSize(150, 150);
-
-		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		Point centerPoint = ge.getCenterPoint();
-		int leftTopX = centerPoint.x - f.getWidth() / 2;
-		int leftTopY = centerPoint.y - f.getHeight() / 2;
-		f.setLocation(leftTopX, leftTopY);
+		tab1Panel.setSize(140, 140);
 
 		JComboBox<String> ctl20 = new JComboBox<String>();
 		ctl20.setFont(new Font("Serif", Font.BOLD, 30));
-		ctl20.addItem("<기간선택>");
 		ctl20.addItem("<주간분석>");
 		ctl20.addItem("<월간분석>");
+		ctl20.addItem("<연간분석>");
 		ctl20.setLocation(250, 120);
 		ctl20.setSize(200, 50);
 
-		JLabel lAt = new JLabel("운동시간 : ");
+		JLabel lAt = new JLabel("평균운동시간 : ");
 		lAt.setLocation(180, 180);
 		lAt.setSize(150, 50);
+		lAt.setFont(font);
 
-		JLabel lUc = new JLabel("소모cal : ");
+		JLabel lUc = new JLabel("평균소모cal : ");
 		lUc.setLocation(180, 230);
 		lUc.setSize(150, 50);
+		lUc.setFont(font);
 
-		JLabel lIc = new JLabel("섭취cal : ");
+		JLabel lIc = new JLabel("평균섭취cal : ");
 		lIc.setLocation(180, 280);
 		lIc.setSize(150, 50);
+		lIc.setFont(font);
 
-		JLabel lIw = new JLabel("섭취수분 : ");
+		JLabel lIw = new JLabel("평균섭취수분 : ");
 		lIw.setLocation(180, 330);
 		lIw.setSize(150, 50);
+		lIw.setFont(font);
 
-		JLabel lBmi = new JLabel("BMI : ");
-		lBmi.setLocation(180, 380);
-		lBmi.setSize(150, 50);
+		JLabel lBmi = new JLabel("현재 BMI : ");
+		lBmi.setLocation(180, 450);
+		lBmi.setSize(180, 50);
+		lBmi.setFont(font);
 
 		JLabel lS = new JLabel("평균수면시간 : ");
-		lS.setLocation(180, 430);
-		lS.setSize(200, 50);
-
+		lS.setLocation(180, 380);
+		lS.setSize(150, 50);
+		lS.setFont(font);
 		// ------------------------------
-//		 String userId = InfoVo.getInstance().getId();
 
-//		("운동시간");
-		JTextField lAtT = new JTextField();
-		lAtT.setLocation(340, 180);
-		lAtT.setSize(150, 50);
-
-//		("소모cal");
-		JTextField lUcT = new JTextField();
-		lUcT.setLocation(340, 230);
-		lUcT.setSize(150, 50);
-
-//		("섭취cal");
-		JTextField lIcT = new JTextField();
-		lIcT.setLocation(340, 280);
-		lIcT.setSize(150, 50);
-
-//		("섭취수분");
-		JTextField lIwT = new JTextField();
-		lIwT.setLocation(340, 330);
-		lIwT.setSize(150, 50);
-
-//		("BMI");
-		JTextField lBmiT = new JTextField();
-		lBmiT.setLocation(340, 380);
-		lBmiT.setSize(150, 50);
-
-//		("평균수면시간");
-		JTextField lST = new JTextField();
-		lST.setLocation(340, 430);
-		lST.setSize(200, 50);
-
-		lAtT.setFont(font);
-		lUcT.setFont(font);
-		lIcT.setFont(font);
-		lIwT.setFont(font);
-		lBmiT.setFont(font);
-		lST.setFont(font);
-
-		f.add(lAtT);
-		f.add(lUcT);
-		f.add(lIcT);
-		f.add(lIwT);
-		f.add(lBmiT);
-		f.add(lST);
-
-//		f.setVisible(true);
-
-		list = dao.list(/*----------*/);
+		list = dao.list();
 		if (list.size() != 0) {
 			for (int i = 0; i < list.size(); i++) {
 				HealthVo data = (HealthVo) list.get(i);
-//		getUserProfile data = new getUserProfile();
+				String avg_exercise_hours = Integer.toString(data.getAvg_exercise_hours());
+				String avg_calories_burned = Integer.toString(data.getAvg_calories_burned());
+				String avg_calories_intake = Integer.toString(data.getAvg_calories_intake());
+				String avg_water_intake = Integer.toString(data.getAvg_water_intake());
+				String avg_sleep_hours = Integer.toString(data.getAvg_sleep_hours());
+				String current_BMI = Integer.toString(data.getCurrent_BMI());
+
+				// HealthDAO list에 InfoDAO gid넣어주기?
+
+				// 프린트테스트OK
+//				System.out.println(gid);
+
+//				("운동시간");
+				JLabel lAtT = new JLabel(avg_exercise_hours + " 분");
+				lAtT.setLocation(340, 180);
+				lAtT.setSize(150, 50);
+
+//				("소모cal");
+				JLabel lUcT = new JLabel(avg_calories_burned + " kcal");
+				lUcT.setLocation(340, 230);
+				lUcT.setSize(150, 50);
+
+//				("섭취cal");
+				JLabel lIcT = new JLabel(avg_calories_intake + " kcal");
+				lIcT.setLocation(340, 280);
+				lIcT.setSize(150, 50);
+
+//				("섭취수분");
+				JLabel lIwT = new JLabel(avg_water_intake + " 리터");
+				lIwT.setLocation(340, 330);
+				lIwT.setSize(150, 50);
+
+//				("BMI");
+				JLabel lBmiT = new JLabel(current_BMI + " Kg/m²");
+				lBmiT.setLocation(340, 450);
+				lBmiT.setSize(150, 50);
+
+//				("평균수면시간");
+				JLabel lST = new JLabel(avg_sleep_hours + " 시간");
+				lST.setLocation(340, 380);
+				lST.setSize(200, 50);
+
+				lAtT.setFont(font);
+				lUcT.setFont(font);
+				lIcT.setFont(font);
+				lIwT.setFont(font);
+				lBmiT.setFont(font);
+				lST.setFont(font);
+
+				f.add(lAtT);
+				f.add(lUcT);
+				f.add(lIcT);
+				f.add(lIwT);
+				f.add(lBmiT);
+				f.add(lST);
+
+				f.setVisible(true);
 
 				ctl20.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 
 						// case1 주간 평균
 						if (ctl20.getSelectedItem().toString() == "<주간분석>") {
-//							dispose();
+							dispose();
 
-//							HealthVo data = HealthVo.getInstance();
-							String gid = data.getId();
-//							String DIDATE = data.getDIDATE();
-							String AVG_EXERCISE_HOURS = Integer.toString(data.getAVG_EXERCISE_HOURS());
-							String AVG_CALORIES_INTAKE = Integer.toString(data.getAVG_CALORIES_INTAKE());
-							String AVG_CALORIES_BURNED = Integer.toString(data.getAVG_CALORIES_BURNED());
-							String AVG_SLEEP_HOURS = Integer.toString(data.getAVG_SLEEP_HOURS());
-							String AVG_BMI = Integer.toString(data.getAVG_BMI());
-							String AVG_WATER_INTAKE = Integer.toString(data.getAVG_WATER_INTAKE());
-							// HealthDAO list에 InfoDAO gid넣어주기?
+							lAtT.setText(avg_exercise_hours + " 분");
+							lUcT.setText(avg_calories_burned + " kcal");
+							lIcT.setText(avg_calories_intake + " kcal");
+							lIwT.setText(avg_water_intake + " 리터");
+							lBmiT.setText(current_BMI + " Kg/m²");
+							lST.setText(avg_sleep_hours + " 시간");
 
-							// 프린트테스트
-							System.out.println(gid);
-
-							lAtT.setText(AVG_EXERCISE_HOURS);
-							lUcT.setText(AVG_CALORIES_BURNED);
-							lIcT.setText(AVG_CALORIES_INTAKE);
-							lIwT.setText(AVG_WATER_INTAKE);
-							lBmiT.setText(AVG_BMI);
-							lST.setText(AVG_SLEEP_HOURS);
-							
-							System.out.println(AVG_EXERCISE_HOURS); ///////////////////////////
-
-							 // case2 월간평균
-						}
-						else {
-//							/////////////
-							list2 = dao.list2(/*----------*/);
+							// case2 월간평균
+						} else if (ctl20.getSelectedItem().toString() == "<월간분석>") {
+							list2 = dao.list2();
 							if (list2.size() != 0) {
 								for (int i = 0; i < list2.size(); i++) {
 									HealthVo data = (HealthVo) list2.get(i);
+									String avg_exercise_hours = Integer.toString(data.getAvg_exercise_hours());
+									String avg_calories_burned = Integer.toString(data.getAvg_calories_burned());
+									String avg_calories_intake = Integer.toString(data.getAvg_calories_intake());
+									String avg_water_intake = Integer.toString(data.getAvg_water_intake());
+									String avg_sleep_hours = Integer.toString(data.getAvg_sleep_hours());
+									String current_BMI = Integer.toString(data.getCurrent_BMI());
 
-									String gid = data.getId();
-//									String DIDATE = data.getDIDATE();
-									String AVG_EXERCISE_HOURS = Integer.toString(data.getAVG_EXERCISE_HOURS());
-									String AVG_CALORIES_INTAKE = Integer.toString(data.getAVG_CALORIES_INTAKE());
-									String AVG_CALORIES_BURNED = Integer.toString(data.getAVG_CALORIES_BURNED());
-									String AVG_SLEEP_HOURS = Integer.toString(data.getAVG_SLEEP_HOURS());
-									String AVG_BMI = Integer.toString(data.getAVG_BMI());
-									String AVG_WATER_INTAKE = Integer.toString(data.getAVG_WATER_INTAKE());
-									// HealthDAO list에 InfoDAO gid넣어주기?
+									lAtT.setText(avg_exercise_hours + " 분");
+									lUcT.setText(avg_calories_burned + " kcal");
+									lIcT.setText(avg_calories_intake + " kcal");
+									lIwT.setText(avg_water_intake + " 리터");
+									lBmiT.setText(current_BMI + " Kg/m²");
+									lST.setText(avg_sleep_hours + " 시간");
+								}
+							}
+							// case3 연간평균
+						} else {
+							list3 = dao.list3();
+							if (list3.size() != 0) {
+								for (int i = 0; i < list3.size(); i++) {
+									HealthVo data = (HealthVo) list3.get(i);
+									String avg_exercise_hours = Integer.toString(data.getAvg_exercise_hours());
+									String avg_calories_burned = Integer.toString(data.getAvg_calories_burned());
+									String avg_calories_intake = Integer.toString(data.getAvg_calories_intake());
+									String avg_water_intake = Integer.toString(data.getAvg_water_intake());
+									String avg_sleep_hours = Integer.toString(data.getAvg_sleep_hours());
+									String current_BMI = Integer.toString(data.getCurrent_BMI());
 
-									lAtT.setText(AVG_EXERCISE_HOURS);
-									lUcT.setText(AVG_CALORIES_BURNED);
-									lIcT.setText(AVG_CALORIES_INTAKE);
-									lIwT.setText(AVG_WATER_INTAKE);
-									lBmiT.setText(AVG_BMI);
-									lST.setText(AVG_SLEEP_HOURS);
-
+									lAtT.setText(avg_exercise_hours + " 분");
+									lUcT.setText(avg_calories_burned + " kcal");
+									lIcT.setText(avg_calories_intake + " kcal");
+									lIwT.setText(avg_water_intake + " 리터");
+									lBmiT.setText(current_BMI + " Kg/m²");
+									lST.setText(avg_sleep_hours + " 시간");
 								}
 							}
 						}
@@ -220,24 +223,25 @@ public class HealthCheck extends JFrame {
 
 		btnI = new JButton("메인페이지이동");
 		btnI.setLocation(170, 570);
-		btnI.setSize(100, 40);
-
-		btnS = new JButton("게시판이동");
-		btnS.setLocation(400, 570);
-		btnS.setSize(100, 40);
-
-		btnS.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new Mframe(); // 회원가입열기
-			}
-		});
-
+		btnI.setSize(150, 40);
 		btnI.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new IdSearch(); //
+				Mainscreen mainscreen = new Mainscreen(); //
+				f.dispose();
+				mainscreen.excute();
 				// 메인페이지열기
+			}
+		});
+
+		btnS = new JButton("게시판이동");
+		btnS.setLocation(370, 570);
+		btnS.setSize(150, 40);
+		btnS.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				f.dispose();
+				new Boardset();
 			}
 		});
 
@@ -263,6 +267,7 @@ public class HealthCheck extends JFrame {
 
 		f.add(btnI);
 		f.add(btnS);
+		f.setLocationRelativeTo(null);
 //		f.add(lb1);
 
 		f.setVisible(true);

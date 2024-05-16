@@ -4,6 +4,7 @@ package Board;
 import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,6 +25,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+
 
 import Post.Read;
 import Post.Correct;
@@ -1194,23 +1196,18 @@ if (f.isVisible()) {
 	public void windowClosed(WindowEvent e) {
 		// TODO Auto-generated method stub
 
-	}
+// import Mains1.Mainscreen;
 
-	@Override
-	public void windowIconified(WindowEvent e) {
-		// TODO Auto-generated method stub
+import Post.Read;
 
-	}
 
-	@Override
-	public void windowDeiconified(WindowEvent e) {
-		// TODO Auto-generated method stub
 
-	}
+// 실행시켜서 가운데 아래 검색기능 오류 고치기 
+// 왜 뜨는지 납득이 안됨 
+// 이거만 고치고 인터페이스 수정만 하면 얼추 게시판 게시글은 다 될듯
+// 해결 빨리 되면 추천수랑 조회수 바로 업데이트 되게 
 
-	@Override
-	public void windowActivated(WindowEvent e) {
-		// TODO Auto-generated method stub
+
 
 	}
 
@@ -1916,4 +1913,5 @@ if (f.isVisible()) {
 		Boardset bs = new Boardset();
 
 	}
+
 }

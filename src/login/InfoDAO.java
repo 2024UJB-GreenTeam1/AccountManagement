@@ -17,19 +17,6 @@ public class InfoDAO {
     private Statement stmt;
     private ResultSet rs, rsL;
 
-//	public void delete(String id) {
-//		try {
-//			String sql = "" + "DELETE FROM LOGIN Where LNO=1";
-//			PreparedStatement pstmt = con.prepareStatement(sql);
-//			pstmt.setString(1, id);
-//			int rows = pstmt.executeUpdate();
-//			pstmt.close();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return;
-//	}
-    
     public ArrayList<InfoVo> list(String pid) {
         ArrayList<InfoVo> list = new ArrayList<InfoVo>();
 
@@ -52,7 +39,7 @@ public class InfoDAO {
                 String id = rs.getString("USER_ID");
                 String pwd = rs.getString("pwd");
 
-                InfoVo data = InfoVo.getInstance();//★☆★☆★☆★☆
+                InfoVo data = InfoVo.getInstance();
                 data.setData(id, pwd);
                 list.add(data);
 

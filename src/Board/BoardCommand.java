@@ -52,9 +52,10 @@ public class BoardCommand extends ConnectionB {
 	public void insert(BoardDTO dto) {  //삽입
 		try {
 			conn = DriverManager.getConnection(URL,USERID,USERPWD);
-			String sql = "insert into post(bno, btitle, bdate, ) valuses (SEQ_BOARD_NUM,?,SYSDATE)";
+			String sql = "insert into post(bno, btitle, bdate, busy) valuses (SEQ_BOARD_NUM,?,SYSDATE,? )";
 			setPstmt(conn.prepareStatement(sql));
 			getPstmt().setString(1, dto.getTitle());
+			getPstmt().setString(2, dto.getBusy());
 			
 			getPstmt().executeUpdate();
 			

@@ -1,59 +1,61 @@
 package login;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.GraphicsEnvironment;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import IDsearch.IdSearch;
 import IDsearch.PwdSearch;
+import Mains1.Mainpopup;
 import Mains1.Mainscreen;
 import Member.Mframe;
-//import Profile.Pframe;
 
-//extends WindowAdapter 
 public class LoginFrame extends JFrame {
 	private JFrame f;
-	private JTextField tfId, tfMsg;
+	private JTextField tfId;
 	private JPasswordField tfPwd;
 	private JButton btnL, btnI, btnP, btnS;
 	private InfoDAO dao;
 	ArrayList<InfoVo> list;
 	private JPanel tab1Panel;
 
+	// 이미지크기조절셋업
+	ImageIcon imageSetSize(ImageIcon icon, int i, int j) { // image Size Setting
+		Image ximg = icon.getImage(); // ImageIcon을 Image로 변환.
+		Image yimg = ximg.getScaledInstance(i, j, java.awt.Image.SCALE_SMOOTH);
+		ImageIcon xyimg = new ImageIcon(yimg);
+		return xyimg;
+	}
+
 	public LoginFrame() {
 
 		dao = new InfoDAO();
 
-		f = new JFrame("Login");
+		f = new JFrame("Just Do Fit");
 		f.setSize(700, 700);
 		f.getContentPane().setLayout(null);
 
 		tab1Panel = new JPanel();
 		JLabel jLabel = new JLabel();
-		jLabel.setIcon(new ImageIcon(getClass().getResource("../img/logo.jpg")));// bin폴더 넘어가면 안되는듯?
+//		java.net.URL imageUrl1 = getClass().getResource("/img/logo.jpg");
+		jLabel.setIcon(new ImageIcon(getClass().getResource("/img/logo1.jpg")));// bin폴더 넘어가면 안되는듯?
 		tab1Panel.add(jLabel);
 		tab1Panel.setLocation(140, 10);
 		tab1Panel.setSize(400, 400);
-
-		// 화면중앙배치
-		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		Point centerPoint = ge.getCenterPoint();
-		int leftTopX = centerPoint.x - f.getWidth() / 2;
-		int leftTopY = centerPoint.y - f.getHeight() / 2;
-		f.setLocation(leftTopX, leftTopY);
 
 		JLabel lId = new JLabel("ID");
 		lId.setLocation(170, 440);
@@ -65,23 +67,25 @@ public class LoginFrame extends JFrame {
 
 		tfId = new JTextField(10);
 		tfId.setLocation(220, 450);
-		tfId.setSize(200, 30);
-//		String id = getTfId().getText();							//
+		tfId.setSize(200, 30); //
 
 		tfPwd = new JPasswordField(10);
-//		tfPwd.setEchoChar('*');
 		tfPwd.setLocation(220, 490);
 		tfPwd.setSize(200, 30);
 
-		tfMsg = new JTextField(10);
-		tfMsg.setLocation(170, 530);
-		tfMsg.setSize(250, 30);
+		// 운동코멘트
+		JLabel lMsg = new JLabel();
+		lMsg.setLocation(20, 530);
+		lMsg.setSize(640, 30);
+		String healthComment = EnglishComment.getEnglishComment();
+		lMsg.setText(healthComment);
+		lMsg.setHorizontalAlignment(JTextField.CENTER);
 
-		btnL = new JButton("Login");
+		btnL = new JButton();
 		btnL.setLocation(420, 448);
-		btnL.setSize(80, 110);
+		btnL.setSize(80, 80);
 
-		btnI = new JButton("ID찾기");
+		btnI = new JButton("아이디찾기");
 		btnI.setLocation(170, 570);
 		btnI.setSize(100, 40);
 
@@ -89,7 +93,7 @@ public class LoginFrame extends JFrame {
 		btnP.setLocation(285, 570);
 		btnP.setSize(100, 40);
 
-		btnS = new JButton("SIGN IN");
+		btnS = new JButton("회원가입");
 		btnS.setLocation(400, 570);
 		btnS.setSize(100, 40);
 
@@ -106,10 +110,10 @@ public class LoginFrame extends JFrame {
 
 				String pwd = new String(tfPwd.getPassword());// SWING에서 .getPassword()는 char[]이기때문에 String변환
 
-				System.out.println(getTfId().getText() + " : " + pwd);
+				System.out.println(tfId.getText() + " : " + pwd);
 				String id = tfId.getText();
 
-				list = dao.list(id);
+				list = dao.list(id);// 사용자 정보 설정
 
 				if (list.size() != 0) {
 					for (int i = 0; i < list.size(); i++) {
@@ -119,12 +123,14 @@ public class LoginFrame extends JFrame {
 
 						System.out.println(gid + " :: " + gpwd);
 
-						if (getTfId().getText().equals(gid) && pwd.equals(gpwd)) { // 성공 메인페이지열기
-							tfMsg.setText("로그인이 성공했습니다.");
+						if (tfId.getText().equals(gid) && pwd.equals(gpwd)) { // 성공 메인페이지열기
+//							tfMsg.setText("로그인이 성공했습니다.");
 							Mainscreen mainscreen = new Mainscreen();//
-//							new	Pframe();
+							Mainpopup mainpopup = new Mainpopup();
 							mainscreen.excute();
+							mainpopup.excute();
 							f.setVisible(false); //
+//							new Pframe();
 						} else {
 							new FailMessage(); // 로그인 실패
 						}
@@ -133,13 +139,13 @@ public class LoginFrame extends JFrame {
 					new FailMessage();
 				}
 
-				for (int i = 0; i < list.size(); i++) { // 이거 왜 중복이냐
-					InfoVo data = (InfoVo) list.get(i);
-					String gid = data.getId();
-					String gpwd = data.getPwd();
-
-					System.out.println(gid + " :: " + gpwd);
-				}
+//				for (int i = 0; i < list.size(); i++) { 
+//					InfoVo data = (InfoVo) list.get(i);
+//					String gid = data.getId();
+//					String gpwd = data.getPwd();
+//
+//					System.out.println(gid + " :: " + gpwd);
+//				}
 			}
 		});
 
@@ -160,27 +166,59 @@ public class LoginFrame extends JFrame {
 		});
 
 		f.getContentPane().add(tab1Panel);
+
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		f.addWindowListener(this);
 		f.add(lId);
-		f.add(getTfId()); // ??
+		f.add(tfId);
 		f.add(lPwd);
 		f.add(tfPwd);
-		f.add(tfMsg);
+		f.add(lMsg);
 		f.add(btnL);
 		f.add(btnI);
 		f.add(btnP);
 		f.add(btnS);
-		f.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				int confirmed = JOptionPane.showConfirmDialog(null, "정말 로그아웃 하시겠습니까?", "Exit Program Message Box",
-						JOptionPane.YES_NO_OPTION);
+		f.setLocationRelativeTo(null);
+//		f.add(lb1);
 
-				if (confirmed == JOptionPane.YES_OPTION) {
-					f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				} else {
-					f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-				}
-			}
-		});
+//		
+		tfId.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		tfPwd.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+		// 배경색 설정
+		f.getContentPane().setBackground(new Color(255, 245, 248)); // 연한 핑크 색상
+
+		// 텍스트 필드 스타일
+		tfId.setBackground(Color.WHITE);
+		tfId.setBorder(BorderFactory.createLineBorder(new Color(210, 210, 210), 1));
+		tfPwd.setBackground(Color.WHITE);
+		tfPwd.setBorder(BorderFactory.createLineBorder(new Color(210, 210, 210), 1));
+
+		btnL.setBackground(new Color(240, 98, 146)); // 핑크색
+		btnL.setForeground(Color.WHITE);
+		btnI.setBackground(new Color(77, 182, 172)); // 민트색
+		btnI.setForeground(Color.WHITE);
+		btnP.setBackground(new Color(255, 183, 77)); // 연한 오렌지색
+		btnP.setForeground(Color.WHITE);
+		btnS.setBackground(new Color(149, 117, 205)); // 연한 보라색
+		btnS.setForeground(Color.WHITE);
+
+		Font btnFont = new Font("SansSerif", Font.BOLD, 12);
+		btnL.setFont(btnFont);
+		btnI.setFont(btnFont);
+		btnP.setFont(btnFont);
+		btnS.setFont(btnFont);
+
+		Font labelFont = new Font("SansSerif", Font.PLAIN, 14);
+		lId.setFont(labelFont);
+		lPwd.setFont(labelFont);
+		lMsg.setFont(labelFont);
+		lMsg.setForeground(new Color(120, 144, 156)); // 진한 회색
+
+		ImageIcon loginIcon = new ImageIcon(getClass().getResource("/img/login_icon.png"));
+		loginIcon = imageSetSize(loginIcon, 40, 40);
+//		https://www.flaticon.com/search?word=login
+		btnL.setIcon(loginIcon);
 
 		f.setVisible(true);
 	}
@@ -232,5 +270,4 @@ public class LoginFrame extends JFrame {
 	public JTextField getTfId() {
 		return tfId;
 	}
-
 }

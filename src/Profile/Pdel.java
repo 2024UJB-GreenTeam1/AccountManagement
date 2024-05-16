@@ -9,11 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-//<<<<<<< HEAD
-import login.InfoVo;
-//=======
-//import Member.Mframe;
-//>>>>>>> branch 'master' of https://github.com/2024UJB-GreenTeam1/AccountManagement.git
+import Member.Mframe;
 import login.LoginFrame;
 
 public class Pdel {

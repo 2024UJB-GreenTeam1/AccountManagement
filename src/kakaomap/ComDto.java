@@ -1,4 +1,4 @@
-package Post;
+package kakaomap;
 //사용함
 import java.sql.Connection;
 import java.sql.DriverManager;

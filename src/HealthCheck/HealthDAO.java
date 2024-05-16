@@ -2,13 +2,10 @@ package HealthCheck;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import Profile.DTO;
 import login.InfoVo;
 
 public class HealthDAO {
@@ -17,166 +14,198 @@ public class HealthDAO {
 	String user = "c##green";
 	String password = "green1234";
 
-	private Connection con; // 안돼네////
+	private Connection con;
 	private Statement stmt;
 	private ResultSet rs;
-//	private PreparedStatement pstmt; //
-//	private InfoVo info; // 
 
-//	public HealthDAO() {
-//		connDB();
-//	}
-
-	// <주간평균>
-	public ArrayList<HealthVo> list() {
-		ArrayList<HealthVo> list = new ArrayList<HealthVo>();
+	// 주간평균
+	public ArrayList<HealthVo> list(/* String pid */) {
+		ArrayList<HealthVo> list = new ArrayList<HealthVo>(); // HealthVo
 
 		try {
 			connDB();
-			String userId1 = InfoVo.getInstance().getId();// ★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆
-			// 프린트
-			System.out.println(userId1);
-			String query ="" + "SELECT\r\n"
-			        + "    U.USER_ID,\r\n"
-			        + "    AVG(DI.EXHOUR) AS WEEKLY_AVG_EXERCISE_HOURS,\r\n"
-			        + "    AVG(DI.USEUPC) AS WEEKLY_AVG_CALORIES_BURNED,\r\n"
-			        + "    AVG(DI.INTAKEC) AS WEEKLY_AVG_CALORIES_INTAKE,\r\n"
-			        + "    AVG(DI.WATER) AS WEEKLY_AVG_WATER_INTAKE,\r\n"
-			        + "    AVG(DI.WEIGHT / ((U.HEIGHT / 100) * (U.HEIGHT / 100))) AS WEEKLY_AVG_BMI,\r\n"
-			        + "    AVG(DI.SLEEP) AS WEEKLY_AVG_SLEEP_HOURS\r\n"
-			        + "FROM\r\n"
-			        + "    DAILYINPUT DI\r\n"
-			        + "JOIN\r\n"
-			        + "    USERS U ON DI.USER_ID = U.USER_ID\r\n";
-//			        + "WHERE\r\n"
-//			        + "    DI.USER_ID = '?'\r\n"
-//			        + "    AND DI.DIDATE >= TRUNC(SYSDATE) - 7\r\n"
-//			        + "GROUP BY\r\n"
-//			        + "    U.USER_ID";
-		
-//			if (userId1 != null) {
-//
-//			}
+			// 로그인아이디호출
+			String userId1 = InfoVo.getInstance().getId();
+			// DAILYINPUT테이블에서 필드 조회쿼리(로그인테이블과 조인)
+			String query = "SELECT " +
+                    "AVG(di.EXHOUR) AS avg_exercise_hours, " +
+                    "AVG(di.USEUPC) AS avg_calories_burned, " +
+                    "AVG(di.INTAKEC) AS avg_calories_intake, " +
+                    "AVG(di.WATER) AS avg_water_intake, " +
+                    "AVG(di.SLEEP) AS avg_sleep_hours, " +
+                    "(SELECT WEIGHT / (u.HEIGHT / 100 * u.HEIGHT / 100) " +
+                    " FROM DAILYINPUT d2 " +
+                    " JOIN USERS u ON d2.USER_ID = u.USER_ID " +
+                    " WHERE d2.USER_ID = di.USER_ID AND " +
+                    "       d2.DIDATE = (SELECT MAX(DIDATE) " +
+                    "                    FROM DAILYINPUT " +
+                    "                    WHERE USER_ID = d2.USER_ID)) " +
+                    "AS current_BMI " +
+                    "FROM DAILYINPUT di " +
+                    "WHERE di.USER_ID = '"+userId1+"' " +
+                    "AND di.DIDATE BETWEEN SYSDATE - 7 AND SYSDATE " +
+                    "GROUP BY di.USER_ID";
 
-			PreparedStatement pstmt = con.prepareStatement(query);
-			if (userId1 != null) {
-				query += " WHERE\r\n"
-						+ "    DI.USER_ID = '?'\r\n"	       /////아이디
-						+ "    AND DI.DIDATE >= TRUNC(SYSDATE) - 7\r\n";
-				query += " GROUP BY\r\n"
-						+ "	U.USER_ID";
-				pstmt.setString(1, userId1);
+			System.out.println("SQL : " + query);
+
+			rs = stmt.executeQuery(query);
+			rs.last();
+			System.out.println("rs.getRow() : " + rs.getRow());
+
+			if (rs.getRow() == 0) {
+				System.out.println("0 row selected...");
+			} else {
+				System.out.println(rs.getRow() + " rows selected...");
+				rs.previous();
+				while (rs.next()) {
+//					String id = rs.getString("USER_ID");	//DAILYINPUT테이블에서 USER_id,  필드 조회
+//					String DIDATE = rs.getString("DIDATE");
+					int avg_exercise_hours = rs.getInt("avg_exercise_hours");
+					int avg_calories_burned = rs.getInt("avg_calories_burned");
+					int avg_calories_intake = rs.getInt("avg_calories_intake");
+					int avg_water_intake = rs.getInt("avg_water_intake");
+					int avg_sleep_hours = rs.getInt("avg_sleep_hours");
+					int current_BMI = rs.getInt("current_BMI");
+
+					// HealthVo에 데이터 넣어주기
+					HealthVo data = new HealthVo(avg_exercise_hours, avg_calories_burned, avg_calories_intake,
+							avg_water_intake, avg_sleep_hours, current_BMI);
+					list.add(data);
+				}
 			}
-
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				String id = rs.getString("USER_ID"); // DAILYINPUT테이블에서 USER_id, 필드 조회
-//				String DIDATE = rs.getString("DIDATE");
-				int AVG_EXERCISE_HOURS = rs.getInt("WEEKLY_AVG_EXERCISE_HOURS");
-				int AVG_CALORIES_INTAKE = rs.getInt("WEEKLY_AVG_CALORIES_INTAKE");
-				int AVG_CALORIES_BURNED = rs.getInt("WEEKLY_AVG_CALORIES_BURNED");
-				int AVG_SLEEP_HOURS = rs.getInt("WEEKLY_AVG_SLEEP_HOURS");
-				int AVG_BMI = rs.getInt("WEEKLY_AVG_BMI");
-				int AVG_WATER_INTAKE = rs.getInt("WEEKLY_AVG_WATER_INTAKE");
-
-				HealthVo data = HealthVo.getInstance();// ★☆★☆★☆★☆
-				// HealthVo에 데이터 넣어주기
-				data.setDataHealth(id, AVG_EXERCISE_HOURS, 
-						AVG_CALORIES_INTAKE, 
-						AVG_CALORIES_BURNED, 
-						AVG_SLEEP_HOURS,
-						AVG_BMI, AVG_WATER_INTAKE);
-				list.add(data);
-
-			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			// 리소스 해제 코드??
-			closeResources();
 		}
+
 		return list;
 	}
 
-	// <월간평균>
-	public ArrayList<HealthVo> list2() {
-		ArrayList<HealthVo> list2 = new ArrayList<HealthVo>();
+	// 월간평균
+	public ArrayList<HealthVo> list2(/* String pid */) {
+		ArrayList<HealthVo> list2 = new ArrayList<HealthVo>(); // HealthVo
 
 		try {
 			connDB();
-			String userId1 = InfoVo.getInstance().getId();// ★☆★☆★☆★☆★☆★☆★☆★☆★☆★☆
-			// 프린트
-			System.out.println(userId1);
-			String query2 = "" +"SELECT\r\n"
-			        + "    U.USER_ID,\r\n"
-			        + "    AVG(DI.EXHOUR) AS WEEKLY_AVG_EXERCISE_HOURS,\r\n"
-			        + "    AVG(DI.USEUPC) AS WEEKLY_AVG_CALORIES_BURNED,\r\n"
-			        + "    AVG(DI.INTAKEC) AS WEEKLY_AVG_CALORIES_INTAKE,\r\n"
-			        + "    AVG(DI.WATER) AS WEEKLY_AVG_WATER_INTAKE,\r\n"
-			        + "    AVG(DI.WEIGHT / ((U.HEIGHT / 100) * (U.HEIGHT / 100))) AS WEEKLY_AVG_BMI,\r\n"
-			        + "    AVG(DI.SLEEP) AS WEEKLY_AVG_SLEEP_HOURS\r\n"
-			        + "FROM\r\n"
-			        + "    DAILYINPUT DI\r\n"
-			        + "JOIN\r\n"
-			        + "    USERS U ON DI.USER_ID = U.USER_ID\r\n";
-//			        + "WHERE\r\n"
-//			        + "    DI.USER_ID = '?'\r\n"
-//			        + "    AND DI.DIDATE >= TRUNC(SYSDATE) - 7\r\n"
-//			        + "GROUP BY\r\n"
-//			        + "    U.USER_ID";
-			if (userId1 != null) {
 
+			// 로그인아이디호출
+			String userId1 = InfoVo.getInstance().getId();
+			// DAILYINPUT테이블에서 필드 조회쿼리(로그인테이블과 조인)
+			String query = "SELECT " +
+                    "AVG(di.EXHOUR) AS avg_exercise_hours, " +
+                    "AVG(di.USEUPC) AS avg_calories_burned, " +
+                    "AVG(di.INTAKEC) AS avg_calories_intake, " +
+                    "AVG(di.WATER) AS avg_water_intake, " +
+                    "AVG(di.SLEEP) AS avg_sleep_hours, " +
+                    "(SELECT WEIGHT / (u.HEIGHT / 100 * u.HEIGHT / 100) " +
+                    " FROM DAILYINPUT d2 " +
+                    " JOIN USERS u ON d2.USER_ID = u.USER_ID " +
+                    " WHERE d2.USER_ID = di.USER_ID AND " +
+                    "       d2.DIDATE = (SELECT MAX(DIDATE) " +
+                    "                    FROM DAILYINPUT " +
+                    "                    WHERE USER_ID = d2.USER_ID)) " +
+                    "AS current_BMI " +
+                    "FROM DAILYINPUT di " +
+                    "WHERE di.USER_ID = '"+userId1+"' " +
+                    "AND di.DIDATE BETWEEN SYSDATE - 30 AND SYSDATE " +
+                    "GROUP BY di.USER_ID";
+
+			System.out.println("SQL : " + query);
+
+			rs = stmt.executeQuery(query);
+			rs.last();
+			System.out.println("rs.getRow() : " + rs.getRow());
+
+			if (rs.getRow() == 0) {
+				System.out.println("0 row selected...");
+			} else {
+				System.out.println(rs.getRow() + " rows selected...");
+				rs.previous();
+				while (rs.next()) {
+//					String id = rs.getString("USER_ID");	//DAILYINPUT테이블에서 USER_id,  필드 조회
+//					String DIDATE = rs.getString("DIDATE");
+					int avg_exercise_hours = rs.getInt("avg_exercise_hours");
+					int avg_calories_burned = rs.getInt("avg_calories_burned");
+					int avg_calories_intake = rs.getInt("avg_calories_intake");
+					int avg_water_intake = rs.getInt("avg_water_intake");
+					int avg_sleep_hours = rs.getInt("avg_sleep_hours");
+					int current_BMI = rs.getInt("current_BMI");
+
+					// HealthVo에 데이터 넣어주기
+					HealthVo data = new HealthVo(avg_exercise_hours, avg_calories_burned, avg_calories_intake,
+							avg_water_intake, avg_sleep_hours, current_BMI);
+					list2.add(data);
+				}
 			}
-
-			PreparedStatement pstmt = con.prepareStatement(query2);
-			if (userId1 != null) {
-				query2 += " WHERE\r\n"
-						+ "    DI.USER_ID = '"+"?"+"'\r\n"	       /////아이디
-						+ "    AND DI.DIDATE >= TRUNC(SYSDATE) - 30\r\n";
-				query2 += " GROUP BY\r\n"
-						+ "	U.USER_ID";
-				pstmt.setString(1, userId1);
-			}
-
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				String id = rs.getString("USER_ID"); // DAILYINPUT테이블에서 USER_id, 필드 조회
-//				String DIDATE = rs.getString("DIDATE");
-				int AVG_EXERCISE_HOURS = rs.getInt("MONTHLY_AVG_EXERCISE_HOURS");
-				int AVG_CALORIES_INTAKE = rs.getInt("MONTHLY_AVG_CALORIES_INTAKE");
-				int AVG_CALORIES_BURNED = rs.getInt("MONTHLY_AVG_CALORIES_BURNED");
-				int AVG_SLEEP_HOURS = rs.getInt("MONTHLY_AVG_SLEEP_HOURS");
-				int AVG_BMI = rs.getInt("MONTHLY_AVG_BMI");
-				int AVG_WATER_INTAKE = rs.getInt("MONTHLY_AVG_WATER_INTAKE");
-
-				HealthVo data2 = HealthVo.getInstance();// ★☆★☆★☆★☆
-				// HealthVo에 데이터 넣어주기
-				data2.setDataHealth(id, AVG_EXERCISE_HOURS, 
-						AVG_CALORIES_INTAKE, 
-						AVG_CALORIES_BURNED, 
-						AVG_SLEEP_HOURS,
-						AVG_BMI, AVG_WATER_INTAKE);
-				list2.add(data2);
-				
-				//프린트
-				System.out.println(AVG_EXERCISE_HOURS);
-
-			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			// 리소스 해제 코드??
-			closeResources();
 		}
+
 		return list2;
 	}
+	
+	// 연간평균
+	public ArrayList<HealthVo> list3(/* String pid */) {
+		ArrayList<HealthVo> list3 = new ArrayList<HealthVo>(); // HealthVo
 
-	private String getCurrentUserId() {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			connDB();
+
+			// 로그인아이디호출
+			String userId1 = InfoVo.getInstance().getId();
+			// DAILYINPUT테이블에서 필드 조회쿼리(로그인테이블과 조인)
+			String query = "SELECT " +
+                    "AVG(di.EXHOUR) AS avg_exercise_hours, " +
+                    "AVG(di.USEUPC) AS avg_calories_burned, " +
+                    "AVG(di.INTAKEC) AS avg_calories_intake, " +
+                    "AVG(di.WATER) AS avg_water_intake, " +
+                    "AVG(di.SLEEP) AS avg_sleep_hours, " +
+                    "(SELECT WEIGHT / (u.HEIGHT / 100 * u.HEIGHT / 100) " +
+                    " FROM DAILYINPUT d2 " +
+                    " JOIN USERS u ON d2.USER_ID = u.USER_ID " +
+                    " WHERE d2.USER_ID = di.USER_ID AND " +
+                    "       d2.DIDATE = (SELECT MAX(DIDATE) " +
+                    "                    FROM DAILYINPUT " +
+                    "                    WHERE USER_ID = d2.USER_ID)) " +
+                    "AS current_BMI " +
+                    "FROM DAILYINPUT di " +
+                    "WHERE di.USER_ID = '"+userId1+"' " +
+                    "AND di.DIDATE BETWEEN SYSDATE - 365 AND SYSDATE " +
+                    "GROUP BY di.USER_ID";
+
+			System.out.println("SQL : " + query);
+
+			rs = stmt.executeQuery(query);
+			rs.last();
+			System.out.println("rs.getRow() : " + rs.getRow());
+
+			if (rs.getRow() == 0) {
+				System.out.println("0 row selected...");
+			} else {
+				System.out.println(rs.getRow() + " rows selected...");
+				rs.previous();
+				while (rs.next()) {
+//					String id = rs.getString("USER_ID");	//DAILYINPUT테이블에서 USER_id,  필드 조회
+//					String DIDATE = rs.getString("DIDATE");
+					int avg_exercise_hours = rs.getInt("avg_exercise_hours");
+					int avg_calories_burned = rs.getInt("avg_calories_burned");
+					int avg_calories_intake = rs.getInt("avg_calories_intake");
+					int avg_water_intake = rs.getInt("avg_water_intake");
+					int avg_sleep_hours = rs.getInt("avg_sleep_hours");
+					int current_BMI = rs.getInt("current_BMI");
+
+					// HealthVo에 데이터 넣어주기
+					HealthVo data = new HealthVo(avg_exercise_hours, avg_calories_burned, avg_calories_intake,
+							avg_water_intake, avg_sleep_hours, current_BMI);
+					list3.add(data);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return list3;
 	}
+
 
 	private void connDB() {
 		try {
@@ -186,22 +215,6 @@ public class HealthDAO {
 			System.out.println("oracle connection success.\n");
 //			stmt = con.createStatement();
 			stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-
-
-	private void closeResources() {
-		try {
-			if (rs != null)
-				rs.close();
-//            if (rsL != null) rsL.close(); //??뭐지
-			if (stmt != null)
-				stmt.close();
-			if (con != null)
-				con.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

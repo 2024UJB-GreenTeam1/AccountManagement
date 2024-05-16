@@ -4,13 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
-
-public class BoardDTO {
+							//테이블정의서에 작성된 컬럼명으로 수정했음
+public class BoardDTO {		//btitle->bctitle, bmain->bcontents,bdate->bcdate
 	int bno;  //카테고리
-	String title;
-	String bmain;
+	String bctitle;
+	String bcontents;
 	String user_id;
-	Date bDate;
+	Date bcDate;
 	private Connection conn;
 	protected PreparedStatement pstmt; // 원래 private
 	private ResultSet rs;
@@ -61,28 +61,28 @@ public class BoardDTO {
 		this.bno = bno;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getBcTitle() {
+		return bctitle;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setBcTitle(String bctitle) {
+		this.bctitle = bctitle;
 	}
 
 	public String getbmain() {
-		return bmain;
+		return bcontents;
 	}
 
-	public void setbmain(String bmain) {
-		this.bmain = bmain;
+	public void setBcontents(String bcontents) {
+		this.bcontents = bcontents;
 	}
 
 	public Date getBDate() {
-		return bDate;
+		return bcDate;
 	}
 
-	public void setbDate(Date bDate) {
-		this.bDate = bDate;
+	public void setbDate(Date bcDate) {
+		this.bcDate = bcDate;
 	}
 
 }
