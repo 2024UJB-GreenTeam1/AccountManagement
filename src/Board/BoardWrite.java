@@ -225,7 +225,13 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 						+ "bctitle,bcontent, "
 						+ "bcdate,bclikes,"
 						+ "bcviews,bcfilename,bfiledata,User_id) "
-						+ "values(" + b + ",BCNO.NEXTVAL,?,?,SYSDATE,?,?,?,?,'green') ";/*SEQ_BCNO.NEXTVAL*/
+
+// 						+ "values(" + b + ",BCNO.NEXTVAL,?,?,SYSDATE,?,?,?,?,'green') ";/*SEQ_BCNO.NEXTVAL*/
+=======
+// 						+ "values(" + b + ",BCNO.NEXTVAL,?,?,SYSDATE,?,?,?,?,'green') ";/*SEQ_BCNO.NEXTVAL*/
+
+						+ "values("+b+",SEQ_BCNO.NEXTVAL,?,?,SYSDATE,?,?,?,?,?) ";/*SEQ_BCNO.NEXTVAL*/
+
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, maindptitlecontent.getText());
 				// System.out.println(maindptitlecontent.getText());
@@ -241,6 +247,7 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 				//	pstmt.setstring(5);
 				//	pstmt.setBlob(6);
 				//}
+        	pstmt.setString(7,userId1);	
 				pstmt.executeUpdate();
 
 				maindptitlecontent.setText("");

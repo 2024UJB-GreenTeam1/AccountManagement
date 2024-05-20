@@ -52,7 +52,7 @@ public class Mainscreen {
 
 		// 로고크기조절&삽입
 		ImageIcon imgTest = new ImageIcon(getClass().getResource("../img/logo.jpg"));
-		imgTest = imageSetSize(imgTest, 60, 60);
+		imgTest = imageSetSize(imgTest, 99, 99);
 		JLabel logo = new JLabel(imgTest);
 //		logo.setIcon(imgTest);
 		logo.setSize(100, 100);
@@ -138,27 +138,36 @@ public class Mainscreen {
 		JLabel bid = new JLabel("아이디");
 		bid.setBounds(0, 0, 155, 30);
 		bid.setHorizontalAlignment(JLabel.CENTER);
+		bid.setFont(font3);
 		popboardtext.add(bid);
 		JLabel btitle = new JLabel("제목");
 		btitle.setBounds(155, 0, 300, 30);
 		btitle.setHorizontalAlignment(JLabel.CENTER);
+		btitle.setFont(font3);
 		popboardtext.add(btitle);
 		JLabel blike = new JLabel("좋아요");
 		blike.setBounds(455, 0, 115, 30);
 		blike.setHorizontalAlignment(JLabel.CENTER);
+		blike.setFont(font3);
 		popboardtext.add(blike);
 		JLabel bviews = new JLabel("조회수");
 		bviews.setBounds(570, 0, 120, 30);
 		bviews.setHorizontalAlignment(JLabel.CENTER);
+		bviews.setFont(font3);
 		popboardtext.add(bviews);
 
 		JLabel b1id = new JLabel();
 		b1id.setBounds(0, 30, 155, 50);
 		b1id.setHorizontalAlignment(JLabel.CENTER);
+		b1id.setFont(font3);
 		popboardtext.add(b1id);
 		JButton b1title = new JButton();
 		b1title.setBounds(155, 30, 300, 50);
 		popboardtext.add(b1title);
+		b1title.setBackground(new Color(0,0,0));
+		b1title.setForeground(Color.black);
+		b1title.setFocusPainted(false); // 버튼 포커스 페인팅 비활성화
+        b1title.setOpaque(false); // 버튼 불투명 설정 비활성화
 
 		// 버튼 클릭시 첫번째 게시글 나오게 하는 방법
 		b1title.addActionListener(new ActionListener() {
@@ -167,26 +176,35 @@ public class Mainscreen {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				dao.showFrame1();
+
 			}
 		});
 
 		JLabel b1like = new JLabel();
 		b1like.setBounds(455, 30, 115, 50);
 		b1like.setHorizontalAlignment(JLabel.CENTER);
+		b1like.setFont(font3);
 		popboardtext.add(b1like);
 		JLabel b1views = new JLabel();
 		b1views.setBounds(570, 30, 120, 50);
 		b1views.setHorizontalAlignment(JLabel.CENTER);
+		b1views.setFont(font3);
 		popboardtext.add(b1views);
 
 		JLabel b2id = new JLabel();
 		b2id.setBounds(0, 80, 155, 50);
 		b2id.setHorizontalAlignment(JLabel.CENTER);
+		b2id.setFont(font3);
 		popboardtext.add(b2id);
 		JButton b2title = new JButton();
 		b2title.setBounds(155, 80, 300, 50);
 		popboardtext.add(b2title);
-		b2title.addActionListener(new ActionListener() {
+		b2title.setFont(font3);
+		b2title.setFocusPainted(false); // 버튼 포커스 페인팅 비활성화
+        b2title.setOpaque(false); // 버튼 불투명 설정 비활성화
+        b2title.setBackground(new Color(0,0,0));
+		b2title.setForeground(Color.black);
+        b2title.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -197,19 +215,26 @@ public class Mainscreen {
 		JLabel b2like = new JLabel();
 		b2like.setBounds(455, 80, 115, 50);
 		b2like.setHorizontalAlignment(JLabel.CENTER);
+		b2like.setFont(font3);
 		popboardtext.add(b2like);
 		JLabel b2views = new JLabel();
 		b2views.setBounds(570, 80, 120, 50);
 		b2views.setHorizontalAlignment(JLabel.CENTER);
+		b2views.setFont(font3);
 		popboardtext.add(b2views);
 
 		JLabel b3id = new JLabel();
 		b3id.setBounds(0, 130, 155, 50);
 		b3id.setHorizontalAlignment(JLabel.CENTER);
+		b3id.setFont(font3);
 		popboardtext.add(b3id);
 		JButton b3title = new JButton();
 		b3title.setBounds(155, 130, 300, 50);
 		popboardtext.add(b3title);
+		b3title.setBackground(new Color(0,0,0));
+		b3title.setForeground(Color.black);
+		b3title.setFocusPainted(false); // 버튼 포커스 페인팅 비활성화
+        b3title.setOpaque(false); // 버튼 불투명 설정 비활성화
 		b3title.addActionListener(new ActionListener() {
 
 			@Override
@@ -221,10 +246,12 @@ public class Mainscreen {
 		JLabel b3like = new JLabel();
 		b3like.setBounds(455, 130, 115, 50);
 		b3like.setHorizontalAlignment(JLabel.CENTER);
+		b3like.setFont(font3);
 		popboardtext.add(b3like);
 		JLabel b3views = new JLabel();
 		b3views.setBounds(570, 130, 120, 50);
 		b3views.setHorizontalAlignment(JLabel.CENTER);
+		b3views.setFont(font3);
 		popboardtext.add(b3views);
 
 		ResultSet resultSet = dao.like3();
@@ -277,16 +304,16 @@ public class Mainscreen {
 		calendarlink.setSize(250, 60);
 		calendarlink.setLocation(405, 490);
 		// 창닫기
-		f.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent evt) {
-				int resp = JOptionPane.showConfirmDialog(f, "정말 로그아웃 하시겠습니까?", "Exit?", JOptionPane.YES_NO_OPTION);
-				if (resp == JOptionPane.YES_OPTION) {
-					f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				} else {
-					f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-				}
-			}
-		});
+//		f.addWindowListener(new WindowAdapter() {
+//			public void windowClosing(WindowEvent evt) {
+//				int resp = JOptionPane.showConfirmDialog(f, "정말 로그아웃 하시겠습니까?", "Exit?", JOptionPane.YES_NO_OPTION);
+//				if (resp == JOptionPane.YES_OPTION) {
+//					f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//				} else {
+//					f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+//				}
+//			}
+//		});
 
 		f.add(logo);
 		f.add(mapimg);
@@ -302,45 +329,45 @@ public class Mainscreen {
 		f.add(calendarlink);
 		//디자인 -ING
 ////////////////////////////////////////////////////////////////////////
-//		f.getContentPane().setBackground(new Color(255, 255, 255));  // 밝은 배경
-//
-//		// 버튼 색상 조정
-//		Color btnColor = new Color(240, 98, 146); // 로고에서 추출한 색상
-//		mpg.setBackground(btnColor);
-//		mpg.setForeground(Color.WHITE);
-//		healthbutton.setBackground(btnColor);
-//		healthbutton.setForeground(Color.WHITE);
-//		boardbutton.setBackground(btnColor);
-//		boardbutton.setForeground(Color.WHITE);
-//		
-//		mpg.setBorder(new RoundedBorder(10)); // 둥근 모서리 버튼
-//		healthbutton.setBorder(new RoundedBorder(10));
-//		boardbutton.setBorder(new RoundedBorder(10));
-//		
-//		// JLabel 및 JButton 센터 정렬
-//		logo.setHorizontalAlignment(SwingConstants.CENTER);
-//		mapimg.setHorizontalAlignment(SwingConstants.CENTER);
-//		calenderimg.setHorizontalAlignment(SwingConstants.CENTER);
-//		mpg.setHorizontalAlignment(SwingConstants.CENTER);
-//		healthbutton.setHorizontalAlignment(SwingConstants.CENTER);
-//		boardbutton.setHorizontalAlignment(SwingConstants.CENTER);
-//
-//		// 팝업 메시지 스타일 조정
-//		JOptionPane.getRootFrame().setFont(font2);
-//		JOptionPane.getRootFrame().setBackground(new Color(255, 255, 255));
-//		
-//		f.addWindowListener(new WindowAdapter() {
-//		    public void windowClosing(WindowEvent evt) {
-//		        UIManager.put("OptionPane.background", new Color(255, 255, 255));
-//		        UIManager.put("Panel.background", new Color(255, 255, 255));
-//		        int resp = JOptionPane.showConfirmDialog(f, "정말 로그아웃 하시겠습니까?", "Exit?", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
-//		        if (resp == JOptionPane.YES_OPTION) {
-//		            f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//		        } else {
-//		            f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-//		        }
-//		    }
-//		});
+		f.getContentPane().setBackground(new Color(255, 255, 255));  // 밝은 배경
+
+		// 버튼 색상 조정
+		Color btnColor = new Color(240, 98, 146); // 로고에서 추출한 색상
+		mpg.setBackground(btnColor);
+		mpg.setForeground(Color.WHITE);
+		healthbutton.setBackground(btnColor);
+		healthbutton.setForeground(Color.WHITE);
+		boardbutton.setBackground(btnColor);
+		boardbutton.setForeground(Color.WHITE);
+		
+		mpg.setBorder(new RoundedBorder(20)); // 둥근 모서리 버튼
+		healthbutton.setBorder(new RoundedBorder(20));
+		boardbutton.setBorder(new RoundedBorder(20));
+		
+		// JLabel 및 JButton 센터 정렬 
+		logo.setHorizontalAlignment(SwingConstants.CENTER);
+		mapimg.setHorizontalAlignment(SwingConstants.CENTER);
+		calenderimg.setHorizontalAlignment(SwingConstants.CENTER);
+		mpg.setHorizontalAlignment(SwingConstants.CENTER);
+		healthbutton.setHorizontalAlignment(SwingConstants.CENTER);
+		boardbutton.setHorizontalAlignment(SwingConstants.CENTER);
+
+		// 팝업 메시지 스타일 조정
+		JOptionPane.getRootFrame().setFont(font2);
+		JOptionPane.getRootFrame().setBackground(new Color(255, 255, 255));
+		
+		f.addWindowListener(new WindowAdapter() {
+		    public void windowClosing(WindowEvent evt) {
+		        UIManager.put("OptionPane.background", new Color(255, 255, 255));
+		        UIManager.put("Panel.background", new Color(255, 255, 255));
+		        int resp = JOptionPane.showConfirmDialog(f, "정말 로그아웃 하시겠습니까?", "Exit?", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+		        if (resp == JOptionPane.YES_OPTION) {
+		            f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		        } else {
+		            f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		        }
+		    }
+		});
 		
 		/////////////////////////////////////////////////////////////////////
 		f.setVisible(true);
