@@ -26,7 +26,11 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+
+import Board.Boardset;
 import login.InfoVo;
+import Board.ConnectionB;
+
 
 public class BoardWrite extends BoardDTO implements WindowListener, ActionListener {
 	private JTextArea maincontent2;
@@ -36,6 +40,7 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 	private JButton write, cancle, maincontent,fileButton;
 	private JTextField maindptitlecontent,fileTextField;
 	private Choice category;
+	BoardWrite bw;
 	public BoardWrite() {
 		Font font = new Font("맑은 고딕", Font.BOLD, 50);
 		Font font2 = new Font("맑은 고딕", Font.BOLD, 20);
@@ -62,10 +67,12 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 	       
 	        
 		category = new Choice();
-		category.add("게시판선택");
-		category.add("exercise");  //1
-		category.add("food");  //2
-		category.add("sleep"); //3
+
+		category.add("Total");
+		category.add("Exercise");  //1
+		category.add("Food");  //2
+		category.add("Sleep"); //3
+
 		category.setFont(font2);
 		category.setSize(200, 100); // 카테고리
 		category.setLocation(50, 10);
@@ -140,13 +147,14 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 	@Override
 	public void windowClosing(WindowEvent e) {
 		// TODO Auto-generated method stub
+		
 
 	}
 
 	@Override
 	public void windowClosed(WindowEvent e) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
@@ -178,10 +186,11 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 		// TODO Auto-generated method stub
 		if (e.getActionCommand().equals("취소")) {
 			f.setVisible(false);
-		} else if (e.getActionCommand().equals("작성")) {
+			Boardset bs = new Boardset();
+		 		} else if (e.getActionCommand().equals("작성")) {
 			String num =category.getSelectedItem();
 			int a = 0;
-			String b = "";
+			String b = "0";
 			if(num.equals("")) {
 				a=0;
 				b=Integer.toString(a);	
@@ -206,6 +215,8 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 						+ "bctitle,bcontent, "
 						+ "bcdate,bclikes,"
 						+ "bcviews,bcfilename,bfiledata,User_id) "
+// 						+ "values(" + b + ",BCNO.NEXTVAL,?,?,SYSDATE,?,?,?,?,'green') ";/*SEQ_BCNO.NEXTVAL*/
+
 						+ "values(+"+b+",SEQ_BCNO.NEXTVAL,?,?,to_char(Sysdate,'YYYY-MM-DD'),?,?,?,?,?) ";/*SEQ_BCNO.NEXTVAL*/
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, maindptitlecontent.getText());
@@ -214,10 +225,20 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 				// System.out.println(maincontent2.getText());
 				pstmt.setInt(3, 0);
 				pstmt.setInt(4, 0);
+				//if(file != null || fileName != null) {
+// 				pstmt.setString(5, fileName);						
+// 				FileInputStream inputStream = new FileInputStream(file);
+// 				pstmt.setBlob(6,inputStream);	
+				//}else {
+				//	pstmt.setstring(5);
+				//	pstmt.setBlob(6);
+				//}
+
 				pstmt.setString(5, fileName);						
 				FileInputStream inputStream = new FileInputStream(file);
 				pstmt.setBlob(6,inputStream);	
 				pstmt.setString(7, userId1);									//USER_ID넣기
+
 				pstmt.executeUpdate();
 
 				maindptitlecontent.setText("");
@@ -226,6 +247,9 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 				// 완료메시지
 				JOptionPane.showMessageDialog(f, 
 						"게시글 등록이 완료되었습니다.", "BoardWrite", JOptionPane.INFORMATION_MESSAGE);
+
+						f.dispose();
+						Boardset bs = new Boardset();
 
 
 			} catch (SQLException | FileNotFoundException e2) {
@@ -239,7 +263,7 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 				}
 				
 			}
-			
+
 			
 		}
 		//첨부파일창

@@ -52,7 +52,7 @@ public class Mainscreen {
 
 		// 로고크기조절&삽입
 		ImageIcon imgTest = new ImageIcon(getClass().getResource("../img/logo.jpg"));
-		imgTest = imageSetSize(imgTest, 60, 60);
+		imgTest = imageSetSize(imgTest, 99, 99);
 		JLabel logo = new JLabel(imgTest);
 //		logo.setIcon(imgTest);
 		logo.setSize(100, 100);
@@ -167,6 +167,7 @@ public class Mainscreen {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				dao.showFrame1();
+
 			}
 		});
 
@@ -277,16 +278,16 @@ public class Mainscreen {
 		calendarlink.setSize(250, 60);
 		calendarlink.setLocation(405, 490);
 		// 창닫기
-		f.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent evt) {
-				int resp = JOptionPane.showConfirmDialog(f, "정말 로그아웃 하시겠습니까?", "Exit?", JOptionPane.YES_NO_OPTION);
-				if (resp == JOptionPane.YES_OPTION) {
-					f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-				} else {
-					f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-				}
-			}
-		});
+//		f.addWindowListener(new WindowAdapter() {
+//			public void windowClosing(WindowEvent evt) {
+//				int resp = JOptionPane.showConfirmDialog(f, "정말 로그아웃 하시겠습니까?", "Exit?", JOptionPane.YES_NO_OPTION);
+//				if (resp == JOptionPane.YES_OPTION) {
+//					f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//				} else {
+//					f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+//				}
+//			}
+//		});
 
 		f.add(logo);
 		f.add(mapimg);
@@ -302,45 +303,45 @@ public class Mainscreen {
 		f.add(calendarlink);
 		//디자인 -ING
 ////////////////////////////////////////////////////////////////////////
-//		f.getContentPane().setBackground(new Color(255, 255, 255));  // 밝은 배경
-//
-//		// 버튼 색상 조정
-//		Color btnColor = new Color(240, 98, 146); // 로고에서 추출한 색상
-//		mpg.setBackground(btnColor);
-//		mpg.setForeground(Color.WHITE);
-//		healthbutton.setBackground(btnColor);
-//		healthbutton.setForeground(Color.WHITE);
-//		boardbutton.setBackground(btnColor);
-//		boardbutton.setForeground(Color.WHITE);
-//		
-//		mpg.setBorder(new RoundedBorder(10)); // 둥근 모서리 버튼
-//		healthbutton.setBorder(new RoundedBorder(10));
-//		boardbutton.setBorder(new RoundedBorder(10));
-//		
-//		// JLabel 및 JButton 센터 정렬
-//		logo.setHorizontalAlignment(SwingConstants.CENTER);
-//		mapimg.setHorizontalAlignment(SwingConstants.CENTER);
-//		calenderimg.setHorizontalAlignment(SwingConstants.CENTER);
-//		mpg.setHorizontalAlignment(SwingConstants.CENTER);
-//		healthbutton.setHorizontalAlignment(SwingConstants.CENTER);
-//		boardbutton.setHorizontalAlignment(SwingConstants.CENTER);
-//
-//		// 팝업 메시지 스타일 조정
-//		JOptionPane.getRootFrame().setFont(font2);
-//		JOptionPane.getRootFrame().setBackground(new Color(255, 255, 255));
-//		
-//		f.addWindowListener(new WindowAdapter() {
-//		    public void windowClosing(WindowEvent evt) {
-//		        UIManager.put("OptionPane.background", new Color(255, 255, 255));
-//		        UIManager.put("Panel.background", new Color(255, 255, 255));
-//		        int resp = JOptionPane.showConfirmDialog(f, "정말 로그아웃 하시겠습니까?", "Exit?", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
-//		        if (resp == JOptionPane.YES_OPTION) {
-//		            f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//		        } else {
-//		            f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-//		        }
-//		    }
-//		});
+		f.getContentPane().setBackground(new Color(255, 255, 255));  // 밝은 배경
+
+		// 버튼 색상 조정
+		Color btnColor = new Color(240, 98, 146); // 로고에서 추출한 색상
+		mpg.setBackground(btnColor);
+		mpg.setForeground(Color.WHITE);
+		healthbutton.setBackground(btnColor);
+		healthbutton.setForeground(Color.WHITE);
+		boardbutton.setBackground(btnColor);
+		boardbutton.setForeground(Color.WHITE);
+		
+		mpg.setBorder(new RoundedBorder(20)); // 둥근 모서리 버튼
+		healthbutton.setBorder(new RoundedBorder(20));
+		boardbutton.setBorder(new RoundedBorder(20));
+		
+		// JLabel 및 JButton 센터 정렬 
+		logo.setHorizontalAlignment(SwingConstants.CENTER);
+		mapimg.setHorizontalAlignment(SwingConstants.CENTER);
+		calenderimg.setHorizontalAlignment(SwingConstants.CENTER);
+		mpg.setHorizontalAlignment(SwingConstants.CENTER);
+		healthbutton.setHorizontalAlignment(SwingConstants.CENTER);
+		boardbutton.setHorizontalAlignment(SwingConstants.CENTER);
+
+		// 팝업 메시지 스타일 조정
+		JOptionPane.getRootFrame().setFont(font2);
+		JOptionPane.getRootFrame().setBackground(new Color(255, 255, 255));
+		
+		f.addWindowListener(new WindowAdapter() {
+		    public void windowClosing(WindowEvent evt) {
+		        UIManager.put("OptionPane.background", new Color(255, 255, 255));
+		        UIManager.put("Panel.background", new Color(255, 255, 255));
+		        int resp = JOptionPane.showConfirmDialog(f, "정말 로그아웃 하시겠습니까?", "Exit?", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+		        if (resp == JOptionPane.YES_OPTION) {
+		            f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		        } else {
+		            f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		        }
+		    }
+		});
 		
 		/////////////////////////////////////////////////////////////////////
 		f.setVisible(true);
