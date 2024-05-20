@@ -1,6 +1,7 @@
 package Profile;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,13 +15,17 @@ import login.InfoVo;
 
 public class PTab extends JPanel {
 	private DTO user;
+	String height2;
+	String weight2;
 
 	public PTab(String tabName, DTO user) {
+
 		this.user = user;
 		setLayout(new BorderLayout());
 
 		if (tabName.equals("내 프로필")) {
 			add(createProfilePanel(), BorderLayout.CENTER);
+				
 		} else if (tabName.equals("E-MAIL 변경")) {
 			add(emailChangePanel(), BorderLayout.CENTER);
 		} else if (tabName.equals("비밀번호 변경")) {
@@ -34,6 +39,7 @@ public class PTab extends JPanel {
 	private JPanel createProfilePanel() {
 
 		JPanel profilePanel = new JPanel();
+		profilePanel.setBackground(new Color(255,255,255));
 		profilePanel.setLayout(new BorderLayout());
 		// 프로필 정보 패널 구성
 		JLabel name = new JLabel("이름");
@@ -78,6 +84,7 @@ public class PTab extends JPanel {
 		JLabel dheight = new JLabel(String.valueOf(user.getHeight()));
 		dheight.setBounds(200, 330, 100, 30);
 		profilePanel.add(dheight);
+//		dheight.setText(height2);
 
 		JLabel weight = new JLabel("몸무게");
 		weight.setBounds(100, 380, 100, 30);
@@ -85,6 +92,7 @@ public class PTab extends JPanel {
 		JLabel dweight = new JLabel(String.valueOf(user.getWeight()));
 		dweight.setBounds(200, 380, 100, 30);
 		profilePanel.add(dweight);
+//		dweight.setText(weight2);
 
 		JButton wh = new JButton("키 몸무게 수정");
 		wh.setBounds(400, 380, 120, 30);
@@ -96,7 +104,6 @@ public class PTab extends JPanel {
 				// TODO Auto-generated method stub
 				Ptab1hw frame = new Ptab1hw();
 				frame.setVisible(true);
-
 			}
 		});
 
@@ -114,6 +121,7 @@ public class PTab extends JPanel {
 	private JPanel emailChangePanel() {
 		JPanel emailChangePanel = new JPanel();
 		emailChangePanel.setLayout(null);
+		emailChangePanel.setBackground(new Color(255,255,255));
 		// 아이디 변경 패널 구성
 		JLabel newIdLabel = new JLabel("NEW E-MAIL:");
 		newIdLabel.setBounds(50, 50, 100, 30);
@@ -146,6 +154,7 @@ public class PTab extends JPanel {
 	private JPanel createPasswordChangePanel() {
 		JPanel passwordChangePanel = new JPanel();
 		passwordChangePanel.setLayout(null);
+		passwordChangePanel.setBackground(new Color(255,255,255));
 		// 비밀번호 변경 패널 구성
 		JLabel newPasswordLabel = new JLabel("새 비밀번호:");
 		newPasswordLabel.setBounds(50, 50, 120, 30);
@@ -193,3 +202,5 @@ public class PTab extends JPanel {
 		return password.matches("[a-zA-Z0-9]+");
 	}
 }
+
+
