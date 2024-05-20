@@ -1,19 +1,18 @@
 package Member;
 
+import java.awt.Color;
 import java.awt.Font;
-import java.awt.GraphicsEnvironment;
 import java.awt.Image;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -42,7 +41,7 @@ public class Mframe {
 		f = new JFrame("회원가입");
 		f.setSize(800, 800);
 		f.setLayout(null);
-
+		f.getContentPane().setBackground(new Color(255, 245, 248));
 		
 		
 		
@@ -54,6 +53,10 @@ public class Mframe {
 		// 로고 이미지 크기 및 위치
 		btlogo.setSize(151, 151);
 		btlogo.setLocation(10, 10);
+		btlogo.setContentAreaFilled(false); // 버튼 내용 영역 채우기 비활성화
+        btlogo.setBorderPainted(false); // 버튼 테두리 페인팅 비활성화
+        btlogo.setFocusPainted(false); // 버튼 포커스 페인팅 비활성화
+        btlogo.setOpaque(false); // 버튼 불투명 설정 비활성화
 		btlogo.addActionListener(new ActionListener() {
 			// 로그인 창으로 이동하게 해야함
 			@Override
@@ -67,6 +70,11 @@ public class Mframe {
 
 		btIdCheck = new JButton("중복 확인");
 		btIdCheck.setBounds(500, 250, 100, 30);
+		btIdCheck.setBackground(new Color(0,0,0));
+		btIdCheck.setForeground(Color.black);
+		
+		btIdCheck.setFocusPainted(false); // 버튼 포커스 페인팅 비활성화
+		btIdCheck.setOpaque(false); // 버튼 불투명 설정 비활성화
 		btIdCheck.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -86,6 +94,12 @@ public class Mframe {
 
 		btn = new JButton("회원 가입");
 		btn.setBounds(380, 620, 100, 30);
+		btn.setBackground(new Color(0,0,0));
+		btn.setForeground(Color.black);
+		
+      
+        btn.setFocusPainted(false); // 버튼 포커스 페인팅 비활성화
+        btn.setOpaque(false); // 버튼 불투명 설정 비활성화
 		btn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -127,22 +141,30 @@ public class Mframe {
 
 		tfName = new JTextField(30);
 		tfName.setBounds(310, 200, 180, 30);
+		tfName.setBorder(BorderFactory.createLineBorder(new Color(210, 210, 210), 1));
 		tfId = new JTextField(30);
 		tfId.setBounds(310, 250, 180, 30);
+		tfId.setBorder(BorderFactory.createLineBorder(new Color(210, 210, 210), 1));
 		tfPwd = new JPasswordField(30);
 		tfPwd.setBounds(310, 300, 180, 30);
+		tfPwd.setBorder(BorderFactory.createLineBorder(new Color(210, 210, 210), 1));
 		tfPwd.setEchoChar('*');
 		tfPwda = new JPasswordField(30);
 		tfPwda.setBounds(310, 350, 180, 30);
+		tfPwda.setBorder(BorderFactory.createLineBorder(new Color(210, 210, 210), 1));
 		tfPwda.setEchoChar('*');
 		tfYear = new JTextField(30);
 		tfYear.setBounds(310, 400, 180, 30);
+		tfYear.setBorder(BorderFactory.createLineBorder(new Color(210, 210, 210), 1));
 		tfPhoneN = new JTextField(30);
 		tfPhoneN.setBounds(310, 450, 180, 30);
+		tfPhoneN.setBorder(BorderFactory.createLineBorder(new Color(210, 210, 210), 1));
 		tfEmail = new JTextField(30);
 		tfEmail.setBounds(310, 500, 180, 30);
+		tfEmail.setBorder(BorderFactory.createLineBorder(new Color(210, 210, 210), 1));
 		tfheight = new JTextField(30);
 		tfheight.setBounds(310, 550, 180, 30);
+		tfheight.setBorder(BorderFactory.createLineBorder(new Color(210, 210, 210), 1));
 
 		lName = new JLabel("이름");
 		lName.setBounds(180, 200, 30, 30);

@@ -61,6 +61,10 @@ public class Pframe {
 		out.setBounds(650, 10, 120, 30);
 		out.setBackground(new Color(77,182,172));
 		out.setForeground(Color.black);
+
+		out.setFocusPainted(false); // 버튼 포커스 페인팅 비활성화
+		out.setOpaque(false); // 버튼 불투명 설정 비활성화
+
 		out.addActionListener(new ActionListener() {
 		
 			@Override
@@ -76,6 +80,10 @@ public class Pframe {
 		delete.setBounds(680, 700, 100, 30);
 		delete.setBackground(new Color(149, 117, 205)); // 연한 보라색
 		delete.setForeground(Color.black);
+
+		delete.setFocusPainted(false); // 버튼 포커스 페인팅 비활성화
+		delete.setOpaque(false); // 버튼 불투명 설정 비활성화
+
 		delete.addActionListener(new ActionListener() {
 			// 탈퇴 확인 취소 팝업 띄우기
 			@Override
@@ -93,6 +101,10 @@ public class Pframe {
 //		logo.setIcon(imgTest);
 		logo.setSize(120, 120);
 		logo.setLocation(10, 10);
+		logo.setContentAreaFilled(false); // 버튼 내용 영역 채우기 비활성화
+        logo.setBorderPainted(false); // 버튼 테두리 페인팅 비활성화
+        logo.setFocusPainted(false); // 버튼 포커스 페인팅 비활성화
+        logo.setOpaque(false); // 버튼 불투명 설정 비활성화
 
 //		logo = new JButton();
 //		logo.setIcon(new ImageIcon(getClass().getResource("../img/logo.jpg")));
