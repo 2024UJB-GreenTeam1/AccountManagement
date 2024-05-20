@@ -25,7 +25,7 @@ public class MapApp extends JFrame {
 
 		// Using JLabel to display logo
 		ImageIcon logoIcon = new ImageIcon("C:\\Users\\Manic-063\\git\\AccountManagement\\bin\\img\\logo_Map.jpg");
-		JLabel logoLabel = new JLabel(new ImageIcon("C:\\Users\\Manic-063\\git\\AccountManagement\\img\\logoMap.jpg"));
+		JLabel logoLabel = new JLabel(new ImageIcon("C:\\Users\\Manic-063\\git\\AccountManagement\\bin\\img\\logoMap.jpg"));
 		logoLabel.setBounds(10, 5, 60, 60);
 
 		Font font1 = new Font("맑은 고딕", Font.BOLD, 15);
@@ -50,8 +50,13 @@ public class MapApp extends JFrame {
 				JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		});
-
+		
+		//검색 버튼 색깔 화이트
+		searchButton.setBackground(Color.white);
+		
+		//배경색 화이트
 		JPanel panel = new JPanel(null);
+		panel.setBackground(Color.white);
 		panel.add(logoLabel);
 		panel.add(new JLabel("주소를 입력해주세요"));
 		panel.add(addressField);

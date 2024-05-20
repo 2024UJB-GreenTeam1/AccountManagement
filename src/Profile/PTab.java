@@ -2,7 +2,9 @@ package Profile;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+
 import java.awt.Font;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,7 +21,7 @@ public class PTab extends JPanel {
 	private DTO user;
 	String height2;
 	String weight2;
-	
+
 	public PTab(String tabName, DTO user) {
 
 		this.user = user;
