@@ -26,11 +26,9 @@ import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
-
 import Board.Boardset;
 import login.InfoVo;
 import Board.ConnectionB;
-
 
 public class BoardWrite extends BoardDTO implements WindowListener, ActionListener {
 	private JTextArea maincontent2;
@@ -44,36 +42,44 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 	public BoardWrite() {
 		Font font = new Font("맑은 고딕", Font.BOLD, 50);
 		Font font2 = new Font("맑은 고딕", Font.BOLD, 20);
-
+		Font font3 = new Font("맑은 고딕", Font.BOLD, 20); // 작성자 내용 날짜 추천수 조회수 카테고리
+		Font font4 = new Font("MD아롱체", Font.ITALIC, 20);
+		Color gr = new Color(205, 250, 219);
+		
+		
 		f = new JFrame("새글작성");
 		f.setSize(800, 800);
 		f.setLocationRelativeTo(null);
 		f.getContentPane().setLayout(null);
 		f.addWindowListener(this);
+		f.getContentPane().setBackground(Color.white); // JFrame은 이걸로
 
 		JButton write = new JButton("작성");
 		write.setBounds(12, 584, 102, 40);
 		write.addActionListener(this);
+		write.setContentAreaFilled(false);
+		write.setBackground(Color.white);
 		
-		//첨부파일 버튼 //
-		 fileTextField = new JTextField();
-	        fileTextField.setEditable(false);
-	        fileTextField.setColumns(20);
-	        fileTextField.setBounds(300, 584, 102, 40);
-	        fileButton = new JButton("첨부파일...");
-	        fileButton.setBounds(405, 584, 102, 40);
-	        fileButton.addActionListener(this);
+		//첨부파일 버튼 //  
+		fileTextField = new JTextField();
+        fileTextField.setEditable(false);
+        fileTextField.setColumns(20);
+        fileTextField.setBounds(300, 584, 102, 40);
+        fileTextField.setBackground(Color.white);
+        fileButton = new JButton("첨부파일");
+        fileButton.setContentAreaFilled(false);
+        fileButton.setBackground(Color.white);
+        fileButton.setBounds(405, 584, 102, 40);
+		fileButton.addActionListener(this);
 	       
 	       
 	        
 		category = new Choice();
-
 		category.add("Total");
 		category.add("Exercise");  //1
 		category.add("Food");  //2
 		category.add("Sleep"); //3
-
-		category.setFont(font2);
+		category.setFont(font4);
 		category.setSize(200, 100); // 카테고리
 		category.setLocation(50, 10);
 		f.add(category);
@@ -81,7 +87,9 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 		JButton cancle = new JButton("취소");
 		cancle.setBounds(670, 584, 102, 40);
 		cancle.addActionListener(this);
-
+		cancle.setContentAreaFilled(false);
+		cancle.setBackground(Color.white);
+		
 		JPanel maindp = new JPanel();
 		maindp.setBounds(0, 90, 600, 335);
 		maindp.setBorder(new TitledBorder(new LineBorder(Color.black, 1)));
@@ -103,6 +111,7 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 
 		JPanel maindptitle2_1 = new JPanel();
 		maindptitle2_1.setBounds(0, 0, 756, 38);
+		maindptitle2_1.setBackground(gr);
 		content2.add(maindptitle2_1);
 		maindptitle2_1.setBorder(new TitledBorder(new LineBorder(Color.black, 1)));
 		maindptitle2_1.setLayout(null);
@@ -110,7 +119,7 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 		JLabel maindptitle = new JLabel("제목");
 		maindptitle.setBounds(0, 0, 50, 38);
 		maindptitle.setHorizontalAlignment(JLabel.CENTER);
-		maindptitle.setFont(font2);
+		maindptitle.setFont(font4);
 		maindptitle2_1.add(maindptitle);
 		maindptitle.setBorder(new TitledBorder(new LineBorder(Color.black, 1)));
 
@@ -121,8 +130,9 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 
 		JLabel content = new JLabel("내용");
 		content.setBounds(0, 36, 50, 464);
-		content.setFont(font2);
+		content.setFont(font4);
 		content.setHorizontalAlignment(JLabel.CENTER);
+		content2.setBackground(gr);
 		content2.add(content);
 		content.setBorder(new TitledBorder(new LineBorder(Color.black, 1)));
 
@@ -133,7 +143,7 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 		JLabel title_1 = new JLabel("새글작성");
 		title_1.setBounds(257, 10, 200, 40);
 		f.getContentPane().add(title_1);
-		title_1.setFont(new Font("맑은 고딕", Font.PLAIN, 40));
+		title_1.setFont(new Font("MD아롱체", Font.PLAIN, 40));
 		title_1.setHorizontalAlignment(JLabel.CENTER);
 		f.setVisible(true);
 	}
@@ -191,16 +201,16 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 			String num =category.getSelectedItem();
 			int a = 0;
 			String b = "0";
-			if(num.equals("")) {
+			if(num.equals("Total")) {
 				a=0;
 				b=Integer.toString(a);	
-			}else if(num.equals("exercise")){
+			}else if(num.equals("Exercise")){
 				a=1;
 				b=Integer.toString(a);	
-			}else if(num.equals("food")) {
+			}else if(num.equals("Food")) {
 				a=2;
 				b=Integer.toString(a);	
-			}else if(num.equals("sleep")) {
+			}else if(num.equals("Sleep")) {
 				a=3;
 				b=Integer.toString(a);	
 			}
@@ -215,9 +225,7 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 						+ "bctitle,bcontent, "
 						+ "bcdate,bclikes,"
 						+ "bcviews,bcfilename,bfiledata,User_id) "
-// 						+ "values(" + b + ",BCNO.NEXTVAL,?,?,SYSDATE,?,?,?,?,'green') ";/*SEQ_BCNO.NEXTVAL*/
-=======
-						+ "values(+"+b+",SEQ_BCNO.NEXTVAL,?,?,to_char(Sysdate,'YYYY-MM-DD'),?,?,?,?,?) ";/*SEQ_BCNO.NEXTVAL*/
+						+ "values(" + b + ",BCNO.NEXTVAL,?,?,SYSDATE,?,?,?,?,'green') ";/*SEQ_BCNO.NEXTVAL*/
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setString(1, maindptitlecontent.getText());
 				// System.out.println(maindptitlecontent.getText());
@@ -226,19 +234,13 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 				pstmt.setInt(3, 0);
 				pstmt.setInt(4, 0);
 				//if(file != null || fileName != null) {
-// 				pstmt.setString(5, fileName);						
-// 				FileInputStream inputStream = new FileInputStream(file);
-// 				pstmt.setBlob(6,inputStream);	
+				pstmt.setString(5, fileName);						
+				FileInputStream inputStream = new FileInputStream(file);
+				pstmt.setBlob(6,inputStream);	
 				//}else {
 				//	pstmt.setstring(5);
 				//	pstmt.setBlob(6);
 				//}
-
-				pstmt.setString(5, fileName);						
-				FileInputStream inputStream = new FileInputStream(file);
-				pstmt.setBlob(6,inputStream);	
-				pstmt.setString(7, userId1);									//USER_ID넣기
-
 				pstmt.executeUpdate();
 
 				maindptitlecontent.setText("");
@@ -247,10 +249,8 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 				// 완료메시지
 				JOptionPane.showMessageDialog(f, 
 						"게시글 등록이 완료되었습니다.", "BoardWrite", JOptionPane.INFORMATION_MESSAGE);
-
 						f.dispose();
 						Boardset bs = new Boardset();
-
 
 			} catch (SQLException | FileNotFoundException e2) {
 				e2.printStackTrace();
@@ -263,7 +263,7 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 				}
 				
 			}
-
+		
 			
 		}
 		//첨부파일창
