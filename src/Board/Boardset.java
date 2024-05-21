@@ -1219,8 +1219,6 @@ if (f.isVisible()) {
 
 // import Mains1.Mainscreen;
 
-import Post.Read;
-
 
 
 // 실행시켜서 가운데 아래 검색기능 오류 고치기 
@@ -1933,6 +1931,24 @@ import Post.Read;
 	public static void main(String[] args) {
 		Boardset bs = new Boardset();
 
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowActivated(WindowEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

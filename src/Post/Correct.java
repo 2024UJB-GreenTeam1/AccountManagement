@@ -1,7 +1,9 @@
 package Post;
 //사용함
 
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -82,11 +84,13 @@ public class Correct extends ComDto implements ActionListener, WindowListener{
 		
 		con = null;
 
+		Font font2 = new Font("MD아롱체", Font.ITALIC, 13);
 		ImageIcon img = new ImageIcon("button_image/logo.jpg");
 		frame = new JFrame("게시글 수정");
 		frame.setBounds(560, 180, 800, 800);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		TextArea tx = new TextArea();
+		frame.getContentPane().setBackground(Color.white);
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 21, 0, -33, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -110,6 +114,7 @@ public class Correct extends ComDto implements ActionListener, WindowListener{
 		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_1.gridx = 1;
 		gbc_lblNewLabel_1.gridy = 6;
+		
 		frame.getContentPane().add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
 //		String[] category = { " 전체 "," 운동 ", " 음식 " , " 수면시간"};
@@ -194,6 +199,7 @@ public class Correct extends ComDto implements ActionListener, WindowListener{
 		gbc_lblNewLabel_2.gridx = 20;
 		gbc_lblNewLabel_2.gridy = 6;
 		frame.getContentPane().add(lblNewLabel_2, gbc_lblNewLabel_2);
+	
 		
 		JLabel lblNewLabel_3 = new JLabel(user_id);
 		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();

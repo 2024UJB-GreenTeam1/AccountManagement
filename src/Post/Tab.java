@@ -26,7 +26,7 @@ import javax.swing.SwingUtilities;
 // 수정 눌렀을때 제목 칸이 줄어드는거 수정하기
 // 게시글을 눌렀을때 이미지가 없다면 이미지 버튼이 없고 있다면 이미지이 있게 해보기 아마 if문 사용하면 될듯 싶음
 
-import kakaomap.Correct;
+import Post.Correct;
 
 public class Tab  extends JFrame implements ActionListener, WindowListener{
 	private JTabbedPane jTabbedPane;
