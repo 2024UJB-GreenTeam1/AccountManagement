@@ -34,7 +34,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
-import kakaomap.Correct;
+import Post.Correct;
 import Board.Boardset;
 
 public class Read extends Connection2 implements ActionListener, WindowListener{
@@ -172,13 +172,19 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 
 	private void initialize(int plz) {
 	
-		
-		Font font = new Font("맑은 고딕",Font.BOLD,40);  //게시판 
-		Font font2 = new Font("맑은 고딕",Font.BOLD,13); //작성자 내용 날짜 추천수 조회수 카테고리
+		Font font = new Font("MD아롱체", Font.ITALIC, 40);
+		//게시판 
+		Font font2 = new Font("MD아롱체", Font.ITALIC, 13);
+		//작성자 내용 날짜 추천수 조회수 카테고리
+	      Color gr = new Color(205, 250, 219);
 		
 		frame = new JFrame("게시글");
 		frame.setBounds(560, 180, 800, 800);
 	//	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		frame.getContentPane().setBackground(Color.white);
+		
+		
 		frame.getContentPane().setLayout(null);
 		JLabel imageLabel = new JLabel();
 		JLabel lblNewLabel = new JLabel("게시글");
@@ -233,40 +239,80 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 		model = new DefaultTableModel(ob,str);
 		table = new JTable(model);
 		
-		JLabel lblNewLabel_2 = new JLabel();
+		JPanel lblNewLabel_2 = new JPanel();
 		lblNewLabel_2.setBounds(0, 116, 101, 23); 	//작성자 칸
 		frame.getContentPane().add(lblNewLabel_2);
 		lblNewLabel_2.setBorder(bb);
+		lblNewLabel_2.setBackground(gr);
 		
-		JLabel lblNewLabel_4 = new JLabel();
+		
+		JPanel lblNewLabel_4 = new JPanel();
 		lblNewLabel_4.setBounds(100, 116, 457, 23); // 제목 칸
 		frame.getContentPane().add(lblNewLabel_4);
 		lblNewLabel_4.setBorder(bb);
+		lblNewLabel_4.setBackground(gr);
 		
 		JLabel lblNewLabel_1 = new JLabel("작성자");
 		lblNewLabel_1.setBounds(25, 120, 57, 15);
 		frame.getContentPane().add(lblNewLabel_1);
 		lblNewLabel_1.setFont(font2);
+		lblNewLabel_1.setBackground(gr);
+		lblNewLabel_2.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_5 = new JLabel("제목");
 		lblNewLabel_5.setBounds(292, 120, 57, 15);
 		frame.getContentPane().add(lblNewLabel_5);
 		lblNewLabel_5.setFont(font2);
+		lblNewLabel_5.setBackground(gr);
+		lblNewLabel_4.add(lblNewLabel_5);
+		
+//	 catch (IOException e1) {
+//		// TODO Auto-generated catch block
+//		e1.printStackTrace();
+//	}
+		JPanel lblNewLabel_6 = new JPanel();
+		lblNewLabel_6.setBounds(556, 116, 104, 23);	//작성일자 칸
+		frame.getContentPane().add(lblNewLabel_6);
+		lblNewLabel_6.setBorder(bb);
+		lblNewLabel_6.setBackground(gr);
+		
+		JPanel lblNewLabel_7 = new JPanel();
+		lblNewLabel_7.setBounds(658, 116, 69, 23);	// 조회수 칸
+		frame.getContentPane().add(lblNewLabel_7);
+		lblNewLabel_7.setBorder(bb);
+		lblNewLabel_7.setBackground(gr);
+		
+		JPanel lblNewLabel_8 = new JPanel();
+		lblNewLabel_8.setBounds(727, 116, 57, 23);	// 추천수 칸
+		frame.getContentPane().add(lblNewLabel_8);
+		lblNewLabel_8.setBorder(bb);
+		lblNewLabel_8.setBackground(gr);
+		
+		JLabel lblNewLabel_12 = new JLabel();
+		lblNewLabel_12.setBounds(1, 139, 100, 23);
+		frame.getContentPane().add(lblNewLabel_12);
+		lblNewLabel_12.setBorder(bb);
 		
 		JLabel lblNewLabel_9 = new JLabel("작성일자");
 		lblNewLabel_9.setBounds(581, 120, 57, 15);
 		frame.getContentPane().add(lblNewLabel_9);
 		lblNewLabel_9.setFont(font2);
+		lblNewLabel_9.setBackground(gr);
+		lblNewLabel_6.add(lblNewLabel_9);
 		
 		JLabel lblNewLabel_10 = new JLabel("조회수");
 		lblNewLabel_10.setBounds(677, 115, 57, 26);
 		frame.getContentPane().add(lblNewLabel_10);
 		lblNewLabel_10.setFont(font2);
+		lblNewLabel_10.setBackground(gr);
+		lblNewLabel_7.add(lblNewLabel_10);
 		
 		JLabel lblNewLabel_11 = new JLabel("추천수");
 		lblNewLabel_11.setBounds(735, 109, 49, 36);
 		frame.getContentPane().add(lblNewLabel_11);
+		lblNewLabel_11.setBackground(gr);
 		lblNewLabel_11.setFont(font2);
+		lblNewLabel_8.add(lblNewLabel_11);
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -278,29 +324,6 @@ public class Read extends Connection2 implements ActionListener, WindowListener{
 				e.printStackTrace();
 			}
 		}
-//	 catch (IOException e1) {
-//		// TODO Auto-generated catch block
-//		e1.printStackTrace();
-//	}
-		JLabel lblNewLabel_6 = new JLabel();
-		lblNewLabel_6.setBounds(556, 116, 104, 23);	//작성일자 칸
-		frame.getContentPane().add(lblNewLabel_6);
-		lblNewLabel_6.setBorder(bb);
-		
-		JLabel lblNewLabel_7 = new JLabel();
-		lblNewLabel_7.setBounds(658, 116, 69, 23);	// 조회수 칸
-		frame.getContentPane().add(lblNewLabel_7);
-		lblNewLabel_7.setBorder(bb);
-		
-		JLabel lblNewLabel_8 = new JLabel();
-		lblNewLabel_8.setBounds(727, 116, 57, 23);	// 추천수 칸
-		frame.getContentPane().add(lblNewLabel_8);
-		lblNewLabel_8.setBorder(bb);
-		
-		JLabel lblNewLabel_12 = new JLabel();
-		lblNewLabel_12.setBounds(1, 139, 100, 23);
-		frame.getContentPane().add(lblNewLabel_12);
-		lblNewLabel_12.setBorder(bb);
 		
 		JLabel lblNewLabel_13 = new JLabel();
 		lblNewLabel_13.setBounds(99, 139, 459, 23);
