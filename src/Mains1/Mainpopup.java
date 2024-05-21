@@ -50,9 +50,11 @@ public class Mainpopup {
 		f.setLocation(screenSize.width / 2 - 800 / 2, screenSize.height / 2 - 800 / 2);
 
 		// 글씨체
-		Font font1 = new Font("맑은 고딕", Font.BOLD, 18);
-		Font font2 = new Font("맑은 고딕", Font.BOLD, 40);
-		Font font3 = new Font("맑은 고딕", Font.BOLD, 11);
+		Font font1 = new Font("SansSerif", Font.PLAIN, 18);
+		Font font2 = new Font("SansSerif", Font.PLAIN, 40);
+		Font font3 = new Font("SansSerif", Font.PLAIN, 11);
+		Font font4 = new Font("SansSerif", Font.BOLD, 18);
+		
 
 		// 로고 객체 생성
 		JLabel logo;
@@ -72,7 +74,7 @@ public class Mainpopup {
 		todayLabel.setLocation(340, 130);
 
 		Label referenceLabel = new Label("※입력된 값은 나의건강일지로 이동합니다.");
-		referenceLabel.setFont(font1);
+		referenceLabel.setFont(font4);
 
 		referenceLabel.setSize(500, 50);
 		referenceLabel.setLocation(220, 530);
@@ -280,6 +282,9 @@ public class Mainpopup {
 				}
 			}
 		});
+		
+	
+		
 		// 저장된 값을 더하는 기능이 있어 당일 특정 테이블에 들어간 데이터를 지워야함
 		Button resetButton = new Button("리셋");
 		resetButton.setFont(font1);
@@ -302,6 +307,8 @@ public class Mainpopup {
 				JOptionPane.showMessageDialog(f, "오늘의 데이터가 초기화되었습니다.");
 			}
 		});
+		
+		
 
 		Button calculateWeightButton = new Button("입력");
 		calculateWeightButton.setSize(50, 30);
@@ -316,6 +323,8 @@ public class Mainpopup {
 				}
 			}
 		});
+		
+		
 
 		Button calculateExerciseButton = new Button("입력");
 		calculateExerciseButton.setSize(50, 30);
@@ -378,6 +387,8 @@ public class Mainpopup {
 				}
 			}
 		});
+		
+	
 
 		Button calculateFoodButton = new Button("입력");
 		calculateFoodButton.setSize(50, 30);
@@ -413,6 +424,8 @@ public class Mainpopup {
 				todayfoodText.setText(String.format("%.0f", totalFoodCalories));
 			}
 		});
+		
+	
 
 		Button calculateSleepButton = new Button("입력");
 		calculateSleepButton.setSize(50, 30);
@@ -428,6 +441,8 @@ public class Mainpopup {
 				todaysleepText.setText(sleepHours + "");
 			}
 		});
+		
+		
 
 		Button calculateWaterButton = new Button("입력");
 		calculateWaterButton.setSize(50, 30);
@@ -443,6 +458,7 @@ public class Mainpopup {
 				}
 			}
 		});
+		
 
 		// 배경색은 흰색으로
 		f.getContentPane().setBackground(Color.white);

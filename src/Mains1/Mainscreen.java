@@ -43,9 +43,10 @@ public class Mainscreen {
 		f.setSize(800, 800);
 		f.setLayout(null);
 
-		Font font1 = new Font("나눔 고딕", Font.BOLD, 15);
-		Font font2 = new Font("맑은 고딕", Font.BOLD, 20);
-		Font font3 = new Font("나눔고딕", Font.PLAIN, 12);
+		Font font1 = new Font("SansSerif", Font.BOLD, 15);
+//		Font font2 = new Font("맑은 고딕", Font.BOLD, 20);
+		Font font3 = new Font("SansSerif", Font.PLAIN, 12);
+		Font font4 = new Font("MD아롱체", Font.PLAIN, 20);
 //		Font font1 = new Font("Sans Serif", Font.BOLD, 16);
 //		Font font2 = new Font("Sans Serif", Font.BOLD, 18);
 //		Font font3 = new Font("Sans Serif", Font.PLAIN, 14);
@@ -112,12 +113,12 @@ public class Mainscreen {
 		mpg.setFont(font1);
 		healthbutton.setFont(font1);
 		boardbutton.setFont(font1);
-		mpg.setSize(130, 40);
-		mpg.setLocation(610, 60);
-		healthbutton.setSize(130, 40);
-		healthbutton.setLocation(610, 105);
-		boardbutton.setSize(130, 40);
-		boardbutton.setLocation(610, 150);
+		mpg.setSize(140, 40);
+		mpg.setLocation(600, 60);
+		healthbutton.setSize(140, 40);
+		healthbutton.setLocation(600, 105);
+		boardbutton.setSize(140, 40);
+		boardbutton.setLocation(600, 150);
 
 		// 텍스트필드
 		TextField healthcommentext = new TextField(10);
@@ -288,13 +289,13 @@ public class Mainscreen {
 
 		// 라벨
 		Label healthcomment = new Label("운동코멘트");
-		healthcomment.setFont(font2);
+		healthcomment.setFont(font4);
 		Label popboard = new Label("인기게시글");
-		popboard.setFont(font2);
+		popboard.setFont(font4);
 		Label maplink = new Label("현위치 헬스장 검색");
-		maplink.setFont(font2);
+		maplink.setFont(font4);
 		Label calendarlink = new Label("나의 일정관리");
-		calendarlink.setFont(font2);
+		calendarlink.setFont(font4);
 		healthcomment.setSize(250, 60);
 		healthcomment.setLocation(48, 185);
 		popboard.setSize(155, 60);
@@ -353,7 +354,7 @@ public class Mainscreen {
 		boardbutton.setHorizontalAlignment(SwingConstants.CENTER);
 
 		// 팝업 메시지 스타일 조정
-		JOptionPane.getRootFrame().setFont(font2);
+		JOptionPane.getRootFrame().setFont(font4);
 		JOptionPane.getRootFrame().setBackground(new Color(255, 255, 255));
 		
 		f.addWindowListener(new WindowAdapter() {
