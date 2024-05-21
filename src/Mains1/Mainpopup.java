@@ -20,6 +20,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import java.awt.Color;
+
 import login.InfoVo;
 
 public class Mainpopup {
@@ -27,8 +29,8 @@ public class Mainpopup {
 	private static double totalCalories = 0; // 전역변수로 칼로리를 누적해서 관리해줌
 	private static double totalFoodCalories = 0; // 마찬가지임
 	private static int totalExerciseHours = 0;
-	// 이미지크기조절셋업
 
+	// 이미지크기조절셋업
 	ImageIcon imageSetSize(ImageIcon icon, int i, int j) { // image Size Setting
 		Image ximg = icon.getImage(); // ImageIcon을 Image로 변환.
 		Image yimg = ximg.getScaledInstance(i, j, java.awt.Image.SCALE_SMOOTH);
@@ -48,9 +50,12 @@ public class Mainpopup {
 		f.setLocation(screenSize.width / 2 - 800 / 2, screenSize.height / 2 - 800 / 2);
 
 		// 글씨체
-		Font font1 = new Font("맑은 고딕", Font.BOLD, 18);
-		Font font2 = new Font("맑은 고딕", Font.BOLD, 40);
-		Font font3 = new Font("맑은 고딕", Font.BOLD, 11);
+		Font font1 = new Font("SansSerif", Font.PLAIN, 18);
+		Font font2 = new Font("SansSerif", Font.PLAIN, 40);
+		Font font3 = new Font("SansSerif", Font.PLAIN, 11);
+		Font font4 = new Font("SansSerif", Font.BOLD, 18);
+		
+
 		// 로고 객체 생성
 		JLabel logo;
 		// 로고 이미지 생성
@@ -66,10 +71,10 @@ public class Mainpopup {
 		todayLabel.setFont(font2);
 
 		todayLabel.setSize(250, 70);
-		todayLabel.setLocation(350, 130);
+		todayLabel.setLocation(340, 130);
 
 		Label referenceLabel = new Label("※입력된 값은 나의건강일지로 이동합니다.");
-		referenceLabel.setFont(font1);
+		referenceLabel.setFont(font4);
 
 		referenceLabel.setSize(500, 50);
 		referenceLabel.setLocation(220, 530);
@@ -144,7 +149,7 @@ public class Mainpopup {
 		LocalDate today = LocalDate.now();
 		String formattedDate = today.toString();
 		todaydateText.setText(formattedDate);
-		
+
 		TextField todayweightText = new TextField(3);
 		todayweightText.setFont(font1);
 
@@ -176,7 +181,6 @@ public class Mainpopup {
 		todaywaterText.setLocation(370, 470);
 
 		// choice
-
 		Choice exercisechoice = new Choice();
 		exercisechoice.add("운동종류");
 		exercisechoice.add("걷기");
@@ -203,7 +207,6 @@ public class Mainpopup {
 		exercisechoice2.setFont(font3);
 
 		// food choice
-
 		Choice foodchoice = new Choice();
 		foodchoice.add("음식명");
 		foodchoice.add("백미");
@@ -229,7 +232,6 @@ public class Mainpopup {
 		foodchoice2.setFont(font3);
 
 		// 잠 초이스
-
 		Choice sleepchoice = new Choice();
 		sleepchoice.add("취침시간");
 		Choice sleepchoice2 = new Choice();
@@ -249,63 +251,64 @@ public class Mainpopup {
 		sleepchoice2.setFont(font3);
 
 		// 버튼
-
 		Button scc = new Button("완료");
 		scc.setFont(font1);
 		scc.setSize(80, 60);
 		scc.setLocation(420, 600);
 		scc.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        try {
-		            int weight = Integer.parseInt(todayweightText.getText());
-		            int useupc = Integer.parseInt(todayHealthText.getText());
-		            int intakec = Integer.parseInt(todayfoodText.getText());
-		            int sleep = Integer.parseInt(todaysleepText.getText());
-		            int water = Integer.parseInt(todaywaterText.getText());
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int weight = Integer.parseInt(todayweightText.getText());
+					int useupc = Integer.parseInt(todayHealthText.getText());
+					int intakec = Integer.parseInt(todayfoodText.getText());
+					int sleep = Integer.parseInt(todaysleepText.getText());
+					int water = Integer.parseInt(todaywaterText.getText());
 
-		            MainpopupDAO dao = new MainpopupDAO();
-		            dao.insertDailyInput(weight, useupc, intakec, sleep, water, totalExerciseHours);
-		            JOptionPane.showMessageDialog(f, "모든 데이터가 성공적으로 저장되었습니다.");
+					MainpopupDAO dao = new MainpopupDAO();
+					dao.insertDailyInput(weight, useupc, intakec, sleep, water, totalExerciseHours);
+					JOptionPane.showMessageDialog(f, "모든 데이터가 성공적으로 저장되었습니다.");
 
-		            // 다음 입력을 위해 운동 시간 초기화
-		            totalExerciseHours = 0;
+					// 다음 입력을 위해 운동 시간 초기화
+					totalExerciseHours = 0;
 
-		            f.setVisible(false);
-		            Mainscreen mainScreen = new Mainscreen();
-		            mainScreen.setVisible(true);
+					f.setVisible(false);
+					Mainscreen mainScreen = new Mainscreen();
+					mainScreen.setVisible(true);
 
-		        } catch (NumberFormatException ex) {
-		            JOptionPane.showMessageDialog(f, "입력 형식이 올바르지 않습니다. 숫자를 입력하세요.");
-		        } catch (Exception ex) {
-		            JOptionPane.showMessageDialog(f, "데이터 저장 중 오류가 발생했습니다: " + ex.getMessage());
-		        }
-		    }
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(f, "입력 형식이 올바르지 않습니다. 숫자를 입력하세요.");
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(f, "데이터 저장 중 오류가 발생했습니다: " + ex.getMessage());
+				}
+			}
 		});
-		// 리셋하면 오늘 데이터 삭제함
+		
+	
+		
+		// 저장된 값을 더하는 기능이 있어 당일 특정 테이블에 들어간 데이터를 지워야함
 		Button resetButton = new Button("리셋");
 		resetButton.setFont(font1);
 		resetButton.setSize(80, 60);
 		resetButton.setLocation(320, 600);
-
-
-
 		resetButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				todayweightText.setText(""); // TextArea 내용을 비웁니다.
+				String userId = InfoVo.getInstance().getId();
+				MainpopupDAO dao = new MainpopupDAO();
+				dao.deleteTodayData(userId);
+				totalCalories = 0;
+				totalFoodCalories = 0;
+				totalExerciseHours = 0;
+
 				todayHealthText.setText("");
 				todayfoodText.setText("");
 				todaysleepText.setText("");
+				todayweightText.setText("");
 				todaywaterText.setText("");
+				JOptionPane.showMessageDialog(f, "오늘의 데이터가 초기화되었습니다.");
 			}
-// 		resetButton.addActionListener(new ActionListener() {
-// 		    public void actionPerformed(ActionEvent e) {
-// 		        String userId = InfoVo.getInstance().getId();
-// 		        MainpopupDAO dao = new MainpopupDAO();
-// 		        dao.deleteTodayData(userId);
-// 		        // 필요한 UI 컴포넌트 초기화 로직
-// 		        JOptionPane.showMessageDialog(f, "오늘의 데이터가 초기화되었습니다.");
-// 		    }
 		});
+		
+		
 
 		Button calculateWeightButton = new Button("입력");
 		calculateWeightButton.setSize(50, 30);
@@ -320,62 +323,72 @@ public class Mainpopup {
 				}
 			}
 		});
+		
+		
 
 		Button calculateExerciseButton = new Button("입력");
 		calculateExerciseButton.setSize(50, 30);
 		calculateExerciseButton.setLocation(500, 345);
 		calculateExerciseButton.addActionListener(new ActionListener() {
-		    @Override
-		    public void actionPerformed(ActionEvent e) {
-		        try {
-		            
-		            int exerciseTime = Integer.parseInt(exercisechoice2.getSelectedItem().replace("분", "").trim());
-		            // 운동 시간 누적
-		            totalExerciseHours += exerciseTime;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					int exerciseTime = 0;
+					switch (exercisechoice2.getSelectedItem()) {
+					case "15분":
+						exerciseTime = 1;
+						break;
+					case "30분":
+						exerciseTime = 2;
+						break;
+					case "45분":
+						exerciseTime = 3;
+						break;
+					case "60분":
+						exerciseTime = 4;
+						break;
+					}
+					totalExerciseHours += exerciseTime * 15;
 
-		            // 몸무게 값 가져오기
-		            double weight = Double.parseDouble(todayweightText.getText());
-		            double factor = 0;
-		            double time = exerciseTime / 60.0;
+					double weight = Double.parseDouble(todayweightText.getText());
+					double factor = 0;
 
-		            // 운동 종류에 따른 칼로리 소모 계수 설정
-		            switch (exercisechoice.getSelectedItem()) {
-		                case "걷기":
-		                    factor = 0.9;
-		                    break;
-		                case "빨리걷기":
-		                    factor = 1.2;
-		                    break;
-		                case "달리기":
-		                    factor = 2.0;
-		                    break;
-		                case "계단오르기":
-		                    factor = 1.6;
-		                    break;
-		                case "자전거타기":
-		                    factor = 1.5;
-		                    break;
-		                case "줄넘기":
-		                    factor = 2.6;
-		                    break;
-		                case "등산":
-		                    factor = 1.5;
-		                    break;
-		            }
+					switch (exercisechoice.getSelectedItem()) {
+					case "걷기":
+						factor = 0.9;
+						break;
+					case "빨리걷기":
+						factor = 1.2;
+						break;
+					case "달리기":
+						factor = 2.0;
+						break;
+					case "계단오르기":
+						factor = 1.6;
+						break;
+					case "자전거타기":
+						factor = 1.5;
+						break;
+					case "줄넘기":
+						factor = 2.6;
+						break;
+					case "등산":
+						factor = 1.5;
+						break;
+					}
 
-		            
-		            totalCalories += weight * factor * time;
-		           
-		            todayHealthText.setText(String.format("%.0f", totalCalories));
+					totalCalories += weight * factor * exerciseTime;
+					todayHealthText.setText(String.format("%.0f", totalCalories));
 
-		            // 운동 시간 업데이트 알림
-		            JOptionPane.showMessageDialog(f, "운동 시간이 추가되었습니다: 현재 " + totalExerciseHours + "분");
-		        } catch (NumberFormatException ex) {
-		            JOptionPane.showMessageDialog(f, "입력 형식이 올바르지 않습니다. 숫자를 입력하세요.");
-		            todayweightText.setText("Error!");
-		        }
-		    }
+					JOptionPane.showMessageDialog(f, "운동 시간이 추가되었습니다: 현재 " + totalExerciseHours + "분");
+				} catch (NumberFormatException ex) {
+					JOptionPane.showMessageDialog(f, "입력 형식이 올바르지 않습니다. 숫자를 입력하세요.");
+					todayweightText.setText("Error!");
+				}
+			}
 		});
+		
+	
 
 		Button calculateFoodButton = new Button("입력");
 		calculateFoodButton.setSize(50, 30);
@@ -411,6 +424,8 @@ public class Mainpopup {
 				todayfoodText.setText(String.format("%.0f", totalFoodCalories));
 			}
 		});
+		
+	
 
 		Button calculateSleepButton = new Button("입력");
 		calculateSleepButton.setSize(50, 30);
@@ -426,6 +441,8 @@ public class Mainpopup {
 				todaysleepText.setText(sleepHours + "");
 			}
 		});
+		
+		
 
 		Button calculateWaterButton = new Button("입력");
 		calculateWaterButton.setSize(50, 30);
@@ -441,6 +458,10 @@ public class Mainpopup {
 				}
 			}
 		});
+		
+
+		// 배경색은 흰색으로
+		f.getContentPane().setBackground(Color.white);
 
 		f.add(logo);
 		f.add(todayLabel);
@@ -484,6 +505,7 @@ public class Mainpopup {
 
 		// 프로그램 창 닫기
 		f.addWindowListener(new WindowAdapter() {
+
 			public void windowClosing(WindowEvent evt) {
 				JOptionPane.showMessageDialog(f, "일일입력을 완료해주십시오", "ErrorMsg", JOptionPane.ERROR_MESSAGE);
 			}

@@ -1,5 +1,6 @@
 package HealthCheck;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
@@ -253,6 +254,7 @@ public class HealthCheck extends JFrame {
 		lS.setFont(font);
 
 		f.getContentPane().add(tab1Panel);
+		f.getContentPane().setBackground(new Color(255, 255, 255));  // 밝은 배경
 
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //		f.addWindowListener(this);

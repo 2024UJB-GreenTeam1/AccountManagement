@@ -52,6 +52,7 @@ public class Pdel {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				f.dispose();
+				new Pframe();
 			}
 		});
 		
