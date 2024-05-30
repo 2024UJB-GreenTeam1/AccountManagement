@@ -227,7 +227,7 @@ public class BoardWrite extends BoardDTO implements WindowListener, ActionListen
 						+ "bcviews,bcfilename,bfiledata,User_id) "
 
 // 						+ "values(" + b + ",BCNO.NEXTVAL,?,?,SYSDATE,?,?,?,?,'green') ";/*SEQ_BCNO.NEXTVAL*/
-=======
+
 // 						+ "values(" + b + ",BCNO.NEXTVAL,?,?,SYSDATE,?,?,?,?,'green') ";/*SEQ_BCNO.NEXTVAL*/
 
 						+ "values("+b+",SEQ_BCNO.NEXTVAL,?,?,SYSDATE,?,?,?,?,?) ";/*SEQ_BCNO.NEXTVAL*/

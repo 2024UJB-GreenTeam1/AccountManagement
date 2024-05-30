@@ -18,15 +18,15 @@ public class HealthDAO {
 	private Statement stmt;
 	private ResultSet rs;
 
-	// 주간평균
-	public ArrayList<HealthVo> list(/* String pid */) {
-		ArrayList<HealthVo> list = new ArrayList<HealthVo>(); // HealthVo
+	// 주간평균 데이터 조회
+	public ArrayList<HealthVo> list() {
+		ArrayList<HealthVo> list = new ArrayList<HealthVo>();
 
 		try {
 			connDB();
 			// 로그인아이디호출
 			String userId1 = InfoVo.getInstance().getId();
-			// DAILYINPUT테이블에서 필드 조회쿼리(로그인테이블과 조인)
+			// 일일입력테이블(사용자테이블과 조인)에서 필드 조회
 			String query = "SELECT " +
                     "AVG(di.EXHOUR) AS avg_exercise_hours, " +
                     "AVG(di.USEUPC) AS avg_calories_burned, " +
