@@ -54,6 +54,7 @@ public class Mainpopup {
 		Font font2 = new Font("SansSerif", Font.PLAIN, 40);
 		Font font3 = new Font("SansSerif", Font.PLAIN, 11);
 		Font font4 = new Font("SansSerif", Font.BOLD, 18);
+		Font font5 = new Font("SansSerif", Font.BOLD, 15);
 		
 
 		// 로고 객체 생성
@@ -283,6 +284,10 @@ public class Mainpopup {
 			}
 		});
 		
+		scc.setBackground(new Color(255,255,255));
+		scc.setForeground(Color.black);
+		scc.setFont(font5);
+		
 	
 		
 		// 저장된 값을 더하는 기능이 있어 당일 특정 테이블에 들어간 데이터를 지워야함
@@ -308,7 +313,9 @@ public class Mainpopup {
 			}
 		});
 		
-		
+		resetButton.setBackground(new Color(255,255,255));
+		resetButton.setForeground(Color.black);
+		resetButton.setFont(font5);
 
 		Button calculateWeightButton = new Button("입력");
 		calculateWeightButton.setSize(50, 30);
@@ -324,6 +331,9 @@ public class Mainpopup {
 			}
 		});
 		
+		calculateWeightButton.setBackground(new Color(255,255,255));
+		calculateWeightButton.setForeground(Color.black);
+		calculateWeightButton.setFont(font5);
 		
 
 		Button calculateExerciseButton = new Button("입력");
@@ -388,6 +398,10 @@ public class Mainpopup {
 			}
 		});
 		
+		calculateExerciseButton.setBackground(new Color(255,255,255));
+		calculateExerciseButton.setForeground(Color.black);
+		calculateExerciseButton.setFont(font5);
+		
 	
 
 		Button calculateFoodButton = new Button("입력");
@@ -425,6 +439,9 @@ public class Mainpopup {
 			}
 		});
 		
+		calculateFoodButton.setBackground(new Color(255,255,255));
+		calculateFoodButton.setForeground(Color.black);
+		calculateFoodButton.setFont(font5);
 	
 
 		Button calculateSleepButton = new Button("입력");
@@ -443,6 +460,10 @@ public class Mainpopup {
 		});
 		
 		
+		calculateSleepButton.setBackground(new Color(255,255,255));
+		calculateSleepButton.setForeground(Color.black);
+		calculateSleepButton.setFont(font5);
+		
 
 		Button calculateWaterButton = new Button("입력");
 		calculateWaterButton.setSize(50, 30);
@@ -458,6 +479,10 @@ public class Mainpopup {
 				}
 			}
 		});
+		
+		calculateWaterButton.setBackground(new Color(255,255,255));
+		calculateWaterButton.setForeground(Color.black);
+		calculateWaterButton.setFont(font5);
 		
 
 		// 배경색은 흰색으로
