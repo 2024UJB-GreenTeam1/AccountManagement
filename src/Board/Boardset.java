@@ -80,6 +80,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 			Font font = new Font("MD아롱체", Font.BOLD, 50); // 게시판
 			Font font2 = new Font("맑은 고딕", Font.ITALIC, 20); // 작성자 내용 날짜 추천수 조회수 카테고리
 			Font font3 = new Font("MD아롱체", Font.BOLD, 20);
+			Font font4 = new Font("맑은 고딕", Font.BOLD, 20);
 			
 		f = new JFrame("게시판");
 		f.getContentPane().setBackground(Color.white);
@@ -155,7 +156,8 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		
 		writing2 = new JLabel();
 		writing2.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
-
+//		writing2.setFont(font4);
+		
 		date = new JLabel("날짜");
 		date.setFont(font2);
 		date2 = new JLabel();
@@ -529,6 +531,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		titleno_1.setBounds(98, 28, 450, 52);
 		titleno_1.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
 		titleno_1.setContentAreaFilled(false);
+		titleno_1.setFont(font4);
 		main.add(titleno_1);
 		titleno_1.addActionListener(new ActionListener() { // 1번글 버튼
 			@Override
@@ -572,6 +575,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		titleno_2.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
 		titleno_2.setBounds(98, 78, 450, 52);
 		titleno_2.setContentAreaFilled(false);
+		titleno_2.setFont(font4);
 		main.add(titleno_2);
 		titleno_2.addActionListener(new ActionListener() { // 2번글 버튼
 			@Override
@@ -615,6 +619,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		titleno_3.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
 		titleno_3.setBounds(98, 128, 450, 52);
 		titleno_3.setContentAreaFilled(false);
+		titleno_3.setFont(font4);
 		main.add(titleno_3);
 		titleno_3.addActionListener(new ActionListener() { // 3번글 버튼
 			@Override
@@ -658,6 +663,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		titleno_4.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
 		titleno_4.setBounds(98, 178, 450, 52);
 		titleno_4.setContentAreaFilled(false);
+		titleno_4.setFont(font4);
 		main.add(titleno_4);
 		titleno_4.addActionListener(new ActionListener() { // 4번글 버튼
 			@Override
@@ -701,6 +707,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		titleno_5.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
 		titleno_5.setBounds(98, 228, 450, 52);
 		titleno_5.setContentAreaFilled(false);
+		titleno_5.setFont(font4);
 		main.add(titleno_5);
 		titleno_5.addActionListener(new ActionListener() { // 5번글 버튼
 			@Override
@@ -742,6 +749,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		titleno_6.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
 		titleno_6.setBounds(98, 278, 450, 52);
 		titleno_6.setContentAreaFilled(false);
+		titleno_6.setFont(font4);
 		main.add(titleno_6);
 		titleno_6.addActionListener(new ActionListener() { // 6번글 버튼
 			@Override
@@ -784,6 +792,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		titleno_7.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
 		titleno_7.setBounds(98, 328, 450, 52);
 		titleno_7.setContentAreaFilled(false);
+		titleno_7.setFont(font4);
 		main.add(titleno_7);
 		titleno_7.addActionListener(new ActionListener() { // 7번글 버튼
 			@Override
@@ -826,6 +835,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		titleno_8.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
 		titleno_8.setBounds(98, 378, 450, 52);
 		titleno_8.setContentAreaFilled(false);
+		titleno_8.setFont(font4);
 		main.add(titleno_8);
 		titleno_8.addActionListener(new ActionListener() { // 8번글 버튼
 			@Override
@@ -868,6 +878,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		titleno_9.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
 		titleno_9.setBounds(98, 428, 450, 52);
 		titleno_9.setContentAreaFilled(false);
+		titleno_9.setFont(font4);
 		main.add(titleno_9);
 		titleno_9.addActionListener(new ActionListener() { // 9번글 버튼
 			@Override
@@ -910,6 +921,7 @@ public class Boardset extends ConnectionB implements ActionListener, WindowListe
 		titleno_10.setBorder(new TitledBorder(new LineBorder(Color.black, 2)));
 		titleno_10.setBounds(98, 478, 450, 52);
 		titleno_10.setContentAreaFilled(false);
+		titleno_10.setFont(font4);
 		main.add(titleno_10);
 		titleno_10.addActionListener(new ActionListener() { // 10번글 버튼
 			@Override

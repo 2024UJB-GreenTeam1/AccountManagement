@@ -72,7 +72,7 @@ public class PTab extends JPanel {
 		mail.setFont(font);
 		profilePanel.add(mail);
 		JLabel dmail = new JLabel(user.getEmail());
-		dmail.setBounds(200, 180, 180, 30);
+		dmail.setBounds(200, 180, 250, 30);
 		dmail.setFont(font);
 		profilePanel.add(dmail);
 

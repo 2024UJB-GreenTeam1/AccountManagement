@@ -135,6 +135,7 @@ public class Mainscreen {
 
 		// 추가내용
 
+		Font font5 = new Font("맑은 고딕", Font.PLAIN, 15);
 		int plz = 0;
 		JLabel bid = new JLabel("아이디");
 		bid.setBounds(0, 0, 155, 30);
@@ -164,6 +165,7 @@ public class Mainscreen {
 		popboardtext.add(b1id);
 		JButton b1title = new JButton();
 		b1title.setBounds(155, 30, 300, 50);
+		b1title.setFont(font5);
 		popboardtext.add(b1title);
 		b1title.setBackground(new Color(0,0,0));
 		b1title.setForeground(Color.black);
@@ -200,7 +202,7 @@ public class Mainscreen {
 		JButton b2title = new JButton();
 		b2title.setBounds(155, 80, 300, 50);
 		popboardtext.add(b2title);
-		b2title.setFont(font3);
+		b2title.setFont(font5);
 		b2title.setFocusPainted(false); // 버튼 포커스 페인팅 비활성화
         b2title.setOpaque(false); // 버튼 불투명 설정 비활성화
         b2title.setBackground(new Color(0,0,0));
@@ -234,6 +236,7 @@ public class Mainscreen {
 		popboardtext.add(b3title);
 		b3title.setBackground(new Color(0,0,0));
 		b3title.setForeground(Color.black);
+		b3title.setFont(font5);
 		b3title.setFocusPainted(false); // 버튼 포커스 페인팅 비활성화
         b3title.setOpaque(false); // 버튼 불투명 설정 비활성화
 		b3title.addActionListener(new ActionListener() {
