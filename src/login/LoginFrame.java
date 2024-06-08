@@ -264,7 +264,6 @@ public class LoginFrame extends JFrame {
 
 	public static void main(String[] args) {
 		new LoginFrame();
-
 	}
 
 	public JTextField getTfId() {

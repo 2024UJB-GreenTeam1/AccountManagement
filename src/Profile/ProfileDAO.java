@@ -118,8 +118,10 @@ public class ProfileDAO {
 		String userId1 = InfoVo.getInstance().getId();
 
 		try {
-			String sql = "SELECT USERs.*, dailyinput.WEIGHT " + "FROM USERS "
-					+ "JOIN DAILYINPUT ON users.USER_ID  = dailyinput.USER_ID " + "WHERE users.USER_ID =?";
+			String sql = "SELECT USERs.*, dailyinput.WEIGHT " 
+					+ "FROM USERS "
+					+ "JOIN DAILYINPUT ON users.USER_ID  = dailyinput.USER_ID " 
+					+ "WHERE users.USER_ID =?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, userId1);
 			rs = pstmt.executeQuery();

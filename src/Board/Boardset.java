@@ -1277,8 +1277,9 @@ if (f.isVisible()) {
 			} else {
 				bw =null;
 			}
-
 		} else if (e.getSource() == click) { // 조회
+//		} else if (e.category.getSelectedItem().toString() == "Total") { // 조회
+//		} else if (e.category.getSelectedItem().equals( "Total")) { // 조회
 			list();
 		} else if (e.getSource() == before) {
 			pageno = pageno - 1;

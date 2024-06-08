@@ -278,6 +278,8 @@ public class Mainpopup {
 
 				} catch (NumberFormatException ex) {
 					JOptionPane.showMessageDialog(f, "입력 형식이 올바르지 않습니다. 숫자를 입력하세요.");
+					todayweightText.setText("Error!");
+					todaywaterText.setText("Error!");
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(f, "데이터 저장 중 오류가 발생했습니다: " + ex.getMessage());
 				}
