@@ -25,7 +25,7 @@ URL : 2024UJB-GreenTeam1/AccountManagement (github.com)<br>
   <img width"200" src="https://github.com/user-attachments/assets/196b6cad-29d9-469e-aee7-7edd301675bd">
 </p>
 (- 일정관리 확인창)<br>
---------------------------------------------------------------------------
+
 <p align="center">
   <img width"200" src="https://github.com/user-attachments/assets/2976a1ec-b9dc-42fd-8eed-16cfede000d8">
 </p>
