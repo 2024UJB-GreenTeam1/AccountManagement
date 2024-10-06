@@ -11,7 +11,7 @@ URL:2024UJB-GreenTeam1/AccountManagement (github.com)
 
 프로젝트 내용:
 <p align="center">
-  <img width"200" src="https://github.com/user-attachments/assets/3291ae5b-85e1-4ee4-8dbb-8cd8755e61e8
+  <img width"200" src="github.com/user-attachments/assets/1def16cf-142f-4693-a525-c19233f53f47
 ">
 </p>
 ★로그인 & 회원 정보 관리:회원 가입, 정보 수정, 탈퇴 등 회원 정보를 관리하는 기능을 개발했습니다.
