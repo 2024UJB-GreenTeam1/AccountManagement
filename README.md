@@ -18,7 +18,7 @@ URL : 2024UJB-GreenTeam1/AccountManagement (github.com)<br>
 
 
 <p align="center">
-  <img width"200" src="https://github.com/user-attachments/assets/51dbd187-6720-437a-9e15-641eed029b44">
+  <img width"100" src="https://github.com/user-attachments/assets/51dbd187-6720-437a-9e15-641eed029b44">
 </p>
 (- 메인페이지)<br>
 메인페이지 지도검색과 달력일정관리 기능 : 지도검색기능과 달력기능을 추가하고 달력에는 일정을 입력하고 확인하기 쉽도록 하였습니다.
