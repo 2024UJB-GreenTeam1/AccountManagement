@@ -1,5 +1,5 @@
-주제:건강 관리 프로그램
-개발 환경:Java 17.0.8, OracleDatabase 21c
+주제:건강 관리 프로그램<br>
+개발 환경:Java 17.0.8, OracleDatabase 21c<br>
 사용 도구: Eclipse, Dbeaver,GitHub, Notion
 URL:2024UJB-GreenTeam1/AccountManagement (github.com)
 제작시기 및 참여도:2024년 5월 - 2024년 6월 (1.5개월), 
