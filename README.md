@@ -2,7 +2,8 @@
 개발 환경 : Java 17.0.8, OracleDatabase 21c<br>
 사용 도구 : Eclipse, Dbeaver,GitHub, Notion<br>
 URL : 2024UJB-GreenTeam1/AccountManagement (github.com)<br>
-노션 주소: https://www.notion.so/96eaf7b7a2714b808ac4672862858a93?v=5464c119be9b4f68b61fd9d81cd17ab1<br>
+노션 주소 : https://www.notion.so/96eaf7b7a2714b808ac4672862858a93?v=5464c119be9b4f68b61fd9d81cd17ab1<br>
+★시연 영상 : https://youtu.be/pqaWFlupAJo<br>
 
 제작시기 및 참여도 : 2024년 5월 - 2024년 6월 (1.5개월), <br>
 함혜중 : 팀장으로 참여(담당파트: DB설계, 로그인, 아이디 비밀번호찾기, 일정달력, 건강페이지, 형상관리)<br>
